@@ -1,9 +1,9 @@
-module com.connectify.client {
+module Client {
     requires javafx.controls;
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
 
-    opens com.connectify.client to javafx.fxml;
-    exports com.connectify.client;
+    opens com.connectify;
+    exports com.connectify;
 }
