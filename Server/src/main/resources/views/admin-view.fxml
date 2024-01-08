@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="adminPane" prefHeight="576.0" prefWidth="790.0" styleClass="right-pane" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane prefHeight="395.0" prefWidth="790.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="start-button" fx:id="startButton" layoutX="132.0" layoutY="153.0" mnemonicParsing="false" onAction="#onStartClick" prefHeight="110.0" prefWidth="200.0" styleClass="right-pane-button" text="Start">
+               <font>
+                  <Font name="Open Sans Regular" size="30.0" />
+               </font>
+            </Button>
+            <Button id="exit-button" fx:id="stopButton" layoutX="473.0" layoutY="153.0" mnemonicParsing="false" onAction="#onStopClick" prefHeight="110.0" prefWidth="200.0" styleClass="right-pane-button" text="Stop">
+               <font>
+                  <Font size="30.0" />
+               </font></Button>
+            <Label id="server-status" fx:id="statusLabel" layoutX="325.0" layoutY="39.0" prefHeight="54.0" prefWidth="140.0" text="Online" />
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="174.0" layoutY="39.0" prefHeight="122.0" prefWidth="443.0" text="Admin Dashboard" />
+            <Separator layoutX="124.0" layoutY="145.0" prefHeight="16.0" prefWidth="543.0" />
+         </children>
+      </Pane>
+   </top>
+</BorderPane>
