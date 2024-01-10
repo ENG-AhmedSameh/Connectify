@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e469bde5-eae4-4932-8afb-1871fc823b4a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/model/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/model/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -27,60 +27,41 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
   <component name="ProjectId" id="2afiP9twnrd6ADRzmIDAQ2Tp0S7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Server.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "dev",
-    "jdk.selected.JAVA_MODULE": "21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Career/Projects/Connectify",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\Images" />
+      <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\Styles" />
       <recent name="D:\Career\Connectify\Server\src\main\java\server" />
       <recent name="D:\Career\Connectify\Server\src\main\resources" />
       <recent name="D:\Career\Connectify\Server\src\main\java\com\connectify" />
-      <recent name="D:\Career\Connectify" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Career\Connectify\Server\src\main\java\server" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Connectify" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Connectify" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.connectify.loaders" />
+      <recent name="com.connectify.utils" />
+      <recent name="com.connectify.controller" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -101,6 +82,9 @@
       <workItem from="1704724497098" duration="21000" />
       <workItem from="1704724556454" duration="314000" />
       <workItem from="1704727058071" duration="439000" />
+      <workItem from="1704886132717" duration="2571000" />
+      <workItem from="1704888740518" duration="75000" />
+      <workItem from="1704888829918" duration="2466000" />
     </task>
     <servers />
   </component>

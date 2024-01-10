@@ -1,0 +1,45 @@
+.logo-anchor-pane{
+    -fx-background-color:  #2f6ea5;
+}
+.signUP-anchor-pane{
+    -fx-background-color:  #17212b;
+}
+.combo-box {
+    -fx-pref-width: 300;
+    -fx-background-color:  #17212b;
+}
+
+.combo-box-popup > .list-view {
+    -fx-pref-width: 204;
+
+}
+
+.combo-box > .list-cell{
+    -fx-text-fill: #FFFFFF;
+}
+
+
+.text-field{
+    -fx-background-color: #17212b;
+    -fx-text-fill:  #FFFFFF;
+}
+.text-field:focused {
+    -fx-border-color:  #2f6ea5;
+    -fx-border-width:  2 2 2 2;
+}
+.date-picker{
+    -fx-control-inner-background:  #17212b;
+}
+.date-picker:focused{
+    -fx-border-color:  #2f6ea5;
+}
+
+.date-picker > .text-field > .prompt-text {
+    -fx-text-fill: #FFFFFF;
+}
+
+.button{
+    -fx-background-color: #2f6ea5;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 10;
+}
