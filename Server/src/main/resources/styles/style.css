@@ -6,21 +6,22 @@
 
 
 
-.panel {
-        -fx-background-color: -fx-blue;
+.left-pane {
+        /* -fx-background-color: -fx-blue; */
+        -fx-background-color: linear-gradient(to top, -fx-blue, -fx-light 95%);
         -fx-border-width: 1px;
         -fx-padding: 10px;
         -fx-border-color: transparent;
         -fx-border-radius: 5px;
 }
 
-.panel-button {
+.left-pane-button {
         -fx-background-color: -fx-dark;
         -fx-border-width: 1px;
         -fx-padding: 5px 10px;
         -fx-text-fill: -fx-light;
         -fx-font-size: 22px;
-        -fx-font-family: Consolas, monaco, monospace;
+        -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
         -fx-margin-bottom: 10px;
         -fx-border-color: transparent;
         -fx-border-radius: 5px;
@@ -30,14 +31,14 @@
         -fx-transition-duration: 0.3s;
 }
 
-.panel-button:hover {
+.left-pane-button:hover {
         -fx-scale-x: 1.1;
         -fx-scale-y: 1.1;
         -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0);
 
 }
 
-.panel-button:pressed {
+.left-pane-button:pressed {
         -fx-translate-y: 4px;
 }
 
@@ -53,7 +54,7 @@
 .label {
         -fx-text-fill: -fx-light;
         -fx-font-size: 40px;
-        -fx-font-family: Consolas, monaco, monospace;
+        -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
         -fx-font-weight: bold;
         -fx-alignment: center;
 }
@@ -61,7 +62,7 @@
 #server-status {
         -fx-text-fill: -fx-light;
         -fx-font-size: 20px;
-        -fx-font-family: Consolas, monaco, monospace;
+        -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
         -fx-font-weight: bold;
         -fx-alignment: center;
         -fx-border-color: transparent;
@@ -74,7 +75,7 @@
         -fx-padding: 5px 10px;
         -fx-text-fill: -fx-light;
         -fx-font-size: 30px;
-        -fx-font-family: Consolas, monaco, monospace;
+        -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
         -fx-margin-bottom: 10px;
         -fx-border-color: transparent;
         -fx-border-radius: 5px;
@@ -103,24 +104,29 @@
 
 
 
-.text-field {
-        -fx-background-color: #f4f4f4;
-        -fx-text-fill: #333333;
-        -fx-prompt-text-fill: #aaaaaa;
-        -fx-border-color: #cccccc;
-        -fx-border-width: 1px;
-        -fx-border-radius: 5px;
-        -fx-padding: 5px;
-}
 
 .text-field {
-        -fx-background-color: #f4f4f4;
-        -fx-text-fill: #333333;
-        -fx-prompt-text-fill: #aaaaaa;
-        -fx-border-color: #cccccc;
-        -fx-border-width: 1px;
-        -fx-border-radius: 5px;
-        -fx-padding: 5px;
+        -fx-border-color: -fx-dark;
+        -fx-border-radius: 4px;
+        -fx-background-color: -fx-dark;
+        -fx-text-fill: #FFFFFF;
+}
+
+.text-field:focused {
+        -fx-border-color: -fx-blue;
+        -fx-border-width: 2px;
+}
+
+.text-area .content {
+        -fx-border-color: -fx-dark;
+        -fx-border-radius: 4px;
+        -fx-background-color: -fx-dark;
+        -fx-text-fill: #FFFFFF;
+}
+
+.text-area .content:focused {
+        -fx-border-color: -fx-blue;
+        -fx-border-width: 2px;
 }
 
 
@@ -138,7 +144,7 @@
         -fx-border-color: -fx-dark;
         -fx-border-radius: 2px;
         -fx-background-radius: 2px;
-        -fx-font-family: Consolas, monaco, monospace;
+        -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
 
 

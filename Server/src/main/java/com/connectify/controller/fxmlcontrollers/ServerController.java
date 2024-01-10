@@ -1,4 +1,4 @@
-package com.connectify.fxmlcontrollers;
+package com.connectify.controller.fxmlcontrollers;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,11 +26,11 @@ public class ServerController implements Initializable{
     private static double yOffset = 0;
 
 
-    private BorderPane adminPane;
+    private Pane adminPane;
 
-    private BorderPane announcementPane;
+    private Pane announcementPane;
 
-    private BorderPane statisticsPane;
+    private Pane statisticsPane;
 
 
 
@@ -54,15 +54,15 @@ public class ServerController implements Initializable{
         });
     }
 
-    public void setAdminPane(BorderPane adminPane) {
+    public void setAdminPane(Pane adminPane) {
         this.adminPane = adminPane;
     }
 
-    public void setAnnouncementPane(BorderPane announcementPane) {
+    public void setAnnouncementPane(Pane announcementPane) {
         this.announcementPane = announcementPane;
     }
 
-    public void setStatisticsPane(BorderPane statisticsPane) {
+    public void setStatisticsPane(Pane statisticsPane) {
         this.statisticsPane = statisticsPane;
     }
 
@@ -92,15 +92,22 @@ public class ServerController implements Initializable{
             }
     }
 
+
+    @FXML
+    void closeButtonHandler(MouseEvent event) {
+        onExitClick();
+    }
+
+    @FXML
+    void maximizeButtonHandler(MouseEvent event){
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        stage.setMaximized(!stage.isMaximized());
+    }
     @FXML
     public void minimizeButtonHandler(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 
-    @FXML
-    void closeButtonHandler(MouseEvent event) {
-        onExitClick();
-    }
 
 }
