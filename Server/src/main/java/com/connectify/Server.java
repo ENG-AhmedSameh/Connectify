@@ -16,7 +16,7 @@ public class Server extends Application {
         Scene scene = new Scene(root);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setMinHeight(750);
-        stage.setMinWidth(1250);
+        stage.setMinWidth(1300);
         stage.setScene(scene);
         stage.show();
     }
