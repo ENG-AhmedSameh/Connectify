@@ -109,7 +109,7 @@
         -fx-border-color: -fx-dark;
         -fx-border-radius: 4px;
         -fx-background-color: -fx-dark;
-        -fx-text-fill: #FFFFFF;
+        -fx-text-fill: -fx-light;
 }
 
 .text-field:focused {
@@ -117,11 +117,15 @@
         -fx-border-width: 2px;
 }
 
+.text-area {
+        -fx-text-fill: -fx-light;
+}
+
 .text-area .content {
         -fx-border-color: -fx-dark;
         -fx-border-radius: 4px;
         -fx-background-color: -fx-dark;
-        -fx-text-fill: #FFFFFF;
+        -fx-text-fill: -fx-light;
 }
 
 .text-area .content:focused {
