@@ -6,9 +6,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.net.URL;
@@ -16,15 +18,14 @@ import java.util.ResourceBundle;
 
 
 public class ServerController implements Initializable{
+
+    private static double xOffset = 0;
+    private static double yOffset = 0;
     @FXML
     private BorderPane mainPane;
 
     @FXML
     private HBox dragBar;
-
-    private static double xOffset = 0;
-    private static double yOffset = 0;
-
 
     private Pane adminPane;
 
@@ -84,7 +85,12 @@ public class ServerController implements Initializable{
 
     @FXML
     public void onExitClick(){
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit? The Server will stop if it is running", ButtonType.YES, ButtonType.NO);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "The server will shut down if still running.", ButtonType.YES, ButtonType.NO);
+            DialogPane dialogPane = alert.getDialogPane();
+            Stage dialogStage = (Stage) dialogPane.getScene().getWindow();
+            dialogStage.initStyle(StageStyle.UNDECORATED);
+            dialogPane.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+            dialogPane.getStyleClass().add("exit-dialog");
             alert.setHeaderText("Exit ?");
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
