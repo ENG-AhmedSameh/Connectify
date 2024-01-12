@@ -1,28 +1,43 @@
 package com.connectify.loaders;
 
-import com.connectify.fxmlcontrollers.AnnouncementController;
-import com.connectify.fxmlcontrollers.AdminController;
-import com.connectify.fxmlcontrollers.ServerController;
-import com.connectify.fxmlcontrollers.StatisticsController;
+import com.connectify.controller.fxmlcontrollers.AnnouncementController;
+import com.connectify.controller.fxmlcontrollers.AdminController;
+import com.connectify.controller.fxmlcontrollers.ServerController;
+import com.connectify.controller.fxmlcontrollers.StatisticsController;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
 public class ViewLoader {
 
+    private static ViewLoader instance;
+    private final Pane mainPane;
 
+    private ViewLoader(){
+        mainPane = loadMainPane();
+    }
 
-    public AnchorPane getMainPane() {
+    public static ViewLoader getInstance(){
+        if(instance == null){
+            instance = new ViewLoader();
+        }
+        return instance;
+    }
+
+    public Pane getMainPane(){
+        return mainPane;
+    }
+
+    private Pane loadMainPane() {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/server-view.fxml"));
         ServerController controller = new ServerController();
-        controller.setAdminPane(getAdminPane());
-        controller.setAnnouncementPane(getAnnouncementPane());
-        controller.setStatisticsPane(getStatisticsPane());
+        controller.setAdminPane(loadAdminPane());
+        controller.setAnnouncementPane(loadAnnouncementPane());
+        controller.setStatisticsPane(loadStatisticsPane());
         fxmlLoader.setController(controller);
-        AnchorPane mainPane = null;
+        Pane mainPane = null;
         try {
             mainPane = fxmlLoader.load();
         } catch (IOException e) {
@@ -31,9 +46,9 @@ public class ViewLoader {
         return mainPane;
     }
 
-    private BorderPane getAdminPane(){
+    private Pane loadAdminPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
-        BorderPane adminPane = null;
+        Pane adminPane = null;
         fxmlLoader.setLocation(getClass().getResource("/views/admin-view.fxml"));
         AdminController controller = new AdminController();
         fxmlLoader.setController(controller);
@@ -45,9 +60,9 @@ public class ViewLoader {
         return adminPane;
     }
 
-    private BorderPane getAnnouncementPane(){
+    private Pane loadAnnouncementPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
-        BorderPane announcementPane = null;
+        Pane announcementPane = null;
         AnnouncementController controller = new AnnouncementController();
         fxmlLoader.setController(controller);
         fxmlLoader.setLocation(getClass().getResource("/views/announcement-view.fxml"));
@@ -59,9 +74,9 @@ public class ViewLoader {
         return announcementPane;
     }
 
-    private BorderPane getStatisticsPane(){
+    private Pane loadStatisticsPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
-        BorderPane statisticsPane = null;
+        Pane statisticsPane = null;
         fxmlLoader.setLocation(getClass().getResource("/views/statistics-view.fxml"));
         StatisticsController controller = new StatisticsController();
         fxmlLoader.setController(controller);

@@ -1,4 +1,4 @@
-package com.connectify.fxmlcontrollers;
+package com.connectify.controller.fxmlcontrollers;
 
 import javafx.fxml.FXML;
 

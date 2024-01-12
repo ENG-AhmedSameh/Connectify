@@ -18,7 +18,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <myMainClass></myMainClass>
+    <myMainClass>main</myMainClass>
   </properties>
 
   <dependencies>
@@ -72,7 +72,7 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>${mainClass}</mainClass>
+              <mainClass>${myMainClass}</mainClass>
             </configuration>
           </execution>
         </executions>
