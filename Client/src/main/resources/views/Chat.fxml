@@ -61,6 +61,19 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="69.0" prefWidth="814.0" styleClass="bot-bar" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="50.0" fitWidth="40.0" onMousePressed="#openHTMLEditorHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
+               <image>
+                  <Image url="@../images/edit.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="2.0" />
+               </HBox.margin>
+            </ImageView>
+            <TextField fx:id="sendBox" prefHeight="54.0" prefWidth="675.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </TextField>
             <ImageView fitHeight="50.0" fitWidth="30.0" onMousePressed="#attachmentHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
                <image>
                   <Image url="@../images/attachement.png" />
@@ -69,20 +82,13 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </ImageView>
-            <TextField fx:id="sendBox" prefHeight="54.0" prefWidth="675.0" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </TextField>
-            <ImageView fitHeight="50.0" fitWidth="40.0" onMousePressed="#openHTMLEditorHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
-               <image>
-                  <Image url="@../images/edit.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="50.0" fitWidth="40.0" onMousePressed="#sendHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
                <image>
                   <Image url="@../images/send.png" />
                </image>
+               <HBox.margin>
+                  <Insets right="2.0" />
+               </HBox.margin>
             </ImageView>
          </children>
       </HBox>
