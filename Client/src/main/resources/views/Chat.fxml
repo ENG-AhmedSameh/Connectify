@@ -26,7 +26,7 @@
                      <children>
                         <Circle fx:id="statusCircle" fill="#1fff26" radius="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="status-circle" HBox.hgrow="NEVER">
                            <HBox.margin>
-                              <Insets right="5.0" top="5.0" />
+                              <Insets right="5.0" top="1.0" />
                            </HBox.margin>
                         </Circle>
                         <Text fx:id="chatName" fill="#4c5660" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="chat-label" text="Hazem Khaled" wrappingWidth="184.81329727172852" />
