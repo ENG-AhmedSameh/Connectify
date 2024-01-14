@@ -1,96 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ChatController">
-   <children>
-      <VBox fx:id="chatPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="813.0" stylesheets="@../styles/Chat.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+<BorderPane prefHeight="667.0" prefWidth="814.0" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ChatController">
+   <top>
+      <HBox prefHeight="78.0" prefWidth="814.0" styleClass="chat-banner" BorderPane.alignment="TOP_LEFT">
          <children>
-            <BorderPane prefHeight="667.0" prefWidth="814.0" VBox.vgrow="ALWAYS">
-               <top>
-                  <HBox prefHeight="78.0" prefWidth="814.0" styleClass="chat-banner" BorderPane.alignment="TOP_LEFT">
+            <Circle fx:id="chatImage" fill="#4c5660" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Circle>
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="24.0" prefWidth="86.0" VBox.vgrow="NEVER">
                      <children>
-                        <Circle fx:id="chatImage" fill="#4c5660" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="NEVER">
+                        <Circle fx:id="statusCircle" fill="#1fff26" radius="5.0" stroke="BLACK" strokeType="INSIDE" styleClass="status-circle" HBox.hgrow="NEVER">
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="3.0" right="5.0" top="2.0" />
                            </HBox.margin>
                         </Circle>
-                        <VBox HBox.hgrow="ALWAYS">
-                           <children>
-                              <HBox prefHeight="24.0" prefWidth="86.0" VBox.vgrow="NEVER">
-                                 <children>
-                                    <Circle fx:id="statusCircle" fill="#1fff26" radius="5.0" stroke="BLACK" strokeType="INSIDE" styleClass="status-circle" HBox.hgrow="NEVER">
-                                       <HBox.margin>
-                                          <Insets left="3.0" right="5.0" top="2.0" />
-                                       </HBox.margin>
-                                    </Circle>
-                                    <Text fx:id="chatName" fill="#4c5660" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="chat-label" text="member" wrappingWidth="88.81328964233398" />
-                                 </children>
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                              </HBox>
-                              <Text fx:id="membersCount" fill="#4c5660" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="chat-label" text="members count" wrappingWidth="124.5367419719696" VBox.vgrow="NEVER">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </Text>
-                           </children>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </VBox>
+                        <Text fx:id="chatName" fill="#4c5660" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="chat-label" text="member" wrappingWidth="88.81328964233398" />
                      </children>
                      <padding>
-                        <Insets top="7.0" />
+                        <Insets top="5.0" />
                      </padding>
                   </HBox>
-               </top>
-               <center>
-                  <HBox alignment="CENTER" BorderPane.alignment="CENTER">
-                     <children>
-                        <VBox fx:id="chatWindow" prefHeight="502.0" prefWidth="812.0" styleClass="chat-window" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-               </center>
-               <bottom>
-                  <HBox alignment="CENTER" prefHeight="148.0" prefWidth="814.0" styleClass="bot-bar" BorderPane.alignment="CENTER">
-                     <children>
-                        <HTMLEditor blendMode="SRC_ATOP" prefHeight="124.0" prefWidth="766.0" HBox.hgrow="ALWAYS" />
-                        <VBox alignment="CENTER" prefHeight="159.0" prefWidth="52.0" HBox.hgrow="NEVER">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="30.0" onMousePressed="#attachmentHandler" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                                 <image>
-                                    <Image url="@../images/attachement.png" />
-                                 </image>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
-                              </ImageView>
-                              <ImageView fitHeight="50.0" fitWidth="40.0" onMousePressed="#sendHandler" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                                 <image>
-                                    <Image url="@../images/send.png" />
-                                 </image>
-                                 <VBox.margin>
-                                    <Insets top="30.0" />
-                                 </VBox.margin>
-                              </ImageView>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </bottom>
-            </BorderPane>
+                  <Text fx:id="membersCount" fill="#4c5660" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="chat-label" text="members count" wrappingWidth="124.5367419719696" VBox.vgrow="NEVER">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </VBox>
          </children>
-      </VBox>
-   </children>
-</AnchorPane>
+         <padding>
+            <Insets top="7.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="814.0">
+         <content>
+            <VBox fx:id="chatWindow" prefHeight="518.0" prefWidth="814.0" styleClass="chat-window" />
+         </content>
+      </ScrollPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="69.0" prefWidth="814.0" styleClass="bot-bar" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="sendBox" prefHeight="54.0" prefWidth="675.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+            <ImageView fitHeight="50.0" fitWidth="40.0" onMousePressed="#openHTMLEditorHandler" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/edit.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="30.0" onMousePressed="#attachmentHandler" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/attachement.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="40.0" onMousePressed="#sendHandler" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/send.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

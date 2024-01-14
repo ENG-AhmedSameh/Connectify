@@ -16,6 +16,8 @@ public class ViewLoader {
 
     HBox titleBarHBox;
 
+    BorderPane chatWindow;
+
     private void loadMainPane() {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/MainPane.fxml"));
@@ -59,7 +61,7 @@ public class ViewLoader {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/Chat.fxml"));
         try {
-            logoAnchorPane = fxmlLoader.load();
+            chatWindow = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -52,49 +52,11 @@
     -fx-background-color: -fx-gray;
 }
 
-
-.html-editor {
-    -fx-background-color: -fx-dark-blue;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-padding: 5px;
-}
-
-
-.html-editor .top-toolbar {
-    -fx-background-color: -fx-dark-blue;
-    -fx-padding: 5px;
-}
-
-.html-editor .top-toolbar .button {
-    -fx-background-color: -fx-gray;
-    -fx-background-radius: 5px;
-    -fx-padding: 5px 10px;
-    -fx-font-size: 12px;
-}
-
-.html-editor .bottom-toolbar {
-    -fx-background-color: -fx-dark-blue;
-    -fx-padding: 5px;
-}
-
-
-.html-editor .tool-bar .button {
-    -fx-background-color: -fx-gray;
-    -fx-background-radius: 5px;
-    -fx-padding: 5px 10px;
-    -fx-font-size: 12px;
-}
-
-.html-editor .tool-bar .button:hover {
+.text-field {
+    -fx-border-color: -fx-dark;
+    -fx-border-radius: 4px;
     -fx-background-color: -fx-dark;
-}
-
-.html-editor .bottom-toolbar .text-field {
-    -fx-background-color: -fx-dark-blue;
-    -fx-padding: 2px;
-}
-
-.html-editor .web-view {
-    -fx-background-color: -fx-dark-blue;
+    -fx-text-fill: -fx-light;
+    -fx-font-size: 15px;
+    -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
