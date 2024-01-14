@@ -1,0 +1,100 @@
+* {
+    -fx-dark: #0e1621;
+    -fx-dark-blue: #182732;
+    -fx-blue: #2a5379;
+    -fx-gray: #4c5660;
+    -fx-light: #e7e5e5;
+}
+
+.chat-banner {
+    -fx-background-color: -fx-dark-blue;
+}
+
+.chat-label {
+    -fx-text-fill: -fx-gray;
+    -fx-font-size: 15px;
+    -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+.bot-bar {
+    -fx-background-color: -fx-dark-blue;
+}
+
+.chat-window {
+    -fx-background-color: -fx-dark;
+}
+
+.contact-message {
+    -fx-background-color: -fx-dark-blue;
+    -fx-text-fill: -fx-light;
+    -fx-font-size: 15px;
+    -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -border-color: transparent;
+}
+
+.user-message {
+    -fx-background-color: -fx-blue;
+    -fx-text-fill: -fx-light;
+    -fx-font-size: 15px;
+    -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -border-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: -fx-dark-blue;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -fx-gray;
+}
+
+
+.html-editor {
+    -fx-background-color: -fx-dark-blue;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+
+.html-editor .top-toolbar {
+    -fx-background-color: -fx-dark-blue;
+    -fx-padding: 5px;
+}
+
+.html-editor .top-toolbar .button {
+    -fx-background-color: -fx-gray;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 12px;
+}
+
+.html-editor .bottom-toolbar {
+    -fx-background-color: -fx-dark-blue;
+    -fx-padding: 5px;
+}
+
+
+.html-editor .tool-bar .button {
+    -fx-background-color: -fx-gray;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 12px;
+}
+
+.html-editor .tool-bar .button:hover {
+    -fx-background-color: -fx-dark;
+}
+
+.html-editor .bottom-toolbar .text-field {
+    -fx-background-color: -fx-dark-blue;
+    -fx-padding: 2px;
+}
+
+.html-editor .web-view {
+    -fx-background-color: -fx-dark-blue;
+}
