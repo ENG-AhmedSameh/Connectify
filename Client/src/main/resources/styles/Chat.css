@@ -12,7 +12,7 @@
 
 .chat-label {
     -fx-text-fill: -fx-gray;
-    -fx-font-size: 15px;
+    -fx-font-size: 20px;
     -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
 
@@ -20,8 +20,13 @@
     -fx-background-color: -fx-dark-blue;
 }
 
+.bar-button:hover {
+    -fx-cursor: hand;
+}
+
 .chat-window {
     -fx-background-color: -fx-dark;
+
 }
 
 .contact-message {
