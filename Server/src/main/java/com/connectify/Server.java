@@ -1,5 +1,6 @@
 package com.connectify;
 
+import com.connectify.controller.utils.DBConnection;
 import com.connectify.loaders.ViewLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class Server extends Application {
     @Override

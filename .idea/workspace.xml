@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e469bde5-eae4-4932-8afb-1871fc823b4a" name="Changes" comment="">
+    <list default="true" id="72e1aa1a-0cae-4d25-bfbd-c1aae7182bcb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/styles/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/styles/SignUp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/SignUp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/view/.gitkeep" beforeDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/styles/style.css" afterDir="false" />
->>>>>>> server-gui
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/utils/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +33,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
   <component name="ProjectId" id="2afiP9twnrd6ADRzmIDAQ2Tp0S7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -51,26 +46,19 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-<<<<<<< HEAD
-    "git-widget-placeholder": "signUpGUI",
-    "last_opened_file_path": "F:/ITI Projects/Connectify/Client/src/main/resources/images",
-    "node.js.selected.package.tslint": "(autodetect)"
-=======
     "Application.Server.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "server-gui",
-    "jdk.selected.JAVA_MODULE": "21",
+    "git-widget-placeholder": "db",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Career/Projects/Connectify",
+    "last_opened_file_path": "D:/Career/Projects/Connectify/Server/src/main/java/com/connectify/controller/utils",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
->>>>>>> server-gui
+    "nodejs_package_manager_path": "npm"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -82,16 +70,15 @@
       <recent name="D:\Career\Connectify\Server\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Career\Projects\Connectify\Server\src\main\resources" />
+      <recent name="D:\Career\Projects\Connectify\Server\src\main\java\com\connectify\controller\utils\db" />
       <recent name="D:\Career\Connectify\Server\src\main\java\server" />
     </key>
-<<<<<<< HEAD
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.connectify.loaders" />
       <recent name="com.connectify.utils" />
       <recent name="com.connectify.controller" />
     </key>
-=======
->>>>>>> server-gui
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -103,7 +90,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e469bde5-eae4-4932-8afb-1871fc823b4a" name="Changes" comment="" />
+      <changelist id="72e1aa1a-0cae-4d25-bfbd-c1aae7182bcb" name="Changes" comment="" />
       <created>1704716010175</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -112,11 +99,9 @@
       <workItem from="1704724497098" duration="21000" />
       <workItem from="1704724556454" duration="314000" />
       <workItem from="1704727058071" duration="439000" />
-<<<<<<< HEAD
       <workItem from="1704886132717" duration="2571000" />
       <workItem from="1704888740518" duration="75000" />
       <workItem from="1704888829918" duration="2466000" />
-=======
       <workItem from="1704727775624" duration="317000" />
       <workItem from="1704729881134" duration="1550000" />
       <workItem from="1704731559033" duration="374000" />
@@ -135,7 +120,7 @@
       <workItem from="1704951372079" duration="154000" />
       <workItem from="1705052566272" duration="682000" />
       <workItem from="1705054326972" duration="5136000" />
->>>>>>> server-gui
+      <workItem from="1705417325369" duration="2139000" />
     </task>
     <servers />
   </component>
