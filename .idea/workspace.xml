@@ -8,9 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/styles/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/styles/SignUp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/SignUp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/view/.gitkeep" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +18,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -35,6 +32,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2afiP9twnrd6ADRzmIDAQ2Tp0S7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -45,8 +45,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "signUpGUI",
-    "last_opened_file_path": "F:/ITI Projects/Connectify/Client/src/main/resources/images",
+    "Application.Client.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "loginGui",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Java/demo2",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
@@ -66,13 +70,6 @@
       <recent name="com.connectify.utils" />
       <recent name="com.connectify.controller" />
     </key>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-249ae16d76d6-a618e4d4" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

@@ -13,6 +13,7 @@ public class ViewLoader {
     BorderPane mainBorderPane;
     AnchorPane logoAnchorPane;
     AnchorPane signUpAnchorPane;
+    AnchorPane loginAnchorPane;
 
     HBox titleBarHBox;
 
@@ -20,6 +21,7 @@ public class ViewLoader {
         loadMainPane();
         //loadTitleBar();
         loadLogoPane();
+        loadLoginPane();
         loadSignUpPane();
     }
 
@@ -47,6 +49,16 @@ public class ViewLoader {
         fxmlLoader.setLocation(getClass().getResource("/views/SignUpPane.fxml"));
         try {
             signUpAnchorPane = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void loadLoginPane(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/views/LoginPane.fxml"));
+        try {
+            loginAnchorPane = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -80,6 +92,10 @@ public class ViewLoader {
 
     public AnchorPane getLogoAnchorPane() {
         return logoAnchorPane;
+    }
+
+    public AnchorPane getLoginAnchorPane() {
+        return loginAnchorPane;
     }
 
     public HBox getTitleBarHBox() {
