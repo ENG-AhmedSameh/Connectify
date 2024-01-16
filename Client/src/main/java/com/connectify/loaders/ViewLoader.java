@@ -1,10 +1,11 @@
 package com.connectify.loaders;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 public class ViewLoader {
@@ -14,16 +15,33 @@ public class ViewLoader {
     AnchorPane logoAnchorPane;
     AnchorPane signUpAnchorPane;
 
+    AnchorPane homeScreenOptionsPane;
+
+    AnchorPane allChatsAnchorPane;
+
     HBox titleBarHBox;
+    AnchorPane chatCardHBox;
 
     private ViewLoader(){
-        loadMainPane();
-        //loadTitleBar();
-        loadLogoPane();
-        loadSignUpPane();
+        loadMainBorderPane();
+        loadChatCardHBox();
+        loadTitleBar();
+        loadLogoAnchorPane();
+        loadSignUpAnchorPane();
+        loadHomeScreenOptionsPane();
+        loadAllChatsAnchorPane();
     }
 
-    private void loadMainPane() {
+    private void loadAllChatsAnchorPane(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/views/AllChatsPane.fxml"));
+        try {
+            allChatsAnchorPane =fxmlLoader.load();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void loadMainBorderPane() {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/MainPane.fxml"));
         try {
@@ -37,12 +55,12 @@ public class ViewLoader {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/titleBarPane.fxml"));
         try {
-            mainBorderPane =fxmlLoader.load();
+            titleBarHBox =fxmlLoader.load();
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    private void loadSignUpPane(){
+    private void loadSignUpAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/SignUpPane.fxml"));
         try {
@@ -52,7 +70,7 @@ public class ViewLoader {
         }
     }
 
-    private void loadLogoPane(){
+    private void loadLogoAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/logoPane.fxml"));
         try {
@@ -61,6 +79,28 @@ public class ViewLoader {
             throw new RuntimeException(e);
         }
     }
+
+    private void loadHomeScreenOptionsPane(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/views/HomeScreenOptionsPane.fxml"));
+        try {
+            homeScreenOptionsPane = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void loadChatCardHBox(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/views/ChatCardPane.fxml"));
+        try {
+            chatCardHBox = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 
 
@@ -85,4 +125,20 @@ public class ViewLoader {
     public HBox getTitleBarHBox() {
         return titleBarHBox;
     }
+
+    public AnchorPane getHomeScreenOptionsPane() {
+        return homeScreenOptionsPane;
+    }
+
+    public AnchorPane getChatCardHBox() {
+        return chatCardHBox;
+    }
+
+    public AnchorPane getAllChatsAnchorPane() {
+        return allChatsAnchorPane;
+    }
+
+    /*public VBox getAllChatsAnchor() {
+        return (VBox) allChatsAnchorPane.getContent();
+    }*/
 }

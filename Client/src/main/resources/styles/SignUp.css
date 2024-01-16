@@ -1,10 +1,11 @@
 * {
-    -fx-dark: #17212b;
+    -fx-dark: #0e1621;
     -fx-blue: #2f6ea5;
+    -fx-blueGray : #17212b
 }
 
 .logo-anchor-pane{
-    -fx-background-color:  -fx-blue;
+    -fx-background-color:  -fx-dark;
 }
 .signUP-anchor-pane{
     -fx-background-color:  -fx-dark;
@@ -50,3 +51,8 @@
 .tool-bar{
     -fx-background-color: -fx-dark;
 }
+
+
+
+
+
