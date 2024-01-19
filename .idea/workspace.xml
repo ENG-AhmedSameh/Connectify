@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/utils/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/utils/DBConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +147,7 @@
       <workItem from="1705244631451" duration="12340000" />
       <workItem from="1705377499528" duration="2242000" />
       <workItem from="1705689590920" duration="892000" />
+      <workItem from="1705693250995" duration="1243000" />
     </task>
     <servers />
   </component>

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-232.10203.10">
+  <component name="dataSourceStorageLocal" created-in="IU-233.13135.103">
     <data-source name="connectify_db@localhost" uuid="5c890c08-ef6e-4308-981a-48f2d234e7f5">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
       <schema-mapping />
     </data-source>
   </component>
