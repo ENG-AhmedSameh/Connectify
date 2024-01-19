@@ -13,6 +13,12 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Server.executor": "Run",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
   <component name="TaskManager">
     <servers />
   </component>
