@@ -20,7 +20,7 @@ public class AttachmentsDAO implements DAO<Attachments, Integer> {
             Connection connection = dbConnection.openConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, attachments.getAttachmentsId());
-            preparedStatement.setInt(2, attachments.getName());
+            preparedStatement.setString(2, attachments.getName());
             preparedStatement.setString(3, attachments.getExtension());
             preparedStatement.setInt(4, attachments.getSize());
             int rowsInserted = preparedStatement.executeUpdate();
@@ -46,7 +46,7 @@ public class AttachmentsDAO implements DAO<Attachments, Integer> {
                 if (resultSet.next()) {
                     attachments = new Attachments();
                     attachments.setAttachmentsId(resultSet.getInt("attachment_id"));
-                    attachments.setName(resultSet.getInt("name"));
+                    attachments.setName(resultSet.getString("name"));
                     attachments.setExtension(resultSet.getString("extension"));
                     attachments.setSize(resultSet.getInt("size"));
                 }
@@ -66,7 +66,7 @@ public class AttachmentsDAO implements DAO<Attachments, Integer> {
         try{
             Connection connection = dbConnection.openConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, attachments.getName());
+            preparedStatement.setString(1, attachments.getName());
             preparedStatement.setString(2, attachments.getExtension());
             preparedStatement.setInt(3, attachments.getSize());
             preparedStatement.setInt(4, attachments.getAttachmentsId());
@@ -86,6 +86,7 @@ public class AttachmentsDAO implements DAO<Attachments, Integer> {
         try{
             Connection connection = dbConnection.openConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, key);
             int rowDeleted = preparedStatement.executeUpdate();
             preparedStatement.close();
             dbConnection.closeConnection();

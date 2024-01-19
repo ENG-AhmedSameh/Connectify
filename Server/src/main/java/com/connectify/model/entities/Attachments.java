@@ -2,7 +2,7 @@ package com.connectify.model.entities;
 
 public class Attachments {
     private int attachmentsId;
-    private int name;
+    private String name;
     private String extension;
     private int size;
 
@@ -14,11 +14,11 @@ public class Attachments {
         this.attachmentsId = attachmentsId;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
