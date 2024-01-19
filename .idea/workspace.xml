@@ -5,11 +5,84 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_16_2024_3_20_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_16_2024_3_20_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_16_2024_4_41_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_16_2024_4_41_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_16_2024_4_41_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_16_2024_4_41_PM__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_19_2024_7_38_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_19_2024_7_38_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_19_2024_9_04_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_19_2024_9_04_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Connectify.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/controller/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/model/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/view/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/Client.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/titleBarController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/loaders/ViewLoader.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/utils/CountryList.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/images/Chats.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/images/contacts.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/images/exit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/images/invitation.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/images/minimize.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/images/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/module-info.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/styles/SignUp.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/views/HomeScreenOptionsPane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/views/HomeScreenPane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/views/LogInMainPane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/views/MainPane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/views/SignUp.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/views/SignUpPane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/views/logoPane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/views/titleBarPane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/controller/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/model/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/view/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/Server.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/AdminController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/AnnouncementController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/ServerController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/ServerController$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/ServerController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/StatisticsController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/utils/DBConnection.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/loaders/ViewLoader.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/DAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/entities/Attachments.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/entities/Chat.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/entities/ChatMember.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/entities/Contacts.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/entities/Group.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/entities/Message.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/entities/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/entities/invitations.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/enums/Gender.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/enums/Mode.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/enums/Status.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/db.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/admin-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/admin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/announcement-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/announcement.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/exit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/logout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/maximize.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/minimize.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/statistics-large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/images/statistics.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/module-info.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/styles/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/views/admin-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/views/announcement-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/views/server-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/classes/views/statistics-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,19 +124,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;db&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;aws.codewhisperer&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Client.executor": "Run",
+    "Application.Server.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging db",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "aws.codewhisperer"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\images" />
@@ -112,46 +186,6 @@
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="" />
-      <created>1704716010175</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1704716010175</updated>
-      <workItem from="1704716011243" duration="5839000" />
-      <workItem from="1704724497098" duration="21000" />
-      <workItem from="1704724556454" duration="314000" />
-      <workItem from="1704727058071" duration="439000" />
-      <workItem from="1704886132717" duration="2571000" />
-      <workItem from="1704888740518" duration="75000" />
-      <workItem from="1704888829918" duration="2466000" />
-      <workItem from="1704727775624" duration="317000" />
-      <workItem from="1704729881134" duration="1550000" />
-      <workItem from="1704731559033" duration="374000" />
-      <workItem from="1704870392119" duration="2798000" />
-      <workItem from="2084108839514" duration="7000" />
-      <workItem from="2084108930820" duration="27000" />
-      <workItem from="1704879856192" duration="14000" />
-      <workItem from="1704886931465" duration="9067000" />
-      <workItem from="1704910402865" duration="337000" />
-      <workItem from="1704911349777" duration="698000" />
-      <workItem from="1704912210752" duration="21000" />
-      <workItem from="1704940842844" duration="508000" />
-      <workItem from="1704944115848" duration="167000" />
-      <workItem from="1704944503063" duration="4000" />
-      <workItem from="1704946790096" duration="1221000" />
-      <workItem from="1704951372079" duration="154000" />
-      <workItem from="1705052566272" duration="682000" />
-      <workItem from="1705054326972" duration="5136000" />
-      <workItem from="1705417325369" duration="2139000" />
-      <workItem from="1704915935503" duration="3830000" />
-      <workItem from="1704921106204" duration="15241000" />
-      <workItem from="1705145741092" duration="8475000" />
-      <workItem from="1705244631451" duration="12340000" />
-      <workItem from="1705377499528" duration="2242000" />
-      <workItem from="1705689590920" duration="892000" />
-      <workItem from="1705693250995" duration="1243000" />
-    </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

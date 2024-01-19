@@ -20,6 +20,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <myMainClass>com.connectify.Server</myMainClass>
+
   </properties>
 
   <dependencies>
@@ -34,6 +35,4 @@
       <version>8.0.31</version>
     </dependency>
   </dependencies>
-
-
 </project>
