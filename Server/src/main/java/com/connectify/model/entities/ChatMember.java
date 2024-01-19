@@ -5,7 +5,6 @@ public class ChatMember {
     private String member;
     private Integer unreadMessagesNumber;  // nullable
 
-    // Constructors
     public ChatMember() {
     }
 
@@ -15,7 +14,6 @@ public class ChatMember {
         this.unreadMessagesNumber = unreadMessagesNumber;
     }
 
-    // Getters and Setters
     public int getChatId() {
         return chatId;
     }
@@ -40,7 +38,6 @@ public class ChatMember {
         this.unreadMessagesNumber = unreadMessagesNumber;
     }
 
-    // toString method for debugging or displaying information
     @Override
     public String toString() {
         return "ChatMember{" +

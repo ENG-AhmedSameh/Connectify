@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72e1aa1a-0cae-4d25-bfbd-c1aae7182bcb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/utils/.gitkeep" beforeDir="false" />
-
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/module-info.java" afterDir="false" />
-    </list>
+    <list default="true" id="e469bde5-eae4-4932-8afb-1871fc823b4a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,13 +33,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
-
   <component name="ProjectId" id="2afiP9twnrd6ADRzmIDAQ2Tp0S7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -56,19 +46,6 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Server.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "git-widget-placeholder": "db",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Career/Projects/Connectify/Server/src/main/java/com/connectify/controller/utils",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
-    ]
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "db",
     "ignore.virus.scanning.warn.message": "true",

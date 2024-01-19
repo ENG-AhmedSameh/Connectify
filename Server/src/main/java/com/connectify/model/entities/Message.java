@@ -10,7 +10,6 @@ public class Message {
     private String content;
     private Integer attachmentId;  // nullable
 
-    // Constructors
     public Message() {
     }
 
@@ -23,7 +22,6 @@ public class Message {
         this.attachmentId = attachmentId;
     }
 
-    // Getters and Setters
     public int getMessageId() {
         return messageId;
     }
@@ -72,7 +70,6 @@ public class Message {
         this.attachmentId = attachmentId;
     }
 
-    // toString method for debugging or displaying information
     @Override
     public String toString() {
         return "Message{" +

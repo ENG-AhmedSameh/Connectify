@@ -2,9 +2,8 @@ package com.connectify.model.entities;
 public class Chat {
     private int chatId;
     private int isPrivateChat;
-    private Integer numberOfMembers;  // nullable
+    private Integer numberOfMembers;
 
-    // Constructors
     public Chat() {
     }
 
@@ -14,7 +13,6 @@ public class Chat {
         this.numberOfMembers = numberOfMembers;
     }
 
-    // Getters and Setters
     public int getChatId() {
         return chatId;
     }
@@ -39,7 +37,6 @@ public class Chat {
         this.numberOfMembers = numberOfMembers;
     }
 
-    // toString method for debugging or displaying information
     @Override
     public String toString() {
         return "Chat{" +
