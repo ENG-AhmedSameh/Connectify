@@ -1,10 +1,8 @@
 package com.connectify.model.dao;
 
-import java.util.List;
-
-public interface DAO<T>{
+public interface DAO<T, K> {
     boolean insert(T entity);
-    <V> T get(V key);
-    boolean update(T key);
-    <V> boolean delete(V key);
+    T get(K key);
+    boolean update(T entity);
+    boolean delete(K key);
 }

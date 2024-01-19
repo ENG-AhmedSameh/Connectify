@@ -21,7 +21,7 @@ public class DBConnection {
         dataSource = getDataSource();
     }
 
-    public static DBConnection getInstance() throws SQLException {
+    public static DBConnection getInstance(){
         if (instance == null){
             instance = new DBConnection();
         }
@@ -41,7 +41,7 @@ public class DBConnection {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties")) {
             credentials.load(is);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("IOException: " + e.getMessage());
             return null;
         }
         MysqlDataSource dataSource = new MysqlConnectionPoolDataSource();
