@@ -2,7 +2,6 @@ package com.connectify.controller.utils;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import javax.sql.DataSource;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,12 +14,10 @@ public class DBConnection {
     private static final int MAX_POOL_SIZE = 20;
     private static final int MAX_IDLE_TIME_EXCESS_CONN = 3000;
 
-    private final DataSource dataSource;
+    private final ComboPooledDataSource dataSource;
     private static DBConnection instance;
 
-    private DBConnection(){
-        dataSource = setupDataSource();
-    }
+    private DBConnection(){ dataSource = setupDataSource();}
 
     public static synchronized DBConnection getInstance(){
         if (instance == null) {
@@ -33,7 +30,7 @@ public class DBConnection {
         return dataSource.getConnection();
     }
 
-    private DataSource setupDataSource(){
+    private ComboPooledDataSource setupDataSource(){
         try{
             Properties credentials = new Properties();
             try (InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties")) {
@@ -50,6 +47,12 @@ public class DBConnection {
             datasource.setMinPoolSize(MIN_POOL_SIZE);
             datasource.setMaxPoolSize(MAX_POOL_SIZE);
             datasource.setMaxIdleTimeExcessConnections(MAX_IDLE_TIME_EXCESS_CONN);
+
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                if (dataSource != null) {
+                    dataSource.close();
+                }
+            }));
 
             return datasource;
         } catch (Exception e){

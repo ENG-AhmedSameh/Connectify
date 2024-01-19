@@ -15,14 +15,13 @@ public class AttachmentsDAOImpl implements AttachmentDAO{
 
     @Override
     public boolean insert(Attachments attachments) {
-        String query = "INSERT INTO attachments (attachment_id, name, extension, size) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO attachments (name, extension, size) VALUES (?, ?, ?)";
         try(Connection connection = dbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            preparedStatement.setInt(1, attachments.getAttachmentsId());
-            preparedStatement.setString(2, attachments.getName());
-            preparedStatement.setString(3, attachments.getExtension());
-            preparedStatement.setInt(4, attachments.getSize());
+            preparedStatement.setString(1, attachments.getName());
+            preparedStatement.setString(2, attachments.getExtension());
+            preparedStatement.setInt(3, attachments.getSize());
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
