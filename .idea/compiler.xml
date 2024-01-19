@@ -10,10 +10,5 @@
         <module name="Server" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Client" target="21" />
-      <module name="Connectify" target="21" />
-      <module name="Server" target="21" />
-    </bytecodeTargetLevel>
   </component>
 </project>
