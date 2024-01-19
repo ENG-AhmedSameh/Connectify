@@ -1,6 +1,6 @@
 package com.connectify.model.entities;
 
-public class invitations {
+public class Invitations {
     private int invitationId;
     private String sender;
     private String receiver;
