@@ -1,34 +1,32 @@
-package com.connectify.model.dao;
+package com.connectify.model.dao.impl;
 
+import com.connectify.model.dao.AttachmentDAO;
 import com.connectify.model.entities.Attachments;
 import com.connectify.controller.utils.DBConnection;
 import java.sql.*;
 
-public class AttachmentsDAO implements DAO<Attachments, Integer> {
+public class AttachmentsDAOImpl implements AttachmentDAO{
 
     private final DBConnection dbConnection;
 
-    public AttachmentsDAO() {
+    public AttachmentsDAOImpl() {
         dbConnection = DBConnection.getInstance();
     }
 
     @Override
     public boolean insert(Attachments attachments) {
         String query = "INSERT INTO attachments (attachment_id, name, extension, size) VALUES (?, ?, ?, ?)";
-        try
+        try(Connection connection = dbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
-            Connection connection = dbConnection.openConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, attachments.getAttachmentsId());
             preparedStatement.setString(2, attachments.getName());
             preparedStatement.setString(3, attachments.getExtension());
             preparedStatement.setInt(4, attachments.getSize());
             int rowsInserted = preparedStatement.executeUpdate();
-            preparedStatement.close();
-            dbConnection.closeConnection();
             return rowsInserted > 0;
         } catch (SQLException e) {
-            System.out.println("SQLException: " + e.getMessage());
+            System.err.println("SQLException: " + e.getMessage());
             return false;
         }
     }
@@ -37,9 +35,9 @@ public class AttachmentsDAO implements DAO<Attachments, Integer> {
     @Override
     public Attachments get(Integer key) {
         String query = "SELECT * FROM attachments WHERE attachment_id = ?";
-        try {
-            Connection connection = dbConnection.openConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
             preparedStatement.setInt(1, key);
             Attachments attachments = null;
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -51,11 +49,9 @@ public class AttachmentsDAO implements DAO<Attachments, Integer> {
                     attachments.setSize(resultSet.getInt("size"));
                 }
             }
-            preparedStatement.close();
-            dbConnection.closeConnection();
             return attachments;
         } catch (SQLException e) {
-            System.out.println("SQLException: " + e.getMessage());
+            System.err.println("SQLException: " + e.getMessage());
             return null;
         }
     }
@@ -63,19 +59,17 @@ public class AttachmentsDAO implements DAO<Attachments, Integer> {
     @Override
     public boolean update(Attachments attachments) {
         String query = "UPDATE attachments SET name = ?, extension = ?, size = ? WHERE attachment_id = ?";
-        try{
-            Connection connection = dbConnection.openConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = dbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
             preparedStatement.setString(1, attachments.getName());
             preparedStatement.setString(2, attachments.getExtension());
             preparedStatement.setInt(3, attachments.getSize());
             preparedStatement.setInt(4, attachments.getAttachmentsId());
             int rowUpdated = preparedStatement.executeUpdate();
-            preparedStatement.close();
-            dbConnection.closeConnection();
             return rowUpdated > 0;
-        }catch (SQLException e){
-            System.out.println("SQLException: " + e.getMessage());
+        } catch (SQLException e){
+            System.err.println("SQLException: " + e.getMessage());
             return false;
         }
     }
@@ -83,16 +77,14 @@ public class AttachmentsDAO implements DAO<Attachments, Integer> {
     @Override
     public boolean delete(Integer key) {
         String query = "DELETE FROM attachments WHERE attachment_id = ?";
-        try{
-            Connection connection = dbConnection.openConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try(Connection connection = dbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
             preparedStatement.setInt(1, key);
             int rowDeleted = preparedStatement.executeUpdate();
-            preparedStatement.close();
-            dbConnection.closeConnection();
             return rowDeleted > 0;
-        }catch (SQLException e){
-            System.out.println("SQLException: " + e.getMessage());
+        } catch (SQLException e){
+            System.err.println("SQLException: " + e.getMessage());
             return false;
         }
     }

@@ -1,54 +1,60 @@
 package com.connectify.controller.utils;
 
-import java.io.IOException;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import javax.sql.DataSource;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import javax.sql.DataSource;
-
-import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
-import com.mysql.cj.jdbc.MysqlDataSource;
-
-
 public class DBConnection {
 
-    private Connection connection;
+    private static final int INITIAL_POOL_SIZE = 10;
+    private static final int MIN_POOL_SIZE = 10;
+    private static final int MAX_POOL_SIZE = 20;
+    private static final int MAX_IDLE_TIME_EXCESS_CONN = 3000;
+
     private final DataSource dataSource;
     private static DBConnection instance;
+
     private DBConnection(){
-        dataSource = getDataSource();
+        dataSource = setupDataSource();
     }
 
-    public static DBConnection getInstance(){
-        if (instance == null){
+    public static synchronized DBConnection getInstance(){
+        if (instance == null) {
             instance = new DBConnection();
         }
         return instance;
     }
 
-    public Connection openConnection() throws SQLException {
-        connection = dataSource.getConnection();
-        return connection;
+    public Connection getConnection() throws SQLException {
+        return dataSource.getConnection();
     }
 
-    public void closeConnection() throws SQLException {
-        connection.close();
-    }
-    private DataSource getDataSource(){
-        Properties credentials = new Properties();
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties")) {
-            credentials.load(is);
-        } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
+    private DataSource setupDataSource(){
+        try{
+            Properties credentials = new Properties();
+            try (InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties")) {
+                credentials.load(is);
+            }
+
+            ComboPooledDataSource datasource = new ComboPooledDataSource();
+            datasource.setDriverClass("com.mysql.cj.jdbc.Driver");
+            datasource.setJdbcUrl(credentials.getProperty("db.url"));
+            datasource.setUser(credentials.getProperty("db.user"));
+            datasource.setPassword(credentials.getProperty("db.password"));
+
+            datasource.setInitialPoolSize(INITIAL_POOL_SIZE);
+            datasource.setMinPoolSize(MIN_POOL_SIZE);
+            datasource.setMaxPoolSize(MAX_POOL_SIZE);
+            datasource.setMaxIdleTimeExcessConnections(MAX_IDLE_TIME_EXCESS_CONN);
+
+            return datasource;
+        } catch (Exception e){
+            System.err.println("Datasource Exception: " + e.getMessage());
             return null;
         }
-        MysqlDataSource dataSource = new MysqlConnectionPoolDataSource();
-        dataSource.setURL(credentials.getProperty("db.url"));
-        dataSource.setUser(credentials.getProperty("db.user"));
-        dataSource.setPassword(credentials.getProperty("db.password"));
-        return dataSource;
     }
-
 }

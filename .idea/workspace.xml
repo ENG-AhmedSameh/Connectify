@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="72e1aa1a-0cae-4d25-bfbd-c1aae7182bcb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/utils/.gitkeep" beforeDir="false" />
-=======
->>>>>>> ead32fea8241abc3703f0fa142e33015795735b0
+
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,15 +39,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-<<<<<<< HEAD
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 1
 }]]></component>
-=======
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
->>>>>>> ead32fea8241abc3703f0fa142e33015795735b0
+
   <component name="ProjectId" id="2afiP9twnrd6ADRzmIDAQ2Tp0S7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -60,7 +56,6 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-<<<<<<< HEAD
     "Application.Server.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "git-widget-placeholder": "db",
@@ -74,7 +69,6 @@
     "DatabaseDriversLRU": [
       "mysql"
     ]
-=======
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "db",
     "ignore.virus.scanning.warn.message": "true",
@@ -84,7 +78,6 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
->>>>>>> ead32fea8241abc3703f0fa142e33015795735b0
   }
 }]]></component>
   <component name="RecentsManager">
@@ -105,8 +98,6 @@
       <recent name="com.connectify.utils" />
       <recent name="com.connectify.controller" />
     </key>
-<<<<<<< HEAD
-=======
   </component>
   <component name="RunManager">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -127,7 +118,6 @@
         <item itemvalue="Application.Client" />
       </list>
     </recent_temporary>
->>>>>>> ead32fea8241abc3703f0fa142e33015795735b0
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -151,7 +141,6 @@
       <workItem from="1704886132717" duration="2571000" />
       <workItem from="1704888740518" duration="75000" />
       <workItem from="1704888829918" duration="2466000" />
-<<<<<<< HEAD
       <workItem from="1704727775624" duration="317000" />
       <workItem from="1704729881134" duration="1550000" />
       <workItem from="1704731559033" duration="374000" />
@@ -171,13 +160,11 @@
       <workItem from="1705052566272" duration="682000" />
       <workItem from="1705054326972" duration="5136000" />
       <workItem from="1705417325369" duration="2139000" />
-=======
       <workItem from="1704915935503" duration="3830000" />
       <workItem from="1704921106204" duration="15241000" />
       <workItem from="1705145741092" duration="8475000" />
       <workItem from="1705244631451" duration="12340000" />
       <workItem from="1705377499528" duration="2242000" />
->>>>>>> ead32fea8241abc3703f0fa142e33015795735b0
     </task>
     <servers />
   </component>
