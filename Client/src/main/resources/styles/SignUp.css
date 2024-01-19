@@ -1,0 +1,52 @@
+* {
+    -fx-dark: #17212b;
+    -fx-blue: #2f6ea5;
+}
+
+.logo-anchor-pane{
+    -fx-background-color:  -fx-blue;
+}
+.signUP-anchor-pane{
+    -fx-background-color:  -fx-dark;
+}
+.combo-box {
+    -fx-pref-width: 300;
+    -fx-background-color:  -fx-dark;
+}
+
+.combo-box-popup > .list-view {
+    -fx-pref-width: 204;
+}
+
+.combo-box > .list-cell{
+    -fx-text-fill: #FFFFFF;
+}
+
+
+.text-field{
+    -fx-background-color: -fx-dark;
+    -fx-text-fill:  #FFFFFF;
+}
+.text-field:focused {
+    -fx-border-color:  -fx-blue;
+    -fx-border-width:  2 2 2 2;
+}
+.date-picker{
+    -fx-control-inner-background:  -fx-dark;
+}
+.date-picker:focused{
+    -fx-border-color:  -fx-blue;
+}
+
+.date-picker > .text-field > .prompt-text {
+    -fx-text-fill: #FFFFFF;
+}
+
+.button{
+    -fx-background-color: -fx-blue;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 10;
+}
+.tool-bar{
+    -fx-background-color: -fx-dark;
+}
