@@ -12,17 +12,21 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class Client extends Application {
+
+    @Override
+    public void init() throws Exception {
+        ViewLoader loader = ViewLoader.getInstance();
+        super.init();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         ViewLoader loader = ViewLoader.getInstance();
         BorderPane mainPane = loader.getMainBorderPane();
         GridPane centerPane =(GridPane)mainPane.getCenter();
         centerPane.add(loader.getLogoAnchorPane(),0,0);
-        centerPane.add(loader.getLoginAnchorPane(),1,0);
-        GridPane centerPane = (GridPane) mainPane.getCenter();
-        centerPane.add(loader.getLogoAnchorPane(), 0, 0);
-        centerPane.add(loader.getSignUpAnchorPane(), 1, 0);
-        //mainPane.setTop(loader.getTitleBarHBox());
+        centerPane.add(loader.getSignUpAnchorPane(),1,0);
+        mainPane.setTop(loader.getTitleBarHBox());
         mainPane.setCenter(centerPane);
         Parent root = mainPane;
         Scene scene = new Scene(root);
