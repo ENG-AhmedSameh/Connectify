@@ -1,4 +1,4 @@
-package com.connectify.fxmlcontrollers;
+package com.connectify.controller.fxmlcontrollers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +27,7 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         statusLabel.setText("Offline");
-        statusLabel.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        statusLabel.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), Insets.EMPTY)));
     }
 
 
@@ -35,13 +35,13 @@ public class AdminController implements Initializable {
     public void onStartClick(){
         System.out.println("Starting Server...");
         statusLabel.setText("Online");
-        statusLabel.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+        statusLabel.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), Insets.EMPTY)));
     }
 
     @FXML
     public void onStopClick(){
         System.out.println("Stopping Server...");
         statusLabel.setText("Offline");
-        statusLabel.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        statusLabel.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(5), Insets.EMPTY)));
     }
 }

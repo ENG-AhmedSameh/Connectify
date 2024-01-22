@@ -19,6 +19,9 @@ public class Client extends Application {
         GridPane centerPane =(GridPane)mainPane.getCenter();
         centerPane.add(loader.getLogoAnchorPane(),0,0);
         centerPane.add(loader.getLoginAnchorPane(),1,0);
+        GridPane centerPane = (GridPane) mainPane.getCenter();
+        centerPane.add(loader.getLogoAnchorPane(), 0, 0);
+        centerPane.add(loader.getSignUpAnchorPane(), 1, 0);
         //mainPane.setTop(loader.getTitleBarHBox());
         mainPane.setCenter(centerPane);
         Parent root = mainPane;
@@ -29,6 +32,7 @@ public class Client extends Application {
         stage.setMinWidth(750);
         stage.setMinHeight(500);
     }
+
     public static void main(String[] args) {
         launch(args);
     }

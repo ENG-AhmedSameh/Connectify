@@ -12,10 +12,11 @@ import java.io.IOException;
 public class Server extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        ViewLoader loader = new ViewLoader();
-        Parent root = loader.getMainPane();
+        Parent root = ViewLoader.getInstance().getMainPane();
         Scene scene = new Scene(root);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.setMinHeight(750);
+        stage.setMinWidth(1300);
         stage.setScene(scene);
         stage.show();
     }

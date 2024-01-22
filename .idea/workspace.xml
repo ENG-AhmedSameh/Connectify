@@ -8,6 +8,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/styles/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/styles/SignUp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/SignUp.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/view/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/styles/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +57,23 @@
     "git-widget-placeholder": "loginGui",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Java/demo2",
+    "git-widget-placeholder": "signUpGUI",
+    "last_opened_file_path": "F:/ITI Projects/Connectify/Client/src/main/resources/images",
     "node.js.selected.package.tslint": "(autodetect)"
+    "Application.Server.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "server-gui",
+    "jdk.selected.JAVA_MODULE": "21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Career/Projects/Connectify",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -86,6 +108,24 @@
       <workItem from="1704886132717" duration="2571000" />
       <workItem from="1704888740518" duration="75000" />
       <workItem from="1704888829918" duration="2466000" />
+      <workItem from="1704727775624" duration="317000" />
+      <workItem from="1704729881134" duration="1550000" />
+      <workItem from="1704731559033" duration="374000" />
+      <workItem from="1704870392119" duration="2798000" />
+      <workItem from="2084108839514" duration="7000" />
+      <workItem from="2084108930820" duration="27000" />
+      <workItem from="1704879856192" duration="14000" />
+      <workItem from="1704886931465" duration="9067000" />
+      <workItem from="1704910402865" duration="337000" />
+      <workItem from="1704911349777" duration="698000" />
+      <workItem from="1704912210752" duration="21000" />
+      <workItem from="1704940842844" duration="508000" />
+      <workItem from="1704944115848" duration="167000" />
+      <workItem from="1704944503063" duration="4000" />
+      <workItem from="1704946790096" duration="1221000" />
+      <workItem from="1704951372079" duration="154000" />
+      <workItem from="1705052566272" duration="682000" />
+      <workItem from="1705054326972" duration="5136000" />
     </task>
     <servers />
   </component>
