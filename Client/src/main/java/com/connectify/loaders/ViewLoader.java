@@ -16,12 +16,7 @@ public class ViewLoader {
 
     HBox titleBarHBox;
 
-    private ViewLoader(){
-        loadMainPane();
-        //loadTitleBar();
-        loadLogoPane();
-        loadSignUpPane();
-    }
+    BorderPane chatWindow;
 
     private void loadMainPane() {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -62,12 +57,49 @@ public class ViewLoader {
         }
     }
 
+    private void loadChatPane(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/views/Chat.fxml"));
+        try {
+            chatWindow = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void loadUserMessage(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/views/UserMessage.fxml"));
+        try {
+            logoAnchorPane = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void loadContactMessage(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/views/ContactMessage.fxml"));
+        try {
+            logoAnchorPane = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     private static final ViewLoader viewLoader = new ViewLoader();
     public static ViewLoader getInstance() {
         return viewLoader;
     }
+    private ViewLoader(){
+        loadMainPane();
+        //loadTitleBar();
+        loadLogoPane();
+        loadSignUpPane();
+    }
+
+
 
     public AnchorPane getSignUpAnchorPane() {
         return signUpAnchorPane;
