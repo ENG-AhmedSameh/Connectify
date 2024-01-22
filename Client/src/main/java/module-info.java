@@ -3,6 +3,7 @@ module Client {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    requires javafx.web;
 
     opens com.connectify;
     opens com.connectify.loaders;
