@@ -22,14 +22,7 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         ViewLoader loader = ViewLoader.getInstance();
-        BorderPane mainPane = loader.getMainBorderPane();
-        GridPane centerPane =(GridPane)mainPane.getCenter();
-        centerPane.add(loader.getLogoAnchorPane(),0,0);
-        centerPane.add(loader.getSignUpAnchorPane(),1,0);
-        mainPane.setTop(loader.getTitleBarHBox());
-        mainPane.setCenter(centerPane);
-        Parent root = mainPane;
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(loader.getMainBorderPaneScene());
         //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();

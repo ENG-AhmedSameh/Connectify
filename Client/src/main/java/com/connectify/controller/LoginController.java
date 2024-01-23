@@ -22,10 +22,7 @@ public class LoginController {
     public void SignupButtonOnAction(ActionEvent e)
     {
         ViewLoader loader = ViewLoader.getInstance();
-        BorderPane mainPane = loader.getMainBorderPane();
-        GridPane centerPane =(GridPane)mainPane.getCenter();
-        centerPane.getChildren().remove(loader.getLoginAnchorPane());
-        centerPane.add(loader.getSignUpAnchorPane(), 1, 0);
+        loader.switchFromLoginToSignUpScreen();
     }
     public void LoginButtonOnAction(ActionEvent e)
     {
@@ -60,7 +57,6 @@ public class LoginController {
         else
         {
             loginmessagelabel.setText("");
-
         }
     }
 }

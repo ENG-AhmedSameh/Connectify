@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -120,19 +121,7 @@ public class SignUpController implements Initializable {
         //validateFields();
         if(validInformation){
             ViewLoader viewLoader = ViewLoader.getInstance();
-            BorderPane mainPane = viewLoader.getMainBorderPane();
-            mainPane.setLeft(viewLoader.getHomeScreenOptionsPane());
-            //mainPane.setCenter(viewLoader.getLogoAnchorPane());
-//            GridPane centerPane =(GridPane)mainPane.getCenter();
-//            centerPane.getChildren().remove(viewLoader.getSignUpAnchorPane());
-//            centerPane.getChildren().remove(viewLoader.getLogoAnchorPane());
-//            centerPane.add(viewLoader.getAllChatsScrollPane(),0,0);
-//            centerPane.add(viewLoader.getLogoAnchorPane(),1,0);
-
-            BorderPane newCenterPane = new BorderPane();
-            newCenterPane.setLeft(viewLoader.getAllChatsAnchorPane());
-            newCenterPane.setCenter(viewLoader.getLogoAnchorPane());
-            mainPane.setCenter(newCenterPane);
+            viewLoader.switchFromSignUpToHomeScreen();
         }
     }
 
@@ -206,4 +195,8 @@ public class SignUpController implements Initializable {
     }
 
 
+    public void onLoginLabelClickedHandler(MouseEvent mouseEvent) {
+        ViewLoader viewLoader = ViewLoader.getInstance();
+        viewLoader.switchFromSignUpToLogin();
+    }
 }

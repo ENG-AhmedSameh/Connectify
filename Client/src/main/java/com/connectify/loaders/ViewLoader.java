@@ -1,11 +1,8 @@
 package com.connectify.loaders;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.Scene;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 public class ViewLoader {
@@ -24,37 +21,20 @@ public class ViewLoader {
     AnchorPane chatCardHBox;
 
     private ViewLoader(){
-        loadMainPane();
-        //loadTitleBar();
-        loadLogoPane();
-        loadLoginPane();
-        loadSignUpPane();
+        loadTitleBar();
+        loadLoginAnchorPane();
         loadMainBorderPane();
         loadChatCardHBox();
-        loadTitleBar();
         loadLogoAnchorPane();
         loadSignUpAnchorPane();
         loadHomeScreenOptionsPane();
         loadAllChatsAnchorPane();
     }
-    private void loadMainPane() {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/views/MainPane.fxml"));
-        try {
-            mainBorderPane =fxmlLoader.load();
-        }catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void loadSignUpPane(){
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/views/SignUpPane.fxml"));
-        try {
-            signUpAnchorPane = fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    private static final ViewLoader viewLoader= new ViewLoader();;
+    public static ViewLoader getInstance() {
+//        if(viewLoader==null)
+//            viewLoader = new ViewLoader();
+        return viewLoader;
     }
 
     BorderPane chatWindow;
@@ -97,7 +77,7 @@ public class ViewLoader {
         }
     }
 
-    private void loadLoginPane(){
+    private void loadLoginAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/LoginPane.fxml"));
         try {
@@ -107,15 +87,6 @@ public class ViewLoader {
         }
     }
 
-    private void loadLogoPane(){
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/views/logoPane.fxml"));
-        try {
-            logoAnchorPane = fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     private void loadLogoAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/logoPane.fxml"));
@@ -174,47 +145,31 @@ public class ViewLoader {
         }
     }
 
-    private static final ViewLoader viewLoader = new ViewLoader();
-    public static ViewLoader getInstance() {
-        return viewLoader;
+
+    public void switchFromSignUpToHomeScreen(){
+        mainBorderPane.setLeft(homeScreenOptionsPane);
+        BorderPane newCenterPane = new BorderPane();
+        newCenterPane.setLeft(allChatsAnchorPane);
+        newCenterPane.setCenter(logoAnchorPane);
+        mainBorderPane.setCenter(newCenterPane);
+    }
+    public void switchFromLoginToSignUpScreen(){
+        GridPane centerPane =(GridPane)mainBorderPane.getCenter();
+        centerPane.getChildren().remove(loginAnchorPane);
+        centerPane.add(signUpAnchorPane, 1, 0);
     }
 
-
-
-    public AnchorPane getSignUpAnchorPane() {
-        return signUpAnchorPane;
+    public void switchFromSignUpToLogin() {
+        GridPane centerPane =(GridPane)mainBorderPane.getCenter();
+        centerPane.getChildren().remove(signUpAnchorPane);
+        centerPane.add(loginAnchorPane, 1, 0);
     }
-
-
-    public BorderPane getMainBorderPane() {
+    public BorderPane getMainBorderPaneScene(){
+        GridPane centerPane =(GridPane)mainBorderPane.getCenter();
+        centerPane.add(logoAnchorPane,0,0);
+        centerPane.add(loginAnchorPane,1,0);
+        mainBorderPane.setTop(titleBarHBox);
+        mainBorderPane.setCenter(centerPane);
         return mainBorderPane;
     }
-
-    public AnchorPane getLogoAnchorPane() {
-        return logoAnchorPane;
-    }
-
-    public AnchorPane getLoginAnchorPane() {
-        return loginAnchorPane;
-    }
-
-    public HBox getTitleBarHBox() {
-        return titleBarHBox;
-    }
-
-    public AnchorPane getHomeScreenOptionsPane() {
-        return homeScreenOptionsPane;
-    }
-
-    public AnchorPane getChatCardHBox() {
-        return chatCardHBox;
-    }
-
-    public AnchorPane getAllChatsAnchorPane() {
-        return allChatsAnchorPane;
-    }
-
-    /*public VBox getAllChatsAnchor() {
-        return (VBox) allChatsAnchorPane.getContent();
-    }*/
 }
