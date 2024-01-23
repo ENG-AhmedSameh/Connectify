@@ -6,8 +6,8 @@ import javafx.scene.input.MouseEvent;
 
 public class HTMLEditorController {
 
-    //@FXML
-    //private HTMLEditor editor;
+//    @FXML
+//    private HTMLEditor editor;
 
     @FXML
     void sendHTMLHandler(MouseEvent event) {
