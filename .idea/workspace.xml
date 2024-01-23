@@ -6,17 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="e469bde5-eae4-4932-8afb-1871fc823b4a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/resources/styles/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/styles/SignUp.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/SignUp.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/resources/view/.gitkeep" beforeDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/resources/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/styles/style.css" afterDir="false" />
->>>>>>> server-gui
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +24,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,6 +38,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2afiP9twnrd6ADRzmIDAQ2Tp0S7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -51,11 +51,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-<<<<<<< HEAD
+    "Application.Client.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "loginGui",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Java/demo2",
     "git-widget-placeholder": "signUpGUI",
     "last_opened_file_path": "F:/ITI Projects/Connectify/Client/src/main/resources/images",
     "node.js.selected.package.tslint": "(autodetect)"
-=======
     "Application.Server.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -70,7 +74,6 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
->>>>>>> server-gui
   }
 }]]></component>
   <component name="RecentsManager">
@@ -84,21 +87,11 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Career\Connectify\Server\src\main\java\server" />
     </key>
-<<<<<<< HEAD
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.connectify.loaders" />
       <recent name="com.connectify.utils" />
       <recent name="com.connectify.controller" />
     </key>
-=======
->>>>>>> server-gui
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-249ae16d76d6-a618e4d4" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -112,11 +105,9 @@
       <workItem from="1704724497098" duration="21000" />
       <workItem from="1704724556454" duration="314000" />
       <workItem from="1704727058071" duration="439000" />
-<<<<<<< HEAD
       <workItem from="1704886132717" duration="2571000" />
       <workItem from="1704888740518" duration="75000" />
       <workItem from="1704888829918" duration="2466000" />
-=======
       <workItem from="1704727775624" duration="317000" />
       <workItem from="1704729881134" duration="1550000" />
       <workItem from="1704731559033" duration="374000" />
@@ -135,7 +126,6 @@
       <workItem from="1704951372079" duration="154000" />
       <workItem from="1705052566272" duration="682000" />
       <workItem from="1705054326972" duration="5136000" />
->>>>>>> server-gui
     </task>
     <servers />
   </component>

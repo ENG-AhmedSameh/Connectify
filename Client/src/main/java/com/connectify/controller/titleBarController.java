@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 
 
-public class titleBarController implements Initializable{
+public class titleBarController{
 
     @FXML
     private ImageView closeButton;
@@ -29,18 +29,7 @@ public class titleBarController implements Initializable{
     private static double xOffset = 0;
     private static double yOffset = 0;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        titleBarHBox.setOnMousePressed(event -> {
-//            xOffset = event.getSceneX();
-//            yOffset = event.getSceneY();
-//        });
-//        titleBarHBox.setOnMouseDragged(event -> {
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            stage.setX(event.getScreenX() - xOffset);
-//            stage.setY(event.getScreenY() - yOffset);
-//        });
-    }
+
 
     @FXML
     void closeButtonHandler(MouseEvent event) {
@@ -58,5 +47,15 @@ public class titleBarController implements Initializable{
         stage.setIconified(true);
     }
 
+    public void onMousePressedHandler(MouseEvent mouseEvent) {
+        xOffset = mouseEvent.getSceneX();
+        yOffset = mouseEvent.getSceneY();
+    }
+
+    public void onMouseDraggedHandler(MouseEvent mouseEvent) {
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        stage.setX(mouseEvent.getScreenX() - xOffset);
+        stage.setY(mouseEvent.getScreenY() - yOffset);
+    }
 }
 

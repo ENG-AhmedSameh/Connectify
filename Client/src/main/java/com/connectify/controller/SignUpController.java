@@ -1,5 +1,6 @@
 package com.connectify.controller;
 
+import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.CountryList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
 import java.util.Objects;
@@ -115,7 +118,11 @@ public class SignUpController implements Initializable {
 
     @FXML
     private void signUpBtnHandler(ActionEvent event){
-        validateFields();
+        //validateFields();
+        if(validInformation){
+            ViewLoader viewLoader = ViewLoader.getInstance();
+            viewLoader.switchFromSignUpToHomeScreen();
+        }
     }
 
     private void validateFields() {
@@ -188,4 +195,8 @@ public class SignUpController implements Initializable {
     }
 
 
+    public void onLoginLabelClickedHandler(MouseEvent mouseEvent) {
+        ViewLoader viewLoader = ViewLoader.getInstance();
+        viewLoader.switchFromSignUpToLogin();
+    }
 }
