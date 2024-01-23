@@ -1,7 +1,6 @@
 package com.connectify.loaders;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
@@ -19,25 +18,18 @@ public class ViewLoader {
 
     HBox titleBarHBox;
     AnchorPane chatCardHBox;
+    BorderPane chatWindow;
 
     private ViewLoader(){
-        loadTitleBar();
-        loadLoginAnchorPane();
-        loadMainBorderPane();
-        loadChatCardHBox();
-        loadLogoAnchorPane();
-        loadSignUpAnchorPane();
-        loadHomeScreenOptionsPane();
-        loadAllChatsAnchorPane();
     }
-    private static final ViewLoader viewLoader= new ViewLoader();;
-    public static ViewLoader getInstance() {
-//        if(viewLoader==null)
-//            viewLoader = new ViewLoader();
+    private static ViewLoader viewLoader;;
+    public static ViewLoader getInstance(){
+        if(viewLoader==null)
+            viewLoader = new ViewLoader();
         return viewLoader;
     }
 
-    BorderPane chatWindow;
+
 
     private void loadAllChatsAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -147,6 +139,10 @@ public class ViewLoader {
 
 
     public void switchFromSignUpToHomeScreen(){
+        if(homeScreenOptionsPane==null)
+            loadHomeScreenOptionsPane();
+        if(allChatsAnchorPane==null)
+            loadAllChatsAnchorPane();
         mainBorderPane.setLeft(homeScreenOptionsPane);
         BorderPane newCenterPane = new BorderPane();
         newCenterPane.setLeft(allChatsAnchorPane);
@@ -154,22 +150,38 @@ public class ViewLoader {
         mainBorderPane.setCenter(newCenterPane);
     }
     public void switchFromLoginToSignUpScreen(){
+        if(signUpAnchorPane==null)
+            loadSignUpAnchorPane();
         GridPane centerPane =(GridPane)mainBorderPane.getCenter();
         centerPane.getChildren().remove(loginAnchorPane);
         centerPane.add(signUpAnchorPane, 1, 0);
     }
 
     public void switchFromSignUpToLogin() {
+        if(loginAnchorPane==null)
+            loadLoginAnchorPane();
         GridPane centerPane =(GridPane)mainBorderPane.getCenter();
         centerPane.getChildren().remove(signUpAnchorPane);
         centerPane.add(loginAnchorPane, 1, 0);
     }
-    public BorderPane getMainBorderPaneScene(){
+
+    public void switchToLogin(){
+        if(titleBarHBox==null)
+            loadTitleBar();
+        if(logoAnchorPane==null)
+            loadLogoAnchorPane();
+        if(loginAnchorPane==null)
+            loadLoginAnchorPane();
+        if(mainBorderPane==null)
+            loadMainBorderPane();
         GridPane centerPane =(GridPane)mainBorderPane.getCenter();
         centerPane.add(logoAnchorPane,0,0);
         centerPane.add(loginAnchorPane,1,0);
         mainBorderPane.setTop(titleBarHBox);
         mainBorderPane.setCenter(centerPane);
+    }
+    public BorderPane getMainBorderPane(){
         return mainBorderPane;
     }
+
 }
