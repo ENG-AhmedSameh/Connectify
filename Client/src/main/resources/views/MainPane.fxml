@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,43 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="520.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.titleBarController">
-   <top>
-      <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="750.0" styleClass="tool-bar" stylesheets="@../styles/SignUp.css" BorderPane.alignment="CENTER">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="2000.0">
-               <children>
-                  <Label prefHeight="18.0" prefWidth="62.0" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="Connectify" HBox.hgrow="NEVER" />
-               </children>
-            </HBox>
-            <ImageView fx:id="minimizeButton" fitHeight="30.0" fitWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#minimizeButtonHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
-               <image>
-                  <Image url="@../images/minimize.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </ImageView>
-            <ImageView fx:id="closeButton" fitHeight="30.0" fitWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#closeButtonHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
-               <image>
-                  <Image url="@../images/exit.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </ImageView>
-         </children>
-      </HBox>
-   </top>
+<BorderPane prefHeight="520.0" prefWidth="750.0" stylesheets="@../styles/HomeScreen.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.titleBarController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -59,4 +22,43 @@
         </rowConstraints>
       </GridPane>
    </center>
+   <top>
+      <HBox fx:id="dragBar" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="790.0" styleClass="bar">
+         <cursor>
+            <Cursor fx:constant="MOVE" />
+         </cursor>
+         <children>
+            <ImageView fx:id="minimizeButton" fitHeight="30.0" fitWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#minimizeButtonHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
+               <image>
+                  <Image url="@../images/minimize.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="maximizeButton" fitHeight="30.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#maximizeButtonHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
+               <image>
+                  <Image url="@../images/maximize.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="closeButton" fitHeight="30.0" fitWidth="30.0" layoutX="1170.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#closeButtonHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
+               <image>
+                  <Image url="@../images/exit.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

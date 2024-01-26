@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 public class titleBarController{
 
+    public HBox titleBarHBox;
     @FXML
     private ImageView closeButton;
 
@@ -24,7 +25,8 @@ public class titleBarController{
     private ImageView minimizeButton;
 
     @FXML
-    private HBox titleBarHBox;
+    private HBox dragBar;
+
 
     private static double xOffset = 0;
     private static double yOffset = 0;
@@ -56,6 +58,11 @@ public class titleBarController{
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         stage.setX(mouseEvent.getScreenX() - xOffset);
         stage.setY(mouseEvent.getScreenY() - yOffset);
+    }
+
+    public void maximizeButtonHandler(MouseEvent event) {
+        Stage stage = (Stage) titleBarHBox.getScene().getWindow();
+        stage.setMaximized(!stage.isMaximized());
     }
 }
 

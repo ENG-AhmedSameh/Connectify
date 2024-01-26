@@ -1,6 +1,8 @@
 package com.connectify;
 
+import com.connectify.Interfaces.ServerAPI;
 import com.connectify.loaders.ViewLoader;
+import com.connectify.controller.ServerController;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +21,8 @@ public class Server extends Application {
         super.init();
         System.out.println("Server is running...");
         var registry = LocateRegistry.createRegistry(1099);
+        ServerAPI server = new ServerController();
+        registry.rebind("server", server);
     }
 
     @Override

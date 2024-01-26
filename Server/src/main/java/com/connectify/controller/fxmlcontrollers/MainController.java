@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ServerController implements Initializable{
+public class MainController implements Initializable{
 
     private static double xOffset = 0;
     private static double yOffset = 0;

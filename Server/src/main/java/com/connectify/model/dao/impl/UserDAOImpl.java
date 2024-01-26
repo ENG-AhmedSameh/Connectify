@@ -1,13 +1,14 @@
 package com.connectify.model.dao.impl;
 
 import com.connectify.model.dao.UserDAO;
-import com.connectify.controller.utils.DBConnection;
-import model.entities.User;
-import model.enums.Gender;
-import model.enums.Mode;
-import model.enums.Status;
+import com.connectify.utils.DBConnection;
+import com.connectify.model.entities.User;
+import com.connectify.model.enums.Gender;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -19,22 +20,17 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean insert(User user) {
-        String query = "INSERT INTO users (phone_number, name, email, password, picture, gender, country, birth_date, bio, mode, status) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users (phone_number, name, email, password, gender, country, birth_date) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user.getPhoneNumber());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, user.getPicture());
-            preparedStatement.setString(6, user.getGender().toString());
-            preparedStatement.setString(7, user.getCountry());
-            preparedStatement.setDate(8, new Date(user.getBirthDate().getTime()));
-            preparedStatement.setString(9, user.getBio());
-            preparedStatement.setString(10, user.getMode().toString());
-            preparedStatement.setString(11, user.getStatus().toString());
-
+            preparedStatement.setString(5, user.getGender().toString().equals("MALE") ? "M" : "F");
+            preparedStatement.setString(6, user.getCountry());
+            preparedStatement.setObject(7, user.getBirthDate());
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
@@ -58,9 +54,9 @@ public class UserDAOImpl implements UserDAO {
                     user.setEmail(resultSet.getString("email"));
                     user.setPassword(resultSet.getString("password"));
                     user.setPicture(resultSet.getString("picture"));
-                    user.setGender(Gender.valueOf(resultSet.getString("gender")));
+                    user.setGender(Gender.valueOf(resultSet.getString("gender").equals("M") ? "MALE" : "FEMALE"));
                     user.setCountry(resultSet.getString("country"));
-                    user.setBirthDate(resultSet.getDate("birth_date"));
+                    user.setBirthDate((LocalDate) resultSet.getObject("birth_date"));
                     user.setBio(resultSet.getString("bio"));
                     user.setMode(Mode.valueOf(resultSet.getString("mode")));
                     user.setStatus(Status.valueOf(resultSet.getString("status")));
@@ -83,9 +79,9 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setString(4, user.getPicture());
-            preparedStatement.setString(5, user.getGender().toString());
+            preparedStatement.setString(5, user.getGender().toString().equals("MALE") ? "M" : "F");
             preparedStatement.setString(6, user.getCountry());
-            preparedStatement.setDate(7, new java.sql.Date(user.getBirthDate().getTime()));
+            preparedStatement.setObject(7, user.getBirthDate());
             preparedStatement.setString(8, user.getBio());
             preparedStatement.setString(9, user.getMode().toString());
             preparedStatement.setString(10, user.getStatus().toString());

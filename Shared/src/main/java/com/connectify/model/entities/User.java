@@ -1,11 +1,12 @@
-package model.entities;
+package com.connectify.model.entities;
 
 
 
-import model.enums.Gender;
-import model.enums.Mode;
-import model.enums.Status;
+import com.connectify.model.enums.Gender;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class User{
@@ -17,7 +18,7 @@ public class User{
     private String picture;
     private Gender gender;
     private String country;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String bio;
     private Mode mode;
     private Status status;
@@ -78,11 +79,11 @@ public class User{
         this.country = country;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

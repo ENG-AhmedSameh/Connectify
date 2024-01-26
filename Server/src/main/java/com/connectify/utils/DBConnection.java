@@ -1,4 +1,4 @@
-package com.connectify.controller.utils;
+package com.connectify.utils;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -53,7 +53,7 @@ public class DBConnection {
                     dataSource.close();
                 }
             }));
-
+            datasource.setAutoCommitOnClose(true);
             return datasource;
         } catch (Exception e){
             System.err.println("Datasource Exception: " + e.getMessage());

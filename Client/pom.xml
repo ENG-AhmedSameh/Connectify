@@ -14,6 +14,11 @@
             <artifactId>javafx-web</artifactId>
             <version>17.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.connectify</groupId>
+            <artifactId>Shared</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <packaging>jar</packaging>
 

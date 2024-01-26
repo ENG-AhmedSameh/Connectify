@@ -1,7 +1,7 @@
 package com.connectify.model.dao;
 
 
-import model.entities.Group;
+import com.connectify.model.entities.Group;
 
 public interface GroupDAO extends DAO<Group,Integer> {
 }

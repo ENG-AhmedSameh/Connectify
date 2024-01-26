@@ -1,4 +1,4 @@
-package model.entities;
+package com.connectify.model.entities;
 
 public class Contacts {
     private String user;
