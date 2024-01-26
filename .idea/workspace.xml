@@ -4,22 +4,166 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30572a17-09b0-408a-8810-667e21bc3429" name="Changes" comment="" />
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="module-info" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="db" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2afiP9twnrd6ADRzmIDAQ2Tp0S7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Server.executor": "Run",
-    "git-widget-placeholder": "main"
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\images" />
+      <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\Images" />
+      <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\Styles" />
+      <recent name="D:\Career\Connectify\Server\src\main\java\server" />
+      <recent name="D:\Career\Connectify\Server\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Career\Projects\Connectify\Server\src\main\resources" />
+      <recent name="D:\Career\Projects\Connectify\Server\src\main\java\com\connectify\controller\utils\db" />
+      <recent name="D:\Career\Connectify\Server\src\main\java\server" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.connectify.loaders" />
+      <recent name="com.connectify.utils" />
+      <recent name="com.connectify.controller" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.connectify.Client" />
+      <module name="Client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.connectify.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Client" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-249ae16d76d6-a618e4d4" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="" />
+      <created>1704716010175</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704716010175</updated>
+      <workItem from="1704716011243" duration="5839000" />
+      <workItem from="1704724497098" duration="21000" />
+      <workItem from="1704724556454" duration="314000" />
+      <workItem from="1704727058071" duration="439000" />
+      <workItem from="1704886132717" duration="2571000" />
+      <workItem from="1704888740518" duration="75000" />
+      <workItem from="1704888829918" duration="2466000" />
+      <workItem from="1704727775624" duration="317000" />
+      <workItem from="1704729881134" duration="1550000" />
+      <workItem from="1704731559033" duration="374000" />
+      <workItem from="1704870392119" duration="2798000" />
+      <workItem from="2084108839514" duration="7000" />
+      <workItem from="2084108930820" duration="27000" />
+      <workItem from="1704879856192" duration="14000" />
+      <workItem from="1704886931465" duration="9067000" />
+      <workItem from="1704910402865" duration="337000" />
+      <workItem from="1704911349777" duration="698000" />
+      <workItem from="1704912210752" duration="21000" />
+      <workItem from="1704940842844" duration="508000" />
+      <workItem from="1704944115848" duration="167000" />
+      <workItem from="1704944503063" duration="4000" />
+      <workItem from="1704946790096" duration="1221000" />
+      <workItem from="1704951372079" duration="154000" />
+      <workItem from="1705052566272" duration="682000" />
+      <workItem from="1705054326972" duration="5136000" />
+      <workItem from="1705417325369" duration="2139000" />
+      <workItem from="1704915935503" duration="3830000" />
+      <workItem from="1704921106204" duration="15241000" />
+      <workItem from="1705145741092" duration="8475000" />
+      <workItem from="1705244631451" duration="12340000" />
+      <workItem from="1705377499528" duration="2242000" />
+      <workItem from="1705689590920" duration="892000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
