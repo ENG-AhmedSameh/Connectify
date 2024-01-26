@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="" />
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="try merging DB layer">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/entities/Attachments.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/Attachments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/entities/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/entities/ChatMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/ChatMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/entities/Contacts.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/Contacts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/entities/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/entities/Invitations.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/Invitations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/entities/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/enums/Gender.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/enums/Gender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/enums/Mode.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/enums/Mode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/enums/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/enums/Status.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +41,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ENG-AhmedSameh"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="6d6d482c-84e3-4485-8ec3-5a61edbd6f7e" />
+        <option name="url" value="https://github.com/hazemkhaled98/Connectify.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" root0="FORCE_HIGHLIGHTING" />
@@ -52,9 +80,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "F:/ITI Projects/Connectify/Shared",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
   }
 }]]></component>
@@ -146,6 +180,15 @@
       <workItem from="1705377499528" duration="2242000" />
       <workItem from="1705689590920" duration="892000" />
     </task>
+    <task id="LOCAL-00001" summary="try merging DB layer">
+      <option name="closed" value="true" />
+      <created>1706252588990</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706252588990</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +204,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="try merging DB layer" />
+    <option name="LAST_COMMIT_MESSAGE" value="try merging DB layer" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
