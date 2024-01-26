@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="editeProfilePane" prefHeight="500.0" prefWidth="500.0" styleClass="signUP-anchor-pane" stylesheets="@../styles/SignUp.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.EditeProfileController">
+<AnchorPane fx:id="editeProfilePane" prefHeight="500.0" prefWidth="500.0" styleClass="anchor-pane" stylesheets="@../styles/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.EditeProfileController">
    <children>
       <VBox alignment="CENTER" fillWidth="false" layoutX="25.0" layoutY="11.0" prefHeight="500.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.599999999999966" AnchorPane.topAnchor="11.0">
          <children>
@@ -34,14 +34,14 @@
                         <Circle fx:id="userImageCircle" fill="DODGERBLUE" radius="64.0" stroke="BLACK" strokeType="INSIDE" />
                      </children>
                   </HBox>
-                  <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="450.0" promptText="bio" styleClass="text-area" stylesheets="@../styles/SignUp.css" text="I am happy." />
+                  <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="450.0" promptText="bio" styleClass="text-area" stylesheets="@../styles/Profile.css" text="I am happy." />
                   <HBox prefHeight="30.0" prefWidth="423.0" spacing="30.0">
                      <children>
-                        <ComboBox fx:id="countryComboBox" blendMode="SCREEN" onAction="#countryOnSelectHandler" onKeyPressed="#countryOnKeyPressedHandler" promptText="Country" styleClass="combo-box" stylesheets="@../styles/SignUp.css" HBox.hgrow="NEVER" />
+                        <ComboBox fx:id="countryComboBox" blendMode="SCREEN" onAction="#countryOnSelectHandler" onKeyPressed="#countryOnKeyPressedHandler" promptText="Country" styleClass="combo-box" HBox.hgrow="NEVER" />
                         <HBox prefHeight="30.0" prefWidth="317.0">
                            <children>
                               <Label fx:id="countryCodeLbl" prefHeight="30.0" prefWidth="58.0" text="+" textAlignment="CENTER" textFill="WHITE" />
-                              <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="01143414035" HBox.hgrow="NEVER" />
+                              <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" text="01143414035" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
                      </children>
@@ -49,19 +49,19 @@
                         <Insets right="50.0" />
                      </opaqueInsets>
                   </HBox>
-                  <TextField fx:id="nameTxtF" blendMode="SCREEN" prefHeight="28.0" prefWidth="402.0" promptText="Display Name" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="Mohamed Nofal" VBox.vgrow="NEVER" />
-                  <TextField fx:id="emailTxtF" blendMode="SCREEN" prefHeight="29.0" prefWidth="407.0" promptText="E-mail" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="Nofal@gimal.com" VBox.vgrow="NEVER" />
-                  <PasswordField fx:id="passwordPassF" blendMode="SCREEN" prefHeight="29.0" prefWidth="427.0" promptText="New Password" styleClass="text-field" stylesheets="@../styles/SignUp.css" VBox.vgrow="NEVER" />
-                  <PasswordField fx:id="confirmPasswordPassF1" blendMode="SCREEN" layoutX="10.0" layoutY="354.0" prefHeight="29.0" prefWidth="427.0" promptText="Confirm Password" styleClass="text-field" stylesheets="@../styles/SignUp.css" />
+                  <TextField fx:id="nameTxtF" blendMode="SCREEN" prefHeight="28.0" prefWidth="402.0" promptText="Display Name" styleClass="text-field" text="Mohamed Nofal" VBox.vgrow="NEVER" />
+                  <TextField fx:id="emailTxtF" blendMode="SCREEN" prefHeight="29.0" prefWidth="407.0" promptText="E-mail" styleClass="text-field" text="Nofal@gimal.com" VBox.vgrow="NEVER" />
+                  <PasswordField fx:id="passwordPassF" blendMode="SCREEN" prefHeight="29.0" prefWidth="427.0" promptText="New Password" styleClass="text-field" VBox.vgrow="NEVER" />
+                  <PasswordField fx:id="confirmPasswordPassF1" blendMode="SCREEN" layoutX="10.0" layoutY="354.0" prefHeight="29.0" prefWidth="427.0" promptText="Confirm Password" styleClass="text-field" />
                   <HBox prefHeight="29.0" prefWidth="455.0" spacing="80.0" VBox.vgrow="NEVER">
                      <children>
-                        <DatePicker fx:id="birthDatePicker" blendMode="SCREEN" prefHeight="26.0" prefWidth="311.0" promptText="Birth Date" styleClass="date-picker" stylesheets="@../styles/SignUp.css" HBox.hgrow="NEVER" />
-                        <ComboBox fx:id="genderComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Male" styleClass="combo-box" stylesheets="@../styles/SignUp.css" visibleRowCount="2" HBox.hgrow="NEVER" />
+                        <DatePicker fx:id="birthDatePicker" blendMode="SCREEN" prefHeight="26.0" prefWidth="311.0" promptText="Birth Date" styleClass="date-picker" HBox.hgrow="NEVER" />
+                        <ComboBox fx:id="genderComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Male" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="445.0" prefHeight="29.0" prefWidth="455.0" spacing="80.0">
                      <children>
-                        <ComboBox fx:id="modeComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Busy" styleClass="combo-box" stylesheets="@../styles/SignUp.css" visibleRowCount="2" HBox.hgrow="NEVER" />
+                        <ComboBox fx:id="modeComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Busy" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
                      </children>
                   </HBox>
                </children>
