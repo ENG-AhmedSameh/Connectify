@@ -144,13 +144,20 @@ public class SignUpController implements Initializable {
         validateFields();
         if(validInformation){
             SignUpRequest request = createSignUpRequest();
+            boolean isSuccessFul = false;
             try {
-                server.signUp(request);
+                isSuccessFul = server.signUp(request);
             } catch (RemoteException e) {
                 System.err.println("Remote Exception: " + e.getMessage());
             }
-            ViewLoader viewLoader = ViewLoader.getInstance();
-            viewLoader.switchFromSignUpToHomeScreen();
+            if (!isSuccessFul) {
+                phoneNumTxtF.setTooltip(hintText("This phone number is already registered"));
+                phoneNumTxtF.setStyle("-fx-border-color: red;");
+            }
+            else {
+                ViewLoader viewLoader = ViewLoader.getInstance();
+                viewLoader.switchFromSignUpToHomeScreen();
+            }
         }
     }
 

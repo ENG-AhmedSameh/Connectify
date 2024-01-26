@@ -13,9 +13,9 @@
 <AnchorPane prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #17212b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.LoginController">
     <children>
         <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #17212b;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.599999999999966" AnchorPane.topAnchor="11.0">
-            <Label text="Your Phone Number" textFill="WHITE">
+            <Label text="Welcome to Connectify" textFill="WHITE">
                 <font>
-                    <Font name="Bodoni MT Bold" size="24.0" />
+                    <Font name="System Bold" size="24.0" />
                 </font>
             </Label>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="400.0" text="Please confirm your country code and enter your phone number" textFill="#7e909e" />
@@ -64,7 +64,7 @@
                     </HBox>
                 </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: #2f6ea5; -fx-background-radius: 10px;" text="Login" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: #2f6ea5; -fx-background-radius: 10px; -fx-cursor: hand;" text="Login" textFill="WHITE">
                 <font>
                     <Font name="Bodoni MT Italic" size="12.0" />
                 </font>

@@ -54,13 +54,13 @@
             </VBox>
             <VBox alignment="CENTER" spacing="10.0" VBox.vgrow="NEVER">
                <children>
-                  <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#signUpBtnHandler" prefHeight="30.0" prefWidth="444.0" stylesheets="@../styles/SignUp.css" text="Sign Up" />
-                  <Label contentDisplay="RIGHT" prefHeight="20.0" prefWidth="232.0" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="Have an account?        ">
+                  <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#signUpBtnHandler" prefHeight="30.0" prefWidth="444.0" style="-fx-cursor: hand;" stylesheets="@../styles/SignUp.css" text="Sign Up" />
+                  <Label contentDisplay="RIGHT" prefHeight="20.0" prefWidth="232.0" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="Already have an account ?  ">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <graphic>
-                        <Label accessibleRole="BUTTON" onMouseClicked="#onLoginLabelClickedHandler" prefHeight="25.0" prefWidth="46.0" stylesheets="@../styles/SignUp.css" text="Log in" textFill="#2f6ea5">
+                        <Label accessibleRole="BUTTON" onMouseClicked="#onLoginLabelClickedHandler" prefHeight="25.0" prefWidth="46.0" style="-fx-cursor: hand;" stylesheets="@../styles/SignUp.css" text="Log in" textFill="#2f6ea5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

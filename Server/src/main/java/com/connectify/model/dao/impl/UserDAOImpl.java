@@ -28,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, user.getGender().toString().equals("MALE") ? "M" : "F");
+            preparedStatement.setString(5, user.getGender().toString().equals("Male") ? "M" : "F");
             preparedStatement.setString(6, user.getCountry());
             preparedStatement.setObject(7, user.getBirthDate());
             int rowsInserted = preparedStatement.executeUpdate();
@@ -79,7 +79,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setString(4, user.getPicture());
-            preparedStatement.setString(5, user.getGender().toString().equals("MALE") ? "M" : "F");
+            preparedStatement.setString(5, user.getGender().toString().equals("Male") ? "M" : "F");
             preparedStatement.setString(6, user.getCountry());
             preparedStatement.setObject(7, user.getBirthDate());
             preparedStatement.setString(8, user.getBio());
