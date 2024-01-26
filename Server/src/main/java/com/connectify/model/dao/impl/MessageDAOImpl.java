@@ -2,8 +2,8 @@ package com.connectify.model.dao.impl;
 
 import com.connectify.controller.utils.DBConnection;
 import com.connectify.model.dao.MessageDAO;
-import com.connectify.model.entities.Chat;
-import com.connectify.model.entities.Message;
+import model.entities.Message;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package com.connectify.model.entities;
+package model.entities;
 public class Chat {
     private int chatId;
     private int isPrivateChat;

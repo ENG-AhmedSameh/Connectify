@@ -1,5 +1,6 @@
 package com.connectify.model.dao;
 
-import com.connectify.model.entities.Invitations;
+
+import model.entities.Invitations;
 
 public interface InvitationsDAO extends DAO<Invitations, Integer> { }

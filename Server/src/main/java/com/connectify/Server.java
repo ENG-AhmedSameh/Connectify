@@ -1,6 +1,5 @@
 package com.connectify;
 
-import com.connectify.controller.utils.DBConnection;
 import com.connectify.loaders.ViewLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -8,10 +7,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.rmi.*;
+
 import java.io.IOException;
-import java.sql.Connection;
+import java.rmi.registry.LocateRegistry;
 
 public class Server extends Application {
+
+    @Override
+    public void init() throws Exception {
+        super.init();
+        System.out.println("Server is running...");
+        var registry = LocateRegistry.createRegistry(1099);
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = ViewLoader.getInstance().getMainPane();

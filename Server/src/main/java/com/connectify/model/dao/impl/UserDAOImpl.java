@@ -1,11 +1,11 @@
 package com.connectify.model.dao.impl;
 
 import com.connectify.model.dao.UserDAO;
-import com.connectify.model.entities.User;
 import com.connectify.controller.utils.DBConnection;
-import com.connectify.model.enums.Gender;
-import com.connectify.model.enums.Mode;
-import com.connectify.model.enums.Status;
+import model.entities.User;
+import model.enums.Gender;
+import model.enums.Mode;
+import model.enums.Status;
 
 import java.sql.*;
 

@@ -34,5 +34,10 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.31</version>
     </dependency>
+    <dependency>
+      <groupId>com.connectify</groupId>
+      <artifactId>Shared</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 </project>

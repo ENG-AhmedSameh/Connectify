@@ -1,8 +1,10 @@
-package com.connectify.model.entities;
+package model.entities;
 
-import com.connectify.model.enums.Gender;
-import com.connectify.model.enums.Mode;
-import com.connectify.model.enums.Status;
+
+
+import model.enums.Gender;
+import model.enums.Mode;
+import model.enums.Status;
 
 import java.util.Date;
 

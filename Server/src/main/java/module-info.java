@@ -6,6 +6,8 @@ module Server {
     requires java.naming;
     requires java.desktop;
     requires c3p0;
+    requires java.rmi;
+    requires com.connectify.shared;
     exports com.connectify.controller.fxmlcontrollers;
     exports com.connectify;
     exports com.connectify.loaders;

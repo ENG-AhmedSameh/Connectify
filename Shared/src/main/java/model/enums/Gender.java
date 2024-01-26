@@ -1,4 +1,4 @@
-package com.connectify.model.enums;
+package model.enums;
 
 public enum Gender {
     MALE,FEMALE

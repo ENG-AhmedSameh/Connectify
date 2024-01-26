@@ -1,8 +1,8 @@
 package com.connectify.model.dao.impl;
 
 import com.connectify.model.dao.ContactsDAO;
-import com.connectify.model.entities.Contacts;
 import com.connectify.controller.utils.DBConnection;
+import model.entities.Contacts;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
