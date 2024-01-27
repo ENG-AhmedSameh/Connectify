@@ -5,6 +5,7 @@ import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.CountryList;
+import com.connectify.utils.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -241,27 +242,12 @@ public class SignUpController implements Initializable {
         request.setPhoneNumber(countryCodeLbl.getText() + phoneNumTxtF.getText());
         request.setName(nameTxtF.getText());
         request.setEmail(emailTxtF.getText());
-        request.setPassword(hashPassword(passwordPassF.getText()));
+        request.setPassword(PasswordManager.encode(passwordPassF.getText()));
         request.setGender(genderComboBox.getValue());
         request.setCountry(countryComboBox.getValue());
         request.setBirthDate(birthDatePicker.getValue());
         return request;
     }
 
-    private String hashPassword(String password){
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-        SecretKeyFactory factory = null;
-        byte[] hash = null;
-        try {
-            factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            hash = factory.generateSecret(spec).getEncoded();
-        } catch (Exception e) {
-            System.err.println("Hashing Exception: " + e.getMessage());
-            return null;
-        }
-        return new String(hash,  StandardCharsets.UTF_8);
-    }
+
 }

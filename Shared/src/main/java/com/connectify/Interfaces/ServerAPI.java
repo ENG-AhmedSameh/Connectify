@@ -9,4 +9,5 @@ import java.rmi.RemoteException;
 public interface ServerAPI extends Remote{
 
     boolean signUp(SignUpRequest signUpRequest) throws RemoteException;
+
 }
