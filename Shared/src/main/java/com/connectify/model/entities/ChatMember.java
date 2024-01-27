@@ -1,17 +1,21 @@
 package com.connectify.model.entities;
 
+import java.sql.Timestamp;
+
 public class ChatMember {
     private int chatId;
     private String member;
-    private Integer unreadMessagesNumber;  // nullable
+
+    private Boolean isOpen;
+    private Timestamp lastOpenedTime;
+    private Integer unreadMessagesNumber;
 
     public ChatMember() {
     }
 
-    public ChatMember(int chatId, String member, Integer unreadMessagesNumber) {
+    public ChatMember(int chatId, String member) {
         this.chatId = chatId;
         this.member = member;
-        this.unreadMessagesNumber = unreadMessagesNumber;
     }
 
     public int getChatId() {
@@ -38,11 +42,29 @@ public class ChatMember {
         this.unreadMessagesNumber = unreadMessagesNumber;
     }
 
+    public Boolean getIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(Boolean open) {
+        isOpen = open;
+    }
+
+    public Timestamp getLastOpenedTime() {
+        return lastOpenedTime;
+    }
+
+    public void setLastOpenedTime(Timestamp lastOpenedTime) {
+        this.lastOpenedTime = lastOpenedTime;
+    }
+
     @Override
     public String toString() {
         return "ChatMember{" +
                 "chatId=" + chatId +
                 ", member='" + member + '\'' +
+                ", isOpen=" + isOpen +
+                ", lastOpenedTime=" + lastOpenedTime +
                 ", unreadMessagesNumber=" + unreadMessagesNumber +
                 '}';
     }
