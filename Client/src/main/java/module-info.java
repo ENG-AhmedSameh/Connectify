@@ -4,6 +4,8 @@ module Client {
 
     requires org.controlsfx.controls;
     requires javafx.web;
+    requires java.rmi;
+    requires com.connectify.shared;
 
     opens com.connectify;
     opens com.connectify.loaders;

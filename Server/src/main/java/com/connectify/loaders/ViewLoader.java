@@ -2,7 +2,7 @@ package com.connectify.loaders;
 
 import com.connectify.controller.fxmlcontrollers.AnnouncementController;
 import com.connectify.controller.fxmlcontrollers.AdminController;
-import com.connectify.controller.fxmlcontrollers.ServerController;
+import com.connectify.controller.fxmlcontrollers.MainController;
 import com.connectify.controller.fxmlcontrollers.StatisticsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -32,7 +32,7 @@ public class ViewLoader {
     private Pane loadMainPane() {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/views/server-view.fxml"));
-        ServerController controller = new ServerController();
+        MainController controller = new MainController();
         controller.setAdminPane(loadAdminPane());
         controller.setAnnouncementPane(loadAnnouncementPane());
         controller.setStatisticsPane(loadStatisticsPane());

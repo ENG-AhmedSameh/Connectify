@@ -1,8 +1,8 @@
 package com.connectify.model.dao.impl;
 
 import com.connectify.model.dao.AttachmentDAO;
-import com.connectify.controller.utils.DBConnection;
-import model.entities.Attachments;
+import com.connectify.utils.DBConnection;
+import com.connectify.model.entities.Attachments;
 
 import java.sql.*;
 

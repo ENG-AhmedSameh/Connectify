@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="try merging DB layer" />
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="add phone number check">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_16_2024_3_20_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_16_2024_4_41_PM__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_19_2024_7_38_AM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/impl/UserDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/impl/UserDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,8 +23,8 @@
       <list>
         <option value="module-info" />
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -59,27 +67,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Client.executor": "Run",
-    "Application.Server.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
-    "jdk.selected.JAVA_MODULE": "21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Career/Projects/Connectify/Shared/src/main/java",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;signUp&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Career/Projects/Connectify/Shared/src/main/java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Career\Projects\Connectify\Shared\src\main\java" />
@@ -100,7 +108,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Client">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.connectify.Client" />
       <module name="Client" />
       <extension name="coverage">
@@ -140,13 +148,6 @@
         <item itemvalue="Application.Client" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-249ae16d76d6-a618e4d4" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -188,7 +189,13 @@
       <workItem from="1705244631451" duration="12340000" />
       <workItem from="1705377499528" duration="2242000" />
       <workItem from="1705689590920" duration="892000" />
-      <workItem from="1706255114071" duration="2450000" />
+      <workItem from="1706255114071" duration="21504000" />
+      <workItem from="1706281985803" duration="26000" />
+      <workItem from="1706282033761" duration="618000" />
+      <workItem from="1706284362695" duration="360000" />
+      <workItem from="1706285695555" duration="2766000" />
+      <workItem from="1706289595822" duration="255000" />
+      <workItem from="1706340177908" duration="3438000" />
     </task>
     <task id="LOCAL-00001" summary="try merging DB layer">
       <option name="closed" value="true" />
@@ -198,7 +205,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706252588990</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add phone number check">
+      <option name="closed" value="true" />
+      <created>1706288240888</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706288240888</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +232,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="try merging DB layer" />
-    <option name="LAST_COMMIT_MESSAGE" value="try merging DB layer" />
+    <MESSAGE value="add phone number check" />
+    <option name="LAST_COMMIT_MESSAGE" value="add phone number check" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

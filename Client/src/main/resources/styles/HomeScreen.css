@@ -1,9 +1,14 @@
-.home-screen-option-button{
-    -fx-background-color:  #0e1621;
+.home-screen-option-button {
+    -fx-background-color: #0e1621;
 }
-.home-screen-option-button:hover{
-    -fx-background-color:  #202b36;
+
+.home-screen-option-button:hover {
+    -fx-background-color: #202b36;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-scale-z: 1.1;
+}
+
+.bar {
+    -fx-background-color: #0e1621;
 }

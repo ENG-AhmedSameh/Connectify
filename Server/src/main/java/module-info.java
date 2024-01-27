@@ -14,6 +14,8 @@ module Server {
     opens com.connectify.controller.fxmlcontrollers;
     opens com.connectify;
     opens com.connectify.loaders;
-    exports com.connectify.controller.utils;
-    opens com.connectify.controller.utils;
+    exports com.connectify.utils;
+    opens com.connectify.utils;
+    exports com.connectify.controller;
+    opens com.connectify.controller;
 }

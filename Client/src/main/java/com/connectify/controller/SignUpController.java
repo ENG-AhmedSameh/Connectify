@@ -1,7 +1,11 @@
 package com.connectify.controller;
 
+import com.connectify.Client;
+import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.SignUpRequest;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.CountryList;
+import com.connectify.utils.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,12 +15,23 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
+import com.connectify.model.enums.Gender;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class SignUpController implements Initializable {
 
@@ -25,18 +40,20 @@ public class SignUpController implements Initializable {
     @FXML private Label countryCodeLbl;
     @FXML private ComboBox<String> countryComboBox;
     @FXML private TextField emailTxtF;
-    @FXML private ComboBox<String> genderComboBox;
-    @FXML private ImageView logoImgView;
-    @FXML private AnchorPane logoPane;
+    @FXML private ComboBox<Gender> genderComboBox;
     @FXML private TextField nameTxtF;
     @FXML private PasswordField passwordPassF;
     @FXML private TextField phoneNumTxtF;
+    @FXML private ImageView logoImgView;
+    @FXML private AnchorPane logoPane;
     @FXML private Button signUpBtn;
     @FXML private Label signUpLbl;
     @FXML private AnchorPane signUpPane;
 
-    CountryList countryList;
-    Boolean validInformation = true;
+    private CountryList countryList;
+    private Boolean validInformation = true;
+
+    private ServerAPI server;
 
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
 
@@ -46,6 +63,13 @@ public class SignUpController implements Initializable {
         txtFieldsOriginalStyle = nameTxtF.getStyle();
         comboBoxOriginalStyle = countryComboBox.getStyle();
         datePickerOriginalStyle = birthDatePicker.getStyle();
+        try {
+            server = (ServerAPI) Client.registry.lookup("server");
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
+        } catch (NotBoundException e) {
+            System.err.println("NotBoundException: " + e.getMessage());
+        }
     }
 
     private void initializeComboBox() {
@@ -59,7 +83,7 @@ public class SignUpController implements Initializable {
     }
 
     private void initializeGenderComboBox(){
-        genderComboBox.getItems().addAll("Male","Female");
+        genderComboBox.getItems().addAll(Gender.MALE,Gender.FEMALE);
     }
 
     @FXML
@@ -118,10 +142,23 @@ public class SignUpController implements Initializable {
 
     @FXML
     private void signUpBtnHandler(ActionEvent event){
-        //validateFields();
+        validateFields();
         if(validInformation){
-            ViewLoader viewLoader = ViewLoader.getInstance();
-            viewLoader.switchFromSignUpToHomeScreen();
+            SignUpRequest request = createSignUpRequest();
+            boolean isSuccessFul = false;
+            try {
+                isSuccessFul = server.signUp(request);
+            } catch (RemoteException e) {
+                System.err.println("Remote Exception: " + e.getMessage());
+            }
+            if (!isSuccessFul) {
+                phoneNumTxtF.setTooltip(hintText("This phone number is already registered"));
+                phoneNumTxtF.setStyle("-fx-border-color: red;");
+            }
+            else {
+                ViewLoader viewLoader = ViewLoader.getInstance();
+                viewLoader.switchFromSignUpToHomeScreen();
+            }
         }
     }
 
@@ -199,4 +236,18 @@ public class SignUpController implements Initializable {
         ViewLoader viewLoader = ViewLoader.getInstance();
         viewLoader.switchFromSignUpToLogin();
     }
+
+    private SignUpRequest createSignUpRequest(){
+        SignUpRequest request = new SignUpRequest();
+        request.setPhoneNumber(countryCodeLbl.getText() + phoneNumTxtF.getText());
+        request.setName(nameTxtF.getText());
+        request.setEmail(emailTxtF.getText());
+        request.setPassword(PasswordManager.encode(passwordPassF.getText()));
+        request.setGender(genderComboBox.getValue());
+        request.setCountry(countryComboBox.getValue());
+        request.setBirthDate(birthDatePicker.getValue());
+        return request;
+    }
+
+
 }
