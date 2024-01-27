@@ -22,13 +22,13 @@ public interface UserMapper {
     @Mapping(source = "birthDate", target = "birthDate")
     User signUpRequestToUser(SignUpRequest signUpRequest);
 
-//    @Mapping(source = "name", target = "name")
-//    @Mapping(source = "email", target = "email")
-//    @Mapping(source = "gender", target = "gender")
-//    @Mapping(source = "birthDate", target = "birthDate")
-//    @Mapping(source = "bio", target = "bio")
-//    @Mapping(source = "status", target = "status")
-//    User updateUserInfoRequestToUser(UpdateUserInfoRequest updateUserInfoRequest);
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "gender", target = "gender")
+    @Mapping(source = "birthDate", target = "birthDate")
+    @Mapping(source = "bio", target = "bio")
+    @Mapping(source = "status", target = "status")
+    User updateUserInfoRequestToUser(UpdateUserInfoRequest updateUserInfoRequest);
 
     @Mapping(source = "phoneNumber", target = "phoneNumber")
     @Mapping(source = "name", target = "name")

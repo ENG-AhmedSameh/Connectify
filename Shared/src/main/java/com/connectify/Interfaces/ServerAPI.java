@@ -11,9 +11,9 @@ import java.rmi.RemoteException;
 public interface ServerAPI extends Remote{
 
     boolean signUp(SignUpRequest signUpRequest) throws RemoteException;
-//    boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException;
-//    boolean updateUserPicture(String phoneNumber, byte[] picture);
-//    boolean updateUserPassword(String phoneNumber, String password);
-    UserRequest getUser(String phoneNumber);
+    boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException;
+    boolean updateUserPicture(String phoneNumber, byte[] picture) throws RemoteException;
+    boolean updateUserPassword(String phoneNumber, String password) throws RemoteException;
+    UserRequest getUser(String phoneNumber) throws RemoteException;
 
 }

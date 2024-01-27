@@ -19,23 +19,23 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         return service.insertUser(signUpRequest);
     }
 
-//    @Override
-//    public boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException {
-//        var userService = new UserService();
-//        return userService.updateUser(updateUserInfoRequest);
-//    }
-//
-//    @Override
-//    public boolean updateUserPicture(String phoneNumber, byte[] picture) {
-//        var userService = new UserService();
-//        return userService.updatePicture(phoneNumber, picture);
-//    }
-//
-//    @Override
-//    public boolean updateUserPassword(String phoneNumber, String password) {
-//        var userService = new UserService();
-//        return userService.updatePassword(password, password);
-//    }
+    @Override
+    public boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException {
+        var userService = new UserService();
+        return userService.updateUser(updateUserInfoRequest);
+    }
+
+    @Override
+    public boolean updateUserPicture(String phoneNumber, byte[] picture) {
+        var userService = new UserService();
+        return userService.updatePicture(phoneNumber, picture);
+    }
+
+    @Override
+    public boolean updateUserPassword(String phoneNumber, String password) {
+        var userService = new UserService();
+        return userService.updatePassword(password, password);
+    }
 
     @Override
     public UserRequest getUser(String phoneNumber) {

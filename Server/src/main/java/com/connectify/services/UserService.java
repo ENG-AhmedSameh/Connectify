@@ -22,19 +22,19 @@ public class UserService {
         return UserMapper.INSTANCE.userToUserRequest(user);
     }
 
-//    public boolean updateUser(UpdateUserInfoRequest request) {
-//        User user = UserMapper.INSTANCE.updateUserInfoRequestToUser(request);
-//        UserDAO userDAO = new UserDAOImpl();
-//        return userDAO.update(user);
-//    }
-//
-//    public boolean updatePassword(String phoneNumber, String password) {
-//        UserDAO userDAO = new UserDAOImpl();
-//        return userDAO.updatePassword(phoneNumber, password);
-//    }
-//
-//    public boolean updatePicture(String phoneNumber, byte[] picture) {
-//        UserDAO userDAO = new UserDAOImpl();
-//        return userDAO.updatePicture(phoneNumber, picture);
-//    }
+    public boolean updateUser(UpdateUserInfoRequest request) {
+        User user = UserMapper.INSTANCE.updateUserInfoRequestToUser(request);
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.update(user);
+    }
+
+    public boolean updatePassword(String phoneNumber, String password) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updatePassword(phoneNumber, password);
+    }
+
+    public boolean updatePicture(String phoneNumber, byte[] picture) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updatePicture(phoneNumber, picture);
+    }
 }
