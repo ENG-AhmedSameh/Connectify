@@ -14,6 +14,8 @@ public class ViewLoader {
 
     AnchorPane allChatsAnchorPane;
 
+    AnchorPane editeProfilePane;
+
     HBox titleBarHBox;
     AnchorPane chatCardHBox;
     BorderPane chatWindow;
@@ -27,7 +29,19 @@ public class ViewLoader {
         return viewLoader;
     }
 
-
+    public void switchFromProfileToEditeProfile(){
+        if(homeScreenOptionsPane==null)
+            homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
+        if(allChatsAnchorPane==null)
+            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane();
+        if(editeProfilePane==null)
+            editeProfilePane=EditeProfileLoader.loadEditeProfileAnchorPane();
+        mainBorderPane.setLeft(homeScreenOptionsPane);
+        BorderPane newCenterPane = new BorderPane();
+        newCenterPane.setLeft(allChatsAnchorPane);
+        newCenterPane.setCenter(editeProfilePane);
+        mainBorderPane.setCenter(newCenterPane);
+    }
 
     public void switchFromSignUpToHomeScreen(){
         if(homeScreenOptionsPane==null)

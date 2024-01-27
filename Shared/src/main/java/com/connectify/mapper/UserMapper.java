@@ -1,5 +1,7 @@
 package com.connectify.mapper;
 
+import com.connectify.dto.UpdateUserInfoRequest;
+import com.connectify.dto.UserRequest;
 import com.connectify.model.entities.User;
 import com.connectify.dto.SignUpRequest;
 import org.mapstruct.Mapper;
@@ -19,4 +21,23 @@ public interface UserMapper {
     @Mapping(source = "country", target = "country")
     @Mapping(source = "birthDate", target = "birthDate")
     User signUpRequestToUser(SignUpRequest signUpRequest);
+
+//    @Mapping(source = "name", target = "name")
+//    @Mapping(source = "email", target = "email")
+//    @Mapping(source = "gender", target = "gender")
+//    @Mapping(source = "birthDate", target = "birthDate")
+//    @Mapping(source = "bio", target = "bio")
+//    @Mapping(source = "status", target = "status")
+//    User updateUserInfoRequestToUser(UpdateUserInfoRequest updateUserInfoRequest);
+
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "picture", target = "picture")
+    @Mapping(source = "gender", target = "gender")
+    @Mapping(source = "country", target = "country")
+    @Mapping(source = "birthDate", target = "birthDate")
+    @Mapping(source = "bio", target = "bio")
+    @Mapping(source = "status", target = "status")
+    UserRequest userToUserRequest(User user);
 }
