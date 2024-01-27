@@ -1,17 +1,11 @@
 package com.connectify.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 

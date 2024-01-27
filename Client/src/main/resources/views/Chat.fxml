@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
-
 <BorderPane prefHeight="667.0" prefWidth="814.0" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ChatController">
    <top>
       <HBox prefHeight="78.0" prefWidth="814.0" styleClass="chat-banner" BorderPane.alignment="TOP_LEFT">

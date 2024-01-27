@@ -5,8 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="add password manager">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatCardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/EditeProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/EditeProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/titleBarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/titleBarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/PasswordManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/util/PasswordManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/AllChatsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/AllChatsPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/AllContactsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/AllContactsPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ChatCardPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ChatCardPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ContactCardPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ContactCardPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ContactMessage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ContactMessage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/EditeProfilePane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/EditeProfilePane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/HTMLEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/HTMLEditor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/HomeScreenOptionsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/HomeScreenOptionsPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/HomeScreenPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/HomeScreenPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/LogInMainPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/LogInMainPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/LoginPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/LoginPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/MainPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/MainPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ProfilePane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ProfilePane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/SignUpPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/UserMessage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/UserMessage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/logoPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/logoPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/titleBarPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/titleBarPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/fxmlcontrollers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/loaders/ViewLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/loaders/ViewLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/AttachmentsDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/AttachmentsDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/ChatDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/ChatDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/ContactsDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/ContactsDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/GroupDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/GroupDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/InvitationsDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/InvitationsDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/MessageDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/MessageDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/UserDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/views/admin-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/views/admin-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/views/announcement-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/views/announcement-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/views/server-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/views/server-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/views/statistics-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/views/statistics-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/impl/UserDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/impl/UserDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/dto/SignUpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/dto/SignUpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +76,7 @@
         <option value="module-info" />
         <option value="FxmlFile" />
         <option value="Interface" />
+        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -26,7 +84,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="signUp" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -68,10 +126,11 @@
     "Application.Server.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "login-signup",
     "jdk.selected.JAVA_MODULE": "21",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Career/Projects/Connectify/Shared/src/main/java",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,7 +139,12 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -191,6 +255,7 @@
       <workItem from="1706285695555" duration="2766000" />
       <workItem from="1706289595822" duration="255000" />
       <workItem from="1706340177908" duration="3438000" />
+      <workItem from="1706347856279" duration="19467000" />
     </task>
     <task id="LOCAL-00001" summary="try merging DB layer">
       <option name="closed" value="true" />

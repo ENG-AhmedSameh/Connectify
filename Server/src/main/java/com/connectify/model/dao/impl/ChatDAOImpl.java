@@ -1,9 +1,8 @@
 package com.connectify.model.dao.impl;
 
-import com.connectify.utils.DBConnection;
 import com.connectify.model.dao.ChatDAO;
 import com.connectify.model.entities.Chat;
-
+import com.connectify.utils.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

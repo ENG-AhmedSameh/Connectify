@@ -4,8 +4,9 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.loaders.ViewLoader;
+import com.connectify.model.enums.Gender;
+import com.connectify.util.PasswordManager;
 import com.connectify.utils.CountryList;
-import com.connectify.utils.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,22 +17,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
-import com.connectify.model.enums.Gender;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 
 public class SignUpController implements Initializable {
 
@@ -157,7 +149,7 @@ public class SignUpController implements Initializable {
             }
             else {
                 ViewLoader viewLoader = ViewLoader.getInstance();
-                viewLoader.switchFromSignUpToHomeScreen();
+                viewLoader.switchToHomeScreen();
             }
         }
     }
@@ -242,7 +234,8 @@ public class SignUpController implements Initializable {
         request.setPhoneNumber(countryCodeLbl.getText() + phoneNumTxtF.getText());
         request.setName(nameTxtF.getText());
         request.setEmail(emailTxtF.getText());
-        request.setPassword(PasswordManager.encode(passwordPassF.getText()));
+        request.setSalt(PasswordManager.generateSalt());
+        request.setPassword(PasswordManager.encode(passwordPassF.getText(), request.getSalt()));
         request.setGender(genderComboBox.getValue());
         request.setCountry(countryComboBox.getValue());
         request.setBirthDate(birthDatePicker.getValue());

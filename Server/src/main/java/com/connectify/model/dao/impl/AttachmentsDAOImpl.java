@@ -1,10 +1,13 @@
 package com.connectify.model.dao.impl;
 
 import com.connectify.model.dao.AttachmentDAO;
-import com.connectify.utils.DBConnection;
 import com.connectify.model.entities.Attachments;
+import com.connectify.utils.DBConnection;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AttachmentsDAOImpl implements AttachmentDAO{
 

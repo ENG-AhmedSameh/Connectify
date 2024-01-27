@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.HTMLEditor?>
-
 <VBox alignment="CENTER" prefHeight="571.0" prefWidth="707.0" styleClass="chat-window" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HTMLEditor fx:id="editor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="449.0" prefWidth="579.0" VBox.vgrow="ALWAYS" />
