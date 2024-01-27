@@ -22,15 +22,15 @@ public class UserService {
     }
 
     public LoginResponse loginUser(LoginRequest request){
-        UserDAO dao = new UserDAOImpl();
-        User user = dao.get(request.getPhoneNumber());
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.get(request.getPhoneNumber());
         if(user == null){
             return new LoginResponse(false, "Phone number is not correct or registered");
         }
-
         String hashedPassword = user.getPassword();
         boolean isCorrect = PasswordManager.isEqual(hashedPassword, request.getPassword(), user.getSalt());
         if(isCorrect){
+            userDAO.updateMode(user.getPhoneNumber(), Mode.ONLINE);
             return new LoginResponse(true, "Login successful");
         }
         return new LoginResponse(false, "Password is not correct");

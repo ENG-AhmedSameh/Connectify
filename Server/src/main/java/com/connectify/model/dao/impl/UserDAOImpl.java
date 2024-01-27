@@ -113,4 +113,34 @@ public class UserDAOImpl implements UserDAO {
             return false;
         }
     }
+
+    @Override
+    public boolean updateMode(String phoneNumber, Mode mode) {
+        String query = "UPDATE users SET mode = ? WHERE phone_number = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, mode.toString());
+            preparedStatement.setString(2, phoneNumber);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateStatus(String phoneNumber, Status status) {
+        String query = "UPDATE users SET status = ? WHERE phone_number = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, status.toString());
+            preparedStatement.setString(2, phoneNumber);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+        return false;
+    }
 }
