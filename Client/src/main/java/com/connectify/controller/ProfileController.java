@@ -27,7 +27,6 @@ public class ProfileController implements Initializable {
     @FXML private ComboBox<String> genderComboBox;
     @FXML private ComboBox<String> modeComboBox;
     @FXML private TextField nameTxtF;
-    @FXML private PasswordField passwordPassF;
     @FXML private TextField phoneNumTxtF;
     @FXML private AnchorPane profilePane;
     @FXML private TextArea bioTextArea;
