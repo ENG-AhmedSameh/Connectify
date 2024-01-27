@@ -3,6 +3,8 @@ package com.connectify.model.dao.impl;
 import com.connectify.model.dao.UserDAO;
 import com.connectify.model.entities.User;
 import com.connectify.model.enums.Gender;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
 import com.connectify.utils.DBConnection;
 
 import java.sql.*;
@@ -17,8 +19,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean insert(User user) {
-        String query = "INSERT INTO users (phone_number, name, email, password, salt, gender, country, birth_date) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users (phone_number, name, email, password, salt, gender, country, birth_date, mode, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user.getPhoneNumber());
@@ -29,6 +31,8 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(6, user.getGender().toString().equals("Male") ? "M" : "F");
             preparedStatement.setString(7, user.getCountry());
             preparedStatement.setDate(8, Date.valueOf(user.getBirthDate()));
+            preparedStatement.setString(9, user.getMode().toString());
+            preparedStatement.setString(10, user.getStatus().toString());
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
@@ -58,7 +62,8 @@ public class UserDAOImpl implements UserDAO {
                     user.setCountry(resultSet.getString("country"));
                     user.setBirthDate(resultSet.getDate("birth_date").toLocalDate());
                     user.setBio(resultSet.getString("bio"));
-//                    user.setStatus(Status.valueOf(resultSet.getString("status")));
+                    user.setStatus(Status.valueOf(resultSet.getString("status")));
+                    user.setMode(Mode.valueOf(resultSet.getString("mode")));
                 }
             }
             return user;

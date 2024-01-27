@@ -7,12 +7,16 @@ import com.connectify.mapper.UserMapper;
 import com.connectify.model.dao.UserDAO;
 import com.connectify.model.dao.impl.UserDAOImpl;
 import com.connectify.model.entities.User;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
 import com.connectify.util.PasswordManager;
 
 public class UserService {
 
     public boolean insertUser(SignUpRequest request){
         User user = UserMapper.INSTANCE.signUpRequestToUser(request);
+        user.setMode(Mode.ONLINE);
+        user.setStatus(Status.AVAILABLE);
         UserDAO dao = new UserDAOImpl();
         return dao.insert(user);
     }
