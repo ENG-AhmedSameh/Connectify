@@ -15,9 +15,9 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.4.2.Final/mapstruct-processor-1.4.2.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
         </processorPath>
+        <module name="Client" />
         <module name="Server" />
         <module name="Shared" />
-        <module name="Client" />
       </profile>
     </annotationProcessing>
   </component>
