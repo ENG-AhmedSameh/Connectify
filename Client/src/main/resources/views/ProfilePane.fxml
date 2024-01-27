@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="signUpPane" prefHeight="500.0" prefWidth="500.0" styleClass="anchor-pane" stylesheets="@../styles/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ProfileController">
+<AnchorPane fx:id="profilePane" prefHeight="500.0" prefWidth="500.0" styleClass="anchor-pane" stylesheets="@../styles/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ProfileController">
    <children>
       <VBox alignment="CENTER" fillWidth="false" layoutX="25.0" layoutY="11.0" prefHeight="500.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.599999999999966" AnchorPane.topAnchor="11.0">
          <children>
@@ -35,20 +35,7 @@
                      </children>
                   </HBox>
                   <TextArea fx:id="bioTextArea" editable="false" prefHeight="200.0" prefWidth="450.0" promptText="bio" styleClass="text-area" text="I am happy." />
-                  <HBox prefHeight="30.0" prefWidth="423.0" spacing="30.0">
-                     <children>
-                        <ComboBox fx:id="countryComboBox" blendMode="SCREEN" onAction="#countryOnSelectHandler" promptText="Country" styleClass="combo-box" HBox.hgrow="NEVER" />
-                        <HBox prefHeight="30.0" prefWidth="317.0">
-                           <children>
-                              <Label fx:id="countryCodeLbl" prefHeight="30.0" prefWidth="58.0" text="+" textAlignment="CENTER" textFill="WHITE" />
-                              <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" text="01143414035" HBox.hgrow="NEVER" />
-                           </children>
-                        </HBox>
-                     </children>
-                     <opaqueInsets>
-                        <Insets right="50.0" />
-                     </opaqueInsets>
-                  </HBox>
+                  <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" text="01143414035" />
                   <TextField fx:id="nameTxtF" blendMode="SCREEN" editable="false" prefHeight="28.0" prefWidth="402.0" promptText="Display Name" styleClass="text-field" text="Mohamed Nofal" VBox.vgrow="NEVER" />
                   <TextField fx:id="emailTxtF" blendMode="SCREEN" editable="false" prefHeight="29.0" prefWidth="407.0" promptText="E-mail" styleClass="text-field" text="Nofal@gimal.com" VBox.vgrow="NEVER" />
                   <HBox prefHeight="29.0" prefWidth="455.0" spacing="80.0" VBox.vgrow="NEVER">
@@ -57,7 +44,7 @@
                         <ComboBox fx:id="genderComboBox" blendMode="SCREEN" prefHeight="26.0" prefWidth="276.0" promptText="Male" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
                      </children>
                   </HBox>
-                  <ComboBox fx:id="modeComboBox" blendMode="SCREEN" prefHeight="26.0" prefWidth="179.0" promptText="Available" styleClass="combo-box" visibleRowCount="2">
+                  <ComboBox fx:id="statusComboBox" blendMode="SCREEN" prefHeight="26.0" prefWidth="179.0" promptText="Available" styleClass="combo-box" visibleRowCount="2">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
