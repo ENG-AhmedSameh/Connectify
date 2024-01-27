@@ -15,7 +15,7 @@ public class User{
     private String name;
     private String email;
     private String password;
-    private String picture;
+    private byte[] picture;
     private Gender gender;
     private String country;
     private LocalDate birthDate;
@@ -55,11 +55,11 @@ public class User{
         this.password = password;
     }
 
-    public String getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
