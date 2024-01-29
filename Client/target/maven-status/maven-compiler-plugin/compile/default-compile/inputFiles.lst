@@ -1,24 +1,29 @@
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\AllChatsPaneLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\HomeScreenOptionsLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\ChatCardController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ContactMessageLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\module-info.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\LoginController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\MainPaneLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\UserMessageLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ChatCardLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\LogoLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\AllChatsPaneController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ChatLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\HTMLEditorController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\SignUpController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\ContactCardController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\utils\CountryList.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\SignUpLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\TitleBarLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\AllContactsPaneController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\ChatController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\LoginLoader.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\Client.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\titleBarController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ViewLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\AllChatsPaneLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\SignUpController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\EditeProfileLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\ChatController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\ContactCardController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\ProfileController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\AllContactsPaneController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\utils\CountryList.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\SignUpLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\ChatCardController.java
+F:\ITI Projects\Connectify\Client\src\main\java\module-info.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\LogoLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\LoginController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\UserMessageLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\Client.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\HTMLEditorController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\HomeScreenOptionsLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ChatCardLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\titleBarController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\MainPaneLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\LoginLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\TitleBarLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\utils\PasswordManager.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\AllChatsPaneController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ChatLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ViewLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\EditeProfileController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ContactMessageLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ProfileLoader.java

@@ -5,10 +5,9 @@ import java.sql.Timestamp;
 public class ChatMember {
     private int chatId;
     private String member;
-
-    private Boolean isOpen;
+    private Boolean isOpen = false;
     private Timestamp lastOpenedTime;
-    private Integer unreadMessagesNumber;
+    private int unreadMessagesNumber;
 
     public ChatMember() {
     }
@@ -16,6 +15,9 @@ public class ChatMember {
     public ChatMember(int chatId, String member) {
         this.chatId = chatId;
         this.member = member;
+    }
+
+    public ChatMember(int chatId, String member, boolean isOpen, Timestamp lastOpenedTime, int unreadMessagesNumber) {
     }
 
     public int getChatId() {
@@ -34,7 +36,7 @@ public class ChatMember {
         this.member = member;
     }
 
-    public Integer getUnreadMessagesNumber() {
+    public int getUnreadMessagesNumber() {
         return unreadMessagesNumber;
     }
 

@@ -29,11 +29,11 @@ public class ViewLoader {
 
 
 
-    public void switchFromSignUpToHomeScreen(){
+    public void switchFromSignUpToHomeScreen(String userID){
         if(homeScreenOptionsPane==null)
             homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
         if(allChatsAnchorPane==null)
-            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane();
+            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane(userID);
         mainBorderPane.setLeft(homeScreenOptionsPane);
         BorderPane newCenterPane = new BorderPane();
         newCenterPane.setLeft(allChatsAnchorPane);

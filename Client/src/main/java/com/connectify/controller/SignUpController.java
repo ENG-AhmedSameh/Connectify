@@ -157,9 +157,12 @@ public class SignUpController implements Initializable {
             }
             else {
                 ViewLoader viewLoader = ViewLoader.getInstance();
-                viewLoader.switchFromSignUpToHomeScreen();
+                viewLoader.switchFromSignUpToHomeScreen(phoneNumTxtF.getText());
             }
         }
+
+//        ViewLoader viewLoader = ViewLoader.getInstance();
+//        viewLoader.switchFromSignUpToHomeScreen("+2001121184437");
     }
 
     private void validateFields() {
