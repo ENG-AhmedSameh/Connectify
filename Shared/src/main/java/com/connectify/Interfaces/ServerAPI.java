@@ -1,6 +1,7 @@
 package com.connectify.Interfaces;
 
 
+import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.model.entities.ChatMember;
@@ -13,4 +14,6 @@ public interface ServerAPI extends Remote{
 
     boolean signUp(SignUpRequest signUpRequest) throws RemoteException;
     List<ChatMemberDTO> getAllUserChats(String userId) throws RemoteException;
+
+    List<ChatCardsInfoDTO> getUserChatsCardsInfo(String userId) throws RemoteException;
 }

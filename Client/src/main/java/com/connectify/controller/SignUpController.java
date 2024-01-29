@@ -142,27 +142,27 @@ public class SignUpController implements Initializable {
 
     @FXML
     private void signUpBtnHandler(ActionEvent event){
-        validateFields();
-        if(validInformation){
-            SignUpRequest request = createSignUpRequest();
-            boolean isSuccessFul = false;
-            try {
-                isSuccessFul = server.signUp(request);
-            } catch (RemoteException e) {
-                System.err.println("Remote Exception: " + e.getMessage());
-            }
-            if (!isSuccessFul) {
-                phoneNumTxtF.setTooltip(hintText("This phone number is already registered"));
-                phoneNumTxtF.setStyle("-fx-border-color: red;");
-            }
-            else {
-                ViewLoader viewLoader = ViewLoader.getInstance();
-                viewLoader.switchFromSignUpToHomeScreen(phoneNumTxtF.getText());
-            }
-        }
+//        validateFields();
+//        if(validInformation){
+//            SignUpRequest request = createSignUpRequest();
+//            boolean isSuccessFul = false;
+//            try {
+//                isSuccessFul = server.signUp(request);
+//            } catch (RemoteException e) {
+//                System.err.println("Remote Exception: " + e.getMessage());
+//            }
+//            if (!isSuccessFul) {
+//                phoneNumTxtF.setTooltip(hintText("This phone number is already registered"));
+//                phoneNumTxtF.setStyle("-fx-border-color: red;");
+//            }
+//            else {
+//                ViewLoader viewLoader = ViewLoader.getInstance();
+//                viewLoader.switchFromSignUpToHomeScreen(phoneNumTxtF.getText());
+//            }
+//        }
 
-//        ViewLoader viewLoader = ViewLoader.getInstance();
-//        viewLoader.switchFromSignUpToHomeScreen("+2001121184437");
+        ViewLoader viewLoader = ViewLoader.getInstance();
+        viewLoader.switchFromSignUpToHomeScreen("+2001121184437");
     }
 
     private void validateFields() {

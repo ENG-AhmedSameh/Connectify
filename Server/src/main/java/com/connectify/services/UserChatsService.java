@@ -1,5 +1,6 @@
 package com.connectify.services;
 
+import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.model.dao.ChatMembersDAO;
@@ -17,6 +18,14 @@ public class UserChatsService {
             List<ChatMember> userChats = dao.getAllUserChats(userId);
             ChatMemberMapper mapper = ChatMemberMapper.INSTANCE;
             return mapper.chatMemberListToChatMemberDtoList(userChats);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<ChatCardsInfoDTO> getAllChatsInfo(String userId){
+        ChatMembersDAO dao = new ChatMembersDAOImpl();
+        try {
+            return dao.getAllUserChatsInfo(userId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -2,6 +2,7 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ChatCardLoader;
 import com.connectify.loaders.ViewLoader;
@@ -73,10 +74,13 @@ public class AllChatsPaneController implements Initializable {
     }
     private void loadAllUserChats(String userID){
         try {
-            List<ChatMemberDTO> userChatsDtoList = server.getAllUserChats(userID);
-            ChatMemberMapper mapper = ChatMemberMapper.INSTANCE;
-            List<ChatMember> userChatsList =mapper.chatMemberDtoListToChatMemberList(userChatsDtoList);
-            userChatsList.stream().forEach(System.out::println);
+//            List<ChatMemberDTO> userChatsDtoList = server.getAllUserChats(userID);
+//            ChatMemberMapper mapper = ChatMemberMapper.INSTANCE;
+//            List<ChatMember> userChatsList =mapper.chatMemberDtoListToChatMemberList(userChatsDtoList);
+//            userChatsList.stream().forEach(System.out::println);
+
+            List<ChatCardsInfoDTO> chatCardsInfoDTOS = server.getUserChatsCardsInfo(userID);
+            chatCardsInfoDTOS.stream().forEach(System.out::println);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
