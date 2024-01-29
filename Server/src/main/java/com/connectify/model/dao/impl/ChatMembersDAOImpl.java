@@ -1,5 +1,6 @@
 package com.connectify.model.dao.impl;
 
+import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.model.dao.ChatMembersDAO;
 import com.connectify.model.entities.ChatMember;
 import com.connectify.utils.DBConnection;
@@ -47,6 +48,36 @@ public class ChatMembersDAOImpl implements ChatMembersDAO {
         }
         return chatMembers;
     }
+
+    @Override
+    public List<ChatCardsInfoDTO> getAllUserChatsInfo(String userId) throws SQLException {
+        List<ChatCardsInfoDTO> chatsCardsList = new ArrayList<>();
+        String query = "SELECT DISTINCT cm.chat_id,cm.Unread_Messages_number, COALESCE (u.name,g.name) AS name, COALESCE(u.picture,g.picture) AS picture" +
+                "FROM chat_members cm" +
+                "LEFT JOIN chat c ON c.chat_id = cm.chat_id" +
+                "LEFT JOIN users u ON cm.member = u.phone_number AND c.is_Private_Chat = 1" +
+                "LEFT JOIN `groups` g ON c.chat_id = g.chat_id AND c.is_Private_Chat = 0" +
+                "WHERE cm.chat_id IN (SELECT chat_id FROM chat_members WHERE member = ? ) AND cm.member != ? ";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)){;
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, userId);
+            try(ResultSet rs = preparedStatement.executeQuery()){
+                while (rs.next()) {
+                    ChatCardsInfoDTO chatCardsInfoDTO = new ChatCardsInfoDTO(
+                            rs.getInt("chat_Id"),
+                            rs.getInt("Unread_Messages_number"),
+                            rs.getString("name"),
+                            rs.getBytes("picture"),
+                            ""
+                    );
+                    chatsCardsList.add(chatCardsInfoDTO);
+                }
+            }
+        }
+        return chatsCardsList;
+    }
+
 
     @Override
     public List<ChatMember> getAllChatMembers(int chatID) throws SQLException {
