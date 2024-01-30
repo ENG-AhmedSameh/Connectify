@@ -2,11 +2,13 @@ package com.connectify.controller;
 
 
 import com.connectify.Client;
+import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.CountryList;
+import com.connectify.utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -67,9 +69,12 @@ public class LoginController implements Initializable {
         }
         LoginRequest request = createLoginRequest();
         try {
-            server = (ServerAPI) Client.registry.lookup("server");
+            server = (ServerAPI) Client.getRegistry().lookup("server");
             LoginResponse response = server.login(request);
             if (response.getStatus()) {
+                ConnectedUser connectedUser = new CurrentUser(phoneNumberTextField.getText());
+                server.registerForAnnoucements(connectedUser);
+                Client.setConnectedUser(connectedUser);
                 ViewLoader.getInstance().switchToHomeScreen();
             }
             else {

@@ -1,5 +1,6 @@
 package com.connectify;
 
+import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.loaders.ViewLoader;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,7 +16,9 @@ public class Client extends Application {
     private final static String host = "localhost";
     private final static int port = 1099;
 
-    public static Registry registry;
+    private static Registry registry;
+
+    private static ConnectedUser connectedUser;
 
     @Override
     public void init() throws Exception {
@@ -37,5 +40,17 @@ public class Client extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static Registry getRegistry(){
+        return registry;
+    }
+
+    public static ConnectedUser getConnectedUser() {
+        return connectedUser;
+    }
+
+    public static void setConnectedUser(ConnectedUser connectedUser) {
+        Client.connectedUser = connectedUser;
     }
 }

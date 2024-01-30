@@ -35,4 +35,9 @@ public class UserService {
         }
         return new LoginResponse(false, "Password is not correct");
     }
+
+    public boolean logoutUser(String phoneNumber){
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
+    }
 }

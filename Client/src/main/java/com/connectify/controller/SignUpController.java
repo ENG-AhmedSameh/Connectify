@@ -1,12 +1,14 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
+import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.util.PasswordManager;
 import com.connectify.utils.CountryList;
+import com.connectify.utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,7 +58,7 @@ public class SignUpController implements Initializable {
         comboBoxOriginalStyle = countryComboBox.getStyle();
         datePickerOriginalStyle = birthDatePicker.getStyle();
         try {
-            server = (ServerAPI) Client.registry.lookup("server");
+            server = (ServerAPI) Client.getRegistry().lookup("server");
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         } catch (NotBoundException e) {
@@ -133,7 +135,7 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    private void signUpBtnHandler(ActionEvent event){
+    private void signUpBtnHandler(ActionEvent event) throws RemoteException {
         validateFields();
         if(validInformation){
             SignUpRequest request = createSignUpRequest();
@@ -149,6 +151,9 @@ public class SignUpController implements Initializable {
             }
             else {
                 ViewLoader viewLoader = ViewLoader.getInstance();
+                ConnectedUser connectedUser = new CurrentUser(phoneNumTxtF.getText());
+                server.registerForAnnoucements(connectedUser);
+                Client.setConnectedUser(connectedUser);
                 viewLoader.switchToHomeScreen();
             }
         }
