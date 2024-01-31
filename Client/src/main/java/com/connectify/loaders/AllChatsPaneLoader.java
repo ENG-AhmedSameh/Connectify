@@ -9,7 +9,6 @@ import java.io.IOException;
 public class AllChatsPaneLoader {
     public static AnchorPane loadAllChatsAnchorPane(String userID){
         FXMLLoader fxmlLoader = new FXMLLoader();
-
         fxmlLoader.setLocation(AllChatsPaneLoader.class.getResource("/views/AllChatsPane.fxml"));
         AllChatsPaneController controller = new AllChatsPaneController(userID);
         fxmlLoader.setController(controller);

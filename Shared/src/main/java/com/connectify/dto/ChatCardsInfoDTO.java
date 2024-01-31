@@ -1,6 +1,7 @@
 package com.connectify.dto;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class ChatCardsInfoDTO implements Serializable {
@@ -9,13 +10,23 @@ public class ChatCardsInfoDTO implements Serializable {
     private String name;
     private byte[] picture;
     private String lastMessage;
+    private Timestamp timestamp;
 
-    public ChatCardsInfoDTO(int chatID, int unreadMessagesNumber, String name, byte[] picture, String lastMessage) {
+    public ChatCardsInfoDTO(int chatID, int unreadMessagesNumber, String name, byte[] picture, String lastMessage, Timestamp timestamp) {
         this.chatID = chatID;
         this.unreadMessagesNumber = unreadMessagesNumber;
         this.name = name;
         this.picture = picture;
         this.lastMessage = lastMessage;
+        this.timestamp = timestamp;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Override

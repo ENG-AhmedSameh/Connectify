@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -68,8 +69,8 @@ public class AllChatsPaneController implements Initializable {
         System.out.println("done");
     }
 
-    public void addChatOnChatPane(){
-        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane();
+    public void addChatOnChatPane(int chatId, int unread, String name, byte[] picture, String lastMessage, Timestamp timestamp){
+        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chatId, unread,name,picture,lastMessage,timestamp);
         allChatsVBox.getChildren().add(chatCard);
     }
     private void loadAllUserChats(String userID){
@@ -80,6 +81,8 @@ public class AllChatsPaneController implements Initializable {
 //            userChatsList.stream().forEach(System.out::println);
 
             List<ChatCardsInfoDTO> chatCardsInfoDTOS = server.getUserChatsCardsInfo(userID);
+            for(ChatCardsInfoDTO chat:chatCardsInfoDTOS)
+                addChatOnChatPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
             chatCardsInfoDTOS.stream().forEach(System.out::println);
         } catch (RemoteException e) {
             throw new RuntimeException(e);

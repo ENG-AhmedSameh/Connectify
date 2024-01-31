@@ -6,6 +6,7 @@ module Client {
     requires javafx.web;
     requires java.rmi;
     requires com.connectify.shared;
+    requires java.sql;
 
     opens com.connectify;
     opens com.connectify.loaders;
