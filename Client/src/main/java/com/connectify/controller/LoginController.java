@@ -73,7 +73,7 @@ public class LoginController implements Initializable {
             LoginResponse response = server.login(request);
             if (response.getStatus()) {
                 ConnectedUser connectedUser = new CurrentUser(phoneNumberTextField.getText());
-                server.registerForAnnoucements(connectedUser);
+                server.registerConnectedUser(connectedUser);
                 Client.setConnectedUser(connectedUser);
                 ViewLoader.getInstance().switchToHomeScreen();
             }

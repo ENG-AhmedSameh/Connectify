@@ -32,12 +32,12 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
-    public void registerForAnnoucements(ConnectedUser user) throws RemoteException {
-
+    public void registerConnectedUser(ConnectedUser user) throws RemoteException {
+        userService.registerConnectedUser(user);
     }
 
     @Override
-    public void unregisterForAnnoucements(ConnectedUser user) throws RemoteException {
-
+    public void unregisterConnectedUser(ConnectedUser user) throws RemoteException {
+        userService.unregisterConnectedUser(user);
     }
 }

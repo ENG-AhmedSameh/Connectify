@@ -16,7 +16,7 @@ public interface ServerAPI extends Remote{
 
     boolean logout(String phoneNumber) throws RemoteException;
 
-    void registerForAnnoucements(ConnectedUser user) throws RemoteException;
-    void unregisterForAnnoucements(ConnectedUser user) throws RemoteException;
+    void registerConnectedUser(ConnectedUser user) throws RemoteException;
+    void unregisterConnectedUser(ConnectedUser user) throws RemoteException;
 
 }

@@ -1,5 +1,7 @@
 package com.connectify.services;
 
+import com.connectify.Interfaces.ConnectedUser;
+import com.connectify.Server;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
@@ -10,6 +12,9 @@ import com.connectify.model.entities.User;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 import com.connectify.util.PasswordManager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserService {
 
@@ -39,5 +44,13 @@ public class UserService {
     public boolean logoutUser(String phoneNumber){
         UserDAO userDAO = new UserDAOImpl();
         return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
+    }
+
+    public void registerConnectedUser(ConnectedUser user) {
+        Server.getConnectedUsers().put(user.getPhoneNumber(), user);
+    }
+
+    public void unregisterConnectedUser(ConnectedUser user) {
+        Server.getConnectedUsers().remove(user.getPhoneNumber());
     }
 }

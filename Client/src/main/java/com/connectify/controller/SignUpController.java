@@ -152,7 +152,7 @@ public class SignUpController implements Initializable {
             else {
                 ViewLoader viewLoader = ViewLoader.getInstance();
                 ConnectedUser connectedUser = new CurrentUser(phoneNumTxtF.getText());
-                server.registerForAnnoucements(connectedUser);
+                server.registerConnectedUser(connectedUser);
                 Client.setConnectedUser(connectedUser);
                 viewLoader.switchToHomeScreen();
             }
