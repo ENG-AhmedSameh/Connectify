@@ -1,7 +1,7 @@
 package com.connectify.mapper;
 
 import com.connectify.dto.UpdateUserInfoRequest;
-import com.connectify.dto.UserRequest;
+import com.connectify.dto.UserProfileResponse;
 import com.connectify.model.entities.User;
 import com.connectify.dto.SignUpRequest;
 import org.mapstruct.Mapper;
@@ -39,5 +39,5 @@ public interface UserMapper {
     @Mapping(source = "birthDate", target = "birthDate")
     @Mapping(source = "bio", target = "bio")
     @Mapping(source = "status", target = "status")
-    UserRequest userToUserRequest(User user);
+    UserProfileResponse userToUserRequest(User user);
 }

@@ -2,32 +2,24 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
-import com.connectify.dto.UserRequest;
+import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Status;
-import com.connectify.utils.CountryList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
-import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
 
 public class ProfileController implements Initializable {
 
@@ -46,7 +38,7 @@ public class ProfileController implements Initializable {
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
 
     private String testPhoneNumber = "+201143414035";
-    private UserRequest userRequest;
+    private UserProfileResponse userProfileResponse;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,23 +49,23 @@ public class ProfileController implements Initializable {
 
         try {
             ServerAPI server = (ServerAPI) Client.registry.lookup("server");
-            userRequest = server.getUser(testPhoneNumber);
+            userProfileResponse = server.getUserProfile(testPhoneNumber);
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         } catch (NotBoundException e) {
             System.err.println("NotBoundException: " + e.getMessage());
         }
 
-        Image image = new Image(new ByteArrayInputStream(userRequest.getPicture()));
+        Image image = new Image(new ByteArrayInputStream(userProfileResponse.getPicture()));
         userImg.setFill(new ImagePattern(image));
 
-        bioTextArea.setText(userRequest.getBio());
-        phoneNumTxtF.setText(userRequest.getPhoneNumber());
-        nameTxtF.setText(userRequest.getName());
-        emailTxtF.setText(userRequest.getEmail());
-        birthDatePicker.setValue(userRequest.getBirthDate());
-        genderComboBox.setValue(userRequest.getGender());
-        statusComboBox.setValue(userRequest.getStatus());
+        bioTextArea.setText(userProfileResponse.getBio());
+        phoneNumTxtF.setText(userProfileResponse.getPhoneNumber());
+        nameTxtF.setText(userProfileResponse.getName());
+        emailTxtF.setText(userProfileResponse.getEmail());
+        birthDatePicker.setValue(userProfileResponse.getBirthDate());
+        genderComboBox.setValue(userProfileResponse.getGender());
+        statusComboBox.setValue(userProfileResponse.getStatus());
     }
 
 //    private void initializeComboBox() {

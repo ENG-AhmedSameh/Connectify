@@ -3,7 +3,7 @@ package com.connectify.controller;
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.UpdateUserInfoRequest;
-import com.connectify.dto.UserRequest;
+import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Status;
@@ -65,7 +65,7 @@ public class ProfileEditorController implements Initializable {
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
 
     private String testPhoneNumber = "+201143414035";
-    private UserRequest currentUserDetails;
+    private UserProfileResponse currentUserDetails;
     private boolean isPictureChanged;
     byte[] newPicture;
 
@@ -76,7 +76,7 @@ public class ProfileEditorController implements Initializable {
 
         try {
             server = (ServerAPI) Client.registry.lookup("server");
-            currentUserDetails = server.getUser(testPhoneNumber);
+            currentUserDetails = server.getUserProfile(testPhoneNumber);
             populateUserDetails();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());

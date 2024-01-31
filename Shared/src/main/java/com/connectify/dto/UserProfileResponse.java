@@ -5,7 +5,7 @@ import com.connectify.model.enums.Status;
 
 import java.time.LocalDate;
 
-public class UserRequest {
+public class UserProfileResponse {
 
     private String phoneNumber;
     private String name;

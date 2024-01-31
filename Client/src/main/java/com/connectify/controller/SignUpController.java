@@ -3,7 +3,6 @@ package com.connectify.controller;
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.SignUpRequest;
-import com.connectify.dto.UserRequest;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.CountryList;
 import javafx.event.ActionEvent;
@@ -18,20 +17,12 @@ import javafx.scene.layout.AnchorPane;
 
 
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import com.connectify.model.enums.Gender;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 
 public class SignUpController implements Initializable {
 

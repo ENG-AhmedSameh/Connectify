@@ -3,7 +3,7 @@ package com.connectify.controller;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.dto.UpdateUserInfoRequest;
-import com.connectify.dto.UserRequest;
+import com.connectify.dto.UserProfileResponse;
 import com.connectify.services.UserService;
 
 import java.rmi.RemoteException;
@@ -38,8 +38,8 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
-    public UserRequest getUser(String phoneNumber) {
+    public UserProfileResponse getUserProfile(String phoneNumber) {
         var userService = new UserService();
-        return  userService.getUser(phoneNumber);
+        return  userService.getUserProfile(phoneNumber);
     }
 }
