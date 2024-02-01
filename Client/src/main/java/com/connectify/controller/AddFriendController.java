@@ -57,12 +57,6 @@ public class AddFriendController implements Initializable {
             System.err.println("NotBoundException: " + e.getMessage());
         }
     }
-
-    @FXML
-    void cancelButtonHandler(ActionEvent event) {
-
-    }
-
     @FXML
     void searchButtonHandler(ActionEvent event) {
         try {
@@ -78,6 +72,17 @@ public class AddFriendController implements Initializable {
 
     @FXML
     void sendInvitationsButtonHandler(ActionEvent event) {
+        for (FriendToAddResponse friendToAddResponse : friendToAddResponseList) {
+            try {
+                server.sendInvitation(currentUserPhone, friendToAddResponse.getPhoneNumber());
+            } catch (RemoteException e) {
+                System.err.println("Remote Exception: " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    void cancelButtonHandler(ActionEvent event) {
 
     }
 

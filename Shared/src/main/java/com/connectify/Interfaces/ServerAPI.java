@@ -17,4 +17,6 @@ public interface ServerAPI extends Remote{
 
     FriendToAddResponse getFriendToAdd(String phoneNumber) throws RemoteException;
 
+    boolean sendInvitation(String senderPhoneNumber, String receiverPhoneNumber) throws RemoteException;
+
 }
