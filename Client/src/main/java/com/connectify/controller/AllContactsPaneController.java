@@ -1,7 +1,6 @@
 package com.connectify.controller;
 
 import com.connectify.loaders.ChatCardLoader;
-import com.connectify.loaders.ViewLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -13,8 +12,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AllContactsPaneController implements Initializable {
-
-    ViewLoader loader = ViewLoader.getInstance();
 
     @FXML
     private TextField ContactSearchTextField;

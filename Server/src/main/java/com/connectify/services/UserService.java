@@ -13,6 +13,7 @@ import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 import com.connectify.util.PasswordManager;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,10 +48,20 @@ public class UserService {
     }
 
     public void registerConnectedUser(ConnectedUser user) {
-        Server.getConnectedUsers().put(user.getPhoneNumber(), user);
+        try {
+            Server.getConnectedUsers().put(user.getPhoneNumber(), user);
+            System.out.println("Registered user: " + user.getPhoneNumber());
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
+        }
     }
 
     public void unregisterConnectedUser(ConnectedUser user) {
-        Server.getConnectedUsers().remove(user.getPhoneNumber());
+        try {
+            Server.getConnectedUsers().remove(user.getPhoneNumber());
+            System.out.println("Unregistered user: " + user.getPhoneNumber());
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
+        }
     }
 }
