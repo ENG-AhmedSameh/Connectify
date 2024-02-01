@@ -13,6 +13,10 @@
     -fx-background-color: -fx-second-accent-color;
 }
 
+.combo-box > .list-cell{
+    -fx-text-fill: #FFFFFF;
+}
+
 .text-field{
     -fx-background-color: -fx-second-accent-color;
     -fx-prompt-text-fill: -fx-prompt-color;

@@ -20,4 +20,9 @@ public interface ServerAPI extends Remote{
 
     LoginResponse login(LoginRequest loginRequest) throws RemoteException;
 
+    boolean logout(String phoneNumber) throws RemoteException;
+
+    void registerConnectedUser(ConnectedUser user) throws RemoteException;
+    void unregisterConnectedUser(ConnectedUser user) throws RemoteException;
+
 }

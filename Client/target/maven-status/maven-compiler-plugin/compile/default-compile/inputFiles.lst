@@ -1,12 +1,15 @@
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\AllChatsPaneLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\HomeScreenOptionsLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\ChatCardController.java
+D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\OptionsController.java
+D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\utils\CurrentUser.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\EditeProfileLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\UserMessageLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ChatCardLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\LogoLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ChatLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\HTMLEditorController.java
+D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\utils\StageManager.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\EditeProfileController.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\SignUpLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\TitleBarLoader.java
