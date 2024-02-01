@@ -1,6 +1,8 @@
 package com.connectify.Interfaces;
 
 
+import com.connectify.dto.LoginRequest;
+import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.dto.UpdateUserInfoRequest;
 import com.connectify.dto.UserProfileResponse;
@@ -15,5 +17,7 @@ public interface ServerAPI extends Remote{
     boolean updateUserPicture(String phoneNumber, byte[] picture) throws RemoteException;
     boolean updateUserPassword(String phoneNumber, String password) throws RemoteException;
     UserProfileResponse getUserProfile(String phoneNumber) throws RemoteException;
+
+    LoginResponse login(LoginRequest loginRequest) throws RemoteException;
 
 }

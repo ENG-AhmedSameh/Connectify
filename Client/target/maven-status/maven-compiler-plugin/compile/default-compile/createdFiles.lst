@@ -1,6 +1,8 @@
+com\connectify\controller\ProfileController.class
 com\connectify\controller\HTMLEditorController.class
 com\connectify\loaders\UserMessageLoader.class
 com\connectify\controller\LoginController.class
+com\connectify\controller\ProfileController$1.class
 com\connectify\loaders\ContactMessageLoader.class
 com\connectify\loaders\SignUpLoader.class
 com\connectify\Client.class
@@ -9,9 +11,13 @@ com\connectify\controller\SignUpController$1.class
 com\connectify\controller\ContactCardController.class
 com\connectify\controller\ChatCardController.class
 com\connectify\loaders\HomeScreenOptionsLoader.class
+com\connectify\loaders\ProfileLoader.class
 com\connectify\utils\CountryList.class
+com\connectify\controller\EditeProfileController.class
 com\connectify\loaders\LoginLoader.class
 com\connectify\controller\AllContactsPaneController.class
+com\connectify\loaders\EditeProfileLoader.class
+com\connectify\controller\EditeProfileController$1.class
 com\connectify\loaders\TitleBarLoader.class
 com\connectify\controller\AllChatsPaneController.class
 module-info.class

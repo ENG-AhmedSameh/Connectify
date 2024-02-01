@@ -1,6 +1,9 @@
 package com.connectify.loaders;
 
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class ViewLoader {
 
@@ -31,35 +34,7 @@ public class ViewLoader {
         return viewLoader;
     }
 
-    public void switchFromProfileToEditeProfile(){
-        if(homeScreenOptionsPane==null)
-            homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        if(allChatsAnchorPane==null)
-            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane();
-        if(editeProfilePane==null)
-            editeProfilePane=EditeProfileLoader.loadEditeProfileAnchorPane();
-        mainBorderPane.setLeft(homeScreenOptionsPane);
-        BorderPane newCenterPane = new BorderPane();
-        newCenterPane.setLeft(allChatsAnchorPane);
-        newCenterPane.setCenter(editeProfilePane);
-        mainBorderPane.setCenter(newCenterPane);
-    }
-
-    public void switchFromEditeProfileToProfile(){
-        if(homeScreenOptionsPane==null)
-            homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        if(allChatsAnchorPane==null)
-            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane();
-        if(profilePane==null)
-            profilePane = ProfileLoader.loadProfileAnchorPane();
-        mainBorderPane.setLeft(homeScreenOptionsPane);
-        BorderPane newCenterPane = new BorderPane();
-        newCenterPane.setLeft(allChatsAnchorPane);
-        newCenterPane.setCenter(profilePane);
-        mainBorderPane.setCenter(newCenterPane);
-    }
-
-    public void switchFromSignUpToHomeScreen(){
+    public void switchToHomeScreen(){
         if(homeScreenOptionsPane==null)
             homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
         if(allChatsAnchorPane==null)
@@ -105,4 +80,31 @@ public class ViewLoader {
         return mainBorderPane;
     }
 
+    public void switchFromProfileToEditeProfile(){
+        if(homeScreenOptionsPane==null)
+            homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
+        if(allChatsAnchorPane==null)
+            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane();
+        if(editeProfilePane==null)
+            editeProfilePane=EditeProfileLoader.loadEditeProfileAnchorPane();
+        mainBorderPane.setLeft(homeScreenOptionsPane);
+        BorderPane newCenterPane = new BorderPane();
+        newCenterPane.setLeft(allChatsAnchorPane);
+        newCenterPane.setCenter(editeProfilePane);
+        mainBorderPane.setCenter(newCenterPane);
+    }
+
+    public void switchFromEditeProfileToProfile(){
+        if(homeScreenOptionsPane==null)
+            homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
+        if(allChatsAnchorPane==null)
+            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane();
+        if(profilePane==null)
+            profilePane = ProfileLoader.loadProfileAnchorPane();
+        mainBorderPane.setLeft(homeScreenOptionsPane);
+        BorderPane newCenterPane = new BorderPane();
+        newCenterPane.setLeft(allChatsAnchorPane);
+        newCenterPane.setCenter(profilePane);
+        mainBorderPane.setCenter(newCenterPane);
+    }
 }

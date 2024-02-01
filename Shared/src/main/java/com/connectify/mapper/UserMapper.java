@@ -4,6 +4,7 @@ import com.connectify.dto.UpdateUserInfoRequest;
 import com.connectify.dto.UserProfileResponse;
 import com.connectify.model.entities.User;
 import com.connectify.dto.SignUpRequest;
+import com.connectify.model.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -20,6 +21,7 @@ public interface UserMapper {
     @Mapping(source = "gender", target = "gender")
     @Mapping(source = "country", target = "country")
     @Mapping(source = "birthDate", target = "birthDate")
+    @Mapping(source = "salt", target = "salt")
     User signUpRequestToUser(SignUpRequest signUpRequest);
 
     @Mapping(source = "name", target = "name")

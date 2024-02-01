@@ -1,11 +1,7 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
-import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
-import com.connectify.model.enums.Gender;
-import com.connectify.model.enums.Status;
+import com.connectify.utils.CountryList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

@@ -1,13 +1,11 @@
 package com.connectify.model.entities;
 
 
-
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class User{
 
@@ -22,6 +20,7 @@ public class User{
     private String bio;
     private Mode mode;
     private Status status;
+    private byte[] salt;
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -109,6 +108,14 @@ public class User{
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 }
 
