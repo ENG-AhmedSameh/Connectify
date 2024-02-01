@@ -18,20 +18,12 @@ import javafx.scene.layout.AnchorPane;
 
 
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import com.connectify.model.enums.Gender;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 
 public class SignUpController implements Initializable {
 
@@ -162,7 +154,7 @@ public class SignUpController implements Initializable {
 //        }
 
         ViewLoader viewLoader = ViewLoader.getInstance();
-        viewLoader.switchFromSignUpToHomeScreen("+2001121184437");
+        viewLoader.switchToHomeScreen("+2001121184437");
     }
 
     private void validateFields() {

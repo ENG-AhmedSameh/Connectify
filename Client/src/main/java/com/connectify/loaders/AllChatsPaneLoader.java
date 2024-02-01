@@ -11,6 +11,7 @@ public class AllChatsPaneLoader {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(AllChatsPaneLoader.class.getResource("/views/AllChatsPane.fxml"));
         AllChatsPaneController controller = new AllChatsPaneController(userID);
+        fxmlLoader.setController(null);
         fxmlLoader.setController(controller);
         try {
             AnchorPane pane = fxmlLoader.load();

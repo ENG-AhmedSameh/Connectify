@@ -1,12 +1,15 @@
 package com.connectify.controller;
 
-import javafx.event.ActionEvent;
+import com.connectify.loaders.ViewLoader;
+import com.connectify.utils.ChatPaneFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 import java.io.ByteArrayInputStream;
@@ -38,9 +41,13 @@ public class ChatCardController implements Initializable {
     @FXML
     private Label nChatUnreadMessagesLabel;
 
+    @FXML
+    private AnchorPane chatCardPane;
+
     int chatId,unread;
     String name, lastMessage;
-    byte[] picture;
+    byte[] pictureBytes;
+    Image pictureImage;
     Timestamp timestamp;
     public ChatCardController() {
     }
@@ -50,23 +57,33 @@ public class ChatCardController implements Initializable {
         this.chatId = chatId;
         this.unread = unread;
         this.name = name;
-        this.picture = picture;
+        this.pictureBytes = picture;
         this.lastMessage = lastMessage;
         this.timestamp = timestamp;
     }
 
 
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeEventHandlers();
         setChatName();
         setChatPhoto();
         setUnreadMessagesNumber(unread);
         setLastMessage(lastMessage);
         setLastMessageTime(timestamp);
     }
+
+    private void initializeEventHandlers() {
+        chatCardPane.setOnMouseClicked((MouseEvent event)->{
+            displayChat();
+        });
+    }
+
     private void setChatPhoto(){
-        chatPictureImageView.setImage(convertToJavaFXImage(picture,chatPictureImageView.getFitWidth(),chatPictureImageView.getFitHeight()));
+        chatPictureImageView.setImage(convertToJavaFXImage(pictureBytes,chatPictureImageView.getFitWidth(),chatPictureImageView.getFitHeight()));
     }
     private void setChatName(){
         chatNameTextField.setText(name);
@@ -94,15 +111,18 @@ public class ChatCardController implements Initializable {
         if(bytes == null){
             String imagePath = "F:\\ITI Projects\\Connectify\\Client\\src\\main\\resources\\images\\profile.png";
             File imageFile = new File(imagePath);
-            return new Image(imageFile.toURI().toString());
-
+            pictureImage = new Image(imageFile.toURI().toString());
+            return pictureImage;
         }
         ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-        return new Image(inputStream, width, height, false, true);
+        pictureImage = new Image(inputStream, width, height, false, true);
+        return pictureImage;
     }
 
-    public void paneOnClicked(MouseEvent mouseEvent) {
-        System.out.println("ya raaaaaaaab");
+    private void displayChat(){
+        BorderPane chatPane = ChatPaneFactory.getChatPane(chatId,name,pictureImage);
+        ViewLoader loader = ViewLoader.getInstance();
+        loader.switchToChat(chatPane);
     }
 
 //    @FXML

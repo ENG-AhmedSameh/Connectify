@@ -17,6 +17,7 @@ public class ViewLoader {
     HBox titleBarHBox;
     AnchorPane chatCardHBox;
     BorderPane chatWindow;
+    BorderPane chatsHomeScreenCenterPane = new BorderPane();
 
     private ViewLoader(){
     }
@@ -28,17 +29,16 @@ public class ViewLoader {
     }
 
 
-
-    public void switchFromSignUpToHomeScreen(String userID){
+    public void switchToHomeScreen(String userID){
         if(homeScreenOptionsPane==null)
             homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
         if(allChatsAnchorPane==null)
             allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane(userID);
         mainBorderPane.setLeft(homeScreenOptionsPane);
-        BorderPane newCenterPane = new BorderPane();
-        newCenterPane.setLeft(allChatsAnchorPane);
-        newCenterPane.setCenter(logoAnchorPane);
-        mainBorderPane.setCenter(newCenterPane);
+
+        chatsHomeScreenCenterPane.setLeft(allChatsAnchorPane);
+        chatsHomeScreenCenterPane.setCenter(logoAnchorPane);
+        mainBorderPane.setCenter(chatsHomeScreenCenterPane);
     }
     public void switchFromLoginToSignUpScreen(){
         if(signUpAnchorPane==null)
@@ -71,8 +71,13 @@ public class ViewLoader {
         mainBorderPane.setTop(titleBarHBox);
         mainBorderPane.setCenter(centerPane);
     }
+
     public BorderPane getMainBorderPane(){
         return mainBorderPane;
+    }
+
+    public void switchToChat(BorderPane chatPane){
+        chatsHomeScreenCenterPane.setCenter(chatPane);
     }
 
 }
