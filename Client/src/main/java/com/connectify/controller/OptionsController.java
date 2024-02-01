@@ -67,6 +67,7 @@ public class OptionsController {
         try {
             ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
             server.unregisterConnectedUser(Client.getConnectedUser());
+            server.logout(Client.getConnectedUser().getPhoneNumber());
             Client.updateUserCredentials("false");
             Client.setConnectedUser(null);
         } catch (RemoteException e) {
