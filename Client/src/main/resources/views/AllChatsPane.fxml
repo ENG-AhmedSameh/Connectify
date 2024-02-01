@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,6 +18,5 @@
             <VBox fx:id="allChatsVBox" alignment="TOP_CENTER" minWidth="350.0" />
          </content>
       </ScrollPane>
-      <Label layoutX="14.0" layoutY="39.0" text="Label" textFill="WHITE" AnchorPane.bottomAnchor="0.0" />
    </children>
 </AnchorPane>
