@@ -1,5 +1,6 @@
 package com.connectify.services;
 
+import com.connectify.dto.FriendToAddResponse;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
@@ -34,5 +35,11 @@ public class UserService {
             return new LoginResponse(true, "Login successful");
         }
         return new LoginResponse(false, "Password is not correct");
+    }
+
+    public FriendToAddResponse getFriendToAddData(String phone) {
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.get(phone);
+        return UserMapper.INSTANCE.userToFriendToAddResponse(user);
     }
 }

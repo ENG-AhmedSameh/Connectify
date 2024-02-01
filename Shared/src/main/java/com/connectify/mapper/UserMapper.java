@@ -1,5 +1,6 @@
 package com.connectify.mapper;
 
+import com.connectify.dto.FriendToAddResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.model.entities.User;
 import org.mapstruct.Mapper;
@@ -20,4 +21,6 @@ public interface UserMapper {
     @Mapping(source = "birthDate", target = "birthDate")
     @Mapping(source = "salt", target = "salt")
     User signUpRequestToUser(SignUpRequest signUpRequest);
+
+    FriendToAddResponse userToFriendToAddResponse(User user);
 }

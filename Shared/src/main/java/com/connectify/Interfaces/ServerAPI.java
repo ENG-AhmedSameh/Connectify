@@ -1,6 +1,7 @@
 package com.connectify.Interfaces;
 
 
+import com.connectify.dto.FriendToAddResponse;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
@@ -13,5 +14,7 @@ public interface ServerAPI extends Remote{
     boolean signUp(SignUpRequest signUpRequest) throws RemoteException;
 
     LoginResponse login(LoginRequest loginRequest) throws RemoteException;
+
+    FriendToAddResponse getFriendToAdd(String phoneNumber) throws RemoteException;
 
 }

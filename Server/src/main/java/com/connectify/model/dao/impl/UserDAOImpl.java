@@ -8,6 +8,7 @@ import com.connectify.model.enums.Status;
 import com.connectify.utils.DBConnection;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -56,14 +57,13 @@ public class UserDAOImpl implements UserDAO {
                     user.setName(resultSet.getString("name"));
                     user.setEmail(resultSet.getString("email"));
                     user.setPassword(resultSet.getString("password"));
-                    user.setSalt(resultSet.getBytes("salt"));
-                    user.setPicture(resultSet.getString("picture"));
+                    user.setPicture(resultSet.getBytes("picture"));
                     user.setGender(Gender.valueOf(resultSet.getString("gender").equals("M") ? "MALE" : "FEMALE"));
                     user.setCountry(resultSet.getString("country"));
-                    user.setBirthDate(resultSet.getDate("birth_date").toLocalDate());
+                    user.setBirthDate((LocalDate) resultSet.getObject("birth_date"));
                     user.setBio(resultSet.getString("bio"));
+//                    user.setMode(Mode.valueOf(resultSet.getString("mode")));
                     user.setStatus(Status.valueOf(resultSet.getString("status")));
-                    user.setMode(Mode.valueOf(resultSet.getString("mode")));
                 }
             }
             return user;
@@ -75,23 +75,18 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User user) {
-        String query = "UPDATE users SET name = ?, email = ?, password = ?, salt = ?, picture = ?, gender = ?, " +
-                "country = ?, birth_date = ?, bio = ?, mode = ?, status = ? WHERE phone_number = ?";
+        String query = "UPDATE users SET name = ?, email = ?, gender = ?, " +
+                "country = ?, birth_date = ?, bio = ?, status = ? WHERE phone_number = ?";
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setBytes(4, user.getSalt());
-            preparedStatement.setString(5, user.getPicture());
-            preparedStatement.setString(6, user.getGender().toString().equals("Male") ? "M" : "F");
-            preparedStatement.setString(7, user.getCountry());
-            preparedStatement.setObject(8, user.getBirthDate());
-            preparedStatement.setString(9, user.getBio());
-            preparedStatement.setString(10, user.getMode().toString());
-            preparedStatement.setString(11, user.getStatus().toString());
-            preparedStatement.setString(12, user.getPhoneNumber());
-
+            preparedStatement.setString(3, user.getGender().toString().equals("Male") ? "M" : "F");
+            preparedStatement.setString(4, user.getCountry());
+            preparedStatement.setObject(5, user.getBirthDate());
+            preparedStatement.setString(6, user.getBio());
+            preparedStatement.setString(7, user.getStatus().toString());
+            preparedStatement.setString(8, user.getPhoneNumber());
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException e) {

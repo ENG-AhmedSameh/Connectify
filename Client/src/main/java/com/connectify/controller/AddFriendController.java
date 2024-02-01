@@ -2,6 +2,7 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.FriendToAddResponse;
 import com.connectify.loaders.AddFriendCardLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,12 +16,14 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddFriendController implements Initializable {
 
     @FXML
-    private TextField ContactPhoneSearchTextField;
+    private TextField newContactPhoneSearchTextField;
 
     @FXML
     private AnchorPane addFriendAnchorPane;
@@ -42,6 +45,7 @@ public class AddFriendController implements Initializable {
 
     private ServerAPI server;
     private static String currentUserPhone = "01143414035";
+    List<FriendToAddResponse> friendToAddResponseList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,12 +65,29 @@ public class AddFriendController implements Initializable {
 
     @FXML
     void searchButtonHandler(ActionEvent event) {
-
+        try {
+            FriendToAddResponse friendToAddResponse = server.getFriendToAdd(newContactPhoneSearchTextField.getText());
+            if (friendToAddResponse != null && isUnique(friendToAddResponse.getPhoneNumber())) {
+                addFriendRequestCard(friendToAddResponse.getName(), friendToAddResponse.getPhoneNumber(),
+                        friendToAddResponse.getPicture());
+            }
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
+        }
     }
 
     @FXML
     void sendInvitationsButtonHandler(ActionEvent event) {
 
+    }
+
+    private boolean isUnique(String phoneNumber) {
+        for (FriendToAddResponse friendToAddResponse : friendToAddResponseList) {
+            if (friendToAddResponse.getPhoneNumber().equals(phoneNumber)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void addFriendRequestCard(String name, String phone, byte[] picture){
