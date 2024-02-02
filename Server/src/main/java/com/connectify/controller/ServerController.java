@@ -3,6 +3,7 @@ package com.connectify.controller;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.ImageBioChangeRequest;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
@@ -40,5 +41,10 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public void unregisterConnectedUser(ConnectedUser user) throws RemoteException {
         userService.unregisterConnectedUser(user);
+    }
+
+    @Override
+    public void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException {
+        userService.changeProfileAndBio(request);
     }
 }

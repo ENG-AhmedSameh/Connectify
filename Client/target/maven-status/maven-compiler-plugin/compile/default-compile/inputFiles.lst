@@ -10,6 +10,7 @@ D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\LogoLo
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ChatLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\HTMLEditorController.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\utils\StageManager.java
+D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ImageBioLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\EditeProfileController.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\SignUpLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\TitleBarLoader.java
@@ -22,10 +23,10 @@ D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\Log
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\MainPaneLoader.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\AllChatsPaneController.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\SignUpController.java
+D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\ImageBioController.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\ContactCardController.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\utils\CountryList.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\AllContactsPaneController.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\ProfileController.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\Client.java
 D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\controller\titleBarController.java
-D:\Career\Projects\Connectify\Client\src\main\java\com\connectify\loaders\ViewLoader.java

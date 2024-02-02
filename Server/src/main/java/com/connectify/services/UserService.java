@@ -2,6 +2,7 @@ package com.connectify.services;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Server;
+import com.connectify.dto.ImageBioChangeRequest;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
@@ -63,5 +64,10 @@ public class UserService {
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }
+    }
+
+    public boolean changeProfileAndBio(ImageBioChangeRequest request) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updateImage(request.getPhoneNumber(), request.getImage()) && userDAO.updateBio(request.getPhoneNumber(), request.getBio());
     }
 }

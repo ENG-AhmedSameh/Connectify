@@ -1,6 +1,7 @@
 package com.connectify.Interfaces;
 
 
+import com.connectify.dto.ImageBioChangeRequest;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
@@ -18,5 +19,7 @@ public interface ServerAPI extends Remote{
 
     void registerConnectedUser(ConnectedUser user) throws RemoteException;
     void unregisterConnectedUser(ConnectedUser user) throws RemoteException;
+
+    void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException;
 
 }

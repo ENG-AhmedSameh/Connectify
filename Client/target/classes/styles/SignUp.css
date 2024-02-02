@@ -53,6 +53,23 @@
 }
 
 
+.text-area {
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-area .content {
+    -fx-border-color: -fx-blueGray;
+    -fx-border-radius: 4px;
+    -fx-background-color: -fx-blueGray;
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-area .content:focused {
+    -fx-border-color: -fx-blue;
+    -fx-border-width: 2px;
+}
+
+
 
 
 
