@@ -6,7 +6,6 @@ import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Status;
-import com.connectify.utils.CountryList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,66 +37,42 @@ public class ProfileController implements Initializable {
 
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
 
-    private String testPhoneNumber = "+201143414035";
-    private UserProfileResponse userProfileResponse;
+    private UserProfileResponse currentUserDetails;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        initializeComboBox();
-//        txtFieldsOriginalStyle = nameTxtF.getStyle();
-//        comboBoxOriginalStyle = countryComboBox.getStyle();
-//        datePickerOriginalStyle = birthDatePicker.getStyle();
-
         try {
             ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
-            userProfileResponse = server.getUserProfile(testPhoneNumber);
+            currentUserDetails = server.getUserProfile("+20" +Client.getConnectedUser().getPhoneNumber());
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         } catch (NotBoundException e) {
             System.err.println("NotBoundException: " + e.getMessage());
         }
 
-        Image image = new Image(new ByteArrayInputStream(userProfileResponse.getPicture()));
-        userImg.setFill(new ImagePattern(image));
+        setImage();
+        bioTextArea.setText(currentUserDetails.getBio() == null ? "bio" : currentUserDetails.getBio());
+        phoneNumTxtF.setText(currentUserDetails.getPhoneNumber());
+        nameTxtF.setText(currentUserDetails.getName());
+        emailTxtF.setText(currentUserDetails.getEmail());
+        birthDatePicker.setValue(currentUserDetails.getBirthDate());
+        genderComboBox.setValue(currentUserDetails.getGender());
+        statusComboBox.setValue(currentUserDetails.getStatus());
 
-        bioTextArea.setText(userProfileResponse.getBio());
-        phoneNumTxtF.setText(userProfileResponse.getPhoneNumber());
-        nameTxtF.setText(userProfileResponse.getName());
-        emailTxtF.setText(userProfileResponse.getEmail());
-        birthDatePicker.setValue(userProfileResponse.getBirthDate());
-        genderComboBox.setValue(userProfileResponse.getGender());
-        statusComboBox.setValue(userProfileResponse.getStatus());
+        birthDatePicker.setDisable(true);
+        genderComboBox.setDisable(true);
+        statusComboBox.setDisable(true);
     }
 
-//    private void initializeComboBox() {
-//        initializeGenderComboBox();
-//        initializeStatusComboBox();
-//    }
-//
-//    private void initializeGenderComboBox(){
-//        genderComboBox.getItems().addAll(Gender.MALE, Gender.FEMALE);
-//    }
-//
-//    private void initializeStatusComboBox(){
-//        statusComboBox.getItems().addAll(Status.AVAILABLE, Status.BUSY, Status.AWAY);
-//    }
-//
-//
-//    private ListCell<String> createListCell() {
-//        return new ListCell<>() {
-//            @Override
-//            protected void updateItem(String item, boolean empty) {
-//                super.updateItem(item, empty);
-//                //setStyle("-fx-text-fill: derive(-fx-control-inner-background,-30%);");
-//
-//                if(!empty&&item!=null){
-//                    String countryName = countryComboBox.getValue().toString();
-//                    countryCodeLbl.setText(countryList.getCountriesMap().get(countryName));
-//                    setText(countryName);
-//                }
-//            }
-//        };
-//    }
+    private void setImage() {
+        Image image = null;
+        if (currentUserDetails.getPicture() == null) {
+            image = new Image(String.valueOf(ProfileController.class.getResource("/images/profile.png")));
+        } else {
+            image = new Image(new ByteArrayInputStream(currentUserDetails.getPicture()));
+        }
+        userImg.setFill(new ImagePattern(image));
+    }
 
     @FXML
     private void editeBtnHandler(ActionEvent event){
