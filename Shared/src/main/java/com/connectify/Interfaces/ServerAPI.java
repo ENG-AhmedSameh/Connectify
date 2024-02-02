@@ -25,6 +25,8 @@ public interface ServerAPI extends Remote{
 
     boolean sendInvitation(String senderPhoneNumber, String receiverPhoneNumber) throws RemoteException;
 
+    boolean isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) throws RemoteException;
+
     boolean logout(String phoneNumber) throws RemoteException;
 
     void registerConnectedUser(ConnectedUser user) throws RemoteException;

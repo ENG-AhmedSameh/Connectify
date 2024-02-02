@@ -60,9 +60,20 @@ public class AddFriendCardController implements Initializable {
     }
 
     public Image convertBytesToImage(byte[] bytes) {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-        return new Image(inputStream, contactPictureImageView.getFitWidth(), contactPictureImageView.getFitHeight(),
-                false, true);
+        if (bytes != null) {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
+            return new Image(inputStream,
+                    contactPictureImageView.getFitWidth(),
+                    contactPictureImageView.getFitHeight(),
+                    false,
+                    true);
+        }
+
+        return new Image(getClass().getResource("/images/person.png").toString(),
+                contactPictureImageView.getFitWidth(),
+                contactPictureImageView.getFitHeight(),
+                false,
+                true);
     }
 
 }

@@ -44,6 +44,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
+    public boolean isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) throws RemoteException {
+        return invitationService.isInvitationSent(senderPhoneNumber, receiverPhoneNumber);
+    }
+
+    @Override
     public boolean logout(String phoneNumber) throws RemoteException {
         return userService.logoutUser(phoneNumber);
     }

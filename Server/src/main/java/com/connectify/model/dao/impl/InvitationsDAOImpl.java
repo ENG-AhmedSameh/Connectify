@@ -82,4 +82,23 @@ public class InvitationsDAOImpl implements InvitationsDAO {
             return false;
         }
     }
+
+    @Override
+    public boolean isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) {
+        String query = "SELECT invitation_id FROM invitations WHERE sender = ? AND receiver = ?";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, senderPhoneNumber);
+            preparedStatement.setString(2, receiverPhoneNumber);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

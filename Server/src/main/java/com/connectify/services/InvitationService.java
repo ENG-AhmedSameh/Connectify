@@ -17,4 +17,9 @@ public class InvitationService {
         invitations.setReceiver(receiverPhoneNumber);
         return invitationsDAO.insert(invitations);
     }
+
+    public boolean isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) {
+        InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
+        return invitationsDAO.isInvitationSent(senderPhoneNumber, receiverPhoneNumber);
+    }
 }

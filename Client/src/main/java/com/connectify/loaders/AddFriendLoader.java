@@ -6,13 +6,11 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class AddFriendCardLoader {
+public class AddFriendLoader {
 
-    public static AnchorPane loadNewAddFriendCardPane(String name, String phone, byte[] picture) {
+    public static AnchorPane loadAddFriendAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
-        AddFriendCardController controller = new AddFriendCardController(name, phone, picture);
-        fxmlLoader.setLocation(AddFriendCardLoader.class.getResource("/views/AddFriendCardPane.fxml"));
-        fxmlLoader.setController(controller);
+        fxmlLoader.setLocation(AddFriendLoader.class.getResource("/views/AddFriendPane.fxml"));
         try {
             return fxmlLoader.load();
         } catch (IOException e) {
