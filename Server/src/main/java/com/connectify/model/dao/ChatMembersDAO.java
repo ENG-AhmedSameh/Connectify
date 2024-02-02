@@ -13,4 +13,6 @@ public interface ChatMembersDAO extends DAO<ChatMember, ChatMember> {
 
     List<ChatMember> getAllChatMembers(int chatID) throws SQLException;
 
+    List<ChatMember> getAllOtherChatMembers(int chatId, String sender);
+
 }

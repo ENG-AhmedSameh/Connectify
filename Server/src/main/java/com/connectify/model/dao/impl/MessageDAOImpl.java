@@ -18,13 +18,13 @@ public class MessageDAOImpl implements MessageDAO{
 
     @Override
     public boolean insert(Message message) {
-        String query = "INSERT INTO Message (sender, chat_id, timeStamp, content, attachement_id) VALUES (?, ?, ?,?)";
+        String query = "INSERT INTO Message (sender, chat_id, content, attachement_id) VALUES (?,?,?,?)";
         try(Connection connection = dbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
             preparedStatement.setString(1, message.getSender());
             preparedStatement.setInt(2, message.getChatId());
-            preparedStatement.setTimestamp(3, message.getTimestamp());
+            preparedStatement.setString(3, message.getContent());
             preparedStatement.setInt(4, message.getAttachmentId());
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted > 0;

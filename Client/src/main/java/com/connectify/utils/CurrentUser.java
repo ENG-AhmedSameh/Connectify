@@ -1,6 +1,7 @@
 package com.connectify.utils;
 
 import com.connectify.Interfaces.ConnectedUser;
+import com.connectify.dto.MessageDTO;
 
 import java.io.File;
 import java.io.Serializable;
@@ -27,5 +28,10 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     public String getPhoneNumber() throws RemoteException {
         return phoneNumber;
+    }
+
+    @Override
+    public void receiveMessage(MessageDTO messageDTO) throws RemoteException {
+        System.out.println("Received Message");
     }
 }

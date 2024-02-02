@@ -3,12 +3,9 @@ package com.connectify.controller;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
-import com.connectify.dto.ImageBioChangeRequest;
-import com.connectify.dto.LoginRequest;
-import com.connectify.dto.LoginResponse;
-import com.connectify.dto.ChatCardsInfoDTO;
-import com.connectify.dto.ChatMemberDTO;
-import com.connectify.dto.SignUpRequest;
+import com.connectify.dto.*;
+import com.connectify.services.ChatService;
+import com.connectify.services.MessageService;
 import com.connectify.services.UserChatsService;
 import com.connectify.services.UserService;
 
@@ -19,8 +16,13 @@ import java.util.List;
 public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     UserService userService;
+    MessageService messageService;
+
+    ChatService chatService;
     public ServerController() throws RemoteException {
         userService = new UserService();
+        messageService = new MessageService();
+        chatService = new ChatService();
     }
 
     @Override
@@ -62,5 +64,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException {
         userService.changeProfileAndBio(request);
+    }
+
+    @Override
+    public void sendMessage(MessageDTO message) throws RemoteException {
+        chatService.sendMessage(message);
+        messageService.storeMessage(message);
     }
 }

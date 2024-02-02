@@ -2,7 +2,6 @@ package com.connectify.Interfaces;
 
 
 import com.connectify.dto.*;
-import com.connectify.model.entities.ChatMember;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -22,5 +21,7 @@ public interface ServerAPI extends Remote{
 
     List<ChatCardsInfoDTO> getUserChatsCardsInfo(String userId) throws RemoteException;
     void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException;
+
+    void sendMessage(MessageDTO message) throws RemoteException;
 
 }

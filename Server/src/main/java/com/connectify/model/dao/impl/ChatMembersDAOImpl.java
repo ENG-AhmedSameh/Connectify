@@ -109,6 +109,28 @@ public class ChatMembersDAOImpl implements ChatMembersDAO {
     }
 
     @Override
+    public List<ChatMember> getAllOtherChatMembers(int chatId, String sender) {
+        List<ChatMember> chatMembers = new ArrayList<>();
+        String query = "SELECT * FROM chat_members WHERE chat_id = ? AND member != ? ";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, chatId);
+            preparedStatement.setString(2, sender);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    ChatMember chatMember = new ChatMember();
+                    chatMember.setMember(rs.getString("member"));
+                    chatMembers.add(chatMember);
+                }
+                return chatMembers;
+            }
+        } catch (SQLException e) {
+            System.err.println("Sql Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+        @Override
     public boolean insert(ChatMember chatMember) {
         String query = "INSERT INTO chat_members (chat_Id, member) VALUES (?, ?)";
         try (Connection connection = dbConnection.getConnection();
