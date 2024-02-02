@@ -2,11 +2,7 @@ package com.connectify.services;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Server;
-import com.connectify.dto.LoginRequest;
-import com.connectify.dto.LoginResponse;
-import com.connectify.dto.SignUpRequest;
-import com.connectify.dto.UpdateUserInfoRequest;
-import com.connectify.dto.UserProfileResponse;
+import com.connectify.dto.*;
 import com.connectify.mapper.UserMapper;
 import com.connectify.model.dao.UserDAO;
 import com.connectify.model.dao.impl.UserDAOImpl;

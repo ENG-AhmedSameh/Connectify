@@ -60,7 +60,7 @@ public class OptionsController {
 
     @FXML
     void inviteHandler(ActionEvent event) {
-
+        StageManager.getInstance().switchToAddFriend();
     }
 
     @FXML

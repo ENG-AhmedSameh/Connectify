@@ -69,6 +69,13 @@ public class StageManager {
         stage.setScene(createProfileEditorScene());
     }
 
+    public void switchToAddFriend(){
+        if(sceneMap.get("add friend") == null)
+            sceneMap.put("add friend", createAddFriendScene());
+        Scene scene = sceneMap.get("add friend");
+        stage.setScene(scene);
+    }
+
     private Scene createLoginScene(){
         BorderPane mainPane = new BorderPane();
         GridPane centerPane = new GridPane();
@@ -134,6 +141,21 @@ public class StageManager {
         AnchorPane profileEditorPane = ProfileEditorLoader.loadProfileEditorAnchorPane();
         centerPane.setLeft(chatsPane);
         centerPane.setCenter(profileEditorPane);
+        mainPane.setLeft(optionsPane);
+        mainPane.setTop(titleBar);
+        mainPane.setCenter(centerPane);
+        return new Scene(mainPane);
+    }
+
+    private Scene createAddFriendScene() {
+        BorderPane mainPane = new BorderPane();
+        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
+        BorderPane centerPane = new BorderPane();
+        AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
+        AnchorPane addFriendPane = AddFriendLoader.loadAddFriendAnchorPane();
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        centerPane.setLeft(addFriendPane);
+        centerPane.setCenter(logoPane);
         mainPane.setLeft(optionsPane);
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
