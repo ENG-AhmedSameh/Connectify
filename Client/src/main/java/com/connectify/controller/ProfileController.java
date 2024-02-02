@@ -6,6 +6,7 @@ import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Status;
+import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,12 +45,15 @@ public class ProfileController implements Initializable {
         try {
             ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
             currentUserDetails = server.getUserProfile("+20" +Client.getConnectedUser().getPhoneNumber());
+            populateUserDetails();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         } catch (NotBoundException e) {
             System.err.println("NotBoundException: " + e.getMessage());
         }
+    }
 
+    private void populateUserDetails() {
         setImage();
         bioTextArea.setText(currentUserDetails.getBio() == null ? "bio" : currentUserDetails.getBio());
         phoneNumTxtF.setText(currentUserDetails.getPhoneNumber());
@@ -76,7 +80,6 @@ public class ProfileController implements Initializable {
 
     @FXML
     private void editeBtnHandler(ActionEvent event){
-        ViewLoader viewLoader = ViewLoader.getInstance();
-        viewLoader.switchFromProfileToEditeProfile();
+        StageManager.getInstance().switchToProfileEditor();
     }
 }

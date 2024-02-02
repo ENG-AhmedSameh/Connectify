@@ -68,6 +68,13 @@ public class StageManager {
         stage.setScene(scene);
     }
 
+    public void switchToProfileEditor(){
+        if(sceneMap.get("profile editor") == null)
+            sceneMap.put("profile editor", createProfileEditorScene());
+        Scene scene = sceneMap.get("profile editor");
+        stage.setScene(scene);
+    }
+
     private Scene createLoginScene(){
         BorderPane mainPane = new BorderPane();
         GridPane centerPane = new GridPane();
@@ -118,6 +125,21 @@ public class StageManager {
         AnchorPane profilePane = ProfileLoader.loadProfileAnchorPane();
         centerPane.setLeft(chatsPane);
         centerPane.setCenter(profilePane);
+        mainPane.setLeft(optionsPane);
+        mainPane.setTop(titleBar);
+        mainPane.setCenter(centerPane);
+        return new Scene(mainPane);
+    }
+
+    private Scene createProfileEditorScene(){
+        BorderPane mainPane = new BorderPane();
+        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
+        BorderPane centerPane = new BorderPane();
+        AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
+        AnchorPane chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
+        AnchorPane profileEditorPane = ProfileEditorLoader.loadProfileEditorAnchorPane();
+        centerPane.setLeft(chatsPane);
+        centerPane.setCenter(profileEditorPane);
         mainPane.setLeft(optionsPane);
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
