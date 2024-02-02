@@ -62,17 +62,11 @@ public class StageManager {
     }
 
     public void switchToProfile(){
-        if(sceneMap.get("profile") == null)
-            sceneMap.put("profile", createProfileScene());
-        Scene scene = sceneMap.get("profile");
-        stage.setScene(scene);
+        stage.setScene(createProfileScene());
     }
 
     public void switchToProfileEditor(){
-        if(sceneMap.get("profile editor") == null)
-            sceneMap.put("profile editor", createProfileEditorScene());
-        Scene scene = sceneMap.get("profile editor");
-        stage.setScene(scene);
+        stage.setScene(createProfileEditorScene());
     }
 
     private Scene createLoginScene(){
