@@ -71,4 +71,9 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         chatService.sendMessage(message);
         messageService.storeMessage(message);
     }
+
+    @Override
+    public void prepareCurrentChat(ChatMemberDTO chatMemberDTO) throws RemoteException {
+        chatService.prepareCurrentChat(chatMemberDTO);
+    }
 }

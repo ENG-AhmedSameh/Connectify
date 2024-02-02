@@ -2,7 +2,9 @@ package com.connectify.services;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Server;
+import com.connectify.dto.ChatMemberDTO;
 import com.connectify.dto.MessageDTO;
+import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.model.dao.ChatMembersDAO;
 import com.connectify.model.dao.impl.ChatMembersDAOImpl;
 import com.connectify.model.entities.ChatMember;
@@ -32,4 +34,10 @@ public class ChatService {
         }
     }
 
+    public void prepareCurrentChat(ChatMemberDTO chatMemberDTO) {
+        ChatMemberMapper mapper = ChatMemberMapper.INSTANCE;
+        ChatMember chatMember = mapper.chatMemberDtoToChatMember(chatMemberDTO);
+        ChatMembersDAO chatMembersDAO = new ChatMembersDAOImpl();
+        chatMembersDAO.prepareCurrentChat(chatMember);
+    }
 }

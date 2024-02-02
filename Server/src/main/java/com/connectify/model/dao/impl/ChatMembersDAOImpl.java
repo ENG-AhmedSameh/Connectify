@@ -130,7 +130,37 @@ public class ChatMembersDAOImpl implements ChatMembersDAO {
         }
     }
 
-        @Override
+    @Override
+    public void prepareCurrentChat(ChatMember chatMember) {
+        String query1 = "UPDATE CHAT_MEMBERS SET is_open = 0 WHERE member = ? AND is_open = 1;";
+        String query2 = "UPDATE CHAT_MEMBERS SET is_open = 1, Unread_Messages_number = 0 WHERE chat_id = ? AND member = ?;"; // Fixed the query to correctly update both columns
+        try (Connection connection = dbConnection.getConnection()) {
+            connection.setAutoCommit(false);
+
+            try (PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
+                 PreparedStatement preparedStatement2 = connection.prepareStatement(query2)) {
+
+                preparedStatement1.setString(1, chatMember.getMember());
+                preparedStatement1.executeUpdate();
+
+                preparedStatement2.setInt(1, chatMember.getChatId());
+                preparedStatement2.setString(2, chatMember.getMember());
+                preparedStatement2.executeUpdate();
+
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+                throw e;
+            } finally {
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
+    }
+
+    @Override
     public boolean insert(ChatMember chatMember) {
         String query = "INSERT INTO chat_members (chat_Id, member) VALUES (?, ?)";
         try (Connection connection = dbConnection.getConnection();

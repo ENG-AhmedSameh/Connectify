@@ -24,4 +24,5 @@ public interface ServerAPI extends Remote{
 
     void sendMessage(MessageDTO message) throws RemoteException;
 
+    void prepareCurrentChat(ChatMemberDTO chatMemberDTO) throws RemoteException;
 }

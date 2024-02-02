@@ -1,5 +1,8 @@
 package com.connectify.controller;
 
+import com.connectify.Client;
+import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.ChatPaneFactory;
 import javafx.fxml.FXML;
@@ -15,6 +18,8 @@ import javafx.scene.layout.HBox;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -75,6 +80,7 @@ public class ChatCardController implements Initializable {
 
     private void initializeEventHandlers() {
         chatCardPane.setOnMouseClicked((MouseEvent event)->{
+
             displayChat();
         });
     }
@@ -120,5 +126,17 @@ public class ChatCardController implements Initializable {
         BorderPane chatPane = ChatPaneFactory.getChatPane(chatId,name,pictureImage);
         ViewLoader loader = ViewLoader.getInstance();
         loader.switchToChat(chatPane,chatCardPane.getScene());
+    }
+    private void prepareChatDB(){
+        ServerAPI server = null;
+        try {
+            server = (ServerAPI) Client.getRegistry().lookup("server");
+            ChatMemberDTO chatMemberDTO = new ChatMemberDTO();
+            chatMemberDTO.setChatId(chatId);
+            chatMemberDTO.setMember(Client.getConnectedUser().getPhoneNumber());
+            server.prepareCurrentChat(chatMemberDTO);
+        } catch (RemoteException | NotBoundException e) {
+            System.err.println("Couldn't find server, details:  "+e.getMessage());
+        }
     }
 }
