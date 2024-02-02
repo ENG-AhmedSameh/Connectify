@@ -1,6 +1,8 @@
 package com.connectify.dto;
 
-public class FriendToAddResponse {
+import java.io.Serializable;
+
+public class FriendToAddResponse implements Serializable {
     private String phoneNumber;
     private String name;
     private byte[] picture;
