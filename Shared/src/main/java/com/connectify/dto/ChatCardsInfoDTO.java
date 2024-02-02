@@ -37,6 +37,7 @@ public class ChatCardsInfoDTO implements Serializable {
                 ", name='" + name + '\'' +
                 ", picture=" + Arrays.toString(picture) +
                 ", lastMessage='" + lastMessage + '\'' +
+                ", timestamp=" + timestamp +
                 '}';
     }
 

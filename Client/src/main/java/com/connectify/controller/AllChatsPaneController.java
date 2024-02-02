@@ -8,19 +8,24 @@ import com.connectify.loaders.ChatCardLoader;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.model.entities.ChatMember;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AllChatsPaneController implements Initializable {
@@ -38,6 +43,10 @@ public class AllChatsPaneController implements Initializable {
 
     @FXML
     private VBox allChatsVBox;
+
+    @FXML
+    private ListView<AnchorPane> allChatsListView;
+    ObservableList<AnchorPane> chatsPanesList = FXCollections.observableArrayList();
 
     private ServerAPI server;
     private static String currentUserId;
@@ -62,17 +71,49 @@ public class AllChatsPaneController implements Initializable {
         } catch (NotBoundException e) {
             System.err.println("NotBoundException: " + e.getMessage());
         }
+        initializeListView();
         loadAllUserChats();
         System.out.println("done");
     }
 
+    private void initializeListView(){
+//        SortedList<AnchorPane> sortedAnchorPanes = new SortedList<>(chatsPanesList, (pane1, pane2) -> {
+//            ChatCardController controller1 = ChatCardLoader.getChatsCardController(pane1);
+//            ChatCardController controller2 = ChatCardLoader.getChatsCardController(pane2);
+//            return Objects.requireNonNull(controller1).getTimestamp().compareTo(Objects.requireNonNull(controller2).getTimestamp());
+//        });
+//        allChatsListView.setItems(sortedAnchorPanes);
+        allChatsListView.setItems(chatsPanesList);
+        setListViewCellFactory();
+    }
+
+    private void setListViewCellFactory() {
+        allChatsListView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<AnchorPane> call(ListView<AnchorPane> listView) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(AnchorPane item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(item);
+                        }
+                    }
+                };
+            }
+        });
+    }
+
     public void addChatOnChatPane(int chatId, int unread, String name, byte[] picture, String lastMessage, Timestamp timestamp){
         AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chatId, unread,name,picture,lastMessage,timestamp);
-        allChatsVBox.getChildren().add(chatCard);
+        //allChatsVBox.getChildren().add(chatCard);
+        chatsPanesList.add(chatCard);
     }
     private void loadAllUserChats(){
         try {
-            allChatsVBox.getChildren().removeAll();
+            //allChatsVBox.getChildren().removeAll();
             List<ChatCardsInfoDTO> chatCardsInfoDTOS = server.getUserChatsCardsInfo(Client.getConnectedUser().getPhoneNumber());
             for(ChatCardsInfoDTO chat:chatCardsInfoDTOS)
                 addChatOnChatPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());

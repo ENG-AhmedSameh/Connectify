@@ -5,6 +5,8 @@ import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.ChatPaneFactory;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -49,21 +51,27 @@ public class ChatCardController implements Initializable {
     @FXML
     private AnchorPane chatCardPane;
 
-    int chatId,unread;
-    String name, lastMessage;
+    int chatId;
+    IntegerProperty unread = new SimpleIntegerProperty();
+    StringProperty chatName = new SimpleStringProperty();
+    StringProperty lastMessage= new SimpleStringProperty();
     byte[] pictureBytes;
     Image pictureImage;
     Timestamp timestamp;
+    ObjectProperty<LocalDateTime> timestampProperty;
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    StringBinding formattedTimestamp;
     public ChatCardController() {
     }
 
 
     public ChatCardController(int chatId, int unread, String name, byte[] picture, String lastMessage, Timestamp timestamp) {
         this.chatId = chatId;
-        this.unread = unread;
-        this.name = name;
+        this.unread.setValue(unread);
+        this.chatName.setValue(name);
         this.pictureBytes = picture;
-        this.lastMessage = lastMessage;
+        this.lastMessage.setValue(lastMessage);
         this.timestamp = timestamp;
     }
 
@@ -71,45 +79,46 @@ public class ChatCardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeEventHandlers();
-        setChatName();
+        if(unread.getValue()==0)
+            nChatUnreadMessagesLabel.setVisible(false);
+        chatNameTextField.textProperty().bind(chatName);
         setChatPhoto();
-        setUnreadMessagesNumber(unread);
-        setLastMessage(lastMessage);
-        setLastMessageTime(timestamp);
+        nChatUnreadMessagesLabel.textProperty().bind(unread.asString());
+        lastMessageLabel.textProperty().bind(lastMessage);
+        timestampProperty = new SimpleObjectProperty<>(timestamp.toLocalDateTime());
+        bindLastMessageTimeStamp();
+    }
+    private void bindLastMessageTimeStamp(){
+        formattedTimestamp = new StringBinding() {
+            {
+                super.bind(timestampProperty);
+            }
+            @Override
+            protected String computeValue() {
+                LocalDateTime timestamp = timestampProperty.get();
+                LocalDate today = LocalDate.now();
+                if (timestamp.toLocalDate().equals(today)) {
+                    return timeFormatter.format(timestamp);
+                } else {
+                    return dateFormatter.format(timestamp);
+                }
+            }
+        };
+        lastMessageTimeLabel.textProperty().bind(formattedTimestamp);
     }
 
     private void initializeEventHandlers() {
         chatCardPane.setOnMouseClicked((MouseEvent event)->{
-
             displayChat();
+            //prepareChatDB();
         });
     }
 
     private void setChatPhoto(){
         chatPictureImageView.setImage(convertToJavaFXImage(pictureBytes,chatPictureImageView.getFitWidth(),chatPictureImageView.getFitHeight()));
+        //chatPictureImageView.imageProperty().bind(pictureBytes);
     }
-    private void setChatName(){
-        chatNameTextField.setText(name);
-    }
-    public void setLastMessage(String message){
-        lastMessageLabel.setText(message);
-    }
-    public void setUnreadMessagesNumber(int unreadMessages){
-        if(unreadMessages==0){
-            nChatUnreadMessagesLabel.setText("");
-            nChatUnreadMessagesLabel.setVisible(false);
-        }else{
-            nChatUnreadMessagesLabel.setText(String.valueOf(unread));
-            nChatUnreadMessagesLabel.setVisible(true);
-        }
-    }
-    public void setLastMessageTime(Timestamp timestamp){
-        LocalDateTime datetime = timestamp.toLocalDateTime();
-        if(datetime.equals(LocalDate.now()))
-            lastMessageTimeLabel.setText(datetime.toLocalTime().format(DateTimeFormatter.ofPattern("hh:mm a")));
-        else
-            lastMessageTimeLabel.setText(timestamp.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-    }
+
     public Image convertToJavaFXImage(byte[] bytes, double width, double height) {
         if(bytes == null){
             String imagePath = "target/classes/images/profile.png";
@@ -123,7 +132,8 @@ public class ChatCardController implements Initializable {
     }
 
     private void displayChat(){
-        BorderPane chatPane = ChatPaneFactory.getChatPane(chatId,name,pictureImage);
+        setUnreadMessagesNumber(0);
+        BorderPane chatPane = ChatPaneFactory.getChatPane(chatId, chatName.get(),pictureImage);
         ViewLoader loader = ViewLoader.getInstance();
         loader.switchToChat(chatPane,chatCardPane.getScene());
     }
@@ -139,4 +149,58 @@ public class ChatCardController implements Initializable {
             System.err.println("Couldn't find server, details:  "+e.getMessage());
         }
     }
+
+    public int getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(int chatId) {
+        this.chatId = chatId;
+    }
+
+    public int getUnread() {
+        return unread.get();
+    }
+
+    public void setUnreadMessagesNumber(int unread) {
+        this.unread.set(unread);
+        nChatUnreadMessagesLabel.setVisible(unread != 0);
+    }
+    public int getUnreadMessagesNumber() {
+        return this.unread.get();
+    }
+
+    public String getChatName() {
+        return chatName.get();
+    }
+    public void setChatName(String  chatName) {
+        this.chatName.setValue(chatName);
+    }
+
+
+    public String getLastMessage() {
+        return lastMessage.get();
+    }
+    public void setLastMessage(String message) {
+        lastMessage.setValue(message);
+    }
+
+    public byte[] getPictureBytes() {
+        return pictureBytes;
+    }
+
+    public void setPictureBytes(byte[] pictureBytes) {
+        this.pictureBytes = pictureBytes;
+    }
+
+
+    public Timestamp getLastMessageTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+        timestampProperty.setValue(timestamp.toLocalDateTime());
+    }
+
 }
