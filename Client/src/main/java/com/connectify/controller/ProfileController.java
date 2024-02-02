@@ -1,6 +1,11 @@
 package com.connectify.controller;
 
+import com.connectify.Client;
+import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
+import com.connectify.model.enums.Gender;
+import com.connectify.model.enums.Status;
 import com.connectify.utils.CountryList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +49,7 @@ public class ProfileController implements Initializable {
 //        datePickerOriginalStyle = birthDatePicker.getStyle();
 
         try {
-            ServerAPI server = (ServerAPI) Client.registry.lookup("server");
+            ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
             userProfileResponse = server.getUserProfile(testPhoneNumber);
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());

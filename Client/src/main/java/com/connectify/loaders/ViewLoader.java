@@ -86,7 +86,7 @@ public class ViewLoader {
         if(allChatsAnchorPane==null)
             allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane();
         if(editeProfilePane==null)
-            editeProfilePane=EditeProfileLoader.loadEditeProfileAnchorPane();
+            editeProfilePane= ProfileEditorLoader.loadProfileEditorAnchorPane();
         mainBorderPane.setLeft(homeScreenOptionsPane);
         BorderPane newCenterPane = new BorderPane();
         newCenterPane.setLeft(allChatsAnchorPane);

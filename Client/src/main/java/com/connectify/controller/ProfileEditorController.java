@@ -75,7 +75,7 @@ public class ProfileEditorController implements Initializable {
         txtFieldsOriginalStyle = nameTxtF.getStyle();
 
         try {
-            server = (ServerAPI) Client.registry.lookup("server");
+            server = (ServerAPI) Client.getRegistry().lookup("server");
             currentUserDetails = server.getUserProfile(testPhoneNumber);
             populateUserDetails();
         } catch (RemoteException e) {

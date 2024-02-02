@@ -77,22 +77,17 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public boolean update(User user) {
         String query = "UPDATE users SET name = ?, email = ?, gender = ?, " +
-                "country = ?, birth_date = ?, bio = ?, status = ? WHERE phone_number = ?";
-        String query = "UPDATE users SET name = ?, email = ?, password = ?, salt = ?, picture = ?, gender = ?, " +
-                "country = ?, birth_date = ?, bio = ?, mode = ?, status = ? WHERE phone_number = ?";
+                "birth_date = ?, bio = ?, mode = ?, status = ? WHERE phone_number = ?";
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setString(4, user.getPicture());
-            preparedStatement.setString(5, user.getGender().toString().equals("Male") ? "M" : "F");
-            preparedStatement.setString(6, user.getCountry());
-            preparedStatement.setObject(7, user.getBirthDate());
-            preparedStatement.setString(8, user.getBio());
-            preparedStatement.setString(9, user.getMode().toString());
-            preparedStatement.setString(10, user.getStatus().toString());
-            preparedStatement.setString(11, user.getPhoneNumber());
+            preparedStatement.setString(3, user.getGender().toString().equals("Male") ? "M" : "F");
+            preparedStatement.setObject(4, user.getBirthDate());
+            preparedStatement.setString(5, user.getBio());
+            preparedStatement.setString(6, user.getMode().toString());
+            preparedStatement.setString(7, user.getStatus().toString());
+            preparedStatement.setString(8, user.getPhoneNumber());
 
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0;

@@ -5,10 +5,10 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class EditeProfileLoader {
-    public static AnchorPane loadEditeProfileAnchorPane(){
+public class ProfileEditorLoader {
+    public static AnchorPane loadProfileEditorAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(EditeProfileLoader.class.getResource("/views/EditeProfilePane.fxml"));
+        fxmlLoader.setLocation(ProfileEditorLoader.class.getResource("/views/EditeProfilePane.fxml"));
         try {
             return fxmlLoader.load();
         } catch (IOException e) {
