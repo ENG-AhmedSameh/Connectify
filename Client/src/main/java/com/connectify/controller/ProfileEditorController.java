@@ -6,6 +6,7 @@ import com.connectify.dto.UpdateUserInfoRequest;
 import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
+import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 import com.connectify.util.PasswordManager;
 import com.connectify.utils.StageManager;
@@ -39,9 +40,11 @@ public class ProfileEditorController implements Initializable {
     @FXML
     private TextField emailTxtF;
     @FXML
-    private ComboBox<Gender> genderComboBox;
+    private ComboBox<String> genderComboBox;
     @FXML
-    private ComboBox<Status> statusComboBox;
+    private ComboBox<String> statusComboBox;
+    @FXML
+    private ComboBox<String> modeComboBox;
     @FXML
     private TextField nameTxtF;
     @FXML
@@ -66,7 +69,9 @@ public class ProfileEditorController implements Initializable {
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
     private UserProfileResponse currentUserDetails;
     private boolean isPictureChanged;
-    byte[] newPicture;
+    private byte[] newPicture;
+    private String egyptKey = "+20";
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,7 +80,7 @@ public class ProfileEditorController implements Initializable {
 
         try {
             server = (ServerAPI) Client.getRegistry().lookup("server");
-            currentUserDetails = server.getUserProfile("+20" +Client.getConnectedUser().getPhoneNumber());
+            currentUserDetails = server.getUserProfile(egyptKey + Client.getConnectedUser().getPhoneNumber());
             populateUserDetails();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
@@ -91,8 +96,9 @@ public class ProfileEditorController implements Initializable {
         nameTxtF.setText(currentUserDetails.getName());
         emailTxtF.setText(currentUserDetails.getEmail());
         birthDatePicker.setValue(currentUserDetails.getBirthDate());
-        genderComboBox.setValue(currentUserDetails.getGender());
-        statusComboBox.setValue(currentUserDetails.getStatus());
+        genderComboBox.setValue(currentUserDetails.getGender().toString());
+        statusComboBox.setValue(currentUserDetails.getStatus().toString());
+        modeComboBox.setValue(currentUserDetails.getMode().toString());
     }
 
     private void setImage() {
@@ -106,8 +112,9 @@ public class ProfileEditorController implements Initializable {
     }
 
     private void initializeComboBoxes() {
-        genderComboBox.getItems().addAll(Gender.values());
-        statusComboBox.getItems().addAll(Status.values());
+        genderComboBox.getItems().addAll(Gender.MALE.toString(), Gender.FEMALE.toString());
+        statusComboBox.getItems().addAll(Status.AVAILABLE.toString(), Status.BUSY.toString(), Status.AWAY.toString());
+        modeComboBox.getItems().addAll(Mode.ONLINE.toString(), Mode.OFFLINE.toString());
     }
 
     @FXML
@@ -122,7 +129,7 @@ public class ProfileEditorController implements Initializable {
     }
 
     private boolean validatePassword() {
-        if (!Objects.equals(confirmPasswordPassF.getText(), passwordPassF.getText())) {
+        if (!Objects.equals(passwordPassF.getText(), confirmPasswordPassF.getText())) {
             confirmPasswordPassF.setStyle("-fx-border-color: red;");
             confirmPasswordPassF.setTooltip(hintText("Doesn't match the password in the first field"));
             return false;
@@ -182,51 +189,68 @@ public class ProfileEditorController implements Initializable {
             if (isUserInfoChanged()) {
                 UpdateUserInfoRequest updateUserInfoRequest = createUpdateUserInfoRequest();
                 try {
-                    server.updateUserProfile(updateUserInfoRequest);
+                    boolean result = server.updateUserProfile(updateUserInfoRequest);
+                    System.out.println("Update user profile result: " + result);
                 } catch (RemoteException e) {
-                    System.err.println("Remote Exception: " + e.getMessage());
+                    System.err.println("Remote Exception when update user profile. cause:" + e.getMessage());
                 }
             }
 
-            if (passwordPassF.getText() != null && validatePassword()) {
-                try {
-                    byte[] salt = PasswordManager.generateSalt();
-                    String password = PasswordManager.encode(passwordPassF.getText(), salt);
-                    server.updateUserPassword(currentUserDetails.getPhoneNumber(), salt, password);
-                } catch (RemoteException e) {
-                    System.err.println("Remote Exception: " + e.getMessage());
+
+            if (!passwordPassF.getText().isEmpty()) {
+                if (validatePassword()) {
+                    try {
+                        byte[] salt = PasswordManager.generateSalt();
+                        String password = PasswordManager.encode(passwordPassF.getText(), salt);
+                        boolean result = server.updateUserPassword(currentUserDetails.getPhoneNumber(), salt, password);
+                        System.out.println("Update password result: " + result);
+                    } catch (RemoteException e) {
+                        System.err.println("Remote Exception: " + e.getMessage());
+                    }
+                } else {
+                    return;
                 }
             }
 
             if (isPictureChanged) {
                 try {
-                    server.updateUserPicture(currentUserDetails.getPhoneNumber(), newPicture);
+                    boolean result = server.updateUserPicture(currentUserDetails.getPhoneNumber(), newPicture);
+                    System.out.println("Update profile picture result: " + result);
                 } catch (RemoteException e) {
                     System.err.println("Remote Exception: " + e.getMessage());
                 }
             }
-
-            ViewLoader.getInstance().switchFromEditeProfileToProfile();
         }
+
+        StageManager.getInstance().switchToHome();
     }
 
     private boolean isUserInfoChanged() {
-        return nameTxtF.getText().equals(currentUserDetails.getName()) &&
+        return !(nameTxtF.getText().equals(currentUserDetails.getName()) &&
                 emailTxtF.getText().equals(currentUserDetails.getEmail()) &&
-                genderComboBox.getValue().equals(currentUserDetails.getGender()) &&
+                genderComboBox.getValue().equals(currentUserDetails.getGender().toString()) &&
                 birthDatePicker.getValue().equals(currentUserDetails.getBirthDate()) &&
-                bioTextArea.getText().equals(currentUserDetails.getBio()) &&
-                statusComboBox.getValue().equals(currentUserDetails.getStatus());
+                (bioTextArea.getText().equals("bio") || bioTextArea.getText().equals(currentUserDetails.getBio())) &&
+                statusComboBox.getValue().equals(currentUserDetails.getStatus().toString()) &&
+                modeComboBox.getValue().equals(currentUserDetails.getMode().toString()));
     }
 
     private UpdateUserInfoRequest createUpdateUserInfoRequest() {
         UpdateUserInfoRequest request = new UpdateUserInfoRequest();
+
+        request.setPhoneNumber(currentUserDetails.getPhoneNumber());
         request.setName(nameTxtF.getText());
         request.setEmail(emailTxtF.getText());
-        request.setGender(genderComboBox.getValue());
+        request.setGender("Male".equals(genderComboBox.getValue()) ? Gender.MALE : Gender.FEMALE);
         request.setBirthDate(birthDatePicker.getValue());
         request.setBio(bioTextArea.getText());
-        request.setStatus(statusComboBox.getValue());
+
+        String statusString = statusComboBox.getValue();
+        request.setStatus("Available".equals(statusString) ? Status.AVAILABLE :
+                "Busy".equals(statusString) ? Status.BUSY : Status.AWAY);
+
+        request.setMode("Online".equals(modeComboBox.getValue()) ? Mode.ONLINE : Mode.OFFLINE);
+
         return request;
     }
 

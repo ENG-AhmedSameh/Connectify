@@ -58,6 +58,10 @@
     -fx-cursor: hand;
 }
 
+.circle:hover {
+    -fx-cursor: hand;
+}
+
 
 
 
