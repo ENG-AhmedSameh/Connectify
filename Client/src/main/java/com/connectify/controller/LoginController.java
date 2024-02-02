@@ -82,7 +82,7 @@ public class LoginController implements Initializable {
         try {
             LoginResponse response = server.login(request);
             if (response.getStatus()) {
-                ConnectedUser connectedUser = new CurrentUser(countryCodeLabel.getText()+phoneNumberTextField.getText());
+                ConnectedUser connectedUser = new CurrentUser(phoneNumberTextField.getText());
                 server.registerConnectedUser(connectedUser);
                 Client.updateUserCredentials(phoneNumberTextField.getText(),countryCodeLabel.getText() ,countryComboBox.getValue(),"true");
                 Client.setConnectedUser(connectedUser);

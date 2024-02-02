@@ -4,6 +4,7 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.SignUpRequest;
+import com.connectify.model.enums.Gender;
 import com.connectify.util.PasswordManager;
 import com.connectify.utils.CountryList;
 import com.connectify.utils.CurrentUser;
@@ -17,7 +18,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
 
 import java.net.URL;
 import java.rmi.NotBoundException;
@@ -151,11 +151,11 @@ public class SignUpController implements Initializable {
                 phoneNumTxtF.setStyle("-fx-border-color: red;");
             }
             else {
-                ConnectedUser connectedUser = new CurrentUser(countryCodeLbl.getText()+phoneNumTxtF.getText());
+                ConnectedUser connectedUser = new CurrentUser(phoneNumTxtF.getText());
                 server.registerConnectedUser(connectedUser);
                 Client.setConnectedUser(connectedUser);
                 clearFields();
-                StageManager.getInstance().switchToHome();
+                StageManager.getInstance().switchToSecondSignUp();
             }
         }
     }

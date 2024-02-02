@@ -3,6 +3,7 @@ package com.connectify.controller;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.ImageBioChangeRequest;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.ChatCardsInfoDTO;
@@ -56,5 +57,10 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     public List<ChatCardsInfoDTO> getUserChatsCardsInfo(String userId) throws RemoteException{
         var service = new UserChatsService();
         return service.getAllChatsInfo(userId);
+    }
+
+    @Override
+    public void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException {
+        userService.changeProfileAndBio(request);
     }
 }

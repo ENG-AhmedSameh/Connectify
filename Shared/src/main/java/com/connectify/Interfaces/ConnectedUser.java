@@ -1,5 +1,6 @@
 package com.connectify.Interfaces;
 
+import java.io.File;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;

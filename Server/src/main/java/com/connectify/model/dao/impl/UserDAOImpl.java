@@ -7,6 +7,7 @@ import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 import com.connectify.utils.DBConnection;
 
+import java.io.*;
 import java.sql.*;
 
 public class UserDAOImpl implements UserDAO {
@@ -135,6 +136,42 @@ public class UserDAOImpl implements UserDAO {
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, status.toString());
+            preparedStatement.setString(2, phoneNumber);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateImage(String phoneNumber, File image) {
+        String query = "UPDATE users SET picture = ? WHERE phone_number = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            byte[] imageData = new byte[(int) image.length()];
+            InputStream inputStream = new FileInputStream(image);
+            inputStream.read(imageData);
+            preparedStatement.setBytes(1, imageData);
+            preparedStatement.setString(2, phoneNumber);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.err.println("FileNoteFoundException: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("IOException: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean updateBio(String phoneNumber, String bio) {
+        String query = "UPDATE users SET bio = ? WHERE phone_number = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, bio);
             preparedStatement.setString(2, phoneNumber);
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0;

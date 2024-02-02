@@ -46,7 +46,7 @@ public class Client extends Application {
         primaryStage = stage;
         if(userCredentials.getProperty("remember").equals("true")){
             connectedUser = new CurrentUser(userCredentials.getProperty("countryCode")+userCredentials.getProperty("phoneNumber"));
-            Client.setConnectedUser(connectedUser);
+            //Client.setConnectedUser(connectedUser);
             StageManager.getInstance().switchToHome();
             try {
                 ServerAPI server = (ServerAPI) registry.lookup("server");

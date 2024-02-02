@@ -25,4 +25,6 @@ public interface ServerAPI extends Remote{
     void unregisterConnectedUser(ConnectedUser user) throws RemoteException;
 
     List<ChatCardsInfoDTO> getUserChatsCardsInfo(String userId) throws RemoteException;
+    void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException;
+
 }

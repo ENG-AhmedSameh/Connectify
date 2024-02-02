@@ -2,6 +2,7 @@ package com.connectify.utils;
 
 import com.connectify.Interfaces.ConnectedUser;
 
+import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -14,12 +15,16 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         super();
         this.phoneNumber = phoneNumber;
     }
+
+    public CurrentUser(String phoneNumber, File profileImage, String bio) throws RemoteException {
+        super();
+        this.phoneNumber = phoneNumber;
+    }
     @Override
     public void receiveAnnouncement(String announcement) throws RemoteException {
 
     }
 
-    @Override
     public String getPhoneNumber() throws RemoteException {
         return phoneNumber;
     }

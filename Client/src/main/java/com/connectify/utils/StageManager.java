@@ -53,6 +53,13 @@ public class StageManager {
         stage.setScene(scene);
     }
 
+    public void switchToSecondSignUp(){
+        if(sceneMap.get("secondSignUp") == null)
+            sceneMap.put("secondSignUp", createSecondSignUpScene());
+        Scene scene = sceneMap.get("secondSignUp");
+        stage.setScene(scene);
+    }
+
 
     public void switchToHome(){
         if(sceneMap.get("home") == null)
@@ -84,6 +91,17 @@ public class StageManager {
         HBox titleBar = TitleBarLoader.loadTitleBarHBox();
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
+        return new Scene(mainPane);
+    }
+
+    private Scene createSecondSignUpScene(){
+        BorderPane mainPane = new BorderPane();
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        AnchorPane secondSignUpPane = ImageBioLoader.loadImageBioAnchorPane();
+        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
+        mainPane.setTop(titleBar);
+        mainPane.setCenter(secondSignUpPane);
+        mainPane.setLeft(logoPane);
         return new Scene(mainPane);
     }
 
