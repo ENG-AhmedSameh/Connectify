@@ -4,7 +4,6 @@ import com.connectify.model.enums.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class SignUpRequest implements Serializable {
     private String phoneNumber;
@@ -14,6 +13,8 @@ public class SignUpRequest implements Serializable {
     private Gender gender;
     private String country;
     private LocalDate birthDate;
+
+    private byte[] salt;
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -69,5 +70,13 @@ public class SignUpRequest implements Serializable {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 }

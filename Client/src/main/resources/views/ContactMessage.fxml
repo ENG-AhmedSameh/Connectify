@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.web.WebView?>
-
 <HBox fx:id="contactMessageBox" prefHeight="85.0" prefWidth="392.0" styleClass="contact-message" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Circle fx:id="contactImage" fill="#4c5660" radius="32.0" stroke="BLACK" strokeType="INSIDE">

@@ -1,18 +1,16 @@
 package com.connectify.controller;
 
+import com.connectify.Client;
+import com.connectify.Interfaces.ServerAPI;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 
 public class titleBarController{
@@ -35,12 +33,17 @@ public class titleBarController{
 
     @FXML
     void closeButtonHandler(MouseEvent event) {
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?", ButtonType.YES, ButtonType.NO);
-//        alert.setHeaderText("Exit ?");
-//        alert.showAndWait();
-//        if (alert.getResult() == ButtonType.YES) {
-            System.exit(0);
-//        }
+        if(Client.getConnectedUser() != null){
+            try {
+                ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
+                server.unregisterConnectedUser(Client.getConnectedUser());
+            } catch (RemoteException e) {
+                System.err.println("Remote Exception: " + e.getMessage());
+            } catch (NotBoundException e) {
+                System.err.println("NotBoundException: " + e.getMessage());
+            }
+        }
+        System.exit(0);
     }
 
     @FXML

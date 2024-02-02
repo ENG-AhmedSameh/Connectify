@@ -1,7 +1,7 @@
 package com.connectify.loaders;
 
-import com.connectify.controller.fxmlcontrollers.AnnouncementController;
 import com.connectify.controller.fxmlcontrollers.AdminController;
+import com.connectify.controller.fxmlcontrollers.AnnouncementController;
 import com.connectify.controller.fxmlcontrollers.MainController;
 import com.connectify.controller.fxmlcontrollers.StatisticsController;
 import javafx.fxml.FXMLLoader;

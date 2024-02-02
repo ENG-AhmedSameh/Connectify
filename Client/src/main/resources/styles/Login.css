@@ -1,0 +1,27 @@
+*{
+    -fx-main-color:  #17212b;
+    -fx-second-accent-color:  #283f55;
+    -fx-prompt-color:  #859aa1;
+    -fx-accent-color:  #2f6ea5;
+}
+
+.anchor-pane{
+    -fx-background-color: -fx-main-color;
+}
+
+.combo-box{
+    -fx-background-color: -fx-second-accent-color;
+}
+
+.combo-box > .list-cell{
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-field{
+    -fx-background-color: -fx-second-accent-color;
+    -fx-prompt-text-fill: -fx-prompt-color;
+    -fx-background-radius: 5px;
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 0 0 2 0;
+    -fx-text-fill: white;
+}

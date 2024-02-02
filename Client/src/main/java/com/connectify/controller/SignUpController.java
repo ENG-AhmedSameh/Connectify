@@ -18,12 +18,20 @@ import javafx.scene.layout.AnchorPane;
 
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import com.connectify.model.enums.Gender;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class SignUpController implements Initializable {
 
@@ -56,7 +64,7 @@ public class SignUpController implements Initializable {
         comboBoxOriginalStyle = countryComboBox.getStyle();
         datePickerOriginalStyle = birthDatePicker.getStyle();
         try {
-            server = (ServerAPI) Client.registry.lookup("server");
+            server = (ServerAPI) Client.getRegistry().lookup("server");
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         } catch (NotBoundException e) {
@@ -133,28 +141,28 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    private void signUpBtnHandler(ActionEvent event){
-//        validateFields();
-//        if(validInformation){
-//            SignUpRequest request = createSignUpRequest();
-//            boolean isSuccessFul = false;
-//            try {
-//                isSuccessFul = server.signUp(request);
-//            } catch (RemoteException e) {
-//                System.err.println("Remote Exception: " + e.getMessage());
-//            }
-//            if (!isSuccessFul) {
-//                phoneNumTxtF.setTooltip(hintText("This phone number is already registered"));
-//                phoneNumTxtF.setStyle("-fx-border-color: red;");
-//            }
-//            else {
-//                ViewLoader viewLoader = ViewLoader.getInstance();
-//                viewLoader.switchFromSignUpToHomeScreen(phoneNumTxtF.getText());
-//            }
-//        }
-
-        ViewLoader viewLoader = ViewLoader.getInstance();
-        viewLoader.switchToHomeScreen("+2001121184437");
+    private void signUpBtnHandler(ActionEvent event) throws RemoteException {
+        validateFields();
+        if(validInformation){
+            SignUpRequest request = createSignUpRequest();
+            boolean isSuccessFul = false;
+            try {
+                isSuccessFul = server.signUp(request);
+            } catch (RemoteException e) {
+                System.err.println("Remote Exception: " + e.getMessage());
+            }
+            if (!isSuccessFul) {
+                phoneNumTxtF.setTooltip(hintText("This phone number is already registered"));
+                phoneNumTxtF.setStyle("-fx-border-color: red;");
+            }
+            else {
+                ConnectedUser connectedUser = new CurrentUser(phoneNumTxtF.getText());
+                server.registerConnectedUser(connectedUser);
+                Client.setConnectedUser(connectedUser);
+                clearFields();
+                StageManager.getInstance().switchToHome();
+            }
+        }
     }
 
     private void validateFields() {
@@ -228,8 +236,7 @@ public class SignUpController implements Initializable {
 
 
     public void onLoginLabelClickedHandler(MouseEvent mouseEvent) {
-        ViewLoader viewLoader = ViewLoader.getInstance();
-        viewLoader.switchFromSignUpToLogin();
+        StageManager.getInstance().switchToLogin();
     }
 
     private SignUpRequest createSignUpRequest(){
@@ -237,12 +244,27 @@ public class SignUpController implements Initializable {
         request.setPhoneNumber(countryCodeLbl.getText() + phoneNumTxtF.getText());
         request.setName(nameTxtF.getText());
         request.setEmail(emailTxtF.getText());
-        request.setPassword(PasswordManager.encode(passwordPassF.getText()));
+        request.setSalt(PasswordManager.generateSalt());
+        request.setPassword(PasswordManager.encode(passwordPassF.getText(), request.getSalt()));
         request.setGender(genderComboBox.getValue());
         request.setCountry(countryComboBox.getValue());
         request.setBirthDate(birthDatePicker.getValue());
         return request;
     }
 
+
+    private void clearFields(){
+        nameTxtF.clear();
+        emailTxtF.clear();
+        phoneNumTxtF.clear();
+        passwordPassF.clear();
+        confirmPasswordPassF.clear();
+        countryCodeLbl.setText(countryList.getCountriesMap().get(countryComboBox.getValue()));
+        nameTxtF.setStyle(txtFieldsOriginalStyle);
+        phoneNumTxtF.setStyle(txtFieldsOriginalStyle);
+        countryComboBox.setStyle(comboBoxOriginalStyle);
+        birthDatePicker.setStyle(datePickerOriginalStyle);
+        validInformation = true;
+    }
 
 }

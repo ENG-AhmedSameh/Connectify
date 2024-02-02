@@ -8,4 +8,5 @@ module com.connectify.shared {
     exports com.connectify.dto;
     exports com.connectify.Interfaces;
     exports com.connectify.mapper;
+    exports com.connectify.util;
 }
