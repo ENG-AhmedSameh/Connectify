@@ -56,9 +56,9 @@ public class UserService {
         return userDAO.update(user);
     }
 
-    public boolean updatePassword(String phoneNumber, String password) {
+    public boolean updatePassword(String phoneNumber, byte[] salt, String password) {
         UserDAO userDAO = new UserDAOImpl();
-        return userDAO.updatePassword(phoneNumber, password);
+        return userDAO.updatePassword(phoneNumber, salt, password);
     }
 
     public boolean updatePicture(String phoneNumber, byte[] picture) {

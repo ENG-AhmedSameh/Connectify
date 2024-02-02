@@ -57,9 +57,9 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
-    public boolean updateUserPassword(String phoneNumber, String password) {
+    public boolean updateUserPassword(String phoneNumber, byte[] salt, String password) {
         var userService = new UserService();
-        return userService.updatePassword(password, password);
+        return userService.updatePassword(password, salt, password);
     }
 
     @Override

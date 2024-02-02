@@ -7,6 +7,8 @@ import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Status;
+import com.connectify.util.PasswordManager;
+import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,10 +63,7 @@ public class ProfileEditorController implements Initializable {
 
     Boolean validInformation = true;
     private ServerAPI server;
-
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
-
-    private String testPhoneNumber = "+201143414035";
     private UserProfileResponse currentUserDetails;
     private boolean isPictureChanged;
     byte[] newPicture;
@@ -76,7 +75,7 @@ public class ProfileEditorController implements Initializable {
 
         try {
             server = (ServerAPI) Client.getRegistry().lookup("server");
-            currentUserDetails = server.getUserProfile(testPhoneNumber);
+            currentUserDetails = server.getUserProfile("+20" +Client.getConnectedUser().getPhoneNumber());
             populateUserDetails();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
@@ -86,15 +85,24 @@ public class ProfileEditorController implements Initializable {
     }
 
     private void populateUserDetails() {
-        Image profileImage = new Image(new ByteArrayInputStream(currentUserDetails.getPicture()));
-        userImg.setFill(new ImagePattern(profileImage));
-        bioTextArea.setText(currentUserDetails.getBio());
+        setImage();
+        bioTextArea.setText(currentUserDetails.getBio() == null ? "bio" : currentUserDetails.getBio());
         phoneNumTxtF.setText(currentUserDetails.getPhoneNumber());
         nameTxtF.setText(currentUserDetails.getName());
         emailTxtF.setText(currentUserDetails.getEmail());
         birthDatePicker.setValue(currentUserDetails.getBirthDate());
         genderComboBox.setValue(currentUserDetails.getGender());
         statusComboBox.setValue(currentUserDetails.getStatus());
+    }
+
+    private void setImage() {
+        Image image = null;
+        if (currentUserDetails.getPicture() == null) {
+            image = new Image(String.valueOf(ProfileController.class.getResource("/images/profile.png")));
+        } else {
+            image = new Image(new ByteArrayInputStream(currentUserDetails.getPicture()));
+        }
+        userImg.setFill(new ImagePattern(image));
     }
 
     private void initializeComboBoxes() {
@@ -104,7 +112,7 @@ public class ProfileEditorController implements Initializable {
 
     @FXML
     void handleCancelAction(ActionEvent event) {
-        ViewLoader.getInstance().switchFromEditeProfileToProfile();
+        StageManager.getInstance().switchToHome();
     }
 
     private void validateFields() {
@@ -182,7 +190,9 @@ public class ProfileEditorController implements Initializable {
 
             if (passwordPassF.getText() != null && validatePassword()) {
                 try {
-                    server.updateUserPassword(currentUserDetails.getPhoneNumber(), passwordPassF.getText());
+                    byte[] salt = PasswordManager.generateSalt();
+                    String password = PasswordManager.encode(passwordPassF.getText(), salt);
+                    server.updateUserPassword(currentUserDetails.getPhoneNumber(), salt, password);
                 } catch (RemoteException e) {
                     System.err.println("Remote Exception: " + e.getMessage());
                 }

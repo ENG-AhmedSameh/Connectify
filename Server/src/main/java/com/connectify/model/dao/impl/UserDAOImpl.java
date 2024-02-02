@@ -157,12 +157,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean updatePassword(String phoneNumber, String password) {
-        String query = "UPDATE users SET password = ? WHERE phone_number = ?";
+    public boolean updatePassword(String phoneNumber, byte[] salt, String password) {
+        String query = "UPDATE users SET salt = ?, password = ? WHERE phone_number = ?";
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, password);
-            preparedStatement.setString(8, phoneNumber);
+            preparedStatement.setBytes(1, salt);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, phoneNumber);
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException e) {

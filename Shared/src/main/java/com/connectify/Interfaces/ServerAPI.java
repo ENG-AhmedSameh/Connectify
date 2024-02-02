@@ -15,7 +15,7 @@ public interface ServerAPI extends Remote{
     boolean signUp(SignUpRequest signUpRequest) throws RemoteException;
     boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException;
     boolean updateUserPicture(String phoneNumber, byte[] picture) throws RemoteException;
-    boolean updateUserPassword(String phoneNumber, String password) throws RemoteException;
+    boolean updateUserPassword(String phoneNumber,byte[] salt, String password) throws RemoteException;
     UserProfileResponse getUserProfile(String phoneNumber) throws RemoteException;
 
     LoginResponse login(LoginRequest loginRequest) throws RemoteException;
