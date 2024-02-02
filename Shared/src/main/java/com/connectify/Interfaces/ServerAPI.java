@@ -1,11 +1,7 @@
 package com.connectify.Interfaces;
 
 
-import com.connectify.dto.LoginRequest;
-import com.connectify.dto.LoginResponse;
-import com.connectify.dto.ChatCardsInfoDTO;
-import com.connectify.dto.ChatMemberDTO;
-import com.connectify.dto.SignUpRequest;
+import com.connectify.dto.*;
 import com.connectify.model.entities.ChatMember;
 
 import java.rmi.Remote;

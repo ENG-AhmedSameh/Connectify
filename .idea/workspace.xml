@@ -4,31 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="add ConnectedUser">
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="merged with stage manager .">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatCardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/AllChatsPaneLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/AllChatsPaneLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ViewLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/StageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/StageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/user.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/user.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/HomeScreenOptionsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/HomeScreenOptionsPane.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/SignUpController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/loaders/ViewLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/loaders/ViewLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/views/HomeScreenOptionsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/views/HomeScreenOptionsPane.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/ChatMembersDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/ChatMembersDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/util/PasswordManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/util/PasswordManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,10 +78,11 @@
     "Application.Server.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "LoadUser'sAllChats",
     "jdk.selected.JAVA_MODULE": "21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Ahmed Sameh/Downloads/ChatUP-main",
+    "last_opened_file_path": "F:/ITI Projects/Connectify",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -104,7 +92,8 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -230,6 +219,7 @@
       <workItem from="1706726232413" duration="5328000" />
       <workItem from="1706733733565" duration="305000" />
       <workItem from="1706769358872" duration="8932000" />
+      <workItem from="1706864333925" duration="1496000" />
     </task>
     <task id="LOCAL-00001" summary="try merging DB layer">
       <option name="closed" value="true" />
@@ -271,7 +261,23 @@
       <option name="project" value="LOCAL" />
       <updated>1706686636096</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="merged with stage manager">
+      <option name="closed" value="true" />
+      <created>1706863911204</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706863911204</updated>
+    </task>
+    <task id="LOCAL-00007" summary="merged with stage manager .">
+      <option name="closed" value="true" />
+      <created>1706864037273</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706864037273</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,7 +299,9 @@
     <MESSAGE value="add phone number check" />
     <MESSAGE value="preparing for logout feature" />
     <MESSAGE value="add ConnectedUser" />
-    <option name="LAST_COMMIT_MESSAGE" value="add ConnectedUser" />
+    <MESSAGE value="merged with stage manager" />
+    <MESSAGE value="merged with stage manager ." />
+    <option name="LAST_COMMIT_MESSAGE" value="merged with stage manager ." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -304,9 +312,9 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java</url>
-          <line>84</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

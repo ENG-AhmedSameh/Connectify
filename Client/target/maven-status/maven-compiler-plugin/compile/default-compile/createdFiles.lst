@@ -5,6 +5,7 @@ com\connectify\controller\LoginController.class
 com\connectify\controller\ProfileController$1.class
 com\connectify\loaders\ContactMessageLoader.class
 com\connectify\loaders\SignUpLoader.class
+com\connectify\Client.class
 com\connectify\loaders\AllChatsPaneLoader.class
 com\connectify\controller\SignUpController$1.class
 com\connectify\utils\CurrentUser.class
@@ -16,10 +17,15 @@ com\connectify\utils\CountryList.class
 com\connectify\controller\EditeProfileController.class
 com\connectify\utils\StageManager.class
 com\connectify\loaders\LoginLoader.class
+com\connectify\controller\AllContactsPaneController.class
 com\connectify\loaders\EditeProfileLoader.class
+com\connectify\controller\ImageBioController.class
 com\connectify\controller\EditeProfileController$1.class
 com\connectify\loaders\TitleBarLoader.class
+com\connectify\controller\AllChatsPaneController.class
 module-info.class
+com\connectify\loaders\ImageBioLoader.class
+com\connectify\loaders\ViewLoader.class
 com\connectify\controller\titleBarController.class
 com\connectify\controller\ChatController.class
 com\connectify\controller\SignUpController.class

@@ -62,6 +62,11 @@ public class StageManager {
 
 
     public void switchToHome(){
+        try {
+            System.out.println(Client.getConnectedUser().getPhoneNumber());
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
         if(sceneMap.get("home") == null)
             sceneMap.put("home", createHomeScene());
         Scene scene = sceneMap.get("home");

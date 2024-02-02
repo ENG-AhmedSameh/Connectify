@@ -72,6 +72,7 @@ public class AllChatsPaneController implements Initializable {
     }
     private void loadAllUserChats(){
         try {
+            allChatsVBox.getChildren().removeAll();
             List<ChatCardsInfoDTO> chatCardsInfoDTOS = server.getUserChatsCardsInfo(Client.getConnectedUser().getPhoneNumber());
             for(ChatCardsInfoDTO chat:chatCardsInfoDTOS)
                 addChatOnChatPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
