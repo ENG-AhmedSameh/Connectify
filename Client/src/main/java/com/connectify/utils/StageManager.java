@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
