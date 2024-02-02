@@ -54,6 +54,10 @@
     -fx-text-fill:  #FFFFFF;
 }
 
+.button:hover {
+    -fx-cursor: hand;
+}
+
 
 
 
