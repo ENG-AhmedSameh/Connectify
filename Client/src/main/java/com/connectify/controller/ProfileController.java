@@ -5,6 +5,7 @@ import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
+import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ public class ProfileController implements Initializable {
     @FXML private TextField emailTxtF;
     @FXML private ComboBox<Gender> genderComboBox;
     @FXML private ComboBox<Status> statusComboBox;
+    @FXML private ComboBox<Mode> modeComboBox;
     @FXML private TextField nameTxtF;
     @FXML private TextField phoneNumTxtF;
     @FXML private AnchorPane profilePane;
@@ -62,10 +64,12 @@ public class ProfileController implements Initializable {
         birthDatePicker.setValue(currentUserDetails.getBirthDate());
         genderComboBox.setValue(currentUserDetails.getGender());
         statusComboBox.setValue(currentUserDetails.getStatus());
+        modeComboBox.setValue(currentUserDetails.getMode());
 
         birthDatePicker.setDisable(true);
         genderComboBox.setDisable(true);
         statusComboBox.setDisable(true);
+        modeComboBox.setDisable(true);
     }
 
     private void setImage() {

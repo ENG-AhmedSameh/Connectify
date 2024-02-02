@@ -241,15 +241,15 @@ public class ProfileEditorController implements Initializable {
         request.setPhoneNumber(currentUserDetails.getPhoneNumber());
         request.setName(nameTxtF.getText());
         request.setEmail(emailTxtF.getText());
-        request.setGender("Male".equals(genderComboBox.getValue()) ? Gender.MALE : Gender.FEMALE);
+        request.setGender("Male".equalsIgnoreCase(genderComboBox.getValue()) ? Gender.MALE : Gender.FEMALE);
         request.setBirthDate(birthDatePicker.getValue());
         request.setBio(bioTextArea.getText());
 
         String statusString = statusComboBox.getValue();
-        request.setStatus("Available".equals(statusString) ? Status.AVAILABLE :
-                "Busy".equals(statusString) ? Status.BUSY : Status.AWAY);
+        request.setStatus("Available".equalsIgnoreCase(statusString) ? Status.AVAILABLE :
+                "Busy".equalsIgnoreCase(statusString) ? Status.BUSY : Status.AWAY);
 
-        request.setMode("Online".equals(modeComboBox.getValue()) ? Mode.ONLINE : Mode.OFFLINE);
+        request.setMode("Online".equalsIgnoreCase(modeComboBox.getValue()) ? Mode.ONLINE : Mode.OFFLINE);
 
         return request;
     }
