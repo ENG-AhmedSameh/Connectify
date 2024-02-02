@@ -44,10 +44,20 @@ public class ChatController implements Initializable {
     private Circle statusCircle;
     private Image picture;
     private String name;
+    private int chatId;
 
-    public ChatController(String name,Image pic) {
+    public ChatController(int chatId,String name,Image pic) {
         picture = pic;
         this.name = name;
+        this.chatId = chatId;
+    }
+
+    public int getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(int chatId) {
+        this.chatId = chatId;
     }
 
     public Image getPicture() {
