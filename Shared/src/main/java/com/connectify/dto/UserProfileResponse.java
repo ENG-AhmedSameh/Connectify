@@ -1,6 +1,7 @@
 package com.connectify.dto;
 
 import com.connectify.model.enums.Gender;
+import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 
 import java.io.Serializable;
@@ -17,6 +18,15 @@ public class UserProfileResponse implements Serializable {
     private LocalDate birthDate;
     private String bio;
     private Status status;
+    private Mode mode;
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;

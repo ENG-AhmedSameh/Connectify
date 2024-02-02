@@ -8,12 +8,31 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class UpdateUserInfoRequest implements Serializable {
+
+    private String phoneNumber;
     private String name;
     private String email;
     private Gender gender;
     private LocalDate birthDate;
     private String bio;
     private Status status;
+    private Mode mode;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
 
     public String getName() {
         return name;
