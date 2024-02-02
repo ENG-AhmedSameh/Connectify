@@ -147,7 +147,7 @@ public class UserDAOImpl implements UserDAO {
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setBytes(1, picture);
-            preparedStatement.setString(8, phoneNumber);
+            preparedStatement.setString(2, phoneNumber);
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException e) {
