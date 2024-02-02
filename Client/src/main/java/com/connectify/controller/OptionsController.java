@@ -2,6 +2,7 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,7 +80,7 @@ public class OptionsController {
 
     @FXML
     void userProfileHandler(ActionEvent event) {
-
+        StageManager.getInstance().switchToProfile();
     }
 
 }

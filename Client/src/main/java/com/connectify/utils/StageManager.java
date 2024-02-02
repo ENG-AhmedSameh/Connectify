@@ -2,6 +2,7 @@ package com.connectify.utils;
 
 import com.connectify.Client;
 import com.connectify.loaders.*;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -60,6 +61,13 @@ public class StageManager {
         stage.setScene(scene);
     }
 
+    public void switchToProfile(){
+        if(sceneMap.get("profile") == null)
+            sceneMap.put("profile", createProfileScene());
+        Scene scene = sceneMap.get("profile");
+        stage.setScene(scene);
+    }
+
     private Scene createLoginScene(){
         BorderPane mainPane = new BorderPane();
         GridPane centerPane = new GridPane();
@@ -95,6 +103,21 @@ public class StageManager {
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setLeft(chatsPane);
         centerPane.setCenter(logoPane);
+        mainPane.setLeft(optionsPane);
+        mainPane.setTop(titleBar);
+        mainPane.setCenter(centerPane);
+        return new Scene(mainPane);
+    }
+
+    private Scene createProfileScene(){
+        BorderPane mainPane = new BorderPane();
+        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
+        BorderPane centerPane = new BorderPane();
+        AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
+        AnchorPane chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
+        AnchorPane profilePane = ProfileLoader.loadProfileAnchorPane();
+        centerPane.setLeft(chatsPane);
+        centerPane.setCenter(profilePane);
         mainPane.setLeft(optionsPane);
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
