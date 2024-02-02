@@ -3,9 +3,10 @@ package com.connectify.dto;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Status;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class UserProfileResponse {
+public class UserProfileResponse implements Serializable {
 
     private String phoneNumber;
     private String name;
