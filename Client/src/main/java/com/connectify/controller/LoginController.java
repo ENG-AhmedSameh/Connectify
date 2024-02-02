@@ -2,11 +2,13 @@ package com.connectify.controller;
 
 
 import com.connectify.Client;
+import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
-import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.CountryList;
+import com.connectify.utils.CurrentUser;
+import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
@@ -38,18 +41,28 @@ public class LoginController implements Initializable {
 
     private ServerAPI server;
 
+    private Properties userCredentials;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryComboBox.getItems().addAll(new TreeSet<>(countryList.getCountriesMap().keySet()));
+        try {
+            server = (ServerAPI) Client.getRegistry().lookup("server");
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
+        } catch (NotBoundException e) {
+            System.err.println("NotBoundException: " + e.getMessage());
+        }
+        userCredentials = Client.getUserCredentials();
+        phoneNumberTextField.setText(userCredentials.getProperty("phoneNumber"));
+        countryComboBox.getSelectionModel().select(userCredentials.getProperty("country"));
+        countryCodeLabel.setText(countryList.getCountriesMap().get(countryComboBox.getValue()));
     }
-
-    @Deprecated
     public void SignupButtonOnAction(ActionEvent e) {
-        ViewLoader loader = ViewLoader.getInstance();
-        loader.switchFromLoginToSignUpScreen();
+        StageManager.getInstance().switchToSignUp();
     }
-    @Deprecated
     public void LoginButtonOnAction(ActionEvent e) {
+        errorLabel.setVisible(false);
         if(countryComboBox.getValue()==null){
             countryComboBox.setTooltip(new Tooltip("Please select your country"));
             countryComboBox.setStyle("-fx-border-color: red;");
@@ -67,10 +80,14 @@ public class LoginController implements Initializable {
         }
         LoginRequest request = createLoginRequest();
         try {
-            server = (ServerAPI) Client.registry.lookup("server");
             LoginResponse response = server.login(request);
             if (response.getStatus()) {
-                ViewLoader.getInstance().switchToHomeScreen();
+                ConnectedUser connectedUser = new CurrentUser(phoneNumberTextField.getText());
+                server.registerConnectedUser(connectedUser);
+                Client.updateUserCredentials(phoneNumberTextField.getText(), countryComboBox.getValue(),"true");
+                Client.setConnectedUser(connectedUser);
+                passwordTextField.clear();
+                StageManager.getInstance().switchToHome();
             }
             else {
                 errorLabel.setText(response.getMessage());
@@ -78,8 +95,6 @@ public class LoginController implements Initializable {
             }
         } catch (RemoteException ex) {
             System.err.println("Remote Exception: " + ex.getMessage());
-        } catch (NotBoundException ex) {
-            System.err.println("NotBoundException: " + ex.getMessage());
         }
     }
 
