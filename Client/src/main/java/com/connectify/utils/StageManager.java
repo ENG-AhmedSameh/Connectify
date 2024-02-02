@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class StageManager {
     private StageManager(){
         stage = Client.getPrimaryStage();
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setMinWidth(750);
+        stage.setMinWidth(850);
         stage.setMinHeight(500);
         sceneMap = new HashMap<>();
     }
@@ -91,7 +92,8 @@ public class StageManager {
         HBox titleBar = TitleBarLoader.loadTitleBarHBox();
         BorderPane centerPane = new BorderPane();
         AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        AnchorPane chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
+        AnchorPane chatsPane = null;
+        chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setLeft(chatsPane);
         centerPane.setCenter(logoPane);

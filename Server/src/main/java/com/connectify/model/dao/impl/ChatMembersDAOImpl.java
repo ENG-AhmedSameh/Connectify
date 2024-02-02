@@ -62,11 +62,12 @@ public class ChatMembersDAOImpl implements ChatMembersDAO {
                 " WHERE cm.chat_id IN (SELECT chat_id FROM chat_members WHERE member = ? ) AND cm.member != ? " +
                 "    AND cm.chat_id IN (SELECT DISTINCT chat_id FROM chat_members)";
         try (Connection connection = dbConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)){;
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ;
             preparedStatement.setString(1, userId);
             preparedStatement.setString(2, userId);
             preparedStatement.setString(3, userId);
-            try(ResultSet rs = preparedStatement.executeQuery()){
+            try (ResultSet rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
                     ChatCardsInfoDTO chatCardsInfoDTO = new ChatCardsInfoDTO(
                             rs.getInt("chat_Id"),

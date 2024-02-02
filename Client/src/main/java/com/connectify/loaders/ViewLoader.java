@@ -1,5 +1,6 @@
 package com.connectify.loaders;
 
+import javafx.scene.Scene;
 import javafx.scene.layout.*;
 
 public class ViewLoader {
@@ -33,7 +34,7 @@ public class ViewLoader {
         if(homeScreenOptionsPane==null)
             homeScreenOptionsPane=HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
         if(allChatsAnchorPane==null)
-            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane(userID);
+            allChatsAnchorPane=AllChatsPaneLoader.loadAllChatsAnchorPane();
         mainBorderPane.setLeft(homeScreenOptionsPane);
 
         chatsHomeScreenCenterPane.setLeft(allChatsAnchorPane);
@@ -77,7 +78,14 @@ public class ViewLoader {
     }
 
     public void switchToChat(BorderPane chatPane){
+
         chatsHomeScreenCenterPane.setCenter(chatPane);
+    }
+    public void switchToChat(BorderPane chatPane, Scene currentScene){
+
+        BorderPane homePane= (BorderPane) currentScene.getRoot();
+        BorderPane chatsPane =(BorderPane)homePane.getCenter();
+        chatsPane.setCenter(chatPane);
     }
 
 }

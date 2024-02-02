@@ -63,9 +63,6 @@ public class ChatCardController implements Initializable {
     }
 
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeEventHandlers();
@@ -109,7 +106,7 @@ public class ChatCardController implements Initializable {
     }
     public Image convertToJavaFXImage(byte[] bytes, double width, double height) {
         if(bytes == null){
-            String imagePath = "F:\\ITI Projects\\Connectify\\Client\\src\\main\\resources\\images\\profile.png";
+            String imagePath = "target/classes/images/profile.png";
             File imageFile = new File(imagePath);
             pictureImage = new Image(imageFile.toURI().toString());
             return pictureImage;
@@ -122,13 +119,6 @@ public class ChatCardController implements Initializable {
     private void displayChat(){
         BorderPane chatPane = ChatPaneFactory.getChatPane(chatId,name,pictureImage);
         ViewLoader loader = ViewLoader.getInstance();
-        loader.switchToChat(chatPane);
+        loader.switchToChat(chatPane,chatCardPane.getScene());
     }
-
-//    @FXML
-//    private void onMouseEnteredHandler(ActionEvent event){
-//        messageHBox.setStyle("-fx-background-color: lightgreen;");
-//    }
-
-
 }

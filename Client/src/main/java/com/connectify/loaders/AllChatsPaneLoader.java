@@ -7,11 +7,10 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class AllChatsPaneLoader {
-    public static AnchorPane loadAllChatsAnchorPane(String userID){
+    public static AnchorPane loadAllChatsAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(AllChatsPaneLoader.class.getResource("/views/AllChatsPane.fxml"));
-        AllChatsPaneController controller = new AllChatsPaneController(userID);
-        fxmlLoader.setController(null);
+        AllChatsPaneController controller = new AllChatsPaneController();
         fxmlLoader.setController(controller);
         try {
             AnchorPane pane = fxmlLoader.load();

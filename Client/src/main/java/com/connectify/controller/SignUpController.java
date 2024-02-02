@@ -1,11 +1,13 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
+import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.SignUpRequest;
-import com.connectify.loaders.ViewLoader;
+import com.connectify.util.PasswordManager;
 import com.connectify.utils.CountryList;
-import com.connectify.utils.PasswordManager;
+import com.connectify.utils.CurrentUser;
+import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,20 +20,13 @@ import javafx.scene.layout.AnchorPane;
 
 
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import com.connectify.model.enums.Gender;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 
 public class SignUpController implements Initializable {
 
@@ -156,7 +151,7 @@ public class SignUpController implements Initializable {
                 phoneNumTxtF.setStyle("-fx-border-color: red;");
             }
             else {
-                ConnectedUser connectedUser = new CurrentUser(phoneNumTxtF.getText());
+                ConnectedUser connectedUser = new CurrentUser(countryCodeLbl.getText()+phoneNumTxtF.getText());
                 server.registerConnectedUser(connectedUser);
                 Client.setConnectedUser(connectedUser);
                 clearFields();

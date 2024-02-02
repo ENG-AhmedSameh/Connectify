@@ -2,6 +2,7 @@ package com.connectify;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.utils.CountryList;
 import com.connectify.utils.CurrentUser;
 import com.connectify.utils.StageManager;
 import javafx.application.Application;
@@ -44,8 +45,9 @@ public class Client extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         if(userCredentials.getProperty("remember").equals("true")){
+            connectedUser = new CurrentUser(userCredentials.getProperty("countryCode")+userCredentials.getProperty("phoneNumber"));
+            Client.setConnectedUser(connectedUser);
             StageManager.getInstance().switchToHome();
-            connectedUser = new CurrentUser(userCredentials.getProperty("phoneNumber"));
             try {
                 ServerAPI server = (ServerAPI) registry.lookup("server");
                 server.registerConnectedUser(connectedUser);
@@ -79,8 +81,9 @@ public class Client extends Application {
         return userCredentials;
     }
 
-    public static void updateUserCredentials(String phoneNumber, String country, String remember) {
-        userCredentials.setProperty("phoneNumber", phoneNumber);
+    public static void updateUserCredentials(String phoneNumber, String countryCode, String country, String remember) {
+        userCredentials.setProperty("phoneNumber",phoneNumber);
+        userCredentials.setProperty("countryCode",countryCode);
         userCredentials.setProperty("country", country);
         userCredentials.setProperty("remember", remember);
         try (FileOutputStream fos = new FileOutputStream("Client/target/classes/user.properties")) {
@@ -92,6 +95,7 @@ public class Client extends Application {
 
     public static void updateUserCredentials(String remember) {
         userCredentials.setProperty("phoneNumber", userCredentials.getProperty("phoneNumber"));
+        userCredentials.setProperty("countryCode",userCredentials.getProperty("countryCode"));
         userCredentials.setProperty("country", userCredentials.getProperty("country"));
         userCredentials.setProperty("remember", remember);
         try (FileOutputStream fos = new FileOutputStream("Client/target/classes/user.properties")) {
