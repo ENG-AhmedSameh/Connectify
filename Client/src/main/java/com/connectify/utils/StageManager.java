@@ -101,4 +101,7 @@ public class StageManager {
         return new Scene(mainPane);
     }
 
+    public Map<String, Scene> getSceneMap() {
+        return sceneMap;
+    }
 }

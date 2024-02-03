@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="signUpPane" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #17212b;" styleClass="signUP-anchor-pane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="signUpPane" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #0e1621;" styleClass="signUP-anchor-pane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
          <children>
@@ -38,7 +38,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="30.0" />
