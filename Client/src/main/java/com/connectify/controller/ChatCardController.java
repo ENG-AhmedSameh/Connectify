@@ -198,9 +198,13 @@ public class ChatCardController implements Initializable {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setLastMessageTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
         timestampProperty.setValue(timestamp.toLocalDateTime());
     }
+
+//    public modifyChatCardOnReceiveMessage(){
+//
+//    }
 
 }

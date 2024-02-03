@@ -67,9 +67,10 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
-    public void sendMessage(MessageDTO message) throws RemoteException {
-        chatService.sendMessage(message);
-        messageService.storeMessage(message);
+    public void sendMessage(MessageSentDTO message) throws RemoteException {
+        MessageDTO storedMessage = messageService.storeMessage(message);
+        chatService.sendMessage(storedMessage);
+
     }
 
     @Override

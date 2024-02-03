@@ -4,6 +4,7 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Server;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.dto.MessageDTO;
+import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.model.dao.ChatMembersDAO;
 import com.connectify.model.dao.impl.ChatMembersDAOImpl;

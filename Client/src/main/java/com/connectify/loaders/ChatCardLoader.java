@@ -11,14 +11,14 @@ import java.util.Map;
 
 public class ChatCardLoader {
 
-    //private static final Map<AnchorPane,ChatCardController> chatsCardsControllersMap = new HashMap<>();
+    private static final Map<AnchorPane,ChatCardController> chatsCardsControllersMap = new HashMap<>();
     public static AnchorPane loadChatCardAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
         ChatCardController controller = new ChatCardController();
         fxmlLoader.setLocation(ChatCardLoader.class.getResource("/views/ChatCardPane.fxml"));
         try {
             AnchorPane pane = fxmlLoader.load();
-            //chatsCardsControllersMap.put(pane,controller);
+            chatsCardsControllersMap.put(pane,controller);
             return pane;
         } catch (IOException e) {
             throw new RuntimeException(e);

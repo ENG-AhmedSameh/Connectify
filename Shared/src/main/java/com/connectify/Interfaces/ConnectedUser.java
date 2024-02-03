@@ -1,9 +1,8 @@
 package com.connectify.Interfaces;
 
 import com.connectify.dto.MessageDTO;
+import com.connectify.dto.MessageSentDTO;
 
-import java.io.File;
-import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

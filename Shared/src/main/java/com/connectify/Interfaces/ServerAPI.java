@@ -22,7 +22,7 @@ public interface ServerAPI extends Remote{
     List<ChatCardsInfoDTO> getUserChatsCardsInfo(String userId) throws RemoteException;
     void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException;
 
-    void sendMessage(MessageDTO message) throws RemoteException;
+    void sendMessage(MessageSentDTO message) throws RemoteException;
 
     void prepareCurrentChat(ChatMemberDTO chatMemberDTO) throws RemoteException;
 }
