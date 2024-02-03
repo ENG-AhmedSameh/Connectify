@@ -8,6 +8,8 @@ import com.connectify.model.entities.Message;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import org.controlsfx.control.Notifications;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -26,8 +28,13 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         this.phoneNumber = phoneNumber;
     }
     @Override
-    public void receiveAnnouncement(String announcement) throws RemoteException {
-
+    public void receiveNotification(String title, String body) throws RemoteException {
+        Platform.runLater(()->{
+            Notifications.create()
+                    .title(title)
+                    .text(body)
+                    .position(Pos.BOTTOM_RIGHT).showInformation();
+        });
     }
 
     public String getPhoneNumber() throws RemoteException {

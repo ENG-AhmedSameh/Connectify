@@ -136,7 +136,7 @@
 
 
 .tabPane {
-        -fx-background-color: -fx-dark;
+        -fx-background-color: #f5f5f5;
 }
 
 .tab-header-background {
@@ -164,6 +164,15 @@
 
 .tab:pressed {
         -fx-translate-y: 1px;
+}
+
+.chart-legend {
+        -fx-background-color:  transparent;
+        -fx-padding: 20px;
+}
+
+.chart-legend-item {
+        -fx-text-fill: -fx-dark;
 }
 
 .exit-dialog {
