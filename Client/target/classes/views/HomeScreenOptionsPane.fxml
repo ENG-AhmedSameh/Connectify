@@ -37,6 +37,15 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="incomingFriendRequestButton" mnemonicParsing="false" onAction="#incomingFriendRequestHandler" styleClass="home-screen-option-button" stylesheets="@../styles/HomeScreen.css">
+               <graphic>
+                  <ImageView fx:id="incomingFriendRequestImageView" fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/invite.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Button fx:id="userProfileButton" mnemonicParsing="false" onAction="#userProfileHandler" styleClass="home-screen-option-button" stylesheets="@../styles/HomeScreen.css">
                <graphic>
                   <ImageView fx:id="userProfileImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
