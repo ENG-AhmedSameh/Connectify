@@ -46,14 +46,17 @@ public class IncomingFriendRequestCardController implements Initializable {
     byte[] pictureBytes;
     String phone;
 
+    int invitationId;
+
     public IncomingFriendRequestCardController() {
 
     }
 
-    public IncomingFriendRequestCardController(String name, byte[] pictureBytes, String phone) {
+    public IncomingFriendRequestCardController(String name, byte[] pictureBytes, String phone, int invitationId) {
         this.name = name;
         this.pictureBytes = pictureBytes;
         this.phone = phone;
+        this.invitationId = invitationId;
     }
 
     @Override

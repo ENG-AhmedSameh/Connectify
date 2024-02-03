@@ -28,6 +28,4 @@ public interface UserMapper {
     User updateUserInfoRequestToUser(UpdateUserInfoRequest updateUserInfoRequest);
 
     UserProfileResponse userToUserProfileResponse(User user);
-
-    IncomingFriendInvitationResponse userToIncomingFriendInvitationResponse(User user);
 }

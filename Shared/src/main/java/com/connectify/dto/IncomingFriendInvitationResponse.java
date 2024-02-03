@@ -6,6 +6,15 @@ public class IncomingFriendInvitationResponse implements Serializable {
     private String phoneNumber;
     private String name;
     private byte[] picture;
+    private int invitationId;
+
+    public int getInvitationId() {
+        return invitationId;
+    }
+
+    public void setInvitationId(int invitationId) {
+        this.invitationId = invitationId;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -30,5 +39,4 @@ public class IncomingFriendInvitationResponse implements Serializable {
     public void setPicture(byte[] picture) {
         this.picture = picture;
     }
-
 }

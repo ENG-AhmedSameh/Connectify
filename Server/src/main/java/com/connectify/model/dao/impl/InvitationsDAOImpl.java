@@ -1,5 +1,6 @@
 package com.connectify.model.dao.impl;
 
+import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.model.dao.InvitationsDAO;
 import com.connectify.model.entities.Invitations;
 import com.connectify.model.entities.User;
@@ -103,8 +104,8 @@ public class InvitationsDAOImpl implements InvitationsDAO {
             return false;
         }
     }
-    public List<User> getIncomingFriendRequests(String receiverPhoneNumber) {
-        String query = "SELECT u.name, u.picture, u.phone_number " +
+    public List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String receiverPhoneNumber) {
+        String query = "SELECT u.name, u.picture, u.phone_number, i.invitation_id " +
                 "FROM invitations i " +
                 "JOIN users u ON i.sender = u.phone_number " +
                 "WHERE i.receiver = ? ";
@@ -112,20 +113,21 @@ public class InvitationsDAOImpl implements InvitationsDAO {
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, receiverPhoneNumber);
-            List<User> users = new ArrayList<>();
+            List<IncomingFriendInvitationResponse> list = new ArrayList<>();
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet != null) {
                     while (resultSet.next()) {
-                        User user = new User();
-                        user.setName(resultSet.getString("name"));
-                        user.setPicture(resultSet.getBytes("picture"));
-                        user.setPhoneNumber(resultSet.getString("phone_number"));
-                        users.add(user);
+                        var invitation = new IncomingFriendInvitationResponse();
+                        invitation.setName(resultSet.getString("name"));
+                        invitation.setPicture(resultSet.getBytes("picture"));
+                        invitation.setPhoneNumber(resultSet.getString("phone_number"));
+                        invitation.setInvitationId(resultSet.getInt("invitation_id"));
+                        list.add(invitation);
                     }
                 }
             }
-            return users;
+            return list;
         } catch (SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
             e.printStackTrace();

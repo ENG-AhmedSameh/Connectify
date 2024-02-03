@@ -26,19 +26,6 @@ public class InvitationService {
 
     public List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String phoneNumber) {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
-        List<User> userList = invitationsDAO.getIncomingFriendRequests(phoneNumber);
-
-        if (userList == null || userList.isEmpty()) {
-            return null;
-        }
-
-        List<IncomingFriendInvitationResponse> responseList = new ArrayList<>();
-
-        for (User user : userList) {
-            IncomingFriendInvitationResponse response = UserMapper.INSTANCE.userToIncomingFriendInvitationResponse(user);
-            responseList.add(response);
-        }
-
-        return responseList;
+        return invitationsDAO.getIncomingFriendRequests(phoneNumber);
     }
 }
