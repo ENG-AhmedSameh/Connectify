@@ -70,6 +70,7 @@ public class OptionsController {
             server.logout(Client.getConnectedUser().getPhoneNumber());
             Client.updateUserCredentials("false");
             Client.setConnectedUser(null);
+            StageManager.getInstance().resetHomeScene();
         } catch (RemoteException e) {
             System.err.println("RemoteException: " + e.getMessage());
         } catch (NotBoundException e) {
