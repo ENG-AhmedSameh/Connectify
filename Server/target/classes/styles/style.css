@@ -1,5 +1,5 @@
 * {
-        -fx-dark: #17212b;
+        -fx-dark: #0e1621;
         -fx-blue: #2f6ea5;
         -fx-light: #e7e5e5;
         -fx-soft-blue: #73a0d0;
@@ -50,9 +50,6 @@
 .bar {
         -fx-background-color: -fx-dark;
         -fx-text-fill: -fx-light;
-        -fx-border-color: -fx-blue;
-        -fx-border-width: 1px;
-        -fx-border-radius: 1px;
 }
 
 .label {
