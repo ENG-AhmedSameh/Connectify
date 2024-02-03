@@ -1,6 +1,11 @@
 package com.connectify.utils;
 
 import com.connectify.Interfaces.ConnectedUser;
+import com.connectify.controller.IncomingFriendRequestController;
+import com.connectify.dto.IncomingFriendInvitationResponse;
+import com.connectify.loaders.IncomingFriendRequestCardLoader;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -23,4 +28,16 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     public String getPhoneNumber() throws RemoteException {
         return phoneNumber;
     }
+
+    @Override
+    public void receiveFriendRequest(IncomingFriendInvitationResponse friendInvitation) throws RemoteException {
+        AnchorPane newFriendRequestCard = IncomingFriendRequestCardLoader
+                .loadNewIncomingFriendRequestCardPane(
+                        friendInvitation.getName(), friendInvitation.getPhoneNumber(),
+                        friendInvitation.getPicture(), friendInvitation.getInvitationId());
+
+        ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
+        friendRequestList.add(newFriendRequestCard);
+    }
+
 }

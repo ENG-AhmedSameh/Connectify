@@ -119,11 +119,7 @@ public class InvitationsDAOImpl implements InvitationsDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet != null) {
                     while (resultSet.next()) {
-                        var invitation = new IncomingFriendInvitationResponse();
-                        invitation.setName(resultSet.getString("name"));
-                        invitation.setPicture(resultSet.getBytes("picture"));
-                        invitation.setPhoneNumber(resultSet.getString("phone_number"));
-                        invitation.setInvitationId(resultSet.getInt("invitation_id"));
+                        var invitation = mapResultSetToInvitationResponse(resultSet);
                         list.add(invitation);
                     }
                 }
@@ -135,6 +131,43 @@ public class InvitationsDAOImpl implements InvitationsDAO {
             return null;
         }
     }
+
+    @Override
+    public IncomingFriendInvitationResponse getIncomingFriendRequest(String senderPhoneNumber, String receiverPhoneNumber) {
+        String query = "SELECT u.name, u.picture, u.phone_number, i.invitation_id " +
+                "FROM invitations i " +
+                "JOIN users u ON i.sender = u.phone_number " +
+                "WHERE i.receiver = ? AND i.sender = ? ";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, receiverPhoneNumber);
+            preparedStatement.setString(2, senderPhoneNumber);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return mapResultSetToInvitationResponse(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Get incoming friend request error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private IncomingFriendInvitationResponse mapResultSetToInvitationResponse(ResultSet resultSet) throws SQLException {
+        IncomingFriendInvitationResponse invitation = new IncomingFriendInvitationResponse();
+        invitation.setName(resultSet.getString("name"));
+        invitation.setPicture(resultSet.getBytes("picture"));
+        invitation.setPhoneNumber(resultSet.getString("phone_number"));
+        invitation.setInvitationId(resultSet.getInt("invitation_id"));
+        return invitation;
+    }
+
+
     @Override
     public boolean acceptFriendRequest(int invitationId) {
         Invitations invitations = this.get(invitationId);

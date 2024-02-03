@@ -12,5 +12,7 @@ public interface InvitationsDAO extends DAO<Invitations, Integer> {
 
     List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String receiverPhoneNumber);
 
+    IncomingFriendInvitationResponse getIncomingFriendRequest(String senderPhoneNumber, String receiverPhoneNumber);
+
     boolean acceptFriendRequest(int invitationId);
 }
