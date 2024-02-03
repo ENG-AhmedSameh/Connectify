@@ -98,7 +98,7 @@
     -fx-background-color: #0e1621;
 }
 .list-cell {
-    -fx-padding: -1px;
+    -fx-padding: 5px;
 }
 .list-view .list-cell:odd {
     -fx-background-color: #0e1621;

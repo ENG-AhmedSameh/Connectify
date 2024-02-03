@@ -2,9 +2,12 @@ package com.connectify.model.dao.impl;
 
 import com.connectify.model.dao.InvitationsDAO;
 import com.connectify.model.entities.Invitations;
+import com.connectify.model.entities.User;
 import com.connectify.utils.DBConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InvitationsDAOImpl implements InvitationsDAO {
 
@@ -100,5 +103,35 @@ public class InvitationsDAOImpl implements InvitationsDAO {
             return false;
         }
     }
+    public List<User> getIncomingFriendRequests(String receiverPhoneNumber) {
+        String query = "SELECT u.name, u.picture, u.phone_number " +
+                "FROM invitations i " +
+                "JOIN users u ON i.sender = u.phone_number " +
+                "WHERE i.receiver = ? ";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, receiverPhoneNumber);
+            List<User> users = new ArrayList<>();
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet != null) {
+                    while (resultSet.next()) {
+                        User user = new User();
+                        user.setName(resultSet.getString("name"));
+                        user.setPicture(resultSet.getBytes("picture"));
+                        user.setPhoneNumber(resultSet.getString("phone_number"));
+                        users.add(user);
+                    }
+                }
+            }
+            return users;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 }

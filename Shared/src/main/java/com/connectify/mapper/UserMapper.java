@@ -1,9 +1,6 @@
 package com.connectify.mapper;
 
-import com.connectify.dto.FriendToAddResponse;
-import com.connectify.dto.SignUpRequest;
-import com.connectify.dto.UpdateUserInfoRequest;
-import com.connectify.dto.UserProfileResponse;
+import com.connectify.dto.*;
 import com.connectify.model.entities.User;
 import com.connectify.dto.SignUpRequest;
 import org.mapstruct.Mapper;
@@ -31,4 +28,6 @@ public interface UserMapper {
     User updateUserInfoRequestToUser(UpdateUserInfoRequest updateUserInfoRequest);
 
     UserProfileResponse userToUserProfileResponse(User user);
+
+    IncomingFriendInvitationResponse userToIncomingFriendInvitationResponse(User user);
 }

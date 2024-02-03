@@ -2,8 +2,7 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
-import com.connectify.loaders.AddFriendCardLoader;
-import com.connectify.loaders.ChatCardLoader;
+import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.loaders.IncomingFriendRequestCardLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +16,6 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -73,8 +71,14 @@ public class IncomingFriendRequestController implements Initializable {
     }
 
     private void loadAllIncomingFriendRequest() {
-        for (int i = 0; i < 20 ; i++) {
-            addIncomingFriendRequestCard("ahmed", "01143414035", null);
+        try {
+            List<IncomingFriendInvitationResponse> incomingFriendRequests = server.getIncomingFriendRequests(currentUserPhone);
+
+            for (IncomingFriendInvitationResponse  response: incomingFriendRequests) {
+                addIncomingFriendRequestCard(response.getName(), response.getPhoneNumber(), response.getPicture());
+            }
+        } catch (RemoteException e) {
+            System.err.println("Load Incoming Friend Request failed case: " + e.getMessage());
         }
     }
 

@@ -1,15 +1,11 @@
 package com.connectify.Interfaces;
 
 
-import com.connectify.dto.FriendToAddResponse;
-import com.connectify.dto.LoginRequest;
-import com.connectify.dto.LoginResponse;
-import com.connectify.dto.SignUpRequest;
-import com.connectify.dto.UpdateUserInfoRequest;
-import com.connectify.dto.UserProfileResponse;
+import com.connectify.dto.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 public interface ServerAPI extends Remote{
 
@@ -32,4 +28,5 @@ public interface ServerAPI extends Remote{
     void registerConnectedUser(ConnectedUser user) throws RemoteException;
     void unregisterConnectedUser(ConnectedUser user) throws RemoteException;
 
+    List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String phoneNumber) throws RemoteException;
 }
