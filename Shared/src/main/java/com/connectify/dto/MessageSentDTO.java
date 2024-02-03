@@ -7,11 +7,13 @@ public class MessageSentDTO implements Serializable {
     private String sender;
     private int chatId;
     private String content;
+    private Timestamp timestamp;
 
-    public MessageSentDTO(String sender, int chatId, String content) {
+    public MessageSentDTO(String sender, int chatId, String content, Timestamp timestamp) {
         this.sender = sender;
         this.chatId = chatId;
         this.content = content;
+        this.timestamp= timestamp;
     }
 
     public int getChatId() {
@@ -38,5 +40,11 @@ public class MessageSentDTO implements Serializable {
         this.content = content;
     }
 
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
 
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
 }

@@ -32,25 +32,27 @@ public class MessageDAOImpl implements MessageDAO{
     }
     @Override
     public Message insertSentMessage(Message clientMessage) {
-        String query = "INSERT INTO Message (sender, chat_id, content, attachement_id) VALUES (?,?,?,?)";
+        String query = "INSERT INTO Message (sender, chat_id,timestamp, content, attachment_id) VALUES (?,?,?,?,?)";
+
         try(Connection connection = dbConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query))
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS))
         {
             String sender = clientMessage.getSender();
             int chatID = clientMessage.getChatId();
+            Timestamp timestamp = clientMessage.getTimestamp();
             String content = clientMessage.getContent();
-            int attachmentID =clientMessage.getAttachmentId();
+            Integer attachmentID =clientMessage.getAttachmentId();
             preparedStatement.setString(1, sender);
             preparedStatement.setInt(2, chatID);
-            preparedStatement.setString(3, content);
-            preparedStatement.setInt(4,attachmentID);
+            preparedStatement.setTimestamp(3,timestamp);
+            preparedStatement.setString(4, content);
+            preparedStatement.setObject(5,attachmentID);
             int rowsInserted = preparedStatement.executeUpdate();
             Message insertedMessage=null;
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 if (rs.next()) {
                     // Assuming the auto-generated key is the first column
-                    int messageId = rs.getInt("message_id");
-                    Timestamp timestamp = rs.getTimestamp("timestamp");
+                    int messageId = rs.getInt(1);
                     insertedMessage = generateMessage(messageId,sender,chatID,content,timestamp,attachmentID);
                 }
             }
@@ -61,7 +63,7 @@ public class MessageDAOImpl implements MessageDAO{
             return null;
         }
     }
-    private Message generateMessage(int messageID, String sender, int chatID, String content, Timestamp timestamp, int attachmentID){
+    private Message generateMessage(int messageID, String sender, int chatID, String content, Timestamp timestamp, Integer attachmentID){
         Message message = new Message();
         message.setMessageId(messageID);
         message.setSender(sender);

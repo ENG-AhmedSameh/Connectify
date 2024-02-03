@@ -16,7 +16,9 @@ public class AllChatsPaneLoader {
             AnchorPane pane = fxmlLoader.load();
             return pane;
         }catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println(e.getMessage());
+            return null;
+            //throw new RuntimeException(e);
         }
     }
 }

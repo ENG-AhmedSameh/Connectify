@@ -1,6 +1,8 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
+import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.MessageSentDTO;
 import com.connectify.utils.CurrentUser;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -18,6 +20,9 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
@@ -60,6 +65,8 @@ public class ChatController implements Initializable {
 
     private final Image image;
 
+    ServerAPI server;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         chatName.setText(name);
@@ -74,10 +81,24 @@ public class ChatController implements Initializable {
         this.chatID = chatID;
         this.name = name;
         this.image = image;
+        try {
+            server = (ServerAPI) Client.getRegistry().lookup("server");
+        } catch (RemoteException | NotBoundException e) {
+
+        }
     }
 
     public void sendHandler(){
-
+        //System.out.println("sh8aaaalllllll");
+        try {
+            MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()));
+            server.sendMessage(messageSentDTO);
+            //TODO render send message
+            messages.add(sendBox.getText());
+            sendBox.clear();
+        } catch (RemoteException e) {
+            System.err.println("Can't find server, details: "+e.getMessage());
+        }
     }
 
 
