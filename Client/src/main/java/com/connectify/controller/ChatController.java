@@ -1,14 +1,21 @@
 package com.connectify.controller;
 
+import com.connectify.Client;
+import com.connectify.utils.CurrentUser;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,96 +23,89 @@ import java.util.ResourceBundle;
 public class ChatController implements Initializable {
 
     @FXML
-    private Circle pictureClip;
-    @FXML
-    private ImageView pictureImageView;
-    @FXML
-    private Circle chatImage;
+    private ImageView attachmentImageView;
 
     @FXML
     private Text chatName;
 
     @FXML
-    private VBox chatWindow;
+    private ImageView htmlEditorImageView;
 
     @FXML
     private Text membersCount;
 
     @FXML
+    private ListView<String> messagesList;
+
+    @FXML
+    private Circle pictureClip;
+
+    @FXML
+    private ImageView pictureImageView;
+
+    @FXML
     private TextField sendBox;
 
     @FXML
-    private ImageView htmlEditorImageView;
-    @FXML
-    private ImageView attachmentImageView;
-    @FXML
     private ImageView sendImageView;
+
     @FXML
     private Circle statusCircle;
-    private Image picture;
-    private String name;
-    private int chatId;
 
-    public ChatController(int chatId,String name,Image pic) {
-        picture = pic;
-        this.name = name;
-        this.chatId = chatId;
-    }
+    private ObservableList<String> messages;
 
-    public int getChatId() {
-        return chatId;
-    }
+    private final int chatID;
 
-    public void setChatId(int chatId) {
-        this.chatId = chatId;
-    }
+    private final String name;
 
-    public Image getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Image picture) {
-        this.picture = picture;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private final Image image;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeEventHandlers();
-        pictureImageView.setImage(picture);
         chatName.setText(name);
+        pictureImageView.setImage(image);
+        setListViewCellFactory();
+        messages = CurrentUser.getMessageList(chatID);
+        messagesList.setItems(messages);
     }
 
-    private void initializeEventHandlers() {
-        htmlEditorImageView.setOnMouseClicked((MouseEvent event) ->{
-            openHTMLEditorHandler();
+
+    public ChatController(int chatID, String name, Image image){
+        this.chatID = chatID;
+        this.name = name;
+        this.image = image;
+    }
+
+    public void sendHandler(){
+
+    }
+
+
+    public void attachmentHandler(){
+
+    }
+
+    public void htmlEditorHandler(){
+
+    }
+
+    private void setListViewCellFactory() {
+        messagesList.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<String> call(ListView<String> listView) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(new Label(item));
+                        }
+                    }
+                };
+            }
         });
-        attachmentImageView.setOnMouseClicked((MouseEvent event) ->{
-            attachmentHandler();
-        });
-        sendImageView.setOnMouseClicked((MouseEvent event) ->{
-            sendHandler();
-        });
     }
-
-    void attachmentHandler() {
-        System.out.println("Attachment pressed");
-    }
-
-    void openHTMLEditorHandler() {
-        System.out.println("Edit pressed");
-    }
-
-    void sendHandler() {
-        System.out.println("send pressed");
-    }
-
 
 }
