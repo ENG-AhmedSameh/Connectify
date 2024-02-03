@@ -129,13 +129,13 @@ public class AddFriendController implements Initializable {
             }
         }
         searchContactsVBox.getChildren().clear();
-        StageManager.getInstance().switchToHome();
+        StageManager.getInstance().switchFromAddFriendToHome();
     }
 
     @FXML
     void cancelButtonHandler(ActionEvent event) {
         searchContactsVBox.getChildren().clear();
-        StageManager.getInstance().switchToHome();
+        StageManager.getInstance().switchFromAddFriendToHome();
     }
 
     private boolean isUnique(String phoneNumber) {

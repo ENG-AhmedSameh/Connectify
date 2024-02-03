@@ -21,6 +21,8 @@ public class StageManager {
     private final Stage stage;
 
     private final Map<String, Scene> sceneMap;
+    private AnchorPane chatsPane;
+    private AnchorPane logoPane;
 
 
     private StageManager(){
@@ -61,26 +63,51 @@ public class StageManager {
         stage.setScene(scene);
     }
 
+    public void switchFromProfileEditorToHome(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setCenter(logoPane);
+        centerPane.setLeft(chatsPane);
+    }
+
+    public void switchFromAddFriendToHome(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setCenter(logoPane);
+        centerPane.setLeft(chatsPane);
+    }
+
     public void switchToProfile(){
-        stage.setScene(createProfileScene());
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setCenter(ProfileLoader.loadProfileAnchorPane());
+        centerPane.setLeft(chatsPane);
     }
 
     public void switchToProfileEditor(){
-        stage.setScene(createProfileEditorScene());
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setCenter(ProfileEditorLoader.loadProfileEditorAnchorPane());
+        centerPane.setLeft(chatsPane);
     }
 
     public void switchToAddFriend(){
-        if(sceneMap.get("add friend") == null)
-            sceneMap.put("add friend", createAddFriendScene());
-        Scene scene = sceneMap.get("add friend");
-        stage.setScene(scene);
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setLeft(AddFriendLoader.loadAddFriendAnchorPane());
+        centerPane.setCenter(logoPane);
     }
 
     public void switchToIncomingFriendRequest(){
-        if(sceneMap.get("incoming friend request") == null)
-            sceneMap.put("incoming friend request", createIncomingFriendRequestScene());
-        Scene scene = sceneMap.get("incoming friend request");
-        stage.setScene(scene);
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setLeft(IncomingFriendRequestLoader.loadIncomingFriendRequestAnchorPane());
     }
 
     private Scene createLoginScene(){
@@ -114,69 +141,9 @@ public class StageManager {
         HBox titleBar = TitleBarLoader.loadTitleBarHBox();
         BorderPane centerPane = new BorderPane();
         AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        AnchorPane chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
-        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
+        logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setLeft(chatsPane);
-        centerPane.setCenter(logoPane);
-        mainPane.setLeft(optionsPane);
-        mainPane.setTop(titleBar);
-        mainPane.setCenter(centerPane);
-        return new Scene(mainPane);
-    }
-
-    private Scene createProfileScene(){
-        BorderPane mainPane = new BorderPane();
-        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
-        BorderPane centerPane = new BorderPane();
-        AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        AnchorPane chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
-        AnchorPane profilePane = ProfileLoader.loadProfileAnchorPane();
-        centerPane.setLeft(chatsPane);
-        centerPane.setCenter(profilePane);
-        mainPane.setLeft(optionsPane);
-        mainPane.setTop(titleBar);
-        mainPane.setCenter(centerPane);
-        return new Scene(mainPane);
-    }
-
-    private Scene createProfileEditorScene(){
-        BorderPane mainPane = new BorderPane();
-        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
-        BorderPane centerPane = new BorderPane();
-        AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        AnchorPane chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
-        AnchorPane profileEditorPane = ProfileEditorLoader.loadProfileEditorAnchorPane();
-        centerPane.setLeft(chatsPane);
-        centerPane.setCenter(profileEditorPane);
-        mainPane.setLeft(optionsPane);
-        mainPane.setTop(titleBar);
-        mainPane.setCenter(centerPane);
-        return new Scene(mainPane);
-    }
-
-    private Scene createAddFriendScene() {
-        BorderPane mainPane = new BorderPane();
-        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
-        BorderPane centerPane = new BorderPane();
-        AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        AnchorPane addFriendPane = AddFriendLoader.loadAddFriendAnchorPane();
-        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
-        centerPane.setLeft(addFriendPane);
-        centerPane.setCenter(logoPane);
-        mainPane.setLeft(optionsPane);
-        mainPane.setTop(titleBar);
-        mainPane.setCenter(centerPane);
-        return new Scene(mainPane);
-    }
-
-    private Scene createIncomingFriendRequestScene() {
-        BorderPane mainPane = new BorderPane();
-        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
-        BorderPane centerPane = new BorderPane();
-        AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        AnchorPane incomingFriendRequestPane = IncomingFriendRequestLoader.loadIncomingFriendRequestAnchorPane();
-        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
-        centerPane.setLeft(incomingFriendRequestPane);
         centerPane.setCenter(logoPane);
         mainPane.setLeft(optionsPane);
         mainPane.setTop(titleBar);

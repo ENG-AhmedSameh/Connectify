@@ -119,7 +119,7 @@ public class ProfileEditorController implements Initializable {
 
     @FXML
     void handleCancelAction(ActionEvent event) {
-        StageManager.getInstance().switchToHome();
+        StageManager.getInstance().switchFromProfileEditorToHome();
     }
 
     private void validateFields() {
@@ -222,7 +222,7 @@ public class ProfileEditorController implements Initializable {
             }
         }
 
-        StageManager.getInstance().switchToHome();
+        StageManager.getInstance().switchFromProfileEditorToHome();
     }
 
     private boolean isUserInfoChanged() {
