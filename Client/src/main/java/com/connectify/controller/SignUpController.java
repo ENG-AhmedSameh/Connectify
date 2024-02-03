@@ -151,7 +151,7 @@ public class SignUpController implements Initializable {
                 phoneNumTxtF.setStyle("-fx-border-color: red;");
             }
             else {
-                ConnectedUser connectedUser = new CurrentUser(phoneNumTxtF.getText());
+                ConnectedUser connectedUser = new CurrentUser(countryCodeLbl.getText() + phoneNumTxtF.getText());
                 server.registerConnectedUser(connectedUser);
                 Client.setConnectedUser(connectedUser);
                 clearFields();
