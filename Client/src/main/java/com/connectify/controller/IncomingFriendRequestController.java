@@ -26,9 +26,10 @@ public class IncomingFriendRequestController implements Initializable {
 
     @FXML
     private ListView<AnchorPane> allInvitationsListView;
-    ObservableList<AnchorPane> friendRequestList = FXCollections.observableArrayList();
+    private static ObservableList<AnchorPane> friendRequestList = FXCollections.observableArrayList();
 
     private ServerAPI server;
+
     private static String currentUserPhone;
 
     @Override
@@ -75,17 +76,20 @@ public class IncomingFriendRequestController implements Initializable {
             List<IncomingFriendInvitationResponse> incomingFriendRequests = server.getIncomingFriendRequests(currentUserPhone);
 
             for (IncomingFriendInvitationResponse  response: incomingFriendRequests) {
-                addIncomingFriendRequestCard(response.getName(), response.getPhoneNumber(), response.getPicture());
+                addIncomingFriendRequestCard(response.getName(), response.getPhoneNumber(), response.getPicture(), response.getInvitationId());
             }
         } catch (RemoteException e) {
             System.err.println("Load Incoming Friend Request failed case: " + e.getMessage());
         }
     }
 
-
-    public void addIncomingFriendRequestCard(String name, String phone, byte[] picture){
+    public void addIncomingFriendRequestCard(String name, String phone, byte[] picture, int invitationId){
         AnchorPane addFriendCard = IncomingFriendRequestCardLoader
-                .loadNewIncomingFriendRequestCardPane(name, phone, picture);
+                .loadNewIncomingFriendRequestCardPane(name, phone, picture, invitationId);
         friendRequestList.add(addFriendCard);
+    }
+
+    public static ObservableList<AnchorPane> getFriendRequestList() {
+        return friendRequestList;
     }
 }

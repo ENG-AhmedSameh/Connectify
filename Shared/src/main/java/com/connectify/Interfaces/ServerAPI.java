@@ -29,4 +29,6 @@ public interface ServerAPI extends Remote{
     void unregisterConnectedUser(ConnectedUser user) throws RemoteException;
 
     List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String phoneNumber) throws RemoteException;
+
+    boolean acceptFriendRequest(int invitationId) throws RemoteException;
 }

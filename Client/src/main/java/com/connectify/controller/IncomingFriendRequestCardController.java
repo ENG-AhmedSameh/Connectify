@@ -42,11 +42,13 @@ public class IncomingFriendRequestCardController implements Initializable {
     @FXML
     private Label senderPhoneNumberLabel;
 
-    String name;
-    byte[] pictureBytes;
-    String phone;
+    private String name;
+    private byte[] pictureBytes;
+    private String phone;
+    private int invitationId;
 
-    int invitationId;
+    private ServerAPI server;
+    private static String currentUserPhone;
 
     public IncomingFriendRequestCardController() {
 
@@ -57,6 +59,15 @@ public class IncomingFriendRequestCardController implements Initializable {
         this.pictureBytes = pictureBytes;
         this.phone = phone;
         this.invitationId = invitationId;
+
+        try {
+            server = (ServerAPI) Client.getRegistry().lookup("server");
+            currentUserPhone = "+20" + Client.getConnectedUser().getPhoneNumber();
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
+        } catch (NotBoundException e) {
+            System.err.println("NotBoundException: " + e.getMessage());
+        }
     }
 
     @Override
@@ -86,11 +97,33 @@ public class IncomingFriendRequestCardController implements Initializable {
 
     @FXML
     void handleAcceptPressed(ActionEvent event) {
+        try {
+            boolean friendRequestAccepted = server.acceptFriendRequest(invitationId);
 
+            if (friendRequestAccepted) {
+                ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
+
+                friendRequestList.removeIf(anchorPane -> isControllerMatch(anchorPane));
+            }
+        } catch (RemoteException e) {
+            System.err.println("Accept Friend Request failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+
+    private boolean isControllerMatch(AnchorPane anchorPane) {
+        IncomingFriendRequestCardController controller = (IncomingFriendRequestCardController) anchorPane.getUserData();
+        return controller == this;
+    }
+
 
     @FXML
     void handleCancelPressed(ActionEvent event) {
-
+        System.out.println("canceled");
     }
+
+    public int getInvitationId() {
+        return invitationId;
+    }
+
 }

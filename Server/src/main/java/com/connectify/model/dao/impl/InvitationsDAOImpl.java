@@ -3,7 +3,6 @@ package com.connectify.model.dao.impl;
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.model.dao.InvitationsDAO;
 import com.connectify.model.entities.Invitations;
-import com.connectify.model.entities.User;
 import com.connectify.utils.DBConnection;
 
 import java.sql.*;
@@ -104,6 +103,8 @@ public class InvitationsDAOImpl implements InvitationsDAO {
             return false;
         }
     }
+
+    @Override
     public List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String receiverPhoneNumber) {
         String query = "SELECT u.name, u.picture, u.phone_number, i.invitation_id " +
                 "FROM invitations i " +
@@ -134,6 +135,52 @@ public class InvitationsDAOImpl implements InvitationsDAO {
             return null;
         }
     }
+    @Override
+    public boolean acceptFriendRequest(int invitationId) {
+        Invitations invitations = this.get(invitationId);
+
+        String insertQuery = "INSERT INTO contacts (user, contact) VALUES (?, ?)";
+        String deleteQuery = "DELETE FROM invitations WHERE invitation_id = ?";
+
+        try (Connection connection = dbConnection.getConnection()) {
+            connection.setAutoCommit(false);
+
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
+                 PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+
+                insertStatement.setString(1, invitations.getSender());
+                insertStatement.setString(2, invitations.getReceiver());
+                insertStatement.addBatch();
+
+                deleteStatement.setInt(1, invitationId);
+                deleteStatement.addBatch();
+
+                int[] insertResults = insertStatement.executeBatch();
+                int[] deleteResults = deleteStatement.executeBatch();
+
+                boolean success = insertResults[0] > 0 && deleteResults[0] > 0;
+
+                if (success) {
+                    connection.commit();
+                } else {
+                    connection.rollback();
+                }
+
+                connection.setAutoCommit(true);
+
+                return success;
+
+            } catch (SQLException e) {
+                connection.rollback();
+                System.err.println("SQLException: " + e.getMessage());
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return false;
+        }
+    }
+
 
 
 }

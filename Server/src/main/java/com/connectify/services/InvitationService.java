@@ -2,8 +2,11 @@ package com.connectify.services;
 
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.mapper.UserMapper;
+import com.connectify.model.dao.ContactsDAO;
 import com.connectify.model.dao.InvitationsDAO;
+import com.connectify.model.dao.impl.ContactsDAOImpl;
 import com.connectify.model.dao.impl.InvitationsDAOImpl;
+import com.connectify.model.entities.Contacts;
 import com.connectify.model.entities.Invitations;
 import com.connectify.model.entities.User;
 
@@ -27,5 +30,10 @@ public class InvitationService {
     public List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String phoneNumber) {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
         return invitationsDAO.getIncomingFriendRequests(phoneNumber);
+    }
+
+    public boolean acceptFriendRequest(int invitationId) {
+        InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
+        return invitationsDAO.acceptFriendRequest(invitationId);
     }
 }
