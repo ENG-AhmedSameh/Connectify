@@ -120,4 +120,7 @@ public class StageManager {
         return new Scene(mainPane);
     }
 
+    public void resetHomeScene() {
+        sceneMap.remove("home");
+    }
 }

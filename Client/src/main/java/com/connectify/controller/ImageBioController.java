@@ -58,6 +58,9 @@ public class ImageBioController {
     private ImageBioChangeRequest createImageBioChangeRequest() {
         try {
             String phoneNumber = Client.getConnectedUser().getPhoneNumber();
+            if(selectedImage == null){
+                selectedImage = new File(getClass().getResourceAsStream("/images/profile.png").toString());
+            }
             return new ImageBioChangeRequest(phoneNumber, selectedImage, bioTextArea.getText());
         } catch (RemoteException e) {
             System.err.println("Couldn't get user: " + e.getMessage());
