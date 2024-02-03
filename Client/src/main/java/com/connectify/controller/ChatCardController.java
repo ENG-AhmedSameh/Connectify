@@ -4,6 +4,7 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
+import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.ChatPaneFactory;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.*;
@@ -132,6 +133,7 @@ public class ChatCardController implements Initializable {
     }
 
     private void displayChat(){
+        ChatManagerFactory.setActiveChatID(chatId);
         setUnreadMessagesNumber(0);
         BorderPane chatPane = ChatPaneFactory.getChatPane(chatId, chatName.get(),pictureImage);
         ViewLoader loader = ViewLoader.getInstance();
@@ -165,6 +167,10 @@ public class ChatCardController implements Initializable {
     public void setUnreadMessagesNumber(int unread) {
         this.unread.set(unread);
         nChatUnreadMessagesLabel.setVisible(unread != 0);
+    }
+    public void updateUnreadMessagesNumber(){
+        if(ChatManagerFactory.getActiveChatID()!=chatId)
+            this.unread.setValue(unread.getValue()+1);
     }
     public int getUnreadMessagesNumber() {
         return this.unread.get();

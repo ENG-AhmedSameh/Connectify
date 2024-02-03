@@ -1,19 +1,17 @@
 package com.connectify.services;
 
 import com.connectify.dto.MessageDTO;
+import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
-import com.connectify.model.dao.ChatMembersDAO;
 import com.connectify.model.dao.MessageDAO;
-import com.connectify.model.dao.impl.ChatMembersDAOImpl;
 import com.connectify.model.dao.impl.MessageDAOImpl;
-import com.connectify.model.entities.ChatMember;
-
-import java.util.List;
+import com.connectify.model.entities.Message;
 
 public class MessageService {
-    public void storeMessage(MessageDTO message){
+    public MessageDTO storeMessage(MessageSentDTO message){
         MessageDAO messageDAO = new MessageDAOImpl();
         MessageMapper mapper = MessageMapper.INSTANCE;
-        messageDAO.insert(mapper.messageDtoTOMessage(message));
+        Message storedMessage = messageDAO.insertSentMessage(mapper.messageSentDtoTOMessage(message));
+        return mapper.messageToMessageDto(storedMessage);
     }
 }

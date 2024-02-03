@@ -7,8 +7,11 @@ com\connectify\loaders\ContactMessageLoader.class
 com\connectify\loaders\SignUpLoader.class
 com\connectify\Client.class
 com\connectify\loaders\AllChatsPaneLoader.class
+com\connectify\controller\ChatController$1$1.class
+com\connectify\utils\ChatManager.class
 com\connectify\controller\SignUpController$1.class
 com\connectify\utils\CurrentUser.class
+com\connectify\controller\ChatCardController$1.class
 com\connectify\controller\ContactCardController.class
 com\connectify\controller\ChatCardController.class
 com\connectify\loaders\HomeScreenOptionsLoader.class
@@ -19,9 +22,11 @@ com\connectify\utils\StageManager.class
 com\connectify\loaders\LoginLoader.class
 com\connectify\controller\AllContactsPaneController.class
 com\connectify\loaders\EditeProfileLoader.class
+com\connectify\controller\AllChatsPaneController$1$1.class
 com\connectify\controller\ImageBioController.class
 com\connectify\controller\EditeProfileController$1.class
 com\connectify\loaders\TitleBarLoader.class
+com\connectify\utils\ChatManagerFactory.class
 com\connectify\controller\AllChatsPaneController.class
 module-info.class
 com\connectify\loaders\ImageBioLoader.class
@@ -31,7 +36,9 @@ com\connectify\controller\ChatController.class
 com\connectify\controller\SignUpController.class
 com\connectify\utils\ChatPaneFactory.class
 com\connectify\loaders\ChatLoader.class
+com\connectify\controller\ChatController$1.class
 com\connectify\loaders\ChatCardLoader.class
+com\connectify\controller\AllChatsPaneController$1.class
 com\connectify\loaders\LogoLoader.class
 com\connectify\loaders\MainPaneLoader.class
 com\connectify\controller\OptionsController.class

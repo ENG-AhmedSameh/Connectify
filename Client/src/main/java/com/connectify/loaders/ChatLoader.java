@@ -17,7 +17,9 @@ public class ChatLoader {
         try {
             return fxmlLoader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
+            System.err.println("Error: "+e.getMessage());
+            return null;
         }
     }
 }

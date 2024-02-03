@@ -4,10 +4,7 @@ import com.connectify.model.dao.MessageDAO;
 import com.connectify.model.entities.Message;
 import com.connectify.utils.DBConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class MessageDAOImpl implements MessageDAO{
     private final DBConnection dbConnection;
@@ -32,6 +29,49 @@ public class MessageDAOImpl implements MessageDAO{
             System.err.println("SQLException: " + e.getMessage());
             return false;
         }
+    }
+    @Override
+    public Message insertSentMessage(Message clientMessage) {
+        String query = "INSERT INTO Message (sender, chat_id,timestamp, content, attachment_id) VALUES (?,?,?,?,?)";
+
+        try(Connection connection = dbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS))
+        {
+            String sender = clientMessage.getSender();
+            int chatID = clientMessage.getChatId();
+            Timestamp timestamp = clientMessage.getTimestamp();
+            String content = clientMessage.getContent();
+            Integer attachmentID =clientMessage.getAttachmentId();
+            preparedStatement.setString(1, sender);
+            preparedStatement.setInt(2, chatID);
+            preparedStatement.setTimestamp(3,timestamp);
+            preparedStatement.setString(4, content);
+            preparedStatement.setObject(5,attachmentID);
+            int rowsInserted = preparedStatement.executeUpdate();
+            Message insertedMessage=null;
+            try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
+                if (rs.next()) {
+                    // Assuming the auto-generated key is the first column
+                    int messageId = rs.getInt(1);
+                    insertedMessage = generateMessage(messageId,sender,chatID,content,timestamp,attachmentID);
+                }
+            }
+
+            return insertedMessage;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return null;
+        }
+    }
+    private Message generateMessage(int messageID, String sender, int chatID, String content, Timestamp timestamp, Integer attachmentID){
+        Message message = new Message();
+        message.setMessageId(messageID);
+        message.setSender(sender);
+        message.setChatId(chatID);
+        message.setTimestamp(timestamp);
+        message.setContent(content);
+        message.setAttachmentId(attachmentID);
+        return message;
     }
 
     @Override

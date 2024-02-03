@@ -3,21 +3,17 @@ package com.connectify.dto;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class MessageDTO implements Serializable {
-    private int messageId;
+public class MessageSentDTO implements Serializable {
     private String sender;
     private int chatId;
-    private Timestamp timestamp;
     private String content;
-    private Integer attachmentId;  // nullable
+    private Timestamp timestamp;
 
-    public MessageDTO(int messageId, String sender, int chatId, Timestamp timestamp, String content, Integer attachmentId) {
-        this.messageId = messageId;
+    public MessageSentDTO(String sender, int chatId, String content, Timestamp timestamp) {
         this.sender = sender;
         this.chatId = chatId;
-        this.timestamp = timestamp;
         this.content = content;
-        this.attachmentId = attachmentId;
+        this.timestamp= timestamp;
     }
 
     public int getChatId() {
@@ -44,27 +40,11 @@ public class MessageDTO implements Serializable {
         this.content = content;
     }
 
-    public int getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
-    }
-
     public Timestamp getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public Integer getAttachmentId() {
-        return attachmentId;
-    }
-
-    public void setAttachmentId(Integer attachmentId) {
-        this.attachmentId = attachmentId;
     }
 }
