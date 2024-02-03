@@ -49,6 +49,12 @@ public class OptionsController {
     private ImageView userProfileImageView1;
 
     @FXML
+    private Button incomingFriendRequestButton;
+
+    @FXML
+    private ImageView incomingFriendRequestImageView;
+
+    @FXML
     void chatsHandler(ActionEvent event) {
 
     }
@@ -81,6 +87,11 @@ public class OptionsController {
     @FXML
     void userProfileHandler(ActionEvent event) {
         StageManager.getInstance().switchToProfile();
+    }
+
+    @FXML
+    void incomingFriendRequestHandler(ActionEvent event) {
+
     }
 
 }
