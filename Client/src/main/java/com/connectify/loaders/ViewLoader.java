@@ -82,7 +82,6 @@ public class ViewLoader {
         chatsHomeScreenCenterPane.setCenter(chatPane);
     }
     public void switchToChat(BorderPane chatPane, Scene currentScene){
-
         BorderPane homePane= (BorderPane) currentScene.getRoot();
         BorderPane chatsPane =(BorderPane)homePane.getCenter();
         chatsPane.setCenter(chatPane);

@@ -3,6 +3,8 @@ package com.connectify.controller;
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.MessageSentDTO;
+import com.connectify.mapper.MessageMapper;
+import com.connectify.utils.ChatCardHandler;
 import com.connectify.utils.CurrentUser;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -89,9 +91,10 @@ public class ChatController implements Initializable {
     }
 
     public void sendHandler(){
-        //System.out.println("sh8aaaalllllll");
         try {
             MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()));
+            MessageMapper mapper = MessageMapper.INSTANCE;
+            ChatCardHandler.updateChatCard(mapper.messageSentDtoTOMessage(messageSentDTO));
             server.sendMessage(messageSentDTO);
             //TODO render send message
             messages.add(sendBox.getText());
