@@ -32,5 +32,7 @@ public class AnnouncementController{
                 System.err.println("Error sending announcement to user: " + e.getMessage());
             }
         }
+        this.title.clear();
+        this.body.clear();
     }
 }

@@ -1,5 +1,6 @@
 package com.connectify.controller.fxmlcontrollers;
 
+import com.connectify.Server;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -108,6 +109,7 @@ public class MainController implements Initializable{
             alert.setHeaderText("Exit ?");
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
+                Server.powerDown();
                 System.exit(0);
             }
     }
