@@ -36,4 +36,9 @@ public class InvitationService {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
         return invitationsDAO.acceptFriendRequest(invitationId);
     }
+
+    public boolean cancelFriendRequest(int invitationId) {
+        InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
+        return invitationsDAO.delete(invitationId);
+    }
 }

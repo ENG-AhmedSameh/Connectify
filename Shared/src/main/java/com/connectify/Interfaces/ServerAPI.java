@@ -31,4 +31,6 @@ public interface ServerAPI extends Remote{
     List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String phoneNumber) throws RemoteException;
 
     boolean acceptFriendRequest(int invitationId) throws RemoteException;
+
+    boolean cancelFriendRequest(int invitationId) throws RemoteException;
 }

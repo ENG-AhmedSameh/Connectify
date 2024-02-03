@@ -111,15 +111,25 @@ public class IncomingFriendRequestCardController implements Initializable {
         }
     }
 
+    @FXML
+    void handleCancelPressed(ActionEvent event) {
+        try {
+            boolean friendRequestCanceled = server.cancelFriendRequest(invitationId);
+
+            if (friendRequestCanceled) {
+                ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
+
+                friendRequestList.removeIf(anchorPane -> isControllerMatch(anchorPane));
+            }
+        } catch (RemoteException e) {
+            System.err.println("Cancel Friend Request failed: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private boolean isControllerMatch(AnchorPane anchorPane) {
         IncomingFriendRequestCardController controller = (IncomingFriendRequestCardController) anchorPane.getUserData();
         return controller == this;
-    }
-
-
-    @FXML
-    void handleCancelPressed(ActionEvent event) {
-        System.out.println("canceled");
     }
 
     public int getInvitationId() {

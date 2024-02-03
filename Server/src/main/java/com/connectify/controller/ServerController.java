@@ -70,6 +70,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
+    public boolean cancelFriendRequest(int invitationId) throws RemoteException {
+        return invitationService.cancelFriendRequest(invitationId);
+    }
+
+    @Override
     public boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException {
         return userService.updateUser(updateUserInfoRequest);
     }
