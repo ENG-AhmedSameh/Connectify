@@ -16,3 +16,7 @@ target/
 !/.idea/dataSources.local.xml
 !/.idea/dataSources.xml
 !/.idea/workspace.xml
+
+# Ignore Maven target directory
+Client/target/
+Server/target/
