@@ -1,8 +1,8 @@
 package com.connectify.utils;
 
 import com.connectify.Interfaces.ConnectedUser;
+import com.connectify.controller.ChatCardController;
 import com.connectify.dto.MessageDTO;
-import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import javafx.collections.FXCollections;
@@ -37,12 +37,20 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     public void receiveMessage(MessageDTO messageDTO) throws RemoteException {
         MessageMapper mapper = MessageMapper.INSTANCE;
         Message receivedMessage = mapper.messageDtoToMessage(messageDTO);
-
+        updateChatCard(receivedMessage);
         System.out.println("Received Message");
 
         int chatID = messageDTO.getChatId();
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
         chatListMessagesMap.get(chatID).add(messageDTO.getContent());
+    }
+
+    private void updateChatCard(Message message) {
+        ChatManager chatManager = ChatManagerFactory.getChatManager(message.getChatId());
+        ChatCardController chatCardController= chatManager.getChatCardController();
+        chatCardController.setUnreadMessagesNumber(chatCardController.getUnreadMessagesNumber()+1);
+        chatCardController.setLastMessage(message.getContent());
+        chatCardController.setTimestamp(message.getTimestamp());
     }
 
     public static ObservableList<String> getMessageList(int chatID) {

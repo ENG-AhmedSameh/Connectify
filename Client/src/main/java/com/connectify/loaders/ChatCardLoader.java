@@ -1,6 +1,8 @@
 package com.connectify.loaders;
 
 import com.connectify.controller.ChatCardController;
+import com.connectify.utils.ChatManager;
+import com.connectify.utils.ChatManagerFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
@@ -11,14 +13,14 @@ import java.util.Map;
 
 public class ChatCardLoader {
 
-    private static final Map<AnchorPane,ChatCardController> chatsCardsControllersMap = new HashMap<>();
+    //private static final Map<AnchorPane,ChatCardController> chatsCardsControllersMap = new HashMap<>();
     public static AnchorPane loadChatCardAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
         ChatCardController controller = new ChatCardController();
         fxmlLoader.setLocation(ChatCardLoader.class.getResource("/views/ChatCardPane.fxml"));
         try {
             AnchorPane pane = fxmlLoader.load();
-            chatsCardsControllersMap.put(pane,controller);
+            //chatsCardsControllersMap.put(pane,controller);
             return pane;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -35,8 +37,12 @@ public class ChatCardLoader {
         ChatCardController controller = new ChatCardController(chatId,unread,name,picture,lastMessage,timestamp);
         fxmlLoader.setLocation(ChatCardLoader.class.getResource("/views/ChatCardPane.fxml"));
         fxmlLoader.setController(controller);
+        ChatManager chatManager = ChatManagerFactory.getChatManager(chatId);
+        chatManager.setChatCardController(controller);
         try {
-            return fxmlLoader.load();
+            AnchorPane chatCardPane = fxmlLoader.load();
+            chatManager.setChatCardPane(chatCardPane);
+            return chatCardPane;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
