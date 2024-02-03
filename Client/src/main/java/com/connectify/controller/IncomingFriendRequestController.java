@@ -73,7 +73,9 @@ public class IncomingFriendRequestController implements Initializable {
     }
 
     private void loadAllIncomingFriendRequest() {
-
+        for (int i = 0; i < 20 ; i++) {
+            addIncomingFriendRequestCard("ahmed", "01143414035", null);
+        }
     }
 
 

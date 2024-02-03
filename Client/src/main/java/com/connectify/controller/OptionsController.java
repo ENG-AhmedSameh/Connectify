@@ -91,7 +91,7 @@ public class OptionsController {
 
     @FXML
     void incomingFriendRequestHandler(ActionEvent event) {
-
+        StageManager.getInstance().switchToIncomingFriendRequest();
     }
 
 }

@@ -76,6 +76,13 @@ public class StageManager {
         stage.setScene(scene);
     }
 
+    public void switchToIncomingFriendRequest(){
+        if(sceneMap.get("incoming friend request") == null)
+            sceneMap.put("incoming friend request", createIncomingFriendRequestScene());
+        Scene scene = sceneMap.get("incoming friend request");
+        stage.setScene(scene);
+    }
+
     private Scene createLoginScene(){
         BorderPane mainPane = new BorderPane();
         GridPane centerPane = new GridPane();
@@ -155,6 +162,21 @@ public class StageManager {
         AnchorPane addFriendPane = AddFriendLoader.loadAddFriendAnchorPane();
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setLeft(addFriendPane);
+        centerPane.setCenter(logoPane);
+        mainPane.setLeft(optionsPane);
+        mainPane.setTop(titleBar);
+        mainPane.setCenter(centerPane);
+        return new Scene(mainPane);
+    }
+
+    private Scene createIncomingFriendRequestScene() {
+        BorderPane mainPane = new BorderPane();
+        HBox titleBar = TitleBarLoader.loadTitleBarHBox();
+        BorderPane centerPane = new BorderPane();
+        AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
+        AnchorPane incomingFriendRequestPane = IncomingFriendRequestLoader.loadIncomingFriendRequestAnchorPane();
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        centerPane.setLeft(incomingFriendRequestPane);
         centerPane.setCenter(logoPane);
         mainPane.setLeft(optionsPane);
         mainPane.setTop(titleBar);
