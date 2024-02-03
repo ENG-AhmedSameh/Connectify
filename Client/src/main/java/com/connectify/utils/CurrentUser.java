@@ -46,22 +46,13 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         System.out.println(messageDTO.getContent());
         MessageMapper mapper = MessageMapper.INSTANCE;
         Message receivedMessage = mapper.messageDtoToMessage(messageDTO);
-        Platform.runLater(()->{
-            updateChatCard(receivedMessage);
-        });
-
+        ChatCardHandler.updateChatCard(receivedMessage);
         int chatID = messageDTO.getChatId();
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
         chatListMessagesMap.get(chatID).add(messageDTO.getContent());
     }
 
-    private void updateChatCard(Message message) {
-        ChatManager chatManager = ChatManagerFactory.getChatManager(message.getChatId());
-        ChatCardController chatCardController= chatManager.getChatCardController();
-        chatCardController.updateUnreadMessagesNumber();
-        chatCardController.setLastMessage(message.getContent());
-        chatCardController.setTimestamp(message.getTimestamp());
-    }
+
 
     public static ObservableList<String> getMessageList(int chatID) {
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
