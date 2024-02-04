@@ -111,7 +111,7 @@ public class ChatCardController implements Initializable {
     private void initializeEventHandlers() {
         chatCardPane.setOnMouseClicked((MouseEvent event)->{
             displayChat();
-            //prepareChatDB();
+            prepareChatDB();
         });
     }
 
