@@ -4,8 +4,10 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.controller.IncomingFriendRequestController;
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.loaders.IncomingFriendRequestCardLoader;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
+import org.controlsfx.control.Notifications;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -37,7 +39,22 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
                         friendInvitation.getPicture(), friendInvitation.getInvitationId());
 
         ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
-        friendRequestList.add(newFriendRequestCard);
+
+        Platform.runLater(() -> {
+            friendRequestList.add(newFriendRequestCard);
+
+            showFriendRequestNotification(friendInvitation.getName());
+        });
     }
+
+    private void showFriendRequestNotification(String friendName) {
+        Notifications.create()
+                .title("New Friend Request")
+                .text(friendName + " has sent you a friend request.")
+                .darkStyle()
+                .threshold(3, Notifications.create().title("Collapsed Notification"))
+                .showInformation();
+    }
+
 
 }

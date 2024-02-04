@@ -95,7 +95,16 @@ public class AddFriendController implements Initializable {
 
     private boolean isEligibleForFriendAddition(FriendToAddResponse friendToAddResponse) {
         return friendToAddResponse != null && !friendToAddResponse.getPhoneNumber().equals(currentUserPhone) &&
-                isUnique(friendToAddResponse.getPhoneNumber()) && !isInvitationSent();
+                isUnique(friendToAddResponse.getPhoneNumber()) && !isInvitationSent() && !areAlreadyFriends();
+    }
+
+    private boolean areAlreadyFriends() {
+        try {
+            return server.areAlreadyFriends(currentUserPhone ,newContactPhoneSearchTextField.getText());
+        } catch (RemoteException e) {
+            System.err.println("Invitation Exception: " + e.getMessage());
+            return false;
+        }
     }
 
     private Tooltip hintText(String text) {

@@ -33,4 +33,6 @@ public interface ServerAPI extends Remote{
     boolean acceptFriendRequest(int invitationId) throws RemoteException;
 
     boolean cancelFriendRequest(int invitationId) throws RemoteException;
+
+    boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException;
 }

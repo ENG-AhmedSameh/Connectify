@@ -23,6 +23,7 @@ public class StageManager {
     private final Map<String, Scene> sceneMap;
     private AnchorPane chatsPane;
     private AnchorPane logoPane;
+    private AnchorPane incomingFriendRequestPane;
 
 
     private StageManager(){
@@ -107,7 +108,9 @@ public class StageManager {
         Scene scene = sceneMap.get("home");
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
-        centerPane.setLeft(IncomingFriendRequestLoader.loadIncomingFriendRequestAnchorPane());
+        if (incomingFriendRequestPane == null)
+            incomingFriendRequestPane = IncomingFriendRequestLoader.loadIncomingFriendRequestAnchorPane();
+        centerPane.setLeft(incomingFriendRequestPane);
     }
 
     private Scene createLoginScene(){

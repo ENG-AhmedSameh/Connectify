@@ -31,12 +31,9 @@ public class InvitationService {
                 IncomingFriendInvitationResponse receivedInvitation = invitationsDAO
                         .getIncomingFriendRequest(senderPhoneNumber, receiverPhoneNumber);
 
-                ConnectedUser receiver = Server.getConnectedUsers().get(receiverPhoneNumber);
+                ConnectedUser receiver = Server.getConnectedUsers().get(receiverPhoneNumber.substring(3));
                 if (receiver != null) {
                     receiver.receiveFriendRequest(receivedInvitation);
-                } else {
-                    System.err.println("Receiver with phone number " + receiverPhoneNumber + " not found.");
-                    System.out.println(Server.getConnectedUsers());
                 }
             } catch (RemoteException e) {
                 System.err.println("Error sending friend invitation. case:" + e.getMessage());

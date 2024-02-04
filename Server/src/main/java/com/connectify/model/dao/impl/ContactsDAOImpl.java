@@ -84,4 +84,31 @@ public class ContactsDAOImpl implements ContactsDAO {
         }
     }
 
+    @Override
+    public boolean areAlreadyFriends(String userPhone, String friendPhone) {
+        String query = "SELECT COUNT(*) FROM contacts WHERE (user = ? AND contact = ?) OR (user = ? AND contact = ?)";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userPhone);
+            preparedStatement.setString(2, friendPhone);
+            preparedStatement.setString(3, friendPhone);
+            preparedStatement.setString(4, userPhone);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return false;
+        }
+
+        return false;
+    }
+
 }

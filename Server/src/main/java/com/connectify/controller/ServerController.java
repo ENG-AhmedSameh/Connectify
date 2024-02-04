@@ -4,6 +4,7 @@ package com.connectify.controller;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
+import com.connectify.services.ContactsService;
 import com.connectify.services.InvitationService;
 import com.connectify.services.UserService;
 
@@ -15,9 +16,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     UserService userService;
     InvitationService invitationService;
+    ContactsService contactsService;
     public ServerController() throws RemoteException {
         userService = new UserService();
         invitationService = new InvitationService();
+        contactsService = new ContactsService();
     }
 
     @Override
@@ -72,6 +75,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public boolean cancelFriendRequest(int invitationId) throws RemoteException {
         return invitationService.cancelFriendRequest(invitationId);
+    }
+
+    @Override
+    public boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException {
+        return contactsService.areAlreadyFriends(userPhone, friendPhone);
     }
 
     @Override
