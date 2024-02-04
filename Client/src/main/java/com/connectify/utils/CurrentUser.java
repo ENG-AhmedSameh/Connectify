@@ -21,7 +21,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     private final String phoneNumber;
 
-    private static final Map<Integer, ObservableList<String>> chatListMessagesMap = new HashMap<>();
+    private static final Map<Integer, ObservableList<Message>> chatListMessagesMap = new HashMap<>();
 
     public CurrentUser(String phoneNumber) throws RemoteException {
         super();
@@ -49,12 +49,12 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         ChatCardHandler.updateChatCard(receivedMessage);
         int chatID = messageDTO.getChatId();
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
-        chatListMessagesMap.get(chatID).add(messageDTO.getContent());
+        chatListMessagesMap.get(chatID).add(receivedMessage);
     }
 
 
 
-    public static ObservableList<String> getMessageList(int chatID) {
+    public static ObservableList<Message> getMessageList(int chatID) {
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
         return chatListMessagesMap.get(chatID);
     }

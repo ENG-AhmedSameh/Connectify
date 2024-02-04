@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ChatCardLoader {
 
-    //private static final Map<AnchorPane,ChatCardController> chatsCardsControllersMap = new HashMap<>();
+    private static final Map<AnchorPane,Integer> chatsCardsIdMap = new HashMap<>();
     public static AnchorPane loadChatCardAnchorPane(){
         FXMLLoader fxmlLoader = new FXMLLoader();
         ChatCardController controller = new ChatCardController();
@@ -26,11 +26,11 @@ public class ChatCardLoader {
             throw new RuntimeException(e);
         }
     }
-//    public static ChatCardController getChatsCardController(AnchorPane pane){
-//        if(chatsCardsControllersMap.containsKey(pane))
-//            return chatsCardsControllersMap.get(pane);
-//        return null;
-//    }
+    public static Integer getChatsCardId(AnchorPane pane){
+        if(chatsCardsIdMap.containsKey(pane))
+            return chatsCardsIdMap.get(pane);
+        return null;
+    }
 
     public static AnchorPane loadChatCardAnchorPane(int chatId, int unread, String name, byte[] picture, String lastMessage, Timestamp timestamp) {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -41,6 +41,7 @@ public class ChatCardLoader {
         chatManager.setChatCardController(controller);
         try {
             AnchorPane chatCardPane = fxmlLoader.load();
+            chatsCardsIdMap.put(chatCardPane,chatId);
             chatManager.setChatCardPane(chatCardPane);
             return chatCardPane;
         } catch (IOException e) {

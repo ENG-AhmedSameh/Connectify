@@ -22,6 +22,7 @@ public class ChatPaneFactory {
 
         }
         BorderPane newPane = ChatLoader.loadChatPane(id,name,image);
+        ChatManagerFactory.getChatManager(id).setChatPane(newPane);
         paneCache.put(id, newPane);
         return newPane;
     }

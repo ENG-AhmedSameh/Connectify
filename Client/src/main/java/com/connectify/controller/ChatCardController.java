@@ -52,17 +52,17 @@ public class ChatCardController implements Initializable {
     @FXML
     private AnchorPane chatCardPane;
 
-    int chatId;
-    IntegerProperty unread = new SimpleIntegerProperty();
-    StringProperty chatName = new SimpleStringProperty();
-    StringProperty lastMessage= new SimpleStringProperty();
-    byte[] pictureBytes;
-    Image pictureImage;
-    Timestamp timestamp;
-    ObjectProperty<LocalDateTime> timestampProperty;
-    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    StringBinding formattedTimestamp;
+    private int chatId;
+    private IntegerProperty unread = new SimpleIntegerProperty();
+    private StringProperty chatName = new SimpleStringProperty();
+    private StringProperty lastMessage= new SimpleStringProperty();
+    private byte[] pictureBytes;
+    private Image pictureImage;
+    private Timestamp timestamp;
+    private ObjectProperty<LocalDateTime> timestampProperty;
+    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private StringBinding formattedTimestamp;
     public ChatCardController() {
     }
 
@@ -202,6 +202,9 @@ public class ChatCardController implements Initializable {
 
     public Timestamp getLastMessageTimestamp() {
         return timestamp;
+    }
+    public ObjectProperty<LocalDateTime> getLastMessageTimeProperty() {
+        return timestampProperty;
     }
 
     public void setTimestamp(Timestamp timestamp) {

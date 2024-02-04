@@ -4,12 +4,15 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
+import com.connectify.model.entities.Message;
 import com.connectify.utils.ChatCardHandler;
 import com.connectify.utils.CurrentUser;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -17,14 +20,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
@@ -42,7 +49,7 @@ public class ChatController implements Initializable {
     private Text membersCount;
 
     @FXML
-    private ListView<String> messagesList;
+    private ListView<Message> messagesList;
 
     @FXML
     private Circle pictureClip;
@@ -59,7 +66,7 @@ public class ChatController implements Initializable {
     @FXML
     private Circle statusCircle;
 
-    private ObservableList<String> messages;
+    private ObservableList<Message> messages;
 
     private final int chatID;
 
@@ -91,16 +98,19 @@ public class ChatController implements Initializable {
     }
 
     public void sendHandler(){
-        try {
-            MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()));
-            MessageMapper mapper = MessageMapper.INSTANCE;
-            ChatCardHandler.updateChatCard(mapper.messageSentDtoTOMessage(messageSentDTO));
-            server.sendMessage(messageSentDTO);
-            //TODO render send message
-            messages.add(sendBox.getText());
-            sendBox.clear();
-        } catch (RemoteException e) {
-            System.err.println("Can't find server, details: "+e.getMessage());
+        if(!Objects.equals(sendBox.getText(), "")){
+            try {
+                MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()));
+                MessageMapper mapper = MessageMapper.INSTANCE;
+                Message message =mapper.messageSentDtoTOMessage(messageSentDTO);
+                ChatCardHandler.updateChatCard(message);
+                server.sendMessage(messageSentDTO);
+                //TODO render send message
+                messages.add(message);
+                sendBox.clear();
+            } catch (RemoteException e) {
+                System.err.println("Can't find server, details: "+e.getMessage());
+            }
         }
     }
 
@@ -113,23 +123,53 @@ public class ChatController implements Initializable {
 
     }
 
-    private void setListViewCellFactory() {
-        messagesList.setCellFactory(new Callback<>() {
-            @Override
-            public ListCell<String> call(ListView<String> listView) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty || item == null) {
-                            setGraphic(null);
+    private void setListViewCellFactory(){
+        messagesList.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
+            public ListCell<Message> call(ListView<Message> param) {
+                return new ListCell<>(){
+                     @Override
+                    public void updateItem(Message message, boolean empty) {
+                        super.updateItem(message, empty);
+                        if (!empty) {
+                            FXMLLoader loader;
+                            if (message != null) {
+                                try {
+                                    if(Objects.equals(message.getSender(), Client.getConnectedUser().getPhoneNumber())){
+                                        loader= new FXMLLoader(getClass().getResource("/views/SentMessageHBox.fxml"));
+                                        //TODO add sender image here
+                                        loader.setController(new SentMessageHBoxController(null,message.getContent()));
+                                    }
+
+                                    else{
+                                        loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
+                                        loader.setController(new ReceivedMessageHBoxController(null,message.getContent()));
+                                    }
+
+                                } catch (RemoteException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                HBox root;
+                                try {
+                                    root = loader.load();
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                Platform.runLater(()->{
+                                    setGraphic(root);
+                                });
+                            }
                         } else {
-                            setGraphic(new Label(item));
+                            Platform.runLater(()->{
+                                setText(null);
+                                setGraphic(null);
+                            });
                         }
                     }
                 };
             }
         });
     }
+
+
 
 }

@@ -8,6 +8,7 @@ import com.connectify.loaders.ChatCardLoader;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.model.entities.ChatMember;
+import com.connectify.utils.ChatManagerFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -46,7 +47,7 @@ public class AllChatsPaneController implements Initializable {
 
     @FXML
     private ListView<AnchorPane> allChatsListView;
-    ObservableList<AnchorPane> chatsPanesList = FXCollections.observableArrayList();
+    private ObservableList<AnchorPane> chatsPanesList = FXCollections.observableArrayList();
 
     private ServerAPI server;
     private static String currentUserId;
@@ -61,6 +62,7 @@ public class AllChatsPaneController implements Initializable {
     public AllChatsPaneController(){
     }
 
+    public SortedList<AnchorPane> sortedAnchorPanes;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,13 +79,13 @@ public class AllChatsPaneController implements Initializable {
     }
 
     private void initializeListView(){
-//        SortedList<AnchorPane> sortedAnchorPanes = new SortedList<>(chatsPanesList, (pane1, pane2) -> {
-//            ChatCardController controller1 = ChatCardLoader.getChatsCardController(pane1);
-//            ChatCardController controller2 = ChatCardLoader.getChatsCardController(pane2);
-//            return Objects.requireNonNull(controller1).getTimestamp().compareTo(Objects.requireNonNull(controller2).getTimestamp());
-//        });
-//        allChatsListView.setItems(sortedAnchorPanes);
-        allChatsListView.setItems(chatsPanesList);
+        sortedAnchorPanes = new SortedList<>(chatsPanesList, (pane1, pane2) -> {
+            ChatCardController controller1 = ChatManagerFactory.getChatManager(ChatCardLoader.getChatsCardId(pane1)).getChatCardController();
+            ChatCardController controller2 = ChatManagerFactory.getChatManager(ChatCardLoader.getChatsCardId(pane2)).getChatCardController();
+            return Objects.requireNonNull(controller2).getLastMessageTimestamp().compareTo(Objects.requireNonNull(controller1).getLastMessageTimestamp());
+        });
+        allChatsListView.setItems(sortedAnchorPanes);
+        //allChatsListView.setItems(chatsPanesList);
         setListViewCellFactory();
     }
 

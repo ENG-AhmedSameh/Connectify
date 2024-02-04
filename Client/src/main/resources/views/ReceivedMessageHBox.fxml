@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<HBox fx:id="userMessageBox" fillHeight="false" style="-fx-background-color: transparent;" styleClass="user-message" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Circle fx:id="imageCircle" fill="#4c5660" radius="22.0" stroke="BLACK" strokeType="INSIDE">
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+      </Circle>
+      <TextFlow fx:id="contentTextFlow" maxWidth="-Infinity" style="-fx-background-radius: 10;" styleClass="contact-message" stylesheets="@../styles/Chat.css">
+         <children>
+            <Text fx:id="messageContentText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </TextFlow>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+   </padding>
+</HBox>
