@@ -12,18 +12,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -127,7 +123,7 @@ public class ChatController implements Initializable {
         messagesList.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
             public ListCell<Message> call(ListView<Message> param) {
                 return new ListCell<>(){
-                     @Override
+                    @Override
                     public void updateItem(Message message, boolean empty) {
                         super.updateItem(message, empty);
                         if (!empty) {
@@ -136,13 +132,11 @@ public class ChatController implements Initializable {
                                 try {
                                     if(Objects.equals(message.getSender(), Client.getConnectedUser().getPhoneNumber())){
                                         loader= new FXMLLoader(getClass().getResource("/views/SentMessageHBox.fxml"));
-                                        //TODO add sender image here
-                                        loader.setController(new SentMessageHBoxController(null,message.getContent()));
+                                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
                                     }
-
                                     else{
                                         loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
-                                        loader.setController(new ReceivedMessageHBoxController(null,message.getContent()));
+                                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
                                     }
 
                                 } catch (RemoteException e) {
