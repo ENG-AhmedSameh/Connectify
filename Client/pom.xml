@@ -10,6 +10,11 @@
   <name>Client</name>
     <dependencies>
         <dependency>
+            <groupId>ca.pjer</groupId>
+            <artifactId>chatter-bot-api</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
             <version>17.0.2</version>
