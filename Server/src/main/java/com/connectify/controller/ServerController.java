@@ -12,6 +12,9 @@ import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.services.ContactService;
+import com.connectify.dto.*;
+import com.connectify.services.ContactsService;
+import com.connectify.services.InvitationService;
 import com.connectify.services.UserService;
 
 import java.rmi.RemoteException;
@@ -25,11 +28,15 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     ChatService chatService;
     ContactService contactService;
+    InvitationService invitationService;
+    ContactsService contactsService;
     public ServerController() throws RemoteException {
         userService = new UserService();
         messageService = new MessageService();
         chatService = new ChatService();
         contactService =new ContactService();
+        invitationService = new InvitationService();
+        contactsService = new ContactsService();
     }
 
     @Override
@@ -39,6 +46,21 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     public LoginResponse login(LoginRequest loginRequest) throws RemoteException {
         return userService.loginUser(loginRequest);
+    }
+
+    @Override
+    public FriendToAddResponse getFriendToAdd(String phoneNumber) throws RemoteException {
+        return userService.getFriendToAddData(phoneNumber);
+    }
+
+    @Override
+    public boolean sendInvitation(String senderPhoneNumber, String receiverPhoneNumber) throws RemoteException {
+        return invitationService.sendInvitation(senderPhoneNumber, receiverPhoneNumber);
+    }
+
+    @Override
+    public boolean isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) throws RemoteException {
+        return invitationService.isInvitationSent(senderPhoneNumber, receiverPhoneNumber);
     }
 
     @Override
@@ -101,4 +123,44 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         return chatService.getAllOtherMembersInfo(chatId,member);
     }
 
+
+    @Override
+    public List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String phoneNumber) throws RemoteException {
+        return invitationService.getIncomingFriendRequests(phoneNumber);
+    }
+
+    @Override
+    public boolean acceptFriendRequest(int invitationId) throws RemoteException {
+        return invitationService.acceptFriendRequest(invitationId);
+    }
+
+    @Override
+    public boolean cancelFriendRequest(int invitationId) throws RemoteException {
+        return invitationService.cancelFriendRequest(invitationId);
+    }
+
+    @Override
+    public boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException {
+        return contactsService.areAlreadyFriends(userPhone, friendPhone);
+    }
+
+    @Override
+    public boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException {
+        return userService.updateUser(updateUserInfoRequest);
+    }
+
+    @Override
+    public boolean updateUserPicture(String phoneNumber, byte[] picture) {
+        return userService.updatePicture(phoneNumber, picture);
+    }
+
+    @Override
+    public boolean updateUserPassword(String phoneNumber, byte[] salt, String password) {
+        return userService.updatePassword(phoneNumber, salt, password);
+    }
+
+    @Override
+    public UserProfileResponse getUserProfile(String phoneNumber) {
+        return  userService.getUserProfile(phoneNumber);
+    }
 }

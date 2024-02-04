@@ -7,6 +7,7 @@ import com.connectify.dto.ContactsDTO;
 import com.connectify.loaders.AllContactsPaneLoader;
 import com.connectify.loaders.LogoLoader;
 import com.connectify.model.entities.User;
+import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,6 +58,12 @@ public class OptionsController {
     private ImageView userProfileImageView1;
 
     @FXML
+    private Button incomingFriendRequestButton;
+
+    @FXML
+    private ImageView incomingFriendRequestImageView;
+
+    @FXML
     void chatsHandler(ActionEvent event) {
 
     }
@@ -73,7 +80,7 @@ public class OptionsController {
 
     @FXML
     void inviteHandler(ActionEvent event) {
-
+        StageManager.getInstance().switchToAddFriend();
     }
 
     @FXML
@@ -95,7 +102,12 @@ public class OptionsController {
 
     @FXML
     void userProfileHandler(ActionEvent event) {
+        StageManager.getInstance().switchToProfile();
+    }
 
+    @FXML
+    void incomingFriendRequestHandler(ActionEvent event) {
+        StageManager.getInstance().switchToIncomingFriendRequest();
     }
 
 }

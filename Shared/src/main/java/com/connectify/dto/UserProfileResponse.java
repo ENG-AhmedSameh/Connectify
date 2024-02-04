@@ -1,26 +1,32 @@
-package com.connectify.model.entities;
-
+package com.connectify.dto;
 
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class User{
+public class UserProfileResponse implements Serializable {
 
     private String phoneNumber;
     private String name;
     private String email;
-    private String password;
     private byte[] picture;
     private Gender gender;
     private String country;
     private LocalDate birthDate;
     private String bio;
-    private Mode mode;
     private Status status;
-    private byte[] salt;
+    private Mode mode;
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -44,14 +50,6 @@ public class User{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public byte[] getPicture() {
@@ -94,14 +92,6 @@ public class User{
         this.bio = bio;
     }
 
-    public Mode getMode() {
-        return mode;
-    }
-
-    public void setMode(Mode mode) {
-        this.mode = mode;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -109,13 +99,4 @@ public class User{
     public void setStatus(Status status) {
         this.status = status;
     }
-
-    public byte[] getSalt() {
-        return salt;
-    }
-
-    public void setSalt(byte[] salt) {
-        this.salt = salt;
-    }
 }
-
