@@ -1,5 +1,6 @@
 package com.connectify.dto;
 
+import java.io.File;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -8,12 +9,15 @@ public class MessageSentDTO implements Serializable {
     private int chatId;
     private String content;
     private Timestamp timestamp;
+    private File attachment;
+    private Integer attachmentId;
 
-    public MessageSentDTO(String sender, int chatId, String content, Timestamp timestamp) {
+    public MessageSentDTO(String sender, int chatId, String content, Timestamp timestamp, File attachment) {
         this.sender = sender;
         this.chatId = chatId;
         this.content = content;
         this.timestamp= timestamp;
+        this.attachment = attachment;
     }
 
     public int getChatId() {
@@ -46,5 +50,21 @@ public class MessageSentDTO implements Serializable {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public File getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(File attachment) {
+        this.attachment = attachment;
+    }
+
+    public Integer getAttachmentId() {
+        return attachmentId;
+    }
+
+    public void setAttachmentId(Integer attachmentId) {
+        this.attachmentId = attachmentId;
     }
 }

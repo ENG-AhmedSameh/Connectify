@@ -33,7 +33,8 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
             Notifications.create()
                     .title(title)
                     .text(body)
-                    .position(Pos.BOTTOM_RIGHT).showInformation();
+                    .position(Pos.BOTTOM_RIGHT)
+                    .showInformation();
         });
     }
 
