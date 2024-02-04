@@ -12,4 +12,6 @@ public interface ConnectedUser extends Remote {
     String getPhoneNumber() throws RemoteException;
 
     void receiveFriendRequest(IncomingFriendInvitationResponse friendInvitation) throws RemoteException;
+
+    void showNotification(String title, String message) throws RemoteException;
 }

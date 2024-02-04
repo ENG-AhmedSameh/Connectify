@@ -8,6 +8,7 @@ import com.connectify.model.dao.ContactsDAO;
 import com.connectify.model.dao.InvitationsDAO;
 import com.connectify.model.dao.impl.ContactsDAOImpl;
 import com.connectify.model.dao.impl.InvitationsDAOImpl;
+import com.connectify.model.dao.impl.UserDAOImpl;
 import com.connectify.model.entities.Contacts;
 import com.connectify.model.entities.Invitations;
 import com.connectify.model.entities.User;
@@ -55,8 +56,26 @@ public class InvitationService {
 
     public boolean acceptFriendRequest(int invitationId) {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
-        return invitationsDAO.acceptFriendRequest(invitationId);
+        Invitations friendInvitation = invitationsDAO.get(invitationId);
+        boolean isInvitationAccepted = invitationsDAO.acceptFriendRequest(invitationId);
+
+        if (isInvitationAccepted) {
+            try {
+                ConnectedUser receiver = Server.getConnectedUsers().get(friendInvitation.getSender().substring(3));
+                if (receiver != null) {
+                    String notificationTitle = "New Friendship";
+                    String receiverName = new UserDAOImpl().get(friendInvitation.getReceiver()).getName();
+                    String notificationMessage = receiverName + " has accepted your friend request.";
+                    receiver.showNotification(notificationTitle, notificationMessage);
+                }
+            } catch (RemoteException e) {
+                System.err.println("Error sending friend invitation. Case: " + e.getMessage());
+            }
+        }
+
+        return isInvitationAccepted;
     }
+
 
     public boolean cancelFriendRequest(int invitationId) {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();

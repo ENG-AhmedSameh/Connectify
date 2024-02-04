@@ -74,7 +74,6 @@ public class IncomingFriendRequestController implements Initializable {
     private void loadAllIncomingFriendRequest() {
         try {
             List<IncomingFriendInvitationResponse> incomingFriendRequests = server.getIncomingFriendRequests(currentUserPhone);
-
             for (IncomingFriendInvitationResponse  response: incomingFriendRequests) {
                 addIncomingFriendRequestCard(response.getName(), response.getPhoneNumber(), response.getPicture(), response.getInvitationId());
             }

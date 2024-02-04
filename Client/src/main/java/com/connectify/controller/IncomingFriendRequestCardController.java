@@ -103,7 +103,7 @@ public class IncomingFriendRequestCardController implements Initializable {
             if (friendRequestAccepted) {
                 ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
 
-                friendRequestList.removeIf(anchorPane -> isControllerMatch(anchorPane));
+                friendRequestList.removeIf(this::isControllerMatch);
             }
         } catch (RemoteException e) {
             System.err.println("Accept Friend Request failed: " + e.getMessage());
@@ -119,7 +119,7 @@ public class IncomingFriendRequestCardController implements Initializable {
             if (friendRequestCanceled) {
                 ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
 
-                friendRequestList.removeIf(anchorPane -> isControllerMatch(anchorPane));
+                friendRequestList.removeIf(this::isControllerMatch);
             }
         } catch (RemoteException e) {
             System.err.println("Cancel Friend Request failed: " + e.getMessage());

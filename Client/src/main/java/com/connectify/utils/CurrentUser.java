@@ -21,6 +21,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         super();
         this.phoneNumber = phoneNumber;
     }
+
     @Override
     public void receiveAnnouncement(String announcement) throws RemoteException {
 
@@ -42,18 +43,27 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
         Platform.runLater(() -> {
             friendRequestList.add(newFriendRequestCard);
-
-            showFriendRequestNotification(friendInvitation.getName());
         });
+
+        String title = "New Friend Request";
+        String message = friendInvitation.getName() + " has sent you a friend request.";
+        try {
+            showNotification(title, message);
+        } catch (RemoteException e) {
+            System.err.println("Error receive Friend Request. case:" + e.getMessage());
+        }
     }
 
-    private void showFriendRequestNotification(String friendName) {
-        Notifications.create()
-                .title("New Friend Request")
-                .text(friendName + " has sent you a friend request.")
-                .darkStyle()
-                .threshold(3, Notifications.create().title("Collapsed Notification"))
-                .showInformation();
+    @Override
+    public void showNotification(String title, String message) throws RemoteException {
+        Platform.runLater(() -> {
+            Notifications.create()
+                    .title(title)
+                    .text(message)
+                    .darkStyle()
+                    .threshold(3, Notifications.create().title("Collapsed Notification"))
+                    .showInformation();
+        });
     }
 
 
