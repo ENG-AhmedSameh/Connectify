@@ -1,22 +1,17 @@
 package com.connectify.utils;
 
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.controller.ChatCardController;
 import com.connectify.dto.MessageDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import org.controlsfx.control.Notifications;
 import com.connectify.controller.IncomingFriendRequestController;
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.loaders.IncomingFriendRequestCardLoader;
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
-import org.controlsfx.control.Notifications;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -36,12 +31,14 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     }
 
     @Override
-    public void receiveNotification(String title, String body) throws RemoteException {
-        Platform.runLater(()->{
+    public void receiveNotification(String title, String message) throws RemoteException {
+        Platform.runLater(() -> {
             Notifications.create()
                     .title(title)
-                    .text(body)
-                    .position(Pos.BOTTOM_RIGHT).showInformation();
+                    .text(message)
+                    .darkStyle()
+                    .threshold(3, Notifications.create().title("Collapsed Notification"))
+                    .showInformation();
         });
     }
 
@@ -83,22 +80,10 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         String title = "New Friend Request";
         String message = friendInvitation.getName() + " has sent you a friend request.";
         try {
-            showNotification(title, message);
+            this.receiveNotification(title, message);
         } catch (RemoteException e) {
             System.err.println("Error receive Friend Request. case:" + e.getMessage());
         }
-    }
-
-    @Override
-    public void showNotification(String title, String message) throws RemoteException {
-        Platform.runLater(() -> {
-            Notifications.create()
-                    .title(title)
-                    .text(message)
-                    .darkStyle()
-                    .threshold(3, Notifications.create().title("Collapsed Notification"))
-                    .showInformation();
-        });
     }
 
 

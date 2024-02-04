@@ -36,7 +36,7 @@ public class IncomingFriendRequestController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             server = (ServerAPI) Client.getRegistry().lookup("server");
-            currentUserPhone = "+20" + Client.getConnectedUser().getPhoneNumber();
+            currentUserPhone = Client.getConnectedUser().getPhoneNumber();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         } catch (NotBoundException e) {

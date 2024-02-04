@@ -105,7 +105,7 @@ public class ContactsDAOImpl implements ContactsDAO {
                     User user =new User();
                     user.setPhoneNumber(resultSet.getString(1));
                     user.setName(resultSet.getString(2));
-                    user.setPicture(resultSet.getString(3));
+                    user.setPicture(resultSet.getBytes(3));
                     contactsList.add(user);
                 }
             }

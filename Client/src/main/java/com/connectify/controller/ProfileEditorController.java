@@ -70,7 +70,6 @@ public class ProfileEditorController implements Initializable {
     private UserProfileResponse currentUserDetails;
     private boolean isPictureChanged;
     private byte[] newPicture;
-    private String egyptKey = "+20";
 
 
     @Override
@@ -80,7 +79,7 @@ public class ProfileEditorController implements Initializable {
 
         try {
             server = (ServerAPI) Client.getRegistry().lookup("server");
-            currentUserDetails = server.getUserProfile(egyptKey + Client.getConnectedUser().getPhoneNumber());
+            currentUserDetails = server.getUserProfile(Client.getConnectedUser().getPhoneNumber());
             populateUserDetails();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());

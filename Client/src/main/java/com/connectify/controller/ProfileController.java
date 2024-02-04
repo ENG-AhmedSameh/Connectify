@@ -46,7 +46,7 @@ public class ProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
-            currentUserDetails = server.getUserProfile("+20" +Client.getConnectedUser().getPhoneNumber());
+            currentUserDetails = server.getUserProfile(Client.getConnectedUser().getPhoneNumber());
             populateUserDetails();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());

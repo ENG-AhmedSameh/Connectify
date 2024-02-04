@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ContactsDTO implements Serializable {
     private String phoneNumber;
     private String name;
-    private String picture;
+    private byte[] picture;
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -22,11 +22,11 @@ public class ContactsDTO implements Serializable {
         this.name = name;
     }
 
-    public String getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 }

@@ -48,12 +48,12 @@ public class GroupMessageHBoxController{
             setMessageTime(messageTime);
         });
     }
-    public void setDifferentSenderMessageStyle(String senderName,String senderImage ,String messageContent, Timestamp messageTime){
+    public void setDifferentSenderMessageStyle(String senderName,byte[] senderImage ,String messageContent, Timestamp messageTime){
         Platform.runLater(()->{
             setMessageContent(messageContent);
             setMessageTime(messageTime);
             setSenderName(senderName);
-            //setSenderImage(senderImage);
+//            setSenderImage(senderImage);
         });
     }
 

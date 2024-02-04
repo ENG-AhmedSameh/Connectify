@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class MemberInfoDTO implements Serializable {
     private String phoneNumber;
     private String name;
-    private String picture;
+    private byte[] picture;
     private String bio;
 
 
@@ -26,11 +26,11 @@ public class MemberInfoDTO implements Serializable {
         this.name = name;
     }
 
-    public String getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
