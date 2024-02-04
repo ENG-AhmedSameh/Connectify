@@ -1,48 +1,41 @@
 package com.connectify.controller;
 
+import com.connectify.model.entities.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ContactCardController implements Initializable {
+    User user;
+    public ContactCardController(User user)
+    {
+        this.user=user;
+    }
 
     @FXML
-    private Label contactNameTextField;
+    private Label contactNameLabel;
 
     @FXML
     private ImageView contactPictureImageView;
 
     @FXML
-    private Label lastMessageLabel;
-
-    @FXML
-    private Label lastMessageTimeLabel;
-
-    @FXML
-    private HBox messageHBox;
-
-    @FXML
-    private Label nContactUnreadMessagesLabel;
+    private Label contactPhoneNumberLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        contactNameLabel.setText(user.getName());
+//        contactPictureImageView.setImage(user.getPicture());
+        contactPhoneNumberLabel.setText(user.getPhoneNumber());
+        System.out.println(contactNameLabel.getText());
     }
 
     public void paneOnClicked(MouseEvent mouseEvent) {
         System.out.println("Contact");
     }
-
-//    @FXML
-//    private void onMouseEnteredHandler(ActionEvent event){
-//        messageHBox.setStyle("-fx-background-color: lightgreen;");
-//    }
-
 
 }

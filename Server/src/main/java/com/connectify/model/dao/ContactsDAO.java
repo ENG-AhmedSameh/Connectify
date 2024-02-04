@@ -2,6 +2,11 @@ package com.connectify.model.dao;
 
 
 import com.connectify.model.entities.Contacts;
+import com.connectify.model.entities.User;
 
-public interface ContactsDAO extends DAO<Contacts, String> {}
+import java.util.List;
+
+public interface ContactsDAO extends DAO<Contacts, String> {
+    List<User> getContactsList(String PhoneNumber);
+}
 

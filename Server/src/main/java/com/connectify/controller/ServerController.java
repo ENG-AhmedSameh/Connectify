@@ -7,6 +7,11 @@ import com.connectify.dto.*;
 import com.connectify.services.ChatService;
 import com.connectify.services.MessageService;
 import com.connectify.services.UserChatsService;
+import com.connectify.dto.ContactsDTO;
+import com.connectify.dto.LoginRequest;
+import com.connectify.dto.LoginResponse;
+import com.connectify.dto.SignUpRequest;
+import com.connectify.services.ContactService;
 import com.connectify.services.UserService;
 
 import java.rmi.RemoteException;
@@ -19,10 +24,12 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     MessageService messageService;
 
     ChatService chatService;
+    ContactService contactService;
     public ServerController() throws RemoteException {
         userService = new UserService();
         messageService = new MessageService();
         chatService = new ChatService();
+        contactService =new ContactService();
     }
 
     @Override
@@ -77,4 +84,10 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     public void prepareCurrentChat(ChatMemberDTO chatMemberDTO) throws RemoteException {
         chatService.prepareCurrentChat(chatMemberDTO);
     }
+
+    @Override
+    public List<ContactsDTO> getContacts(String phoneNumber) throws RemoteException {
+        return contactService.getContactsDTOList(phoneNumber);
+    }
+
 }

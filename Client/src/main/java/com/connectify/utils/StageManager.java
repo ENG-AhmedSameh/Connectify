@@ -129,4 +129,7 @@ public class StageManager {
     public void resetHomeScene() {
         sceneMap.remove("home");
     }
+    public Map<String, Scene> getSceneMap() {
+        return sceneMap;
+    }
 }
