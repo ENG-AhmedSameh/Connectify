@@ -90,4 +90,9 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         return contactService.getContactsDTOList(phoneNumber);
     }
 
+    @Override
+    public boolean isPrivateChat(int chatID) throws RemoteException {
+        return chatService.isPrivateChat(chatID);
+    }
+
 }

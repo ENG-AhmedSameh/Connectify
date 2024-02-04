@@ -4,9 +4,10 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Server;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.dto.MessageDTO;
-import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.ChatMemberMapper;
+import com.connectify.model.dao.ChatDAO;
 import com.connectify.model.dao.ChatMembersDAO;
+import com.connectify.model.dao.impl.ChatDAOImpl;
 import com.connectify.model.dao.impl.ChatMembersDAOImpl;
 import com.connectify.model.entities.ChatMember;
 
@@ -40,5 +41,10 @@ public class ChatService {
         ChatMember chatMember = mapper.chatMemberDtoToChatMember(chatMemberDTO);
         ChatMembersDAO chatMembersDAO = new ChatMembersDAOImpl();
         chatMembersDAO.prepareCurrentChat(chatMember);
+    }
+
+    public boolean isPrivateChat(int chatID) {
+        ChatDAO chatDAO = new ChatDAOImpl();
+        return chatDAO.isPrivateChat(chatID);
     }
 }

@@ -6,6 +6,7 @@ import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import com.connectify.utils.ChatCardHandler;
+import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.CurrentUser;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -135,8 +136,14 @@ public class ChatController implements Initializable {
                                         loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
                                     }
                                     else{
-                                        loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
-                                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                                        if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
+                                            loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
+                                            loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                                        }else{
+                                            //TODO handle group message here
+                                            loader=new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
+                                        }
+
                                     }
 
                                 } catch (RemoteException e) {

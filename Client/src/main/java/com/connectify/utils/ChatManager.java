@@ -19,7 +19,7 @@ public class ChatManager {
     private ChatCardController chatCardController;
     private ChatController chatController;
 
-    private Boolean isGroupChat;
+    private Boolean privateChat;
 
     List<User> chatMembers;
 
@@ -29,7 +29,7 @@ public class ChatManager {
         this.chatID=chatID;
         try {
             server = (ServerAPI) Client.getRegistry().lookup("server");
-            //isGroupChat = server.getChatType(String chatID);
+            privateChat = server.isPrivateChat(chatID);
         } catch (RemoteException | NotBoundException e) {
             throw new RuntimeException(e);
         }
@@ -74,5 +74,8 @@ public class ChatManager {
         this.chatController = chatController;
     }
 
+    public Boolean isPrivateChat() {
+        return privateChat;
+    }
 }
 

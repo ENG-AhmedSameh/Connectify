@@ -31,4 +31,5 @@ public interface ServerAPI extends Remote{
 
     void prepareCurrentChat(ChatMemberDTO chatMemberDTO) throws RemoteException;
     List<ContactsDTO> getContacts(String phoneNumber)throws RemoteException ;
+    boolean isPrivateChat(int chatID) throws RemoteException;
 }

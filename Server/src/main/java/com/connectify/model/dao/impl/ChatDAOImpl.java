@@ -83,4 +83,23 @@ public class ChatDAOImpl implements ChatDAO {
             return false;
         }
     }
+
+    @Override
+    public boolean isPrivateChat(int chatID) {
+        String query = "SELECT is_Private_Chat FROM connectify_db.chat WHERE chat_id = ?;";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            preparedStatement.setInt(1, chatID);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getBoolean("is_Private_Chat");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return false;
+        }
+        return false;
+    }
 }
