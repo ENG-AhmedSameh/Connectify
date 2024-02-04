@@ -65,7 +65,8 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public List<ChatCardsInfoDTO> getUserChatsCardsInfo(String userId) throws RemoteException{
         var service = new UserChatsService();
-        return service.getAllChatsInfo(userId);
+        List<ChatCardsInfoDTO> chatCardsInfoDTOS = service.getAllChatsInfo(userId);
+        return chatCardsInfoDTOS;
     }
 
     @Override
@@ -93,6 +94,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public boolean isPrivateChat(int chatID) throws RemoteException {
         return chatService.isPrivateChat(chatID);
+    }
+
+    @Override
+    public List<MemberInfoDTO> getAllChatOtherMembersInfo(int chatId, String member) throws RemoteException {
+        return chatService.getAllOtherMembersInfo(chatId,member);
     }
 
 }

@@ -5,7 +5,9 @@ import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
+import com.connectify.model.entities.User;
 import com.connectify.utils.ChatCardHandler;
+import com.connectify.utils.ChatManager;
 import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.CurrentUser;
 import javafx.application.Platform;
@@ -129,29 +131,34 @@ public class ChatController implements Initializable {
                         super.updateItem(message, empty);
                         if (!empty) {
                             FXMLLoader loader;
+                            HBox root;
                             if (message != null) {
                                 try {
                                     if(Objects.equals(message.getSender(), Client.getConnectedUser().getPhoneNumber())){
                                         loader= new FXMLLoader(getClass().getResource("/views/SentMessageHBox.fxml"));
                                         loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                                        root = loader.load();
                                     }
                                     else{
                                         if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
                                             loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
                                             loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                                            root = loader.load();
                                         }else{
-                                            //TODO handle group message here
-                                            loader=new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
+                                            loader = new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
+                                            GroupMessageHBoxController controller = new GroupMessageHBoxController();
+                                            loader.setController(controller);
+                                            root = loader.load();
+                                            ChatManager chatManager= ChatManagerFactory.getChatManager(chatID);
+                                            if(Objects.equals(chatManager.getGroupLastSender(), message.getSender())){
+                                                controller.setSameSenderMessageStyle(message.getContent(),message.getTimestamp());
+                                            }else{
+                                                User user = chatManager.getUserInfo(message.getSender());
+                                                controller.setDifferentSenderMessageStyle(user.getName(),user.getPicture(),message.getContent(),message.getTimestamp());
+                                            }
                                         }
-
                                     }
 
-                                } catch (RemoteException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                HBox root;
-                                try {
-                                    root = loader.load();
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
