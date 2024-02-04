@@ -1,7 +1,8 @@
 package com.connectify.mapper;
 
-import com.connectify.dto.SignUpRequest;
+import com.connectify.dto.*;
 import com.connectify.model.entities.User;
+import com.connectify.dto.SignUpRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -20,4 +21,11 @@ public interface UserMapper {
     @Mapping(source = "birthDate", target = "birthDate")
     @Mapping(source = "salt", target = "salt")
     User signUpRequestToUser(SignUpRequest signUpRequest);
+
+    FriendToAddResponse userToFriendToAddResponse(User user);
+
+
+    User updateUserInfoRequestToUser(UpdateUserInfoRequest updateUserInfoRequest);
+
+    UserProfileResponse userToUserProfileResponse(User user);
 }

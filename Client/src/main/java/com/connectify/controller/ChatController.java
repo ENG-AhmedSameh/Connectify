@@ -5,21 +5,21 @@ import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
+import com.connectify.model.entities.User;
 import com.connectify.utils.ChatCardHandler;
+import com.connectify.utils.ChatManager;
+import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.CurrentUser;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -141,30 +141,39 @@ public class ChatController implements Initializable {
         messagesList.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
             public ListCell<Message> call(ListView<Message> param) {
                 return new ListCell<>(){
-                     @Override
+                    @Override
                     public void updateItem(Message message, boolean empty) {
                         super.updateItem(message, empty);
                         if (!empty) {
                             FXMLLoader loader;
+                            HBox root;
                             if (message != null) {
                                 try {
                                     if(Objects.equals(message.getSender(), Client.getConnectedUser().getPhoneNumber())){
                                         loader= new FXMLLoader(getClass().getResource("/views/SentMessageHBox.fxml"));
-                                        //TODO add sender image here
-                                        loader.setController(new SentMessageHBoxController(null,message.getContent()));
+                                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                                        root = loader.load();
                                     }
-
                                     else{
-                                        loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
-                                        loader.setController(new ReceivedMessageHBoxController(null,message.getContent()));
+                                        if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
+                                            loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
+                                            loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                                            root = loader.load();
+                                        }else{
+                                            loader = new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
+                                            GroupMessageHBoxController controller = new GroupMessageHBoxController();
+                                            loader.setController(controller);
+                                            root = loader.load();
+                                            ChatManager chatManager= ChatManagerFactory.getChatManager(chatID);
+                                            if(Objects.equals(chatManager.getGroupLastSender(), message.getSender())){
+                                                controller.setSameSenderMessageStyle(message.getContent(),message.getTimestamp());
+                                            }else{
+                                                User user = chatManager.getUserInfo(message.getSender());
+                                                controller.setDifferentSenderMessageStyle(user.getName(),user.getPicture(),message.getContent(),message.getTimestamp());
+                                            }
+                                        }
                                     }
 
-                                } catch (RemoteException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                HBox root;
-                                try {
-                                    root = loader.load();
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }

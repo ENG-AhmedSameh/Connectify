@@ -1,0 +1,12 @@
+
+.anchor-pane {
+    -fx-background-color: #374754;
+}
+
+.button {
+    -fx-background-color: transparent;
+}
+
+.button:hover {
+    -fx-cursor: hand;
+}

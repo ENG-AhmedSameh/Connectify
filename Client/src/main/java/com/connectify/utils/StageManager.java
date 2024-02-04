@@ -2,6 +2,7 @@ package com.connectify.utils;
 
 import com.connectify.Client;
 import com.connectify.loaders.*;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -21,6 +22,9 @@ public class StageManager {
     private final Stage stage;
 
     private final Map<String, Scene> sceneMap;
+    private AnchorPane chatsPane;
+    private AnchorPane logoPane;
+    private AnchorPane incomingFriendRequestPane;
 
 
     private StageManager(){
@@ -73,6 +77,55 @@ public class StageManager {
         stage.setScene(scene);
     }
 
+    public void switchFromProfileEditorToHome(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setCenter(logoPane);
+        centerPane.setLeft(chatsPane);
+    }
+
+    public void switchFromAddFriendToHome(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setCenter(logoPane);
+        centerPane.setLeft(chatsPane);
+    }
+
+    public void switchToProfile(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setCenter(ProfileLoader.loadProfileAnchorPane());
+        centerPane.setLeft(chatsPane);
+    }
+
+    public void switchToProfileEditor(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setCenter(ProfileEditorLoader.loadProfileEditorAnchorPane());
+        centerPane.setLeft(chatsPane);
+    }
+
+    public void switchToAddFriend(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        centerPane.setLeft(AddFriendLoader.loadAddFriendAnchorPane());
+        centerPane.setCenter(logoPane);
+    }
+
+    public void switchToIncomingFriendRequest(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        if (incomingFriendRequestPane == null)
+            incomingFriendRequestPane = IncomingFriendRequestLoader.loadIncomingFriendRequestAnchorPane();
+        centerPane.setLeft(incomingFriendRequestPane);
+    }
+
     private Scene createLoginScene(){
         BorderPane mainPane = MainPaneLoader.loadMainBorderPane();
         GridPane centerPane = (GridPane) mainPane.getCenter();
@@ -115,9 +168,8 @@ public class StageManager {
         HBox titleBar = TitleBarLoader.loadTitleBarHBox();
         BorderPane centerPane = new BorderPane();
         AnchorPane optionsPane = HomeScreenOptionsLoader.loadHomeScreenOptionsAnchorPane();
-        AnchorPane chatsPane = null;
         chatsPane = AllChatsPaneLoader.loadAllChatsAnchorPane();
-        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setLeft(chatsPane);
         centerPane.setCenter(logoPane);
         mainPane.setLeft(optionsPane);
@@ -128,5 +180,8 @@ public class StageManager {
 
     public void resetHomeScene() {
         sceneMap.remove("home");
+    }
+    public Map<String, Scene> getSceneMap() {
+        return sceneMap;
     }
 }

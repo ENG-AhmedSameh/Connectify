@@ -6,6 +6,7 @@ import com.connectify.dto.ImageBioChangeRequest;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
+import com.connectify.dto.*;
 import com.connectify.mapper.UserMapper;
 import com.connectify.model.dao.UserDAO;
 import com.connectify.model.dao.impl.UserDAOImpl;
@@ -44,6 +45,28 @@ public class UserService {
         return new LoginResponse(false, "Password is not correct");
     }
 
+    public UserProfileResponse getUserProfile(String phoneNumber) {
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.get(phoneNumber);
+        return UserMapper.INSTANCE.userToUserProfileResponse(user);
+    }
+
+    public boolean updateUser(UpdateUserInfoRequest request) {
+        User user = UserMapper.INSTANCE.updateUserInfoRequestToUser(request);
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.update(user);
+    }
+
+    public boolean updatePassword(String phoneNumber, byte[] salt, String password) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updatePassword(phoneNumber, salt, password);
+    }
+
+    public boolean updatePicture(String phoneNumber, byte[] picture) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updatePicture(phoneNumber, picture);
+    }
+
     public boolean logoutUser(String phoneNumber){
         UserDAO userDAO = new UserDAOImpl();
         return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
@@ -70,5 +93,11 @@ public class UserService {
     public boolean changeProfileAndBio(ImageBioChangeRequest request) {
         UserDAO userDAO = new UserDAOImpl();
         return userDAO.updateImage(request.getPhoneNumber(), request.getImage()) && userDAO.updateBio(request.getPhoneNumber(), request.getBio());
+    }
+
+    public FriendToAddResponse getFriendToAddData(String phone) {
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.get(phone);
+        return UserMapper.INSTANCE.userToFriendToAddResponse(user);
     }
 }

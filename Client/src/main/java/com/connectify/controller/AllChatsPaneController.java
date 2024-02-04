@@ -110,7 +110,6 @@ public class AllChatsPaneController implements Initializable {
 
     public void addChatOnChatPane(int chatId, int unread, String name, byte[] picture, String lastMessage, Timestamp timestamp){
         AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chatId, unread,name,picture,lastMessage,timestamp);
-        //allChatsVBox.getChildren().add(chatCard);
         chatsPanesList.add(chatCard);
     }
     private void loadAllUserChats(){

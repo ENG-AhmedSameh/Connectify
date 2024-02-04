@@ -1,27 +1,36 @@
 package com.connectify.controller;
 
-import com.connectify.utils.CountryList;
+import com.connectify.Client;
+import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.UserProfileResponse;
+import com.connectify.loaders.ViewLoader;
+import com.connectify.model.enums.Gender;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
+import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
 
 public class ProfileController implements Initializable {
 
     @FXML private DatePicker birthDatePicker;
-    @FXML private Label countryCodeLbl;
-    @FXML private ComboBox<String> countryComboBox;
     @FXML private TextField emailTxtF;
-    @FXML private ComboBox<String> genderComboBox;
-    @FXML private ComboBox<String> modeComboBox;
+    @FXML private ComboBox<Gender> genderComboBox;
+    @FXML private ComboBox<Status> statusComboBox;
+    @FXML private ComboBox<Mode> modeComboBox;
     @FXML private TextField nameTxtF;
-    @FXML private PasswordField passwordPassF;
     @FXML private TextField phoneNumTxtF;
     @FXML private AnchorPane profilePane;
     @FXML private TextArea bioTextArea;
@@ -29,55 +38,52 @@ public class ProfileController implements Initializable {
     @FXML private Label profileLbl;
     @FXML private Circle userImg;
 
-    CountryList countryList;
-
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
+
+    private UserProfileResponse currentUserDetails;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeComboBox();
-        txtFieldsOriginalStyle = nameTxtF.getStyle();
-        comboBoxOriginalStyle = countryComboBox.getStyle();
-        datePickerOriginalStyle = birthDatePicker.getStyle();
+        try {
+            ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
+            currentUserDetails = server.getUserProfile(Client.getConnectedUser().getPhoneNumber());
+            populateUserDetails();
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
+        } catch (NotBoundException e) {
+            System.err.println("NotBoundException: " + e.getMessage());
+        }
     }
 
-    private void initializeComboBox() {
-        initializeCountryComboBox();
-        initializeGenderComboBox();
-    }
-    private void initializeCountryComboBox() {
-        countryList = CountryList.getInstance();
-        countryComboBox.getItems().addAll(new TreeSet<>(countryList.getCountriesMap().keySet()));
-        //countryComboBox.setButtonCell(createListCell(countryList));
-    }
+    private void populateUserDetails() {
+        setImage();
+        bioTextArea.setText(currentUserDetails.getBio() == null ? "bio" : currentUserDetails.getBio());
+        phoneNumTxtF.setText(currentUserDetails.getPhoneNumber());
+        nameTxtF.setText(currentUserDetails.getName());
+        emailTxtF.setText(currentUserDetails.getEmail());
+        birthDatePicker.setValue(currentUserDetails.getBirthDate());
+        genderComboBox.setValue(currentUserDetails.getGender());
+        statusComboBox.setValue(currentUserDetails.getStatus());
+        modeComboBox.setValue(currentUserDetails.getMode());
 
-    private void initializeGenderComboBox(){
-        genderComboBox.getItems().addAll("Male","Female");
-    }
-
-    @FXML
-    private void countryOnSelectHandler(ActionEvent event){
-        countryCodeLbl.setText(countryList.getCountriesMap().get(countryComboBox.getValue()));
+        birthDatePicker.setDisable(true);
+        genderComboBox.setDisable(true);
+        statusComboBox.setDisable(true);
+        modeComboBox.setDisable(true);
     }
 
-    private ListCell<String> createListCell() {
-        return new ListCell<>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                //setStyle("-fx-text-fill: derive(-fx-control-inner-background,-30%);");
-
-                if(!empty&&item!=null){
-                    String countryName = countryComboBox.getValue().toString();
-                    countryCodeLbl.setText(countryList.getCountriesMap().get(countryName));
-                    setText(countryName);
-                }
-            }
-        };
+    private void setImage() {
+        Image image = null;
+        if (currentUserDetails.getPicture() == null) {
+            image = new Image(String.valueOf(ProfileController.class.getResource("/images/profile.png")));
+        } else {
+            image = new Image(new ByteArrayInputStream(currentUserDetails.getPicture()));
+        }
+        userImg.setFill(new ImagePattern(image));
     }
 
     @FXML
     private void editeBtnHandler(ActionEvent event){
-
+        StageManager.getInstance().switchToProfileEditor();
     }
 }

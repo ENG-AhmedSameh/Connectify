@@ -1,5 +1,7 @@
 package com.connectify.Interfaces;
 
+import com.connectify.dto.IncomingFriendInvitationResponse;
+
 import com.connectify.dto.MessageDTO;
 
 import java.rmi.Remote;
@@ -11,4 +13,6 @@ public interface ConnectedUser extends Remote {
     String getPhoneNumber() throws RemoteException;
 
     void receiveMessage(MessageDTO messageDTO) throws RemoteException;
+
+    void receiveFriendRequest(IncomingFriendInvitationResponse friendInvitation) throws RemoteException;
 }
