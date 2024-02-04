@@ -1,12 +1,15 @@
 package com.connectify.controller.fxmlcontrollers;
 
+import com.connectify.Server;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -33,7 +36,18 @@ public class MainController implements Initializable{
     private Pane announcementPane;
 
     private Pane statisticsPane;
-
+    @FXML
+    private Button announcementButton;
+    @FXML
+    private Button statisticsButton;
+    @FXML
+    private Button exitButton;
+    @FXML
+    private ImageView minimizeButton;
+    @FXML
+    private ImageView maximizeButton;
+    @FXML
+    private ImageView closeButton;
 
 
     @Override
@@ -95,6 +109,7 @@ public class MainController implements Initializable{
             alert.setHeaderText("Exit ?");
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
+                Server.powerDown();
                 System.exit(0);
             }
     }

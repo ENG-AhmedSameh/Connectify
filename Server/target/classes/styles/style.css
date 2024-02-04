@@ -1,5 +1,5 @@
 * {
-        -fx-dark: #17212b;
+        -fx-dark: #0e1621;
         -fx-blue: #2f6ea5;
         -fx-light: #e7e5e5;
         -fx-soft-blue: #73a0d0;
@@ -50,9 +50,6 @@
 .bar {
         -fx-background-color: -fx-dark;
         -fx-text-fill: -fx-light;
-        -fx-border-color: -fx-blue;
-        -fx-border-width: 1px;
-        -fx-border-radius: 1px;
 }
 
 .label {
@@ -139,7 +136,7 @@
 
 
 .tabPane {
-        -fx-background-color: -fx-dark;
+        -fx-background-color: #f5f5f5;
 }
 
 .tab-header-background {
@@ -167,6 +164,15 @@
 
 .tab:pressed {
         -fx-translate-y: 1px;
+}
+
+.chart-legend {
+        -fx-background-color:  transparent;
+        -fx-padding: 20px;
+}
+
+.chart-legend-item {
+        -fx-text-fill: -fx-dark;
 }
 
 .exit-dialog {

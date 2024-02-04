@@ -3,6 +3,7 @@ package com.connectify.model.dao.impl;
 import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.model.dao.ChatMembersDAO;
 import com.connectify.model.entities.ChatMember;
+import com.connectify.model.entities.User;
 import com.connectify.utils.DBConnection;
 
 import java.sql.Connection;
@@ -106,6 +107,85 @@ public class ChatMembersDAOImpl implements ChatMembersDAO {
             }
         }
         return chatMembers;
+    }
+
+    @Override
+    public List<ChatMember> getAllOtherChatMembers(int chatId, String sender) {
+        List<ChatMember> chatMembers = new ArrayList<>();
+        String query = "SELECT * FROM chat_members WHERE chat_id = ? AND member != ? ";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, chatId);
+            preparedStatement.setString(2, sender);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    ChatMember chatMember = new ChatMember();
+                    chatMember.setMember(rs.getString("member"));
+                    chatMembers.add(chatMember);
+                }
+                return chatMembers;
+            }
+        } catch (SQLException e) {
+            System.err.println("Sql Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public void prepareCurrentChat(ChatMember chatMember) {
+        String query1 = "UPDATE CHAT_MEMBERS SET is_open = 0 WHERE member = ? AND is_open = 1;";
+        String query2 = "UPDATE CHAT_MEMBERS SET is_open = 1, Unread_Messages_number = 0 WHERE chat_id = ? AND member = ?;"; // Fixed the query to correctly update both columns
+        try (Connection connection = dbConnection.getConnection()) {
+            connection.setAutoCommit(false);
+
+            try (PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
+                 PreparedStatement preparedStatement2 = connection.prepareStatement(query2)) {
+
+                preparedStatement1.setString(1, chatMember.getMember());
+                preparedStatement1.executeUpdate();
+
+                preparedStatement2.setInt(1, chatMember.getChatId());
+                preparedStatement2.setString(2, chatMember.getMember());
+                preparedStatement2.executeUpdate();
+
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+                throw e;
+            } finally {
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
+    }
+
+    @Override
+    public List<User> getAllOtherChatMembersInfo(int chatID, String member) {
+        List<User> membersInfo = new ArrayList<>();
+        String query = "SELECT member,name,picture,bio FROM chat_members LEFT JOIN users ON member = phone_number WHERE chat_id = ? AND member != ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, chatID);
+            preparedStatement.setString(2, member);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    User user = new User();
+                    user.setPhoneNumber(rs.getString("member"));
+                    user.setName(rs.getString("name"));
+                    //TODO load picture as file from db
+                    //byte[] picBlob = rs.getBytes("picture");
+                    //user.setPicture(rs.getString("picture"));
+                    user.setBio(rs.getString("bio"));
+                    membersInfo.add(user);
+                }
+                return membersInfo;
+            }
+        } catch (SQLException e) {
+            System.err.println("Sql Exception: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override

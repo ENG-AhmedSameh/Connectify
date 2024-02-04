@@ -9,15 +9,17 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
 public class ChatLoader {
-    public static BorderPane loadChatPane(String name, Image picture) {
+    public static BorderPane loadChatPane(int chat_id,String name, Image picture) {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        ChatController controller = new ChatController(name,picture);
+        ChatController controller = new ChatController(chat_id,name,picture);
         fxmlLoader.setLocation(ChatLoader.class.getResource("/views/Chat.fxml"));
         fxmlLoader.setController(controller);
         try {
             return fxmlLoader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
+            System.err.println("Error: "+e.getMessage());
+            return null;
         }
     }
 }

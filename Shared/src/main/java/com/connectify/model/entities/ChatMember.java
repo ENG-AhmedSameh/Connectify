@@ -40,7 +40,7 @@ public class ChatMember {
         return unreadMessagesNumber;
     }
 
-    public void setUnreadMessagesNumber(Integer unreadMessagesNumber) {
+    public void setUnreadMessagesNumber(int unreadMessagesNumber) {
         this.unreadMessagesNumber = unreadMessagesNumber;
     }
 

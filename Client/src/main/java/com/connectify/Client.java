@@ -45,7 +45,7 @@ public class Client extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         if(userCredentials.getProperty("remember").equals("true")){
-            connectedUser = new CurrentUser(userCredentials.getProperty("countryCode") + userCredentials.getProperty("phoneNumber"));
+            connectedUser = new CurrentUser(userCredentials.getProperty("countryCode")+userCredentials.getProperty("phoneNumber"));
             StageManager.getInstance().switchToHome();
             try {
                 ServerAPI server = (ServerAPI) registry.lookup("server");

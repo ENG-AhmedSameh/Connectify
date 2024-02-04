@@ -74,8 +74,8 @@ public class StageManager {
     }
 
     private Scene createLoginScene(){
-        BorderPane mainPane = new BorderPane();
-        GridPane centerPane = new GridPane();
+        BorderPane mainPane = MainPaneLoader.loadMainBorderPane();
+        GridPane centerPane = (GridPane) mainPane.getCenter();
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         AnchorPane loginPane = LoginLoader.loadLoginAnchorPane();
         centerPane.add(logoPane,0,0);
@@ -87,8 +87,8 @@ public class StageManager {
     }
 
     private Scene createSignUpScene(){
-        BorderPane mainPane = new BorderPane();
-        GridPane centerPane = new GridPane();
+        BorderPane mainPane = MainPaneLoader.loadMainBorderPane();
+        GridPane centerPane = (GridPane) mainPane.getCenter();
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         AnchorPane signUpPane = SignUpLoader.loadSignUpAnchorPane();
         centerPane.add(logoPane,0,0);
@@ -126,4 +126,10 @@ public class StageManager {
         return new Scene(mainPane);
     }
 
+    public void resetHomeScene() {
+        sceneMap.remove("home");
+    }
+    public Map<String, Scene> getSceneMap() {
+        return sceneMap;
+    }
 }

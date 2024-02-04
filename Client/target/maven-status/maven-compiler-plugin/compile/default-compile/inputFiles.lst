@@ -20,6 +20,7 @@ F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\utils\StageManage
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\HomeScreenOptionsLoader.java
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\utils\CurrentUser.java
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\OptionsController.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\utils\ChatManager.java
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ChatCardLoader.java
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\titleBarController.java
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\MainPaneLoader.java
@@ -31,4 +32,5 @@ F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ViewLoade
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\utils\ChatPaneFactory.java
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\controller\EditeProfileController.java
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ContactMessageLoader.java
+F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\utils\ChatManagerFactory.java
 F:\ITI Projects\Connectify\Client\src\main\java\com\connectify\loaders\ProfileLoader.java

@@ -11,22 +11,27 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class Server extends Application {
 
+
+    private static Registry registry;
     private static Map<String, ConnectedUser> connectedUsers;
+
+    private static ScheduledExecutorService statisticsScheduler;
 
     @Override
     public void init() throws Exception {
         super.init();
-        System.out.println("Server is running...");
-        var registry = LocateRegistry.createRegistry(1099);
-        ServerAPI server = new ServerController();
-        registry.rebind("server", server);
-        connectedUsers = new HashMap<>();
+        powerUp();
     }
 
     @Override
@@ -47,5 +52,38 @@ public class Server extends Application {
 
     public static Map<String, ConnectedUser> getConnectedUsers(){
         return connectedUsers;
+    }
+
+    public static void powerUp(){
+        try{
+            System.out.println("Server is running...");
+            registry = LocateRegistry.createRegistry(1099);
+            ServerAPI server = new ServerController();
+            registry.rebind("server", server);
+            connectedUsers = new HashMap<>();
+            statisticsScheduler = Executors.newSingleThreadScheduledExecutor();
+        } catch (RemoteException e){
+            System.err.println("Couldn't power up server: "+e.getMessage());
+            System.exit(1);
+        }
+    }
+
+    public static void powerDown(){
+        try{
+            System.out.println("Server is shutdown...");
+            for(var user : connectedUsers.values()){
+                user.receiveNotification("Server is down", "Server is down. Please exit the application and reconnect later.");
+            }
+            UnicastRemoteObject.unexportObject(registry, true);
+            connectedUsers = null;
+            statisticsScheduler.shutdown();
+        } catch (RemoteException e){
+            System.err.println("Couldn't power down server: "+e.getMessage());
+            System.exit(1);
+        }
+    }
+
+    public static ScheduledExecutorService getStatisticsScheduler() {
+        return statisticsScheduler;
     }
 }

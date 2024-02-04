@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="chatCardPane" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="350.0" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css">
+      <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="350.0" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="chatPictureImageView" fitHeight="96.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                <clip>

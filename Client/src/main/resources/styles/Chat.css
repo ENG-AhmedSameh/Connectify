@@ -24,9 +24,20 @@
     -fx-cursor: hand;
 }
 
-.chat-window {
+.list-view {
     -fx-background-color: -fx-dark;
+}
 
+.list-cell {
+    -fx-padding: -1px;
+}
+
+.list-view .list-cell:odd {
+    -fx-background-color: -fx-dark;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: -fx-dark;
 }
 
 .contact-message {
@@ -64,4 +75,13 @@
     -fx-text-fill: -fx-light;
     -fx-font-size: 15px;
     -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.button .graphic {
+    -fx-background-color: transparent;
 }

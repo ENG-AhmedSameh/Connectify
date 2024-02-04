@@ -4,7 +4,17 @@ import java.io.Serializable;
 
 public class ChatMemberDTO implements Serializable {
     private int chatId;
-    private Integer unreadMessagesNumber;
+
+    private String member;
+    private int unreadMessagesNumber;
+
+    public String getMember() {
+        return member;
+    }
+
+    public void setMember(String member) {
+        this.member = member;
+    }
 
     public ChatMemberDTO() {
     }
@@ -27,7 +37,7 @@ public class ChatMemberDTO implements Serializable {
         return unreadMessagesNumber;
     }
 
-    public void setUnreadMessagesNumber(Integer unreadMessagesNumber) {
+    public void setUnreadMessagesNumber(int unreadMessagesNumber) {
         this.unreadMessagesNumber = unreadMessagesNumber;
     }
 }

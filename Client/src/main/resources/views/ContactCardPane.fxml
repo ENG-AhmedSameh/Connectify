@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-<AnchorPane onMousePressed="#paneOnClicked"
-            style="-fx-background-color: #374754;"
-            styleClass="chat-HBox" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ContactCardController">
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane onMousePressed="#paneOnClicked" style="-fx-background-color: #374754;" styleClass="chat-HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="350.0">
             <children>
@@ -29,17 +26,16 @@
                     <children>
                         <HBox alignment="CENTER_LEFT">
                             <children>
-                                <Label fx:id="contactNameTextField" prefHeight="27.0" prefWidth="182.0" text="Friend Name" textFill="WHITE">
+                                <Label fx:id="contactNameLabel" prefHeight="27.0" prefWidth="182.0" text="Friend Name" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="16.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lastMessageTimeLabel" prefHeight="18.0" prefWidth="73.0" text="12:00 AM" textFill="#597081" />
                             </children>
                         </HBox>
                         <HBox>
                             <children>
-                                <Label fx:id="lastMessageLabel" prefHeight="18.0" prefWidth="200.0" text="Hey..I'm using Whasapp" textFill="WHITE" />
+                                <Label fx:id="contactPhoneNumberLabel" prefHeight="18.0" prefWidth="200.0" text="01092328066" textFill="WHITE" />
                             </children>
                         </HBox>
                     </children>
