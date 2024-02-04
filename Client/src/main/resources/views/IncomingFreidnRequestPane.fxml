@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="incomingFriendRequestAnchorPane" styleClass="logo-anchor-pane" stylesheets="@../styles/IncomingFriendRequest.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.IncomingFriendRequestController">
    <children>
-      <Label layoutX="46.0" layoutY="14.0" text="Incoming Friend Request" textFill="WHITE" AnchorPane.topAnchor="14.0">
+      <Label layoutX="46.0" layoutY="14.0" text="Incoming Friend Requests" textFill="WHITE" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
