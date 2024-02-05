@@ -4,7 +4,6 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.FriendToAddResponse;
 import com.connectify.loaders.AddFriendCardLoader;
-import com.connectify.model.entities.Invitations;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -138,13 +137,13 @@ public class AddFriendController implements Initializable {
             }
         }
         searchContactsVBox.getChildren().clear();
-        StageManager.getInstance().switchFromAddFriendToHome();
+        StageManager.getInstance().switchToChats();
     }
 
     @FXML
     void cancelButtonHandler(ActionEvent event) {
         searchContactsVBox.getChildren().clear();
-        StageManager.getInstance().switchFromAddFriendToHome();
+        StageManager.getInstance().switchToChats();
     }
 
     private boolean isUnique(String phoneNumber) {

@@ -120,7 +120,8 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     @Override
     public List<MemberInfoDTO> getAllChatOtherMembersInfo(int chatId, String member) throws RemoteException {
-        return chatService.getAllOtherMembersInfo(chatId,member);
+        List<MemberInfoDTO> memberInfoDTOS = chatService.getAllOtherMembersInfo(chatId,member);
+        return memberInfoDTOS;
     }
 
 

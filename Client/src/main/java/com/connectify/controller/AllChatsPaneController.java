@@ -47,7 +47,7 @@ public class AllChatsPaneController implements Initializable {
 
     @FXML
     private ListView<AnchorPane> allChatsListView;
-    private ObservableList<AnchorPane> chatsPanesList = FXCollections.observableArrayList();
+    private static ObservableList<AnchorPane> chatsPanesList = FXCollections.observableArrayList();
 
     private ServerAPI server;
     private static String currentUserId;
@@ -122,6 +122,9 @@ public class AllChatsPaneController implements Initializable {
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static void clearChatsCardList(){
+        chatsPanesList.clear();
     }
 
 }

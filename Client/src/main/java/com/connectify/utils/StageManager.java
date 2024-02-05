@@ -2,7 +2,6 @@ package com.connectify.utils;
 
 import com.connectify.Client;
 import com.connectify.loaders.*;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -85,7 +84,7 @@ public class StageManager {
         centerPane.setLeft(chatsPane);
     }
 
-    public void switchFromAddFriendToHome(){
+    public void switchToChats(){
         Scene scene = sceneMap.get("home");
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();

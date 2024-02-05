@@ -44,19 +44,20 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        if(userCredentials.getProperty("remember").equals("true")){
-            connectedUser = new CurrentUser(userCredentials.getProperty("countryCode")+userCredentials.getProperty("phoneNumber"));
-            StageManager.getInstance().switchToHome();
-            try {
-                ServerAPI server = (ServerAPI) registry.lookup("server");
-                server.registerConnectedUser(connectedUser);
-            } catch (NotBoundException e) {
-                System.err.println("Server not found: " + e.getMessage());
-            }
-        }
-        else{
-            StageManager.getInstance().switchToLogin();
-        }
+//        if(userCredentials.getProperty("remember").equals("true")){
+//            connectedUser = new CurrentUser(userCredentials.getProperty("countryCode")+userCredentials.getProperty("phoneNumber"));
+//            StageManager.getInstance().switchToHome();
+//            try {
+//                ServerAPI server = (ServerAPI) registry.lookup("server");
+//                server.registerConnectedUser(connectedUser);
+//            } catch (NotBoundException e) {
+//                System.err.println("Server not found: " + e.getMessage());
+//            }
+//        }
+//        else{
+//            StageManager.getInstance().switchToLogin();
+//        }
+        StageManager.getInstance().switchToLogin();
         primaryStage.show();
     }
 

@@ -26,5 +26,8 @@ public class ChatPaneFactory {
         paneCache.put(id, newPane);
         return newPane;
     }
+    public static void clearChats(){
+        paneCache.clear();
+    }
 
 }

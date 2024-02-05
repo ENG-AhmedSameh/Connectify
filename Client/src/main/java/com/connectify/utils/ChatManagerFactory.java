@@ -19,4 +19,8 @@ public class ChatManagerFactory {
     public static void setActiveChatID(int activeChatID) {
         ChatManagerFactory.activeChatID = activeChatID;
     }
+
+    public static void clearChatManagersMap(){
+        chatManagersMap.clear();
+    }
 }
