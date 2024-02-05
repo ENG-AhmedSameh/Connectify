@@ -2,6 +2,7 @@ package com.connectify.loaders;
 
 import com.connectify.controller.ChooseContactCardController;
 import com.connectify.controller.ContactCardController;
+import com.connectify.controller.IncomingFriendRequestCardController;
 import com.connectify.dto.ContactsDTO;
 import com.connectify.model.entities.User;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,9 @@ public class ChooseContactCardLoader {
         fxmlLoader.setLocation(ChooseContactCardLoader.class.getResource("/views/ChooseContactCardPane.fxml"));
         fxmlLoader.setController(chooseContactCardController);
         try {
-            return fxmlLoader.load();
+            AnchorPane anchorPane = fxmlLoader.load();
+            anchorPane.setUserData(chooseContactCardController);
+            return anchorPane;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

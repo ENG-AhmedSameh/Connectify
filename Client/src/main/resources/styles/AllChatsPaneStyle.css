@@ -39,3 +39,11 @@
 .button:hover {
     -fx-cursor: hand;
 }
+.text-field{
+    -fx-background-color: -fx-dark;
+    -fx-text-fill:  #FFFFFF;
+}
+.text-field:focused {
+    -fx-border-color:  -fx-blue;
+    -fx-border-width:  2 2 2 2;
+}

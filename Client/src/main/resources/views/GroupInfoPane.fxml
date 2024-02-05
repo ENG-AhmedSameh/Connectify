@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="GroupInfoAnchorPane" prefHeight="400.0" prefWidth="350.0" styleClass="anchor-pane" stylesheets="@../styles/AllChatsPaneStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.GroupInfoController">
+<AnchorPane fx:id="groupInfoAnchorPane" prefHeight="400.0" prefWidth="350.0" styleClass="anchor-pane" stylesheets="@../styles/AllChatsPaneStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.GroupInfoController">
     <children>
         <VBox alignment="CENTER" prefHeight="500.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -37,7 +37,7 @@
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="GroupDescriptionTextField" promptText="Enter Description" style="-fx-background-color: #1a283b;">
+            <TextField fx:id="groupDescriptionTextField" promptText="Enter Description" style="-fx-background-color: #1a283b;">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="10.0" />
                </VBox.margin>

@@ -4,18 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="">
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="add controllers for creating group GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllContactsPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllContactsPaneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/StageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/StageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChooseContactCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChooseContactCardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChooseContactsGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChooseContactsGroupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/GroupInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/GroupInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ChooseContactCardLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ChooseContactCardLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/resources/styles/AllChatsPaneStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/styles/AllChatsPaneStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/AddGroupNameAndImage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/GroupInfoPane.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/AllContactsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/AllContactsPane.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactCardPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactCardPane.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactsGroupPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactsGroupPane.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/titleBarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/titleBarController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/GroupInfoPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/GroupInfoPane.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,7 +355,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706987890783</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add controllers for creating group GUI">
+      <option name="closed" value="true" />
+      <created>1707170733482</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1707170733482</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,7 +411,8 @@
     <MESSAGE value="update chat card information on receiving message" />
     <MESSAGE value="Agmal Commit Elnaharda" />
     <MESSAGE value="update chat card displayed details when user send message" />
-    <option name="LAST_COMMIT_MESSAGE" value="update chat card displayed details when user send message" />
+    <MESSAGE value="add controllers for creating group GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="add controllers for creating group GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

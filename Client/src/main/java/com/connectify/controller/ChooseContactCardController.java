@@ -1,14 +1,11 @@
 package com.connectify.controller;
 
 import com.connectify.dto.ContactsDTO;
-import com.connectify.model.entities.User;
 import com.connectify.utils.ImageConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 
 import java.net.URL;
@@ -40,6 +37,14 @@ public class ChooseContactCardController implements Initializable {
         contactNameLabel.setText(contact.getName());
         userImageCircle.setFill(ImageConverter.convertBytesToImagePattern(contact.getPicture()));
         contactPhoneNumberLabel.setText(contact.getPhoneNumber());
+    }
+
+    public boolean isSelected() {
+        return selectedContactCheckBox.isSelected();
+    }
+
+    public ContactsDTO getContactDTO() {
+        return contact;
     }
 
 }
