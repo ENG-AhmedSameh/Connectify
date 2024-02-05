@@ -65,28 +65,6 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     }
 
     @Override
-    public void receiveFriendRequest(IncomingFriendInvitationResponse friendInvitation) throws RemoteException {
-        AnchorPane newFriendRequestCard = IncomingFriendRequestCardLoader
-                .loadNewIncomingFriendRequestCardPane(
-                        friendInvitation.getName(), friendInvitation.getPhoneNumber(),
-                        friendInvitation.getPicture(), friendInvitation.getInvitationId());
-
-        ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
-
-        Platform.runLater(() -> {
-            friendRequestList.add(newFriendRequestCard);
-        });
-
-        String title = "New Friend Request";
-        String message = friendInvitation.getName() + " has sent you a friend request.";
-        try {
-            this.receiveNotification(title, message);
-        } catch (RemoteException e) {
-            System.err.println("Error receive Friend Request. case:" + e.getMessage());
-        }
-    }
-
-    @Override
     public void forceLogout() throws RemoteException {
         StageManager.getInstance().resetHomeScene();
         StageManager.getInstance().switchToLogin();

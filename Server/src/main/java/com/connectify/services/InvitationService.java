@@ -26,9 +26,8 @@ public class InvitationService {
                 IncomingFriendInvitationResponse receivedInvitation = invitationsDAO
                         .getIncomingFriendRequest(senderPhoneNumber, receiverPhoneNumber);
 
-                ConnectedUser receiver = Server.getConnectedUsers().get(receiverPhoneNumber.substring(3));
+                ConnectedUser receiver = Server.getConnectedUsers().get(receiverPhoneNumber);
                 if (receiver != null) {
-                    receiver.receiveFriendRequest(receivedInvitation);
                     receiver.receiveNotification("New Friend Request", "You have received a new friend request");
                 }
             } catch (RemoteException e) {
@@ -57,7 +56,7 @@ public class InvitationService {
 
         if (isInvitationAccepted) {
             try {
-                ConnectedUser receiver = Server.getConnectedUsers().get(friendInvitation.getSender().substring(3));
+                ConnectedUser receiver = Server.getConnectedUsers().get(friendInvitation.getSender());
                 if (receiver != null) {
                     String notificationTitle = "New Friendship";
                     String receiverName = new UserDAOImpl().get(friendInvitation.getReceiver()).getName();

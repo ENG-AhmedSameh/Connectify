@@ -18,10 +18,6 @@ import java.rmi.registry.Registry;
 import java.util.Properties;
 
 public class Client extends Application {
-
-    private final static String host = "localhost";
-    private final static int port = 1099;
-
     private static ConnectedUser connectedUser;
 
     private static Properties userCredentials;
