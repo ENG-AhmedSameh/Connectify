@@ -62,8 +62,15 @@ public class AttachmentService {
         AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
         Attachments attachment = attachmentDAO.get(attachmentId);
         if (attachment != null) {
-            Path filePath = Paths.get(attachment.getName());
-            return filePath.toFile();
+            Callable<File> callable = () -> {
+                Path filePath = Paths.get(attachment.getName());
+                return filePath.toFile();
+            };
+            try {
+                return executor.submit(callable).get();
+            } catch (InterruptedException | ExecutionException e) {
+                System.err.println("Exception: " + e.getMessage());
+            }
         }
         return null;
     }
@@ -73,6 +80,5 @@ public class AttachmentService {
         int index = path.lastIndexOf('.');
         return path.substring(index + 1);
     }
-
 
 }
