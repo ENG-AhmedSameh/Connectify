@@ -7,19 +7,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="allContactsAnchorPane" styleClass="logo-anchor-pane" stylesheets="@../styles/SignUp.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.AllContactsPaneController">
+<AnchorPane fx:id="chooseContactsGroupAnchorPane" prefHeight="459.0" prefWidth="349.0" styleClass="logo-anchor-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ChooseContactsGroupController">
     <children>
         <TextField fx:id="ContactSearchTextField" blendMode="SCREEN" layoutX="19.0" layoutY="14.0" prefHeight="26.0" prefWidth="311.0" promptText="Enter Contact Name" styleClass="text-field">
             <stylesheets>
                 <URL value="@../styles/SignUp.css" />
                 <URL value="@../styles/AllContactsPaneStyles.css" />
             </stylesheets></TextField>
-        <ScrollPane fx:id="allContactsScrollPane" hbarPolicy="NEVER" layoutY="78.0" minWidth="350.0" prefHeight="922.0" prefWidth="350.0" stylesheets="@../styles/AllContactsPaneStyles.css" vbarPolicy="NEVER">
+        <ScrollPane fx:id="allContactsScrollPane" hbarPolicy="NEVER" layoutX="-1.0" layoutY="56.0" minWidth="350.0" prefHeight="349.0" prefWidth="350.0" stylesheets="@../styles/AllContactsPaneStyles.css" vbarPolicy="NEVER">
             <content>
                 <VBox fx:id="allContactsVBox" alignment="TOP_CENTER" minWidth="350.0" />
             </content>
         </ScrollPane>
-      <Button layoutX="31.0" layoutY="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="121.0" text="Cancel" />
-        <Button layoutX="194.0" layoutY="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="121.0" text="Create " />
+      <Button fx:id="cancelButton" layoutX="25.0" layoutY="418.0" mnemonicParsing="false" onAction="#cancelHandler" prefHeight="26.0" prefWidth="121.0" text="Cancel" />
+        <Button fx:id="NextButton" layoutX="185.0" layoutY="418.0" mnemonicParsing="false" onAction="#NextHandler" prefHeight="26.0" prefWidth="121.0" text="Next" />
     </children>
+   <stylesheets>
+      <URL value="@../styles/SignUp.css" />
+      <URL value="@../styles/AllChatsPaneStyle.css" />
+   </stylesheets>
 </AnchorPane>

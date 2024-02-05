@@ -4,19 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="update chat card displayed details when user send message">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatCardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ChatCardLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ChatCardLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/ChatPaneFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/ChatPaneFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/CurrentUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/CurrentUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/user.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/user.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/loaders/ViewLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/loaders/ViewLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllContactsPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllContactsPaneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/StageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/StageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/styles/AllChatsPaneStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/styles/AllChatsPaneStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/AddGroupNameAndImage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/GroupInfoPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/AllContactsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/AllContactsPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactCardPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactCardPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactsGroupPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactsGroupPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/titleBarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/titleBarController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="acceptInviationAutomatic" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,7 +79,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "chat",
+    "git-widget-placeholder": "create-Group",
     "jdk.selected.JAVA_MODULE": "21",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "F:/ITI Courses/JAVA/Advanced JavaFx/Labs/Day 1/D01L01",
@@ -117,8 +116,8 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.connectify.loaders" />
-      <recent name="com.connectify.utils" />
       <recent name="com.connectify.controller" />
+      <recent name="com.connectify.utils" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Client">
@@ -162,6 +161,13 @@
         <item itemvalue="Application.Client" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -359,6 +365,21 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="create-Group" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">

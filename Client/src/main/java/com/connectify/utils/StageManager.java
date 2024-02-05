@@ -3,9 +3,7 @@ package com.connectify.utils;
 import com.connectify.Client;
 import com.connectify.loaders.*;
 import javafx.application.Platform;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -102,6 +100,15 @@ public class StageManager {
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setCenter(logoPane);
         centerPane.setLeft(chatsPane);
+    }
+
+    public void switchToChooseContactsGroupPane(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        AnchorPane chooseContactsGroupAnchorPane = ChooseContactsGroupPaneLoader.loadChooseContactsGroupAnchorPane();
+        centerPane.setCenter(logoPane);
+        centerPane.setLeft(chooseContactsGroupAnchorPane);
     }
 
     public void switchToProfile(){
@@ -211,5 +218,15 @@ public class StageManager {
     }
     public Map<String, Scene> getSceneMap() {
         return sceneMap;
+    }
+
+    public void switchToGroupInfo() {
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        AnchorPane groupInfoPane = GroupInfoPaneLoader.loadGroupInfoAnchorPane();
+        centerPane.setCenter(logoPane);
+        centerPane.setLeft(groupInfoPane);
     }
 }

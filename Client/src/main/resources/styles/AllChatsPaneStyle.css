@@ -1,4 +1,11 @@
-
+* {
+    -fx-dark: #0e1621;
+    -fx-blue: #2f6ea5;
+    -fx-blueGray : #17212b
+}
+.anchor-pane{
+    -fx-background-color:  -fx-dark;
+}
 .chat-HBox{
     -fx-background-color:  transparent;
 }
@@ -23,4 +30,12 @@
 }
 .chats-cards-pane{
     -fx-background-color: #17212b;
+}
+.button{
+    -fx-background-color: -fx-blue;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 10;
+}
+.button:hover {
+    -fx-cursor: hand;
 }

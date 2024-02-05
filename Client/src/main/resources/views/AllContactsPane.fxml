@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +14,8 @@
                 <URL value="@../styles/SignUp.css" />
                 <URL value="@../styles/AllContactsPaneStyles.css" />
             </stylesheets></TextField>
-        <ScrollPane fx:id="allContactsScrollPane" hbarPolicy="NEVER" layoutY="60.0" minWidth="350.0" prefHeight="940.0" prefWidth="350.0" stylesheets="@../styles/AllContactsPaneStyles.css" vbarPolicy="NEVER">
+      <Button fx:id="createGroupButton" layoutX="132.0" layoutY="47.0" mnemonicParsing="false" onAction="#createGroupHandler" text="Create group" />
+        <ScrollPane fx:id="allContactsScrollPane" hbarPolicy="NEVER" layoutY="80.0" minWidth="350.0" prefHeight="920.0" prefWidth="350.0" stylesheets="@../styles/AllContactsPaneStyles.css" vbarPolicy="NEVER">
             <content>
                 <VBox fx:id="allContactsVBox" alignment="TOP_CENTER" minWidth="350.0" />
             </content>

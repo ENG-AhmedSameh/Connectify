@@ -1,12 +1,8 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ContactsDTO;
-import com.connectify.loaders.ChatCardLoader;
-import com.connectify.loaders.ContactCardLoader;
-import com.connectify.mapper.ContactMapper;
-import com.connectify.model.entities.User;
+import com.connectify.loaders.ChooseContactCardLoader;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
@@ -19,18 +15,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AllContactsPaneController implements Initializable {
+public class ChooseContactsGroupController implements Initializable {
 
     @FXML
     private TextField ContactSearchTextField;
 
     @FXML
-    private AnchorPane allContactsAnchorPane;
+    private Button NextButton;
 
     @FXML
     private ScrollPane allContactsScrollPane;
@@ -39,31 +34,32 @@ public class AllContactsPaneController implements Initializable {
     private VBox allContactsVBox;
 
     @FXML
-    private Button createGroupButton;
+    private Button cancelButton;
+
+    @FXML
+    private AnchorPane chooseContactsGroupAnchorPane;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL location, ResourceBundle resources) {
         List<ContactsDTO> ContactDTOList = null;
         try {
             ContactDTOList = RemoteManager.getInstance().getContacts(Client.getConnectedUser().getPhoneNumber());
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }
-        ContactMapper mapper=ContactMapper.INSTANCE;
-        List<User> contactsList = mapper.contactDTOListToUserList(ContactDTOList);
-        for (User user : contactsList)
+        for (ContactsDTO contact : ContactDTOList)
         {
-            allContactsVBox.getChildren().add(ContactCardLoader.loadContactCardAnchorPane(user));
+            allContactsVBox.getChildren().add(ChooseContactCardLoader.loadChooseContactCardAnchorPane(contact));
         }
     }
 
-    public void addContactOnContactsPane(){
-
+    @FXML
+    void NextHandler(ActionEvent event) {
+        StageManager.getInstance().switchToGroupInfo();
     }
 
     @FXML
-    void createGroupHandler(ActionEvent event) {
-        StageManager.getInstance().switchToChooseContactsGroupPane();
+    void cancelHandler(ActionEvent event) {
+        StageManager.getInstance().switchToChats();
     }
-
 }
