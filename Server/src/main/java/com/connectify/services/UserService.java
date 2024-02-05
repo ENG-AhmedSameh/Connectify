@@ -84,7 +84,7 @@ public class UserService {
 
     public boolean changeProfileAndBio(ImageBioChangeRequest request) {
         UserDAO userDAO = new UserDAOImpl();
-        return userDAO.updateImage(request.getPhoneNumber(), request.getImage()) && userDAO.updateBio(request.getPhoneNumber(), request.getBio());
+        return userDAO.updatePicture(request.getPhoneNumber(), request.getImage()) && userDAO.updateBio(request.getPhoneNumber(), request.getBio());
     }
 
     public FriendToAddResponse getFriendToAddData(String phone) {
