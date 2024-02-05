@@ -31,7 +31,6 @@ public class ContactCardController implements Initializable {
         contactNameLabel.setText(user.getName());
 //        contactPictureImageView.setImage(user.getPicture());
         contactPhoneNumberLabel.setText(user.getPhoneNumber());
-        System.out.println(contactNameLabel.getText());
     }
 
     public void paneOnClicked(MouseEvent mouseEvent) {

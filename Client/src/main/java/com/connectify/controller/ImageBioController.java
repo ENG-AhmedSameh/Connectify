@@ -32,7 +32,6 @@ public class ImageBioController {
         FileChooser fileChooser = new FileChooser();
         selectedImage = fileChooser.showOpenDialog(null);
         if(selectedImage != null){
-            System.out.println(selectedImage.getAbsolutePath());
             ImagePattern profile = new ImagePattern(new Image(selectedImage.toURI().toString()));
             profileImage.setFill(profile);
         }

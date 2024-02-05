@@ -54,7 +54,6 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     @Override
     public void receiveMessage(MessageDTO messageDTO) throws RemoteException {
-        System.out.println(messageDTO.getContent());
         MessageMapper mapper = MessageMapper.INSTANCE;
         Message receivedMessage = mapper.messageDtoToMessage(messageDTO);
         ChatCardHandler.updateChatCard(receivedMessage);

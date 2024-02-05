@@ -111,7 +111,6 @@ public class AllChatsPaneController implements Initializable {
             List<ChatCardsInfoDTO> chatCardsInfoDTOS = RemoteManager.getInstance().getUserChatsCardsInfo(Client.getConnectedUser().getPhoneNumber());
             for(ChatCardsInfoDTO chat:chatCardsInfoDTOS)
                 addChatOnChatPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
-            chatCardsInfoDTOS.stream().forEach(System.out::println);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
