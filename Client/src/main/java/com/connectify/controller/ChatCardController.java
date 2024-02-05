@@ -1,11 +1,11 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.ChatPaneFactory;
+import com.connectify.utils.ImageConverter;
 import com.connectify.utils.RemoteManager;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.*;
@@ -13,16 +13,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -36,7 +35,7 @@ public class ChatCardController implements Initializable {
     private Label chatNameTextField;
 
     @FXML
-    private ImageView chatPictureImageView;
+    private Circle chatPicture;
 
     @FXML
     private Label lastMessageLabel;
@@ -117,21 +116,9 @@ public class ChatCardController implements Initializable {
     }
 
     private void setChatPhoto(){
-        chatPictureImageView.setImage(convertToJavaFXImage(pictureBytes,chatPictureImageView.getFitWidth(),chatPictureImageView.getFitHeight()));
-        //chatPictureImageView.imageProperty().bind(pictureBytes);
+        chatPicture.setFill(ImageConverter.convertBytesToImagePattern(pictureBytes));
     }
 
-    public Image convertToJavaFXImage(byte[] bytes, double width, double height) {
-        if(bytes == null){
-            String imagePath = "target/classes/images/profile.png";
-            File imageFile = new File(imagePath);
-            pictureImage = new Image(imageFile.toURI().toString());
-            return pictureImage;
-        }
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-        pictureImage = new Image(inputStream, width, height, false, true);
-        return pictureImage;
-    }
 
     private void displayChat(){
         ChatManagerFactory.setActiveChatID(chatId);
