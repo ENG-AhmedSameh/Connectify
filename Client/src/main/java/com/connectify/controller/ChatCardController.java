@@ -6,6 +6,7 @@ import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.ChatPaneFactory;
+import com.connectify.utils.RemoteManager;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.*;
 import javafx.fxml.FXML;
@@ -140,14 +141,12 @@ public class ChatCardController implements Initializable {
         loader.switchToChat(chatPane,chatCardPane.getScene());
     }
     private void prepareChatDB(){
-        ServerAPI server = null;
         try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
             ChatMemberDTO chatMemberDTO = new ChatMemberDTO();
             chatMemberDTO.setChatId(chatId);
             chatMemberDTO.setMember(Client.getConnectedUser().getPhoneNumber());
-            server.prepareCurrentChat(chatMemberDTO);
-        } catch (RemoteException | NotBoundException e) {
+            RemoteManager.getInstance().prepareCurrentChat(chatMemberDTO);
+        } catch (RemoteException e) {
             System.err.println("Couldn't find server, details:  "+e.getMessage());
         }
     }

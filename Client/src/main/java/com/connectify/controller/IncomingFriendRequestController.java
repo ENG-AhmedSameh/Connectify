@@ -4,6 +4,7 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.loaders.IncomingFriendRequestCardLoader;
+import com.connectify.utils.RemoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,19 +29,15 @@ public class IncomingFriendRequestController implements Initializable {
     private ListView<AnchorPane> allInvitationsListView;
     private static ObservableList<AnchorPane> friendRequestList = FXCollections.observableArrayList();
 
-    private ServerAPI server;
 
     private static String currentUserPhone;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
             currentUserPhone = Client.getConnectedUser().getPhoneNumber();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
         }
 
         initializeListView();
@@ -72,13 +69,9 @@ public class IncomingFriendRequestController implements Initializable {
     }
 
     private void loadAllIncomingFriendRequest() {
-        try {
-            List<IncomingFriendInvitationResponse> incomingFriendRequests = server.getIncomingFriendRequests(currentUserPhone);
-            for (IncomingFriendInvitationResponse  response: incomingFriendRequests) {
-                addIncomingFriendRequestCard(response.getName(), response.getPhoneNumber(), response.getPicture(), response.getInvitationId());
-            }
-        } catch (RemoteException e) {
-            System.err.println("Load Incoming Friend Request failed case: " + e.getMessage());
+        List<IncomingFriendInvitationResponse> incomingFriendRequests = RemoteManager.getInstance().getIncomingFriendRequests(currentUserPhone);
+        for (IncomingFriendInvitationResponse  response: incomingFriendRequests) {
+            addIncomingFriendRequestCard(response.getName(), response.getPhoneNumber(), response.getPicture(), response.getInvitationId());
         }
     }
 

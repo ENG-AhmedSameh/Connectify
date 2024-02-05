@@ -4,6 +4,7 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ImageBioChangeRequest;
 import com.connectify.utils.CurrentUser;
+import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -39,14 +40,7 @@ public class ImageBioController {
     }
     public void finishHandler(){
         ImageBioChangeRequest request = createImageBioChangeRequest();
-        try {
-            ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
-            server.changeProfileAndBio(request);
-        } catch (RemoteException e) {
-            System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("Server not found: " + e.getMessage());
-        }
+        RemoteManager.getInstance().changeProfileAndBio(request);
         StageManager.getInstance().switchToHome();
     }
 

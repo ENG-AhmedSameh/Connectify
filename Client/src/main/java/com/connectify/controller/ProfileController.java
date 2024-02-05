@@ -7,6 +7,7 @@ import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
+import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,14 +46,11 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
-            currentUserDetails = server.getUserProfile(Client.getConnectedUser().getPhoneNumber());
-            populateUserDetails();
+            currentUserDetails = RemoteManager.getInstance().getUserProfile(Client.getConnectedUser().getPhoneNumber());
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
         }
+        populateUserDetails();
     }
 
     private void populateUserDetails() {

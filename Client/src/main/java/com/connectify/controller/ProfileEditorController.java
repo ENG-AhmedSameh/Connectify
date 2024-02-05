@@ -9,6 +9,7 @@ import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 import com.connectify.util.PasswordManager;
+import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +66,6 @@ public class ProfileEditorController implements Initializable {
     private Button cancelBtn;
 
     Boolean validInformation = true;
-    private ServerAPI server;
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
     private UserProfileResponse currentUserDetails;
     private boolean isPictureChanged;
@@ -76,16 +76,13 @@ public class ProfileEditorController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeComboBoxes();
         txtFieldsOriginalStyle = nameTxtF.getStyle();
-
         try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
-            currentUserDetails = server.getUserProfile(Client.getConnectedUser().getPhoneNumber());
-            populateUserDetails();
+            currentUserDetails = RemoteManager.getInstance().getUserProfile(Client.getConnectedUser().getPhoneNumber());
         } catch (RemoteException e) {
-            System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
+            throw new RuntimeException(e);
         }
+        populateUserDetails();
+
     }
 
     private void populateUserDetails() {
@@ -187,37 +184,25 @@ public class ProfileEditorController implements Initializable {
         if (validInformation) {
             if (isUserInfoChanged()) {
                 UpdateUserInfoRequest updateUserInfoRequest = createUpdateUserInfoRequest();
-                try {
-                    boolean result = server.updateUserProfile(updateUserInfoRequest);
-                    System.out.println("Update user profile result: " + result);
-                } catch (RemoteException e) {
-                    System.err.println("Remote Exception when update user profile. cause:" + e.getMessage());
-                }
+                boolean result = RemoteManager.getInstance().updateUserProfile(updateUserInfoRequest);
+                System.out.println("Update user profile result: " + result);
             }
 
 
             if (!passwordPassF.getText().isEmpty()) {
                 if (validatePassword()) {
-                    try {
-                        byte[] salt = PasswordManager.generateSalt();
-                        String password = PasswordManager.encode(passwordPassF.getText(), salt);
-                        boolean result = server.updateUserPassword(currentUserDetails.getPhoneNumber(), salt, password);
-                        System.out.println("Update password result: " + result);
-                    } catch (RemoteException e) {
-                        System.err.println("Remote Exception: " + e.getMessage());
-                    }
+                    byte[] salt = PasswordManager.generateSalt();
+                    String password = PasswordManager.encode(passwordPassF.getText(), salt);
+                    boolean result = RemoteManager.getInstance().updateUserPassword(currentUserDetails.getPhoneNumber(), salt, password);
+                    System.out.println("Update password result: " + result);
                 } else {
                     return;
                 }
             }
 
             if (isPictureChanged) {
-                try {
-                    boolean result = server.updateUserPicture(currentUserDetails.getPhoneNumber(), newPicture);
-                    System.out.println("Update profile picture result: " + result);
-                } catch (RemoteException e) {
-                    System.err.println("Remote Exception: " + e.getMessage());
-                }
+                boolean result = RemoteManager.getInstance().updateUserPicture(currentUserDetails.getPhoneNumber(), newPicture);
+                System.out.println("Update profile picture result: " + result);
             }
         }
 

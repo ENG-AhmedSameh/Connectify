@@ -32,9 +32,6 @@ public interface ServerAPI extends Remote{
     boolean logout(String phoneNumber) throws RemoteException;
 
     void registerConnectedUser(ConnectedUser user) throws RemoteException;
-
-    void unregisterConnectedUser(ConnectedUser user) throws RemoteException;
-
     List<ChatCardsInfoDTO> getUserChatsCardsInfo(String userId) throws RemoteException;
     void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException;
 

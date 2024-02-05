@@ -74,11 +74,6 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
-    public void unregisterConnectedUser(ConnectedUser user) throws RemoteException {
-        userService.unregisterConnectedUser(user);
-    }
-
-    @Override
     public List<ChatMemberDTO> getAllUserChats(String userId) throws RemoteException {
         var service = new UserChatsService();
         return service.getAllChats(userId);

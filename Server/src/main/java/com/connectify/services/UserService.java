@@ -39,7 +39,6 @@ public class UserService {
         String hashedPassword = user.getPassword();
         boolean isCorrect = PasswordManager.isEqual(hashedPassword, request.getPassword(), user.getSalt());
         if(isCorrect){
-            userDAO.updateMode(user.getPhoneNumber(), Mode.ONLINE);
             return new LoginResponse(true, "Login successful");
         }
         return new LoginResponse(false, "Password is not correct");
@@ -68,23 +67,17 @@ public class UserService {
     }
 
     public boolean logoutUser(String phoneNumber){
+        Server.getConnectedUsers().remove(phoneNumber);
         UserDAO userDAO = new UserDAOImpl();
         return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
     }
 
     public void registerConnectedUser(ConnectedUser user) {
         try {
+            UserDAO userDAO = new UserDAOImpl();
+            userDAO.updateMode(user.getPhoneNumber(), Mode.ONLINE);
             Server.getConnectedUsers().put(user.getPhoneNumber(), user);
             System.out.println("Registered user: " + user.getPhoneNumber());
-        } catch (RemoteException e) {
-            System.err.println("Remote Exception: " + e.getMessage());
-        }
-    }
-
-    public void unregisterConnectedUser(ConnectedUser user) {
-        try {
-            Server.getConnectedUsers().remove(user.getPhoneNumber());
-            System.out.println("Unregistered user: " + user.getPhoneNumber());
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }

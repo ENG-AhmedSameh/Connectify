@@ -29,22 +29,21 @@ public class ChatManager {
     private Map<String,User> membersInfoMap;
     private String groupLastSender = "";
 
-    ServerAPI server;
-
     public ChatManager(int chatID){
         this.chatID=chatID;
+        privateChat = RemoteManager.getInstance().isPrivateChat(chatID);
+        List<MemberInfoDTO> memberInfoDTOS = null;
         try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
-            privateChat = server.isPrivateChat(chatID);
-            List<MemberInfoDTO> memberInfoDTOS = server.getAllChatOtherMembersInfo(chatID,Client.getConnectedUser().getPhoneNumber());
-            chatMembers = MemberInfoMapper.Instance.memberInfoDtoListToUserList(memberInfoDTOS);
-            membersInfoMap = new HashMap<>();
-            for(User user:chatMembers){
-                membersInfoMap.putIfAbsent(user.getPhoneNumber(),user);
-            }
-        } catch (RemoteException | NotBoundException e) {
-            throw new RuntimeException(e);
+            memberInfoDTOS = RemoteManager.getInstance().getAllChatOtherMembersInfo(chatID, Client.getConnectedUser().getPhoneNumber());
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
         }
+        chatMembers = MemberInfoMapper.Instance.memberInfoDtoListToUserList(memberInfoDTOS);
+        membersInfoMap = new HashMap<>();
+        for(User user:chatMembers) {
+            membersInfoMap.putIfAbsent(user.getPhoneNumber(), user);
+        }
+
     }
     public int getChatID() {
         return chatID;

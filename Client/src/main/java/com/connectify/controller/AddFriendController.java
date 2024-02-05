@@ -5,6 +5,7 @@ import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.FriendToAddResponse;
 import com.connectify.loaders.AddFriendCardLoader;
 import com.connectify.model.entities.Invitations;
+import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.rmi.NotBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,6 @@ public class AddFriendController implements Initializable {
     @FXML
     private Button serchButton;
 
-    private ServerAPI server;
     private static String currentUserPhone;
     List<FriendToAddResponse> friendToAddResponseList = new ArrayList<>();
     private String txtFieldsOriginalStyle;
@@ -55,27 +56,20 @@ public class AddFriendController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         txtFieldsOriginalStyle = newContactPhoneSearchTextField.getStyle();
         try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
             currentUserPhone = Client.getConnectedUser().getPhoneNumber();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
         }
     }
     @FXML
     void searchButtonHandler(ActionEvent event) {
-        try {
-            String newContactPhone = newContactPhoneSearchTextField.getText();
-            FriendToAddResponse friendToAddResponse = server.getFriendToAdd(newContactPhone);
+        String newContactPhone = newContactPhoneSearchTextField.getText();
+        FriendToAddResponse friendToAddResponse = RemoteManager.getInstance().getFriendToAdd(newContactPhone);
 
-            if (isEligibleForFriendAddition(friendToAddResponse)) {
-                handleFriendAddition(friendToAddResponse);
-            } else {
-                handleInvalidFriendAddition();
-            }
-        } catch (RemoteException e) {
-            System.err.println("Remote Exception: " + e.getMessage());
+        if (isEligibleForFriendAddition(friendToAddResponse)) {
+            handleFriendAddition(friendToAddResponse);
+        } else {
+            handleInvalidFriendAddition();
         }
     }
 
@@ -99,12 +93,7 @@ public class AddFriendController implements Initializable {
     }
 
     private boolean areAlreadyFriends() {
-        try {
-            return server.areAlreadyFriends(currentUserPhone ,newContactPhoneSearchTextField.getText());
-        } catch (RemoteException e) {
-            System.err.println("Invitation Exception: " + e.getMessage());
-            return false;
-        }
+        return RemoteManager.getInstance().areAlreadyFriends(currentUserPhone ,newContactPhoneSearchTextField.getText());
     }
 
     private Tooltip hintText(String text) {
@@ -119,23 +108,14 @@ public class AddFriendController implements Initializable {
     }
 
     private boolean isInvitationSent() {
-        try {
-            return server.isInvitationSent(currentUserPhone ,newContactPhoneSearchTextField.getText());
-        } catch (RemoteException e) {
-            System.err.println("Invitation Exception: " + e.getMessage());
-            return false;
-        }
+        return RemoteManager.getInstance().isInvitationSent(currentUserPhone ,newContactPhoneSearchTextField.getText());
     }
 
     @FXML
     void sendInvitationsButtonHandler(ActionEvent event) {
         for (FriendToAddResponse friendToAddResponse : friendToAddResponseList) {
-            try {
-                boolean result = server.sendInvitation(currentUserPhone, friendToAddResponse.getPhoneNumber());
-                System.out.println("Send invitation result: " + result);
-            } catch (RemoteException e) {
-                System.err.println("Remote Exception: " + e.getMessage());
-            }
+            boolean result = RemoteManager.getInstance().sendInvitation(currentUserPhone, friendToAddResponse.getPhoneNumber());
+            System.out.println("Send invitation result: " + result);
         }
         searchContactsVBox.getChildren().clear();
         StageManager.getInstance().switchFromAddFriendToHome();

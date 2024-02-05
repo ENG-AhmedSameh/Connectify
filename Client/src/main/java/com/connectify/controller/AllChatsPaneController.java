@@ -9,6 +9,7 @@ import com.connectify.loaders.ViewLoader;
 import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.model.entities.ChatMember;
 import com.connectify.utils.ChatManagerFactory;
+import com.connectify.utils.RemoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -49,7 +50,6 @@ public class AllChatsPaneController implements Initializable {
     private ListView<AnchorPane> allChatsListView;
     private ObservableList<AnchorPane> chatsPanesList = FXCollections.observableArrayList();
 
-    private ServerAPI server;
     private static String currentUserId;
     public String getCurrentUserId() {
         return currentUserId;
@@ -66,13 +66,6 @@ public class AllChatsPaneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
-        } catch (RemoteException e) {
-            System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
-        }
         initializeListView();
         loadAllUserChats();
         System.out.println("done");
@@ -115,7 +108,7 @@ public class AllChatsPaneController implements Initializable {
     private void loadAllUserChats(){
         try {
             //allChatsVBox.getChildren().removeAll();
-            List<ChatCardsInfoDTO> chatCardsInfoDTOS = server.getUserChatsCardsInfo(Client.getConnectedUser().getPhoneNumber());
+            List<ChatCardsInfoDTO> chatCardsInfoDTOS = RemoteManager.getInstance().getUserChatsCardsInfo(Client.getConnectedUser().getPhoneNumber());
             for(ChatCardsInfoDTO chat:chatCardsInfoDTOS)
                 addChatOnChatPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
             chatCardsInfoDTOS.stream().forEach(System.out::println);
