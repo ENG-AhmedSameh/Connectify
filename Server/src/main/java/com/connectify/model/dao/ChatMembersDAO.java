@@ -21,4 +21,6 @@ public interface ChatMembersDAO extends DAO<ChatMember, ChatMember> {
     void prepareCurrentChat(ChatMember chatMember);
 
     List<User> getAllOtherChatMembersInfo(int chatID, String member);
+
+    ChatCardsInfoDTO getUserLastChatInfo(String userId);
 }

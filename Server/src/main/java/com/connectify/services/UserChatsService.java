@@ -30,4 +30,8 @@ public class UserChatsService {
             throw new RuntimeException(e);
         }
     }
+    public ChatCardsInfoDTO getLastChatInfo(String userId){
+        ChatMembersDAO dao = new ChatMembersDAOImpl();
+        return dao.getUserLastChatInfo(userId);
+    }
 }

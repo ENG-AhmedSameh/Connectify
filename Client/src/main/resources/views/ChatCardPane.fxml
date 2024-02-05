@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="chatCardPane" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="345.0" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="335.0" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="chatPictureImageView" fitHeight="96.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                <clip>
@@ -35,8 +35,8 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label fx:id="lastMessageLabel" prefHeight="18.0" prefWidth="200.0" text="last massage supposed to be displayed here" textFill="#597081" />
-                        <Label fx:id="nChatUnreadMessagesLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="23.0" style="-fx-border-radius: 50; -fx-background-color: #7ea0b7; -fx-background-radius: 50;" text="1" textAlignment="RIGHT" textFill="WHITE" />
+                        <Label fx:id="lastMessageLabel" prefHeight="18.0" prefWidth="176.0" text="last massage supposed to be displayed here" textFill="#597081" />
+                        <Label fx:id="nChatUnreadMessagesLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="29.0" style="-fx-border-radius: 50; -fx-background-color: #7ea0b7; -fx-background-radius: 50;" text="1" textAlignment="RIGHT" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

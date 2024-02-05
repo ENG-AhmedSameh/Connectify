@@ -10,7 +10,6 @@
 }
 .list-view{
     -fx-background-color: #17212b;
-    -fx-border-color: #17212b;
 }
 .list-cell {
     -fx-padding: -1px;
@@ -24,5 +23,4 @@
 }
 .chats-cards-pane{
     -fx-background-color: #17212b;
-    -fx-border-color: #17212b;
 }

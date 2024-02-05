@@ -1,7 +1,12 @@
 package com.connectify.utils;
 
+import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
+import com.connectify.Interfaces.ServerAPI;
+import com.connectify.controller.AllChatsPaneController;
+import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.MessageDTO;
+import com.connectify.loaders.ChatCardLoader;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import javafx.application.Platform;
@@ -14,6 +19,7 @@ import com.connectify.loaders.IncomingFriendRequestCardLoader;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.Serializable;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
@@ -84,6 +90,12 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         } catch (RemoteException e) {
             System.err.println("Error receive Friend Request. case:" + e.getMessage());
         }
+    }
+
+    @Override
+    public void makeNewChatCard(ChatCardsInfoDTO chat) throws RemoteException{
+        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
+        AllChatsPaneController.getChatsPanesList().add(chatCard);
     }
 
 

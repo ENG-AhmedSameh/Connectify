@@ -12,7 +12,6 @@ import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.services.ContactService;
-import com.connectify.dto.*;
 import com.connectify.services.ContactsService;
 import com.connectify.services.InvitationService;
 import com.connectify.services.UserService;
@@ -90,6 +89,12 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         List<ChatCardsInfoDTO> chatCardsInfoDTOS = service.getAllChatsInfo(userId);
         return chatCardsInfoDTOS;
     }
+    @Override
+    public ChatCardsInfoDTO getUserLastChatCardInfo(String userId) throws RemoteException{
+        var service = new UserChatsService();
+        ChatCardsInfoDTO chatCardInfoDTOS = service.getLastChatInfo(userId);
+        return chatCardInfoDTOS;
+    }
 
     @Override
     public void changeProfileAndBio(ImageBioChangeRequest request) throws RemoteException {
@@ -132,7 +137,6 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     @Override
     public boolean acceptFriendRequest(int invitationId) throws RemoteException {
-
         return invitationService.acceptFriendRequest(invitationId);
     }
 

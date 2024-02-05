@@ -2,6 +2,8 @@ package com.connectify.services;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Server;
+import com.connectify.controller.ServerController;
+import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.model.dao.InvitationsDAO;
 import com.connectify.model.dao.impl.InvitationsDAOImpl;
@@ -53,15 +55,17 @@ public class InvitationService {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
         Invitations friendInvitation = invitationsDAO.get(invitationId);
         boolean isInvitationAccepted = invitationsDAO.acceptFriendRequest(invitationId);
-
         if (isInvitationAccepted) {
             try {
-                ConnectedUser receiver = Server.getConnectedUsers().get(friendInvitation.getSender().substring(3));
+                ConnectedUser receiver = Server.getConnectedUsers().get(friendInvitation.getSender());
                 if (receiver != null) {
                     String notificationTitle = "New Friendship";
                     String receiverName = new UserDAOImpl().get(friendInvitation.getReceiver()).getName();
                     String notificationMessage = receiverName + " has accepted your friend request.";
                     receiver.receiveNotification(notificationTitle, notificationMessage);
+                    ServerController controller = new ServerController();
+                    ChatCardsInfoDTO chatCard = controller.getUserLastChatCardInfo(receiver.getPhoneNumber());
+                    receiver.makeNewChatCard(chatCard);
                 }
             } catch (RemoteException e) {
                 System.err.println("Error sending friend invitation. Case: " + e.getMessage());

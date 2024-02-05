@@ -127,4 +127,7 @@ public class AllChatsPaneController implements Initializable {
         chatsPanesList.clear();
     }
 
+    public static ObservableList<AnchorPane> getChatsPanesList() {
+        return chatsPanesList;
+    }
 }
