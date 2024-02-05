@@ -8,7 +8,7 @@
 
 <HBox fx:id="userMessageBox" fillHeight="false" spacing="5.0" style="-fx-background-color: transparent;" styleClass="user-message" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Circle fx:id="imageCircle" fill="#4c5660" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+      <Circle fx:id="imagePicture" fill="#4c5660" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
          <HBox.margin>
             <Insets />
          </HBox.margin>

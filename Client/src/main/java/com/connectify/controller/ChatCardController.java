@@ -57,7 +57,7 @@ public class ChatCardController implements Initializable {
     private StringProperty chatName = new SimpleStringProperty();
     private StringProperty lastMessage= new SimpleStringProperty();
     private byte[] pictureBytes;
-    private Image pictureImage;
+    private byte[] pictureImage;
     private Timestamp timestamp;
     private ObjectProperty<LocalDateTime> timestampProperty;
     private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
@@ -123,7 +123,7 @@ public class ChatCardController implements Initializable {
     private void displayChat(){
         ChatManagerFactory.setActiveChatID(chatId);
         setUnreadMessagesNumber(0);
-        BorderPane chatPane = ChatPaneFactory.getChatPane(chatId, chatName.get(),pictureImage);
+        BorderPane chatPane = ChatPaneFactory.getChatPane(chatId, chatName.get(),pictureBytes);
         ViewLoader loader = ViewLoader.getInstance();
         loader.switchToChat(chatPane,chatCardPane.getScene());
     }
