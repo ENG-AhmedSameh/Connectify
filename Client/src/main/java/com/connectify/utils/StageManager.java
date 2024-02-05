@@ -2,6 +2,8 @@ package com.connectify.utils;
 
 import com.connectify.Client;
 import com.connectify.loaders.*;
+import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -49,7 +51,7 @@ public class StageManager {
         Scene scene = sceneMap.get("login");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
-        stage.setScene(scene);
+        Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchToSignUp(){
@@ -58,7 +60,7 @@ public class StageManager {
         Scene scene = sceneMap.get("signup");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
-        stage.setScene(scene);
+        Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchToSecondSignUp(){
@@ -67,7 +69,7 @@ public class StageManager {
         Scene scene = sceneMap.get("secondSignUp");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
-        stage.setScene(scene);
+        Platform.runLater(() -> stage.setScene(scene));
     }
 
 
@@ -82,7 +84,7 @@ public class StageManager {
         Scene scene = sceneMap.get("home");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
-        stage.setScene(scene);
+        Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchFromProfileEditorToHome(){

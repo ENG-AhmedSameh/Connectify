@@ -8,6 +8,7 @@ import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.utils.CountryList;
 import com.connectify.utils.CurrentUser;
+import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,20 +40,11 @@ public class LoginController implements Initializable {
     private Label errorLabel;
     private CountryList countryList = CountryList.getInstance();
 
-    private ServerAPI server;
-
     private Properties userCredentials;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryComboBox.getItems().addAll(new TreeSet<>(countryList.getCountriesMap().keySet()));
-        try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
-        } catch (RemoteException e) {
-            System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
-        }
         userCredentials = Client.getUserCredentials();
         phoneNumberTextField.setText(userCredentials.getProperty("phoneNumber"));
         countryComboBox.getSelectionModel().select(userCredentials.getProperty("country"));
@@ -80,10 +72,10 @@ public class LoginController implements Initializable {
         }
         LoginRequest request = createLoginRequest();
         try {
-            LoginResponse response = server.login(request);
+            LoginResponse response = RemoteManager.getInstance().login(request);
             if (response.getStatus()) {
                 ConnectedUser connectedUser = new CurrentUser(countryCodeLabel.getText() + phoneNumberTextField.getText());
-                server.registerConnectedUser(connectedUser);
+                RemoteManager.getInstance().registerConnectedUser(connectedUser);
                 Client.updateUserCredentials(phoneNumberTextField.getText(),countryCodeLabel.getText() ,countryComboBox.getValue(),"true");
                 Client.setConnectedUser(connectedUser);
                 passwordTextField.clear();

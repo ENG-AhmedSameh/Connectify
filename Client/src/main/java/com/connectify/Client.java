@@ -4,6 +4,7 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.utils.CountryList;
 import com.connectify.utils.CurrentUser;
+import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -17,12 +18,6 @@ import java.rmi.registry.Registry;
 import java.util.Properties;
 
 public class Client extends Application {
-
-    private final static String host = "localhost";
-    private final static int port = 1099;
-
-    private static Registry registry;
-
     private static ConnectedUser connectedUser;
 
     private static Properties userCredentials;
@@ -32,7 +27,6 @@ public class Client extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        registry = LocateRegistry.getRegistry(host, port);
         userCredentials = new Properties();
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("user.properties")) {
             userCredentials.load(is);
@@ -44,31 +38,18 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-//        if(userCredentials.getProperty("remember").equals("true")){
-//            connectedUser = new CurrentUser(userCredentials.getProperty("countryCode")+userCredentials.getProperty("phoneNumber"));
-//            StageManager.getInstance().switchToHome();
-//            try {
-//                ServerAPI server = (ServerAPI) registry.lookup("server");
-//                server.registerConnectedUser(connectedUser);
-//            } catch (NotBoundException e) {
-//                System.err.println("Server not found: " + e.getMessage());
-//            }
-//        }
-//        else{
-//            StageManager.getInstance().switchToLogin();
-//        }
         StageManager.getInstance().switchToLogin();
         primaryStage.show();
+        if(!RemoteManager.getInstance().isServerDown() && userCredentials.getProperty("remember").equals("true")){
+            connectedUser = new CurrentUser(userCredentials.getProperty("countryCode")+userCredentials.getProperty("phoneNumber"));
+            StageManager.getInstance().switchToHome();
+            RemoteManager.getInstance().registerConnectedUser(connectedUser);
+        }
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
-    public static Registry getRegistry(){
-        return registry;
-    }
-
     public static ConnectedUser getConnectedUser() {
         return connectedUser;
     }

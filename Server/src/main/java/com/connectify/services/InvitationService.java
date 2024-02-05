@@ -28,9 +28,9 @@ public class InvitationService {
                 IncomingFriendInvitationResponse receivedInvitation = invitationsDAO
                         .getIncomingFriendRequest(senderPhoneNumber, receiverPhoneNumber);
 
-                ConnectedUser receiver = Server.getConnectedUsers().get(receiverPhoneNumber.substring(3));
+                ConnectedUser receiver = Server.getConnectedUsers().get(receiverPhoneNumber);
                 if (receiver != null) {
-                    receiver.receiveFriendRequest(receivedInvitation);
+                    receiver.receiveNotification("New Friend Request", "You have received a new friend request");
                 }
             } catch (RemoteException e) {
                 System.err.println("Error sending friend invitation. case:" + e.getMessage());

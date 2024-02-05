@@ -4,6 +4,7 @@ package com.connectify.controller;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
+import com.connectify.model.entities.User;
 import com.connectify.services.ChatService;
 import com.connectify.services.MessageService;
 import com.connectify.services.UserChatsService;
@@ -22,13 +23,13 @@ import java.util.List;
 
 public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
-    UserService userService;
-    MessageService messageService;
+    private final UserService userService;
+    private final MessageService messageService;
 
-    ChatService chatService;
-    ContactService contactService;
-    InvitationService invitationService;
-    ContactsService contactsService;
+    private final ChatService chatService;
+    private final ContactService contactService;
+    private final InvitationService invitationService;
+    private final ContactsService contactsService;
     public ServerController() throws RemoteException {
         userService = new UserService();
         messageService = new MessageService();
@@ -64,17 +65,16 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     @Override
     public boolean logout(String phoneNumber) throws RemoteException {
+        User userInfo = userService.getUserInfo(phoneNumber);
+        contactsService.notifyContacts(phoneNumber, "A contact is offline.", userInfo.getName() + " has become offline");
         return userService.logoutUser(phoneNumber);
     }
 
     @Override
     public void registerConnectedUser(ConnectedUser user) throws RemoteException {
         userService.registerConnectedUser(user);
-    }
-
-    @Override
-    public void unregisterConnectedUser(ConnectedUser user) throws RemoteException {
-        userService.unregisterConnectedUser(user);
+        User userInfo = userService.getUserInfo(user.getPhoneNumber());
+        contactsService.notifyContacts(user.getPhoneNumber(), "A contact is online!", userInfo.getName() + " has become Online!");
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.controller.ServerController;
 import com.connectify.loaders.ViewLoader;
+import com.connectify.services.UserService;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -31,6 +33,7 @@ public class Server extends Application {
     @Override
     public void init() throws Exception {
         super.init();
+        connectedUsers = new HashMap<>();
         powerUp();
     }
 
@@ -42,6 +45,7 @@ public class Server extends Application {
         stage.setMinHeight(750);
         stage.setMinWidth(1300);
         stage.setScene(scene);
+        stage.onCloseRequestProperty().set(e -> powerDown());
         stage.show();
     }
 
@@ -60,7 +64,6 @@ public class Server extends Application {
             registry = LocateRegistry.createRegistry(1099);
             ServerAPI server = new ServerController();
             registry.rebind("server", server);
-            connectedUsers = new HashMap<>();
             statisticsScheduler = Executors.newSingleThreadScheduledExecutor();
         } catch (RemoteException e){
             System.err.println("Couldn't power up server: "+e.getMessage());
@@ -72,13 +75,16 @@ public class Server extends Application {
         try{
             System.out.println("Server is shutdown...");
             for(var user : connectedUsers.values()){
-                user.receiveNotification("Server is down", "Server is down. Please exit the application and reconnect later.");
+                UserService userService = new UserService();
+                userService.logoutUser(user.getPhoneNumber());
+                user.receiveNotification("Server is down", "Server is down. Contact the admin and try to reconnect later.");
+                user.forceLogout();
             }
+            registry.unbind("server");
             UnicastRemoteObject.unexportObject(registry, true);
-            connectedUsers = null;
             statisticsScheduler.shutdown();
-        } catch (RemoteException e){
-            System.err.println("Couldn't power down server: "+e.getMessage());
+        } catch (RemoteException | NotBoundException e){
+            System.err.println("Couldn't power down server: " + e.getMessage());
             System.exit(1);
         }
     }

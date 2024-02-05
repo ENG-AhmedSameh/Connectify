@@ -7,6 +7,7 @@ import com.connectify.loaders.ChatCardLoader;
 import com.connectify.loaders.ContactCardLoader;
 import com.connectify.mapper.ContactMapper;
 import com.connectify.model.entities.User;
+import com.connectify.utils.RemoteManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -31,24 +32,22 @@ public class AllContactsPaneController implements Initializable {
     @FXML
     private ScrollPane allContactsScrollPane;
 
-    private ServerAPI serverAPI;
-
     @FXML
     private VBox allContactsVBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<ContactsDTO> ContactDTOList = null;
         try {
-            serverAPI = (ServerAPI) Client.getRegistry().lookup("server");
-            List<ContactsDTO> ContactDTOList = serverAPI.getContacts(Client.getConnectedUser().getPhoneNumber());
-            ContactMapper mapper=ContactMapper.INSTANCE;
-            List<User> contactsList = mapper.contactDTOListToUserList(ContactDTOList);
-            for (User user : contactsList)
-            {
-                allContactsVBox.getChildren().add(ContactCardLoader.loadContactCardAnchorPane(user));
-            }
-        } catch (RemoteException | NotBoundException e) {
-            throw new RuntimeException(e);
+            ContactDTOList = RemoteManager.getInstance().getContacts(Client.getConnectedUser().getPhoneNumber());
+        } catch (RemoteException e) {
+            System.err.println("Remote Exception: " + e.getMessage());
+        }
+        ContactMapper mapper=ContactMapper.INSTANCE;
+        List<User> contactsList = mapper.contactDTOListToUserList(ContactDTOList);
+        for (User user : contactsList)
+        {
+            allContactsVBox.getChildren().add(ContactCardLoader.loadContactCardAnchorPane(user));
         }
     }
 
