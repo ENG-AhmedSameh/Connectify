@@ -67,6 +67,7 @@ public class UserService {
     public boolean logoutUser(String phoneNumber){
         Server.getConnectedUsers().remove(phoneNumber);
         UserDAO userDAO = new UserDAOImpl();
+        System.out.println("Unregistered user: " + phoneNumber);
         return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
     }
 
