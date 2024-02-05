@@ -16,9 +16,7 @@ import com.connectify.model.enums.Status;
 import com.connectify.util.PasswordManager;
 
 import java.rmi.RemoteException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class UserService {
 
@@ -92,5 +90,10 @@ public class UserService {
         UserDAO userDAO = new UserDAOImpl();
         User user = userDAO.get(phone);
         return UserMapper.INSTANCE.userToFriendToAddResponse(user);
+    }
+
+    public User getUserInfo(String phoneNumber) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.get(phoneNumber);
     }
 }
