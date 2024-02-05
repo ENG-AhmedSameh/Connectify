@@ -114,7 +114,6 @@ public class ChatController implements Initializable {
         }
     }
 
-
     public void attachmentHandler(){
 
     }

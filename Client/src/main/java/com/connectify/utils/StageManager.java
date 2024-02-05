@@ -3,6 +3,7 @@ package com.connectify.utils;
 import com.connectify.Client;
 import com.connectify.loaders.*;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -29,8 +30,8 @@ public class StageManager {
     private StageManager(){
         stage = Client.getPrimaryStage();
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setMinWidth(850);
-        stage.setMinHeight(500);
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
         sceneMap = new HashMap<>();
     }
 
@@ -46,6 +47,8 @@ public class StageManager {
         if(sceneMap.get("login") == null)
             sceneMap.put("login", createLoginScene());
         Scene scene = sceneMap.get("login");
+        BorderPane mainPane =(BorderPane)scene.getRoot();
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -53,6 +56,8 @@ public class StageManager {
         if(sceneMap.get("signup") == null)
             sceneMap.put("signup", createSignUpScene());
         Scene scene = sceneMap.get("signup");
+        BorderPane mainPane =(BorderPane)scene.getRoot();
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -60,6 +65,8 @@ public class StageManager {
         if(sceneMap.get("secondSignUp") == null)
             sceneMap.put("secondSignUp", createSecondSignUpScene());
         Scene scene = sceneMap.get("secondSignUp");
+        BorderPane mainPane =(BorderPane)scene.getRoot();
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -73,6 +80,8 @@ public class StageManager {
         if(sceneMap.get("home") == null)
             sceneMap.put("home", createHomeScene());
         Scene scene = sceneMap.get("home");
+        BorderPane mainPane =(BorderPane)scene.getRoot();
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -135,6 +144,7 @@ public class StageManager {
         HBox titleBar = TitleBarLoader.loadTitleBarHBox();
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         return new Scene(mainPane);
     }
 
@@ -148,6 +158,7 @@ public class StageManager {
         HBox titleBar = TitleBarLoader.loadTitleBarHBox();
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         return new Scene(mainPane);
     }
 
@@ -159,6 +170,7 @@ public class StageManager {
         mainPane.setTop(titleBar);
         mainPane.setCenter(secondSignUpPane);
         mainPane.setLeft(logoPane);
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         return new Scene(mainPane);
     }
 
@@ -174,6 +186,7 @@ public class StageManager {
         mainPane.setLeft(optionsPane);
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         return new Scene(mainPane);
     }
 
