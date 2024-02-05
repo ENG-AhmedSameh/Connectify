@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: #374754;" styleClass="chat-HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane style="-fx-background-color: transparet;" styleClass="chat-HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="350.0">
             <children>

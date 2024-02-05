@@ -97,6 +97,7 @@ public class StageManager {
         Scene scene = sceneMap.get("home");
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setCenter(logoPane);
         centerPane.setLeft(chatsPane);
     }
@@ -106,7 +107,18 @@ public class StageManager {
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
         centerPane.setCenter(ProfileLoader.loadProfileAnchorPane());
-        centerPane.setLeft(chatsPane);
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        logoPane.setStyle("-fx-background-color: #17212b");
+        centerPane.setLeft(logoPane);
+    }
+    public void switchToContacts(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane=(BorderPane) mainPane.getCenter();
+        centerPane.setLeft(AllContactsPaneLoader.loadAllContactsAnchorPane());
+        centerPane.setCenter(null);
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        centerPane.setCenter(logoPane);
     }
 
     public void switchToProfileEditor(){
@@ -114,14 +126,13 @@ public class StageManager {
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
         centerPane.setCenter(ProfileEditorLoader.loadProfileEditorAnchorPane());
-        centerPane.setLeft(chatsPane);
     }
-
     public void switchToAddFriend(){
         Scene scene = sceneMap.get("home");
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
         centerPane.setLeft(AddFriendLoader.loadAddFriendAnchorPane());
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setCenter(logoPane);
     }
 
@@ -132,6 +143,8 @@ public class StageManager {
         if (incomingFriendRequestPane == null)
             incomingFriendRequestPane = IncomingFriendRequestLoader.loadIncomingFriendRequestAnchorPane();
         centerPane.setLeft(incomingFriendRequestPane);
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        centerPane.setCenter(logoPane);
     }
 
     private Scene createLoginScene(){
@@ -145,6 +158,7 @@ public class StageManager {
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
+        mainPane.setStyle("-fx-border-color: #17212b; -fx-border-width:1");
         return new Scene(mainPane);
     }
 

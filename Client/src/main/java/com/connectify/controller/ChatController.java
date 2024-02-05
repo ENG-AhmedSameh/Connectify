@@ -78,6 +78,8 @@ public class ChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(!ChatManagerFactory.getChatManager(chatID).isPrivateChat())
+            statusCircle.setVisible(false);
         chatName.setText(name);
         pictureImageView.setImage(image);
         setListViewCellFactory();

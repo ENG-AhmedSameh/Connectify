@@ -73,12 +73,7 @@ public class OptionsController {
 
     @FXML
     void contactsHandler(ActionEvent event) {
-        StageManager stageManager =StageManager.getInstance();
-        Scene scene = stageManager.getSceneMap().get("home");
-        BorderPane mainPane = (BorderPane) scene.getRoot();
-        BorderPane centerPane=(BorderPane) mainPane.getCenter();
-        centerPane.setLeft(AllContactsPaneLoader.loadAllContactsAnchorPane());
-        centerPane.setCenter(LogoLoader.loadLogoAnchorPane());
+        StageManager.getInstance().switchToContacts();
     }
 
     @FXML

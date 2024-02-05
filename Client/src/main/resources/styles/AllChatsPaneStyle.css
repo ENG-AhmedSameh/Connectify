@@ -1,36 +1,4 @@
 
-.scroll-pane {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane > .viewport {
-    -fx-background-color: transparent;
-}
-
-.scroll-bar:horizontal, .scroll-bar:vertical{
-    -fx-background-color:transparent;
-}
-
-.increment-button, .decrement-button {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.scroll-bar:horizontal .track,
-.scroll-bar:vertical .track{
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-background-radius: 0em;
-}
-
-.scroll-bar:horizontal .thumb,
-.scroll-bar:vertical .thumb {
-    -fx-background-color: #597081;
-    -fx-background-radius: 5em;
-}
-.scroll-pane > .corner {
-    -fx-background-color: black;
-}
 .chat-HBox{
     -fx-background-color:  transparent;
 }
@@ -41,15 +9,20 @@
     -fx-background-radius: 15;
 }
 .list-view{
-    -fx-background-color: #0e1621;
+    -fx-background-color: #17212b;
+    -fx-border-color: #17212b;
 }
 .list-cell {
     -fx-padding: -1px;
+
 }
 .list-view .list-cell:odd {
-    -fx-background-color: #0e1621;
+    -fx-background-color: #17212b;
 }
 .list-view .list-cell:even {
-    -fx-background-color: #0e1621;
+    -fx-background-color: #17212b;
 }
-
+.chats-cards-pane{
+    -fx-background-color: #17212b;
+    -fx-border-color: #17212b;
+}

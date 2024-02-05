@@ -6,6 +6,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,64 +17,72 @@
 
 <AnchorPane fx:id="editeProfilePane" styleClass="anchor-pane" stylesheets="@../styles/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ProfileEditorController">
    <children>
-      <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="25.0" layoutY="11.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.599999999999966" AnchorPane.topAnchor="11.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="488.0" spacing="10.0" VBox.vgrow="NEVER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="24.799999237060547" layoutY="11.199999809265137" stylesheets="@../styles/Profile.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane>
                <children>
-                  <Label fx:id="editeProfileLbl" alignment="CENTER" prefHeight="38.0" prefWidth="88.0" text="Profile" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="26.0" />
-                     </font>
-                  </Label>
+                  <VBox alignment="CENTER" fillWidth="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="488.0" spacing="10.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Label fx:id="editeProfileLbl" alignment="CENTER" prefHeight="38.0" prefWidth="88.0" text="Profile" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <VBox prefHeight="222.0" prefWidth="450.0" spacing="20.0" VBox.vgrow="NEVER">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Circle fx:id="userImg" fill="DODGERBLUE" onMouseClicked="#profileImageOnMouseClicked" radius="64.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle" />
+                                 </children>
+                              </HBox>
+                              <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="450.0" promptText="bio" styleClass="text-area" stylesheets="@../styles/Profile.css" text="I am happy." />
+                              <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" text="01143414035" />
+                              <TextField fx:id="emailTxtF" blendMode="SCREEN" prefHeight="29.0" prefWidth="407.0" promptText="E-mail" styleClass="text-field" text="Nofal@gimal.com" VBox.vgrow="NEVER" />
+                              <TextField fx:id="nameTxtF" blendMode="SCREEN" prefHeight="28.0" prefWidth="402.0" promptText="Display Name" styleClass="text-field" text="Mohamed Nofal" VBox.vgrow="NEVER" />
+                              <PasswordField fx:id="passwordPassF" blendMode="SCREEN" prefHeight="29.0" prefWidth="427.0" promptText="New Password" styleClass="text-field" VBox.vgrow="NEVER" />
+                              <PasswordField fx:id="confirmPasswordPassF" blendMode="SCREEN" layoutX="10.0" layoutY="354.0" prefHeight="29.0" prefWidth="427.0" promptText="Confirm Password" styleClass="text-field" />
+                              <HBox prefHeight="29.0" prefWidth="455.0" spacing="80.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <DatePicker fx:id="birthDatePicker" blendMode="SCREEN" prefHeight="26.0" prefWidth="311.0" promptText="Birth Date" styleClass="date-picker" HBox.hgrow="NEVER" />
+                                    <ComboBox fx:id="genderComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Male" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="445.0" prefHeight="29.0" prefWidth="455.0" spacing="80.0">
+                                 <children>
+                                    <ComboBox fx:id="statusComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Busy" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="29.0" prefWidth="455.0" spacing="80.0">
+                                 <children>
+                                    <ComboBox fx:id="modeComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Online" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
+                                 </children>
+                              </HBox>
+                              <HBox spacing="30.0">
+                                 <children>
+                                    <Button fx:id="updateBtn1" mnemonicParsing="false" onAction="#updateBtnHandler" prefHeight="30.0" prefWidth="444.0" stylesheets="@../styles/SignUp.css" text="Update" />
+                                    <Button fx:id="cancelBtn1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="30.0" prefWidth="444.0" stylesheets="@../styles/SignUp.css" text="Cancel" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
                </children>
-            </HBox>
-            <VBox prefHeight="222.0" prefWidth="450.0" spacing="20.0" VBox.vgrow="NEVER">
-               <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Circle fx:id="userImg" fill="DODGERBLUE" onMouseClicked="#profileImageOnMouseClicked" radius="64.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle" />
-                     </children>
-                  </HBox>
-                  <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="450.0" promptText="bio" styleClass="text-area" stylesheets="@../styles/Profile.css" text="I am happy." />
-                  <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" text="01143414035" />
-                  <TextField fx:id="emailTxtF" blendMode="SCREEN" prefHeight="29.0" prefWidth="407.0" promptText="E-mail" styleClass="text-field" text="Nofal@gimal.com" VBox.vgrow="NEVER" />
-                  <TextField fx:id="nameTxtF" blendMode="SCREEN" prefHeight="28.0" prefWidth="402.0" promptText="Display Name" styleClass="text-field" text="Mohamed Nofal" VBox.vgrow="NEVER" />
-                  <PasswordField fx:id="passwordPassF" blendMode="SCREEN" prefHeight="29.0" prefWidth="427.0" promptText="New Password" styleClass="text-field" VBox.vgrow="NEVER" />
-                  <PasswordField fx:id="confirmPasswordPassF" blendMode="SCREEN" layoutX="10.0" layoutY="354.0" prefHeight="29.0" prefWidth="427.0" promptText="Confirm Password" styleClass="text-field" />
-                  <HBox prefHeight="29.0" prefWidth="455.0" spacing="80.0" VBox.vgrow="NEVER">
-                     <children>
-                        <DatePicker fx:id="birthDatePicker" blendMode="SCREEN" prefHeight="26.0" prefWidth="311.0" promptText="Birth Date" styleClass="date-picker" HBox.hgrow="NEVER" />
-                        <ComboBox fx:id="genderComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Male" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
-                     </children>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="445.0" prefHeight="29.0" prefWidth="455.0" spacing="80.0">
-                     <children>
-                        <ComboBox fx:id="statusComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Busy" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="29.0" prefWidth="455.0" spacing="80.0">
-                     <children>
-                        <ComboBox fx:id="modeComboBox" blendMode="SCREEN" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Online" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="30.0">
-                     <children>
-                        <Button fx:id="updateBtn1" mnemonicParsing="false" onAction="#updateBtnHandler" prefHeight="30.0" prefWidth="444.0" stylesheets="@../styles/SignUp.css" text="Update" />
-                        <Button fx:id="cancelBtn1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="30.0" prefWidth="444.0" stylesheets="@../styles/SignUp.css" text="Cancel" />
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="20.0" top="20.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </VBox>
-         </children>
-      </VBox>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

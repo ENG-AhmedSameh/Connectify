@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="incomingFriendRequestAnchorPane" styleClass="logo-anchor-pane" stylesheets="@../styles/IncomingFriendRequest.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.IncomingFriendRequestController">
+<AnchorPane fx:id="incomingFriendRequestAnchorPane" styleClass="chats-cards-pane" stylesheets="@../styles/AllChatsPaneStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.IncomingFriendRequestController">
    <children>
-      <Label layoutX="46.0" layoutY="14.0" text="Incoming Friend Requests" textFill="WHITE" AnchorPane.topAnchor="14.0">
+      <Label layoutX="46.0" layoutY="14.0" text="Incoming Friend Requests" textFill="#2f6ea5" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Separator layoutX="16.0" layoutY="46.0" prefHeight="6.0" prefWidth="317.0" AnchorPane.topAnchor="46.0" />
+      <Separator blendMode="SOFT_LIGHT" layoutX="16.0" layoutY="46.0" prefHeight="6.0" prefWidth="317.0" style="-fx-background-color: #2f6ea5;" AnchorPane.topAnchor="46.0" />
       <ListView fx:id="allInvitationsListView" layoutY="60.0" prefWidth="350.0" stylesheets="@../styles/AllChatsPaneStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
    </children>
 </AnchorPane>
