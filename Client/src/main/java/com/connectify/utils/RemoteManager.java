@@ -364,4 +364,14 @@ public class RemoteManager {
     public boolean isServerDown() {
         return server == null;
     }
+
+    public ChatCardsInfoDTO getUserLastChatCardInfo(String phoneNumber) {
+        try {
+            return server.getUserLastChatCardInfo(phoneNumber);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
+    }
 }

@@ -66,7 +66,7 @@ public class OptionsController {
 
     @FXML
     void chatsHandler(ActionEvent event) {
-
+        StageManager.getInstance().switchToChats();
     }
 
     @FXML

@@ -95,23 +95,18 @@ public class IncomingFriendRequestCardController implements Initializable {
     @FXML
     void handleAcceptPressed(ActionEvent event) {
         boolean friendRequestAccepted = RemoteManager.getInstance().acceptFriendRequest(invitationId);
-
-            if (friendRequestAccepted) {
-                ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
-                friendRequestList.removeIf(this::isControllerMatch);
-            }
-            try {
-                ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
-                ChatCardsInfoDTO chat = server.getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
-                AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
-                AllChatsPaneController.getChatsPanesList().add(chatCard);
-            } catch (RemoteException | NotBoundException e) {
-                throw new RuntimeException(e);
-            }
-        } catch (RemoteException e) {
-            System.err.println("Accept Friend Request failed: " + e.getMessage());
-            e.printStackTrace();
+        if (friendRequestAccepted) {
+            ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
+            friendRequestList.removeIf(this::isControllerMatch);
         }
+        ChatCardsInfoDTO chat = null;
+        try {
+            chat = RemoteManager.getInstance().getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
+        AllChatsPaneController.getChatsPanesList().add(chatCard);
     }
 
     @FXML
