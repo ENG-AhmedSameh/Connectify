@@ -8,7 +8,7 @@ public class Message {
     private int chatId;
     private Timestamp timestamp;
     private String content;
-    private Integer attachmentId;  // nullable
+    private Integer attachmentId;
 
     public Message() {
     }

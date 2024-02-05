@@ -4,6 +4,7 @@ package com.connectify.controller;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
+import com.connectify.services.*;
 import com.connectify.services.ChatService;
 import com.connectify.services.MessageService;
 import com.connectify.services.UserChatsService;
@@ -17,15 +18,19 @@ import com.connectify.services.ContactsService;
 import com.connectify.services.InvitationService;
 import com.connectify.services.UserService;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
-    UserService userService;
-    MessageService messageService;
+    private final UserService userService;
+    private final MessageService messageService;
 
+    private final ChatService chatService;
+
+    private final AttachmentService attachmentService;
     ChatService chatService;
     ContactService contactService;
     InvitationService invitationService;
@@ -34,6 +39,7 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         userService = new UserService();
         messageService = new MessageService();
         chatService = new ChatService();
+        attachmentService = new AttachmentService();
         contactService =new ContactService();
         invitationService = new InvitationService();
         contactsService = new ContactsService();
@@ -95,7 +101,18 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     public void sendMessage(MessageSentDTO message) throws RemoteException {
         MessageDTO storedMessage = messageService.storeMessage(message);
         chatService.sendMessage(storedMessage);
+    }
 
+    @Override
+    public void sendAttachment(MessageSentDTO message) throws RemoteException{
+        Integer attachmentId = attachmentService.storeAttachment(message);
+        message.setAttachmentId(attachmentId);
+        MessageDTO storedMessage = messageService.storeMessage(message);
+        chatService.sendMessage(storedMessage);
+    }
+
+    public File getAttachment(Integer attachmentId) throws RemoteException{
+        return attachmentService.getAttachment(attachmentId);
     }
 
     @Override

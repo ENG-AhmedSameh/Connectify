@@ -91,4 +91,25 @@ public class AttachmentsDAOImpl implements AttachmentDAO{
             return false;
         }
     }
+
+    @Override
+    public int insertAndReturnID(Attachments attachments) {
+        String query = "INSERT INTO attachments (name, extension, size) VALUES (?, ?, ?)";
+        try(Connection connection = dbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS))
+        {
+            preparedStatement.setString(1, attachments.getName());
+            preparedStatement.setString(2, attachments.getExtension());
+            preparedStatement.setInt(3, attachments.getSize());
+            preparedStatement.executeUpdate();
+            try(ResultSet resultSet = preparedStatement.getGeneratedKeys()){
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+        return -1;
+    }
 }

@@ -20,8 +20,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
@@ -90,7 +94,7 @@ public class ChatController implements Initializable {
     public void sendHandler(){
         if(!Objects.equals(sendBox.getText(), "")){
             try {
-                MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()));
+                MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()), null);
                 MessageMapper mapper = MessageMapper.INSTANCE;
                 Message message =mapper.messageSentDtoTOMessage(messageSentDTO);
                 ChatCardHandler.updateChatCard(message);
@@ -106,7 +110,18 @@ public class ChatController implements Initializable {
 
 
     public void attachmentHandler(){
-
+        Stage stage = (Stage) sendBox.getScene().getWindow();
+        FileChooser  fileChooser = new FileChooser();
+        fileChooser.setTitle("Select file");
+        File file = fileChooser.showOpenDialog(stage);
+        if(file != null){
+            try{
+                MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(), chatID, "", new Timestamp(System.currentTimeMillis()), file);
+                server.sendAttachment(messageSentDTO);
+            } catch (RemoteException e){
+                System.err.println("Remote Exception: " + e.getMessage());
+            }
+        }
     }
 
     public void htmlEditorHandler(){
