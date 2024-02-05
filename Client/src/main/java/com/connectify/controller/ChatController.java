@@ -6,10 +6,7 @@ import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import com.connectify.model.entities.User;
-import com.connectify.utils.ChatCardHandler;
-import com.connectify.utils.ChatManager;
-import com.connectify.utils.ChatManagerFactory;
-import com.connectify.utils.CurrentUser;
+import com.connectify.utils.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -74,7 +71,6 @@ public class ChatController implements Initializable {
 
     private final Image image;
 
-    ServerAPI server;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,11 +86,6 @@ public class ChatController implements Initializable {
         this.chatID = chatID;
         this.name = name;
         this.image = image;
-        try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
-        } catch (RemoteException | NotBoundException e) {
-
-        }
     }
 
     public void sendHandler(){
@@ -104,7 +95,7 @@ public class ChatController implements Initializable {
                 MessageMapper mapper = MessageMapper.INSTANCE;
                 Message message =mapper.messageSentDtoTOMessage(messageSentDTO);
                 ChatCardHandler.updateChatCard(message);
-                server.sendMessage(messageSentDTO);
+                RemoteManager.getInstance().sendMessage(messageSentDTO);
                 //TODO render send message
                 messages.add(message);
                 sendBox.clear();

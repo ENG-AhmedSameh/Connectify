@@ -8,9 +8,7 @@ import com.connectify.loaders.AllContactsPaneLoader;
 import com.connectify.loaders.LogoLoader;
 import com.connectify.model.entities.User;
 import com.connectify.loaders.ViewLoader;
-import com.connectify.utils.ChatManager;
-import com.connectify.utils.ChatManagerFactory;
-import com.connectify.utils.ChatPaneFactory;
+import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,7 +66,7 @@ public class OptionsController {
 
     @FXML
     void chatsHandler(ActionEvent event) {
-        StageManager.getInstance().switchToChats();
+
     }
 
     @FXML
@@ -88,21 +86,10 @@ public class OptionsController {
 
     @FXML
     void logoutHandler(ActionEvent event) {
-        try {
-            ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
-            server.unregisterConnectedUser(Client.getConnectedUser());
-            server.logout(Client.getConnectedUser().getPhoneNumber());
-            Client.updateUserCredentials("false");
-            Client.setConnectedUser(null);
-            ChatPaneFactory.clearChats();
-            AllChatsPaneController.clearChatsCardList();
-            ChatManagerFactory.clearChatManagersMap();
-            StageManager.getInstance().resetHomeScene();
-        } catch (RemoteException e) {
-            System.err.println("RemoteException: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
-        }
+        RemoteManager.getInstance().logout(Client.getConnectedUser());
+        Client.updateUserCredentials("false");
+        Client.setConnectedUser(null);
+        StageManager.getInstance().resetHomeScene();
         StageManager.getInstance().switchToLogin();
     }
 

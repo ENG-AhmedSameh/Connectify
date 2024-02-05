@@ -2,6 +2,8 @@ package com.connectify.utils;
 
 import com.connectify.Client;
 import com.connectify.loaders.*;
+import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -46,21 +48,21 @@ public class StageManager {
         if(sceneMap.get("login") == null)
             sceneMap.put("login", createLoginScene());
         Scene scene = sceneMap.get("login");
-        stage.setScene(scene);
+        Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchToSignUp(){
         if(sceneMap.get("signup") == null)
             sceneMap.put("signup", createSignUpScene());
         Scene scene = sceneMap.get("signup");
-        stage.setScene(scene);
+        Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchToSecondSignUp(){
         if(sceneMap.get("secondSignUp") == null)
             sceneMap.put("secondSignUp", createSecondSignUpScene());
         Scene scene = sceneMap.get("secondSignUp");
-        stage.setScene(scene);
+        Platform.runLater(() -> stage.setScene(scene));
     }
 
 
@@ -73,7 +75,7 @@ public class StageManager {
         if(sceneMap.get("home") == null)
             sceneMap.put("home", createHomeScene());
         Scene scene = sceneMap.get("home");
-        stage.setScene(scene);
+        Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchFromProfileEditorToHome(){
@@ -84,7 +86,7 @@ public class StageManager {
         centerPane.setLeft(chatsPane);
     }
 
-    public void switchToChats(){
+    public void switchFromAddFriendToHome(){
         Scene scene = sceneMap.get("home");
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();

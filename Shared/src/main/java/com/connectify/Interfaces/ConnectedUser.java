@@ -15,4 +15,6 @@ public interface ConnectedUser extends Remote {
     void receiveMessage(MessageDTO messageDTO) throws RemoteException;
 
     void receiveFriendRequest(IncomingFriendInvitationResponse friendInvitation) throws RemoteException;
+
+    void forceLogout() throws RemoteException;
 }

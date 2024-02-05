@@ -2,6 +2,7 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.utils.RemoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,8 +47,6 @@ public class IncomingFriendRequestCardController implements Initializable {
     private byte[] pictureBytes;
     private String phone;
     private int invitationId;
-
-    private ServerAPI server;
     private static String currentUserPhone;
 
     public IncomingFriendRequestCardController() {
@@ -59,14 +58,10 @@ public class IncomingFriendRequestCardController implements Initializable {
         this.pictureBytes = pictureBytes;
         this.phone = phone;
         this.invitationId = invitationId;
-
         try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
             currentUserPhone = Client.getConnectedUser().getPhoneNumber();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
         }
     }
 
@@ -97,33 +92,23 @@ public class IncomingFriendRequestCardController implements Initializable {
 
     @FXML
     void handleAcceptPressed(ActionEvent event) {
-        try {
-            boolean friendRequestAccepted = server.acceptFriendRequest(invitationId);
+        boolean friendRequestAccepted = RemoteManager.getInstance().acceptFriendRequest(invitationId);
 
-            if (friendRequestAccepted) {
-                ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
+        if (friendRequestAccepted) {
+            ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
 
-                friendRequestList.removeIf(this::isControllerMatch);
-            }
-        } catch (RemoteException e) {
-            System.err.println("Accept Friend Request failed: " + e.getMessage());
-            e.printStackTrace();
+            friendRequestList.removeIf(this::isControllerMatch);
         }
     }
 
     @FXML
     void handleCancelPressed(ActionEvent event) {
-        try {
-            boolean friendRequestCanceled = server.cancelFriendRequest(invitationId);
+        boolean friendRequestCanceled = RemoteManager.getInstance().cancelFriendRequest(invitationId);
 
-            if (friendRequestCanceled) {
-                ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
+        if (friendRequestCanceled) {
+            ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
 
-                friendRequestList.removeIf(this::isControllerMatch);
-            }
-        } catch (RemoteException e) {
-            System.err.println("Cancel Friend Request failed: " + e.getMessage());
-            e.printStackTrace();
+            friendRequestList.removeIf(this::isControllerMatch);
         }
     }
 

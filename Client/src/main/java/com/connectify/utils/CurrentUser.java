@@ -86,5 +86,11 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         }
     }
 
+    @Override
+    public void forceLogout() throws RemoteException {
+        StageManager.getInstance().resetHomeScene();
+        StageManager.getInstance().switchToLogin();
+    }
+
 
 }

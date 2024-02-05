@@ -2,12 +2,12 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.model.enums.Gender;
 import com.connectify.util.PasswordManager;
 import com.connectify.utils.CountryList;
 import com.connectify.utils.CurrentUser;
+import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,13 +20,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
-import com.connectify.model.enums.Gender;
 
 public class SignUpController implements Initializable {
 
@@ -48,8 +45,6 @@ public class SignUpController implements Initializable {
     private CountryList countryList;
     private Boolean validInformation = true;
 
-    private ServerAPI server;
-
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
 
     @Override
@@ -58,13 +53,6 @@ public class SignUpController implements Initializable {
         txtFieldsOriginalStyle = nameTxtF.getStyle();
         comboBoxOriginalStyle = countryComboBox.getStyle();
         datePickerOriginalStyle = birthDatePicker.getStyle();
-        try {
-            server = (ServerAPI) Client.getRegistry().lookup("server");
-        } catch (RemoteException e) {
-            System.err.println("Remote Exception: " + e.getMessage());
-        } catch (NotBoundException e) {
-            System.err.println("NotBoundException: " + e.getMessage());
-        }
     }
 
     private void initializeComboBox() {
@@ -140,19 +128,14 @@ public class SignUpController implements Initializable {
         validateFields();
         if(validInformation){
             SignUpRequest request = createSignUpRequest();
-            boolean isSuccessFul = false;
-            try {
-                isSuccessFul = server.signUp(request);
-            } catch (RemoteException e) {
-                System.err.println("Remote Exception: " + e.getMessage());
-            }
+            boolean isSuccessFul = RemoteManager.getInstance().signUp(request);
             if (!isSuccessFul) {
                 phoneNumTxtF.setTooltip(hintText("This phone number is already registered"));
                 phoneNumTxtF.setStyle("-fx-border-color: red;");
             }
             else {
                 ConnectedUser connectedUser = new CurrentUser(countryCodeLbl.getText() + phoneNumTxtF.getText());
-                server.registerConnectedUser(connectedUser);
+                RemoteManager.getInstance().registerConnectedUser(connectedUser);
                 Client.setConnectedUser(connectedUser);
                 clearFields();
                 StageManager.getInstance().switchToSecondSignUp();

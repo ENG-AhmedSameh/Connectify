@@ -2,6 +2,7 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.utils.RemoteManager;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -34,15 +35,7 @@ public class titleBarController{
     @FXML
     void closeButtonHandler(MouseEvent event) {
         if(Client.getConnectedUser() != null){
-            try {
-                ServerAPI server = (ServerAPI) Client.getRegistry().lookup("server");
-                server.unregisterConnectedUser(Client.getConnectedUser());
-                server.logout(Client.getConnectedUser().getPhoneNumber());
-            } catch (RemoteException e) {
-                System.err.println("Remote Exception: " + e.getMessage());
-            } catch (NotBoundException e) {
-                System.err.println("NotBoundException: " + e.getMessage());
-            }
+            RemoteManager.getInstance().logout(Client.getConnectedUser());
         }
         System.exit(0);
     }
