@@ -6,43 +6,73 @@ import com.connectify.model.dao.impl.AttachmentsDAOImpl;
 import com.connectify.model.entities.Attachments;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
 
 
 public class AttachmentService {
 
+    private final ExecutorService executor;
+
+    public AttachmentService() {
+        executor = Executors.newCachedThreadPool();
+    }
+
     public Integer storeAttachment(MessageSentDTO message){
-        File chatFolder = new File(getClass().getClassLoader().getResource("attachments").getPath() + "/" + message.getChatId());
-        if (!chatFolder.exists()) {
-            chatFolder.mkdirs();
-        }
+        Callable<Integer> callable = () -> {
+            Path attachmentsPath = Paths.get(getClass().getClassLoader().getResource("attachments").toURI());
+            Path chatFolderPath = attachmentsPath.resolve(String.valueOf(message.getChatId()));
+            if (!Files.exists(chatFolderPath)) {
+                Files.createDirectories(chatFolderPath);
+            }
 
-        File senderFolder = new File(chatFolder, message.getSender());
-        if (!senderFolder.exists()) {
-            senderFolder.mkdirs();
-        }
+            Path senderFolderPath = chatFolderPath.resolve(message.getSender());
+            if (!Files.exists(senderFolderPath)) {
+                Files.createDirectories(senderFolderPath);
+            }
 
-        File attachmentFile = message.getAttachment();
-        if (attachmentFile != null && attachmentFile.exists()) {
-            File newFile = new File(senderFolder, attachmentFile.getName());
-            Attachments attachment = new Attachments();
-            attachment.setName(newFile.getPath());
-            attachment.setExtension(newFile.getName().substring(newFile.getName().lastIndexOf(".") + 1));
-            attachment.setSize((int)newFile.length());
-            AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
-            return attachmentDAO.insertAndReturnID(attachment);
+            Path attachmentPath = message.getAttachment().toPath();
+            if (Files.exists(attachmentPath)) {
+                Path newFilePath = senderFolderPath.resolve(attachmentPath.getFileName());
+                Files.copy(attachmentPath, newFilePath, StandardCopyOption.REPLACE_EXISTING);
+
+                Attachments attachment = new Attachments();
+                attachment.setName(newFilePath.toString());
+                attachment.setExtension(getExtension(newFilePath.toString()));
+                attachment.setSize((int) Files.size(newFilePath));
+                AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
+                return attachmentDAO.insertAndReturnID(attachment);
+            }
+            return null;
+        };
+
+        try {
+            return executor.submit(callable).get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Exception: " + e.getMessage());
+            return null;
         }
-        return null;
     }
 
     public File getAttachment(Integer attachmentId) {
         AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
         Attachments attachment = attachmentDAO.get(attachmentId);
         if (attachment != null) {
-            File attachmentFile = new File(attachment.getName());
-            if (attachmentFile.exists()) {
-                return attachmentFile;
-            }
+            Path filePath = Paths.get(attachment.getName());
+            return filePath.toFile();
         }
         return null;
     }
+
+
+    private String getExtension(String path) {
+        int index = path.lastIndexOf('.');
+        return path.substring(index + 1);
+    }
+
+
 }

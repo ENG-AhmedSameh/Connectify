@@ -31,10 +31,9 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     private final ChatService chatService;
 
     private final AttachmentService attachmentService;
-    ChatService chatService;
-    ContactService contactService;
-    InvitationService invitationService;
-    ContactsService contactsService;
+    private final ContactService contactService;
+    private final InvitationService invitationService;
+    private final ContactsService contactsService;
     public ServerController() throws RemoteException {
         userService = new UserService();
         messageService = new MessageService();

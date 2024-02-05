@@ -348,6 +348,19 @@ public class RemoteManager {
         }
     }
 
+    public void sendAttachment(MessageSentDTO messageSentDTO) {
+        if(isServerDown()){
+            handleServerDown();
+            return;
+        }
+        try {
+            server.sendAttachment(messageSentDTO);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+        }
+    }
+
     private void handleServerDown() {
         showServerDownNotification();
         StageManager.getInstance().switchToLogin();
