@@ -7,6 +7,7 @@ module Client {
     requires java.rmi;
     requires com.connectify.shared;
     requires java.sql;
+    requires chatter.bot.api;
 
     opens com.connectify;
     opens com.connectify.loaders;

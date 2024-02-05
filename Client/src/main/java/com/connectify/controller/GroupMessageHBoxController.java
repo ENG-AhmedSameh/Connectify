@@ -40,10 +40,10 @@ public class GroupMessageHBoxController{
     private HBox userMessageBox;
 
     public void setSameSenderMessageStyle(String messageContent,Timestamp messageTime){
-        messageElementsVBox.getChildren().remove(senderNameLabel);
-        imageCircle.setVisible(false);
-        contentTextFlow.setStyle("-fx-background-radius: 10 10 0 0");
         Platform.runLater(()->{
+            messageElementsVBox.getChildren().remove(senderNameLabel);
+            imageCircle.setVisible(false);
+            contentTextFlow.setStyle("-fx-background-radius: 10 10 0 0");
             setMessageContent(messageContent);
             setMessageTime(messageTime);
         });

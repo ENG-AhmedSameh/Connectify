@@ -30,6 +30,7 @@ import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -130,42 +131,10 @@ public class ChatController implements Initializable {
                     public void updateItem(Message message, boolean empty) {
                         super.updateItem(message, empty);
                         if (!empty) {
-                            FXMLLoader loader;
-                            HBox root;
-                            if (message != null) {
-                                try {
-                                    if(Objects.equals(message.getSender(), Client.getConnectedUser().getPhoneNumber())){
-                                        loader= new FXMLLoader(getClass().getResource("/views/SentMessageHBox.fxml"));
-                                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
-                                        root = loader.load();
-                                    }
-                                    else{
-                                        if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
-                                            loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
-                                            loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
-                                            root = loader.load();
-                                        }else{
-                                            loader = new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
-                                            GroupMessageHBoxController controller = new GroupMessageHBoxController();
-                                            loader.setController(controller);
-                                            root = loader.load();
-                                            ChatManager chatManager= ChatManagerFactory.getChatManager(chatID);
-                                            if(Objects.equals(chatManager.getGroupLastSender(), message.getSender())){
-                                                controller.setSameSenderMessageStyle(message.getContent(),message.getTimestamp());
-                                            }else{
-                                                User user = chatManager.getUserInfo(message.getSender());
-                                                controller.setDifferentSenderMessageStyle(user.getName(),user.getPicture(),message.getContent(),message.getTimestamp());
-                                            }
-                                        }
-                                    }
-
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                Platform.runLater(()->{
-                                    setGraphic(root);
-                                });
-                            }
+                            HBox root = getMessageHBox(message);
+                            Platform.runLater(()->{
+                                setGraphic(root);
+                            });
                         } else {
                             Platform.runLater(()->{
                                 setText(null);
@@ -178,6 +147,43 @@ public class ChatController implements Initializable {
         });
     }
 
-
+    private HBox getMessageHBox(Message message){
+        FXMLLoader loader;
+        HBox root;
+        if (message != null) {
+            try {
+                if(Objects.equals(message.getSender(), Client.getConnectedUser().getPhoneNumber())){
+                    loader= new FXMLLoader(getClass().getResource("/views/SentMessageHBox.fxml"));
+                    loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                    root = loader.load();
+                }
+                else{
+                    if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
+                        loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
+                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                        root = loader.load();
+                    }else{
+                        loader = new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
+                        GroupMessageHBoxController controller = new GroupMessageHBoxController();
+                        loader.setController(controller);
+                        root = loader.load();
+                        ChatManager chatManager= ChatManagerFactory.getChatManager(chatID);
+//                        if(Objects.equals(chatManager.getGroupLastSender(), message.getSender())){
+//                            controller.setSameSenderMessageStyle(message.getContent(),message.getTimestamp());
+//                            chatManager.setGroupLastSender(message.getSender());
+//                        }else{
+                            User user = chatManager.getUserInfo(message.getSender());
+                            controller.setDifferentSenderMessageStyle(user.getName(),user.getPicture(),message.getContent(),message.getTimestamp());
+                            chatManager.setGroupLastSender(message.getSender());
+                        //}
+                    }
+                }
+                return root;
+            } catch (IOException e) {
+                System.err.println(Arrays.toString(e.getStackTrace()));
+            }
+        }
+        return null;
+    }
 
 }

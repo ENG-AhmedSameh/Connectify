@@ -45,7 +45,8 @@ public class InvitationService {
 
     public List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String phoneNumber) {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
-        return invitationsDAO.getIncomingFriendRequests(phoneNumber);
+        List<IncomingFriendInvitationResponse> list = invitationsDAO.getIncomingFriendRequests(phoneNumber);
+        return list;
     }
 
     public boolean acceptFriendRequest(int invitationId) {
