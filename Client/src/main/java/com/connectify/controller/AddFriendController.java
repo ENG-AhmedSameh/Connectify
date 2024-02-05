@@ -7,6 +7,7 @@ import com.connectify.loaders.AddFriendCardLoader;
 import com.connectify.model.entities.Invitations;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -108,15 +109,56 @@ public class AddFriendController implements Initializable {
     }
 
     private boolean isInvitationSent() {
-        return RemoteManager.getInstance().isInvitationSent(currentUserPhone ,newContactPhoneSearchTextField.getText());
+        return RemoteManager
+                .getInstance()
+                .isInvitationSent(currentUserPhone ,newContactPhoneSearchTextField.getText()) != -1;
+    }
+
+    private int hasNewContactSentInvitationToCurrentUser(String newContactPhoneNumber) {
+        return RemoteManager
+                .getInstance()
+                .isInvitationSent(newContactPhoneNumber, currentUserPhone);
+    }
+
+    private void acceptFriend(FriendToAddResponse friend, int invitationId) throws RemoteException {
+        boolean request = RemoteManager.getInstance().acceptFriendRequest(invitationId);
+        System.out.println("Friend request result: " + request);
+        Client.getConnectedUser()
+                .receiveNotification("Friend Request Accepted",
+                        "You are now friends with " + friend.getName()
+                                + ". They had previously sent you a friend request, which has been accepted.");
+
+        if (request) {
+            ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
+
+            friendRequestList.removeIf(anchorPane -> isInvitationIdMatch(anchorPane, invitationId));
+
+        }
+    }
+
+    private boolean isInvitationIdMatch(AnchorPane anchorPane, int invitationId) {
+        IncomingFriendRequestCardController controller = (IncomingFriendRequestCardController) anchorPane.getUserData();
+        return controller.getInvitationId() == invitationId;
     }
 
     @FXML
     void sendInvitationsButtonHandler(ActionEvent event) {
-        for (FriendToAddResponse friendToAddResponse : friendToAddResponseList) {
-            boolean result = RemoteManager.getInstance().sendInvitation(currentUserPhone, friendToAddResponse.getPhoneNumber());
-            System.out.println("Send invitation result: " + result);
+        for (FriendToAddResponse friend : friendToAddResponseList) {
+            try {
+
+                int invitationId = hasNewContactSentInvitationToCurrentUser(friend.getPhoneNumber());
+
+                if (invitationId != -1) {
+                    acceptFriend(friend, invitationId);
+                } else {
+                    boolean result = RemoteManager.getInstance().sendInvitation(currentUserPhone, friend.getPhoneNumber());
+                    System.out.println("Send invitation result: " + result);
+                }
+            } catch (RemoteException e) {
+                System.err.println("Remote Exception: " + e.getMessage());
+            }
         }
+
         searchContactsVBox.getChildren().clear();
         StageManager.getInstance().switchToChats();
     }

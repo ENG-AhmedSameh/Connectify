@@ -5,18 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="update chat card displayed details when user send message">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatCardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ChatCardLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ChatCardLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/ChatPaneFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/ChatPaneFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/CurrentUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/CurrentUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/user.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/user.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/loaders/ViewLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/loaders/ViewLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AddFriendController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AddFriendController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/RemoteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/RemoteManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/titleBarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/connectify/controller/titleBarController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/InvitationsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/InvitationsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/InvitationsDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/InvitationsDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/services/InvitationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/services/InvitationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="addFriendAuto" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,7 +79,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "chat",
+    "git-widget-placeholder": "acceptInviationAutomatic",
     "jdk.selected.JAVA_MODULE": "21",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "F:/ITI Courses/JAVA/Advanced JavaFx/Labs/Day 1/D01L01",
@@ -158,6 +157,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Client" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.Client" />
       </list>

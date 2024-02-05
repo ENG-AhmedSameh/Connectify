@@ -87,7 +87,7 @@ public class InvitationsDAOImpl implements InvitationsDAO {
     }
 
     @Override
-    public boolean isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) {
+    public int isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) {
         String query = "SELECT invitation_id FROM invitations WHERE sender = ? AND receiver = ?";
 
         try (Connection connection = dbConnection.getConnection();
@@ -96,11 +96,14 @@ public class InvitationsDAOImpl implements InvitationsDAO {
             preparedStatement.setString(2, receiverPhoneNumber);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next();
+                if (resultSet.next()) {
+                    return resultSet.getInt("invitation_id");
+                }
+                return -1;
             }
         } catch (SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
-            return false;
+            return -1;
         }
     }
 

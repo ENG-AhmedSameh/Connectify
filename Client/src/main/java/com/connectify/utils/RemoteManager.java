@@ -251,17 +251,17 @@ public class RemoteManager {
         }
     }
 
-    public boolean isInvitationSent(String currentUserPhone, String text) {
+    public int isInvitationSent(String currentUserPhone, String text) {
         if(isServerDown()){
             handleServerDown();
-            return false;
+            return -1;
         }
         try {
             return server.isInvitationSent(currentUserPhone, text);
         } catch (RemoteException e) {
             handleServerDown();
             System.err.println("Remote Exception: " + e.getMessage());
-            return false;
+            return -1;
         }
     }
 

@@ -40,7 +40,7 @@ public class InvitationService {
         return isInvitationSent;
     }
 
-    public boolean isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) {
+    public int isInvitationSent(String senderPhoneNumber, String receiverPhoneNumber) {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
         return invitationsDAO.isInvitationSent(senderPhoneNumber, receiverPhoneNumber);
     }
