@@ -111,11 +111,11 @@ public class ChatController implements Initializable {
     }
 
     public void attachmentHandler(){
+        Stage stage = (Stage) sendBox.getScene().getWindow();
+        FileChooser  fileChooser = new FileChooser();
+        fileChooser.setTitle("Select file to send");
+        File file = fileChooser.showOpenDialog(stage);
         Runnable sendAttachmentTask = () -> {
-            Stage stage = (Stage) sendBox.getScene().getWindow();
-            FileChooser  fileChooser = new FileChooser();
-            fileChooser.setTitle("Select file to send");
-            File file = fileChooser.showOpenDialog(stage);
             if(file != null){
                 try{
                     MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(), chatID, "", new Timestamp(System.currentTimeMillis()), file);

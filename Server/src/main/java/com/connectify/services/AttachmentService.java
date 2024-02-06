@@ -44,6 +44,7 @@ public class AttachmentService {
                 attachment.setName(newFilePath.toString());
                 attachment.setExtension(getExtension(newFilePath.toString()));
                 attachment.setSize((int) Files.size(newFilePath));
+                System.out.println(newFilePath);
                 AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
                 return attachmentDAO.insertAndReturnID(attachment);
             }
