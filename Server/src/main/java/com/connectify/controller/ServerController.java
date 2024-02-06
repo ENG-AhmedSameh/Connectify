@@ -5,6 +5,7 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
 import com.connectify.services.*;
+import com.connectify.model.entities.User;
 import com.connectify.services.ChatService;
 import com.connectify.services.MessageService;
 import com.connectify.services.UserChatsService;
@@ -13,7 +14,6 @@ import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.services.ContactService;
-import com.connectify.dto.*;
 import com.connectify.services.ContactsService;
 import com.connectify.services.InvitationService;
 import com.connectify.services.UserService;
@@ -70,12 +70,16 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     @Override
     public boolean logout(String phoneNumber) throws RemoteException {
+        User userInfo = userService.getUserInfo(phoneNumber);
+        contactsService.notifyContacts(phoneNumber, "A contact is offline.", userInfo.getName() + " has become offline");
         return userService.logoutUser(phoneNumber);
     }
 
     @Override
     public void registerConnectedUser(ConnectedUser user) throws RemoteException {
         userService.registerConnectedUser(user);
+        User userInfo = userService.getUserInfo(user.getPhoneNumber());
+        contactsService.notifyContacts(user.getPhoneNumber(), "A contact is online!", userInfo.getName() + " has become Online!");
     }
 
     @Override
@@ -89,6 +93,12 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         var service = new UserChatsService();
         List<ChatCardsInfoDTO> chatCardsInfoDTOS = service.getAllChatsInfo(userId);
         return chatCardsInfoDTOS;
+    }
+    @Override
+    public ChatCardsInfoDTO getUserLastChatCardInfo(String userId) throws RemoteException{
+        var service = new UserChatsService();
+        ChatCardsInfoDTO chatCardInfoDTOS = service.getLastChatInfo(userId);
+        return chatCardInfoDTOS;
     }
 
     @Override
@@ -131,7 +141,8 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     @Override
     public List<MemberInfoDTO> getAllChatOtherMembersInfo(int chatId, String member) throws RemoteException {
-        return chatService.getAllOtherMembersInfo(chatId,member);
+        List<MemberInfoDTO> memberInfoDTOS = chatService.getAllOtherMembersInfo(chatId,member);
+        return memberInfoDTOS;
     }
 
 

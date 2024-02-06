@@ -102,5 +102,10 @@ public class ChatManager {
     public void setGroupLastSender(String groupLastSender) {
         this.groupLastSender = groupLastSender;
     }
+
+    public void clearMembersInfoMap(){
+        chatMembers.clear();
+        membersInfoMap.clear();
+    }
 }
 

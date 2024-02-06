@@ -118,13 +118,13 @@ public class AddFriendController implements Initializable {
             System.out.println("Send invitation result: " + result);
         }
         searchContactsVBox.getChildren().clear();
-        StageManager.getInstance().switchFromAddFriendToHome();
+        StageManager.getInstance().switchToChats();
     }
 
     @FXML
     void cancelButtonHandler(ActionEvent event) {
         searchContactsVBox.getChildren().clear();
-        StageManager.getInstance().switchFromAddFriendToHome();
+        StageManager.getInstance().switchToChats();
     }
 
     private boolean isUnique(String phoneNumber) {

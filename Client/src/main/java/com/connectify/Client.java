@@ -13,15 +13,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Properties;
 
 public class Client extends Application {
-
-    private final static String host = "localhost";
-    private final static int port = 1099;
-
     private static ConnectedUser connectedUser;
 
     private static Properties userCredentials;
@@ -43,6 +40,12 @@ public class Client extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         StageManager.getInstance().switchToLogin();
+        primaryStage.onCloseRequestProperty().set(e -> {
+            if(connectedUser != null){
+                RemoteManager.getInstance().logout(connectedUser);
+                System.exit(0);
+            }
+        });
         primaryStage.show();
         if(!RemoteManager.getInstance().isServerDown() && userCredentials.getProperty("remember").equals("true")){
             connectedUser = new CurrentUser(userCredentials.getProperty("countryCode")+userCredentials.getProperty("phoneNumber"));

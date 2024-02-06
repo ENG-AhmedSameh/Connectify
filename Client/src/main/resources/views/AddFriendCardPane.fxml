@@ -1,30 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane style="-fx-background-color: #374754;" styleClass="chat-HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane style="-fx-background-color: transparent;" styleClass="chat-HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="350.0">
+        <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="350.0" spacing="10.0">
             <children>
-                <ImageView fx:id="contactPictureImageView" fitHeight="96.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/person.png" />
-                    </image>
-                    <clip>
-                        <Circle fx:id="imageProfileClip" centerX="40" centerY="40" radius="40" />
-                    </clip>
-                    <HBox.margin>
-                        <Insets right="20.0" top="15.0" />
-                    </HBox.margin>
-                </ImageView>
+            <Circle fx:id="contactPicture" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                 <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="309.0" spacing="10.0">
                     <children>
                         <HBox alignment="CENTER_LEFT">
@@ -45,7 +31,7 @@
                 </VBox>
             </children>
             <padding>
-                <Insets bottom="10.0" left="20.0" right="20.0" />
+                <Insets left="20.0" right="20.0" />
             </padding>
         </HBox>
     </children>

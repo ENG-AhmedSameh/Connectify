@@ -2,6 +2,8 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.ChatCardsInfoDTO;
+import com.connectify.loaders.ChatCardLoader;
 import com.connectify.utils.RemoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -93,12 +95,18 @@ public class IncomingFriendRequestCardController implements Initializable {
     @FXML
     void handleAcceptPressed(ActionEvent event) {
         boolean friendRequestAccepted = RemoteManager.getInstance().acceptFriendRequest(invitationId);
-
         if (friendRequestAccepted) {
             ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
-
             friendRequestList.removeIf(this::isControllerMatch);
         }
+        ChatCardsInfoDTO chat = null;
+        try {
+            chat = RemoteManager.getInstance().getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
+        AllChatsPaneController.getChatsPanesList().add(chatCard);
     }
 
     @FXML

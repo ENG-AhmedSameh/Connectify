@@ -189,6 +189,43 @@ public class ChatMembersDAOImpl implements ChatMembersDAO {
     }
 
     @Override
+    public ChatCardsInfoDTO getUserLastChatInfo(String userId) {
+        ChatCardsInfoDTO chatCardsInfoDTO = null;
+        String query = "SELECT DISTINCT cm.chat_id,cm2.Unread_Messages_number, COALESCE (u.name,g.name) AS name, COALESCE(u.picture,g.picture) AS picture ,m.content,m.`timestamp` " +
+                " FROM chat_members cm " +
+                "    LEFT JOIN chat_members cm2 ON cm.chat_id = cm2.chat_id AND cm2.member = ? " +
+                " LEFT JOIN chat c ON c.chat_id = cm.chat_id " +
+                " LEFT JOIN users u ON cm.member = u.phone_number AND c.is_Private_Chat = 1 " +
+                "    LEFT JOIN `groups` g ON c.chat_id = g.chat_id AND c.is_Private_Chat = 0 " +
+                " LEFT JOIN message m ON c.chat_id = m.chat_id AND m.message_id IN (SELECT m1.message_id FROM message m1 JOIN ( SELECT chat_id, MAX(`timestamp`) AS latest_time FROM message GROUP BY chat_id ) m2 ON m1.chat_id = m2.chat_id AND m1.`timestamp` = m2.latest_time  ORDER BY m1.message_id DESC ) " +
+                " WHERE cm.chat_id IN (SELECT chat_id FROM chat_members WHERE member = ? ) AND cm.member != ? " +
+                "    AND cm.chat_id IN (SELECT DISTINCT chat_id FROM chat_members) " +
+                " ORDER BY cm.chat_id DESC LIMIT 1";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ;
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, userId);
+            preparedStatement.setString(3, userId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    chatCardsInfoDTO = new ChatCardsInfoDTO(
+                            rs.getInt("chat_Id"),
+                            rs.getInt("Unread_Messages_number"),
+                            rs.getString("name"),
+                            rs.getBytes("picture"),
+                            rs.getString("content"),
+                            rs.getTimestamp("timestamp")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return chatCardsInfoDTO;
+    }
+
+    @Override
     public boolean insert(ChatMember chatMember) {
         String query = "INSERT INTO chat_members (chat_Id, member) VALUES (?, ?)";
         try (Connection connection = dbConnection.getConnection();

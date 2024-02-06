@@ -16,9 +16,7 @@ import com.connectify.model.enums.Status;
 import com.connectify.util.PasswordManager;
 
 import java.rmi.RemoteException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class UserService {
 
@@ -69,6 +67,7 @@ public class UserService {
     public boolean logoutUser(String phoneNumber){
         Server.getConnectedUsers().remove(phoneNumber);
         UserDAO userDAO = new UserDAOImpl();
+        System.out.println("Unregistered user: " + phoneNumber);
         return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
     }
 
@@ -85,12 +84,17 @@ public class UserService {
 
     public boolean changeProfileAndBio(ImageBioChangeRequest request) {
         UserDAO userDAO = new UserDAOImpl();
-        return userDAO.updateImage(request.getPhoneNumber(), request.getImage()) && userDAO.updateBio(request.getPhoneNumber(), request.getBio());
+        return userDAO.updatePicture(request.getPhoneNumber(), request.getImage()) && userDAO.updateBio(request.getPhoneNumber(), request.getBio());
     }
 
     public FriendToAddResponse getFriendToAddData(String phone) {
         UserDAO userDAO = new UserDAOImpl();
         User user = userDAO.get(phone);
         return UserMapper.INSTANCE.userToFriendToAddResponse(user);
+    }
+
+    public User getUserInfo(String phoneNumber) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.get(phoneNumber);
     }
 }

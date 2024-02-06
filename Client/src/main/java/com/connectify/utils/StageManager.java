@@ -5,6 +5,7 @@ import com.connectify.loaders.*;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -31,8 +32,8 @@ public class StageManager {
     private StageManager(){
         stage = Client.getPrimaryStage();
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setMinWidth(850);
-        stage.setMinHeight(500);
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
         sceneMap = new HashMap<>();
     }
 
@@ -48,6 +49,8 @@ public class StageManager {
         if(sceneMap.get("login") == null)
             sceneMap.put("login", createLoginScene());
         Scene scene = sceneMap.get("login");
+        BorderPane mainPane =(BorderPane)scene.getRoot();
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         Platform.runLater(() -> stage.setScene(scene));
     }
 
@@ -55,6 +58,8 @@ public class StageManager {
         if(sceneMap.get("signup") == null)
             sceneMap.put("signup", createSignUpScene());
         Scene scene = sceneMap.get("signup");
+        BorderPane mainPane =(BorderPane)scene.getRoot();
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         Platform.runLater(() -> stage.setScene(scene));
     }
 
@@ -62,6 +67,8 @@ public class StageManager {
         if(sceneMap.get("secondSignUp") == null)
             sceneMap.put("secondSignUp", createSecondSignUpScene());
         Scene scene = sceneMap.get("secondSignUp");
+        BorderPane mainPane =(BorderPane)scene.getRoot();
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         Platform.runLater(() -> stage.setScene(scene));
     }
 
@@ -75,6 +82,8 @@ public class StageManager {
         if(sceneMap.get("home") == null)
             sceneMap.put("home", createHomeScene());
         Scene scene = sceneMap.get("home");
+        BorderPane mainPane =(BorderPane)scene.getRoot();
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         Platform.runLater(() -> stage.setScene(scene));
     }
 
@@ -86,10 +95,11 @@ public class StageManager {
         centerPane.setLeft(chatsPane);
     }
 
-    public void switchFromAddFriendToHome(){
+    public void switchToChats(){
         Scene scene = sceneMap.get("home");
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setCenter(logoPane);
         centerPane.setLeft(chatsPane);
     }
@@ -99,7 +109,18 @@ public class StageManager {
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
         centerPane.setCenter(ProfileLoader.loadProfileAnchorPane());
-        centerPane.setLeft(chatsPane);
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        logoPane.setStyle("-fx-background-color: #17212b");
+        centerPane.setLeft(logoPane);
+    }
+    public void switchToContacts(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane=(BorderPane) mainPane.getCenter();
+        centerPane.setLeft(AllContactsPaneLoader.loadAllContactsAnchorPane());
+        centerPane.setCenter(null);
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        centerPane.setCenter(logoPane);
     }
 
     public void switchToProfileEditor(){
@@ -107,14 +128,13 @@ public class StageManager {
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
         centerPane.setCenter(ProfileEditorLoader.loadProfileEditorAnchorPane());
-        centerPane.setLeft(chatsPane);
     }
-
     public void switchToAddFriend(){
         Scene scene = sceneMap.get("home");
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
         centerPane.setLeft(AddFriendLoader.loadAddFriendAnchorPane());
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setCenter(logoPane);
     }
 
@@ -125,6 +145,8 @@ public class StageManager {
         if (incomingFriendRequestPane == null)
             incomingFriendRequestPane = IncomingFriendRequestLoader.loadIncomingFriendRequestAnchorPane();
         centerPane.setLeft(incomingFriendRequestPane);
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        centerPane.setCenter(logoPane);
     }
 
     private Scene createLoginScene(){
@@ -137,6 +159,8 @@ public class StageManager {
         HBox titleBar = TitleBarLoader.loadTitleBarHBox();
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
+        mainPane.setStyle("-fx-border-color: #17212b; -fx-border-width:1");
         return new Scene(mainPane);
     }
 
@@ -150,6 +174,7 @@ public class StageManager {
         HBox titleBar = TitleBarLoader.loadTitleBarHBox();
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         return new Scene(mainPane);
     }
 
@@ -161,6 +186,7 @@ public class StageManager {
         mainPane.setTop(titleBar);
         mainPane.setCenter(secondSignUpPane);
         mainPane.setLeft(logoPane);
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         return new Scene(mainPane);
     }
 
@@ -176,6 +202,7 @@ public class StageManager {
         mainPane.setLeft(optionsPane);
         mainPane.setTop(titleBar);
         mainPane.setCenter(centerPane);
+        mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         return new Scene(mainPane);
     }
 

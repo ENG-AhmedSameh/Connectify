@@ -1,10 +1,10 @@
 package com.connectify.controller;
 
+import com.connectify.utils.ImageConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
@@ -21,7 +21,7 @@ public class AddFriendCardController implements Initializable {
     private Label contactPhoneNumberLabel;
 
     @FXML
-    private ImageView contactPictureImageView;
+    private Circle contactPicture;
 
     @FXML
     private HBox messageHBox;
@@ -56,24 +56,8 @@ public class AddFriendCardController implements Initializable {
     }
 
     private void setCardPhoto(byte[] pictureBytes) {
-        contactPictureImageView.setImage(convertBytesToImage(pictureBytes));
-    }
-
-    public Image convertBytesToImage(byte[] bytes) {
-        if (bytes != null) {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-            return new Image(inputStream,
-                    contactPictureImageView.getFitWidth(),
-                    contactPictureImageView.getFitHeight(),
-                    false,
-                    true);
-        }
-
-        return new Image(getClass().getResource("/images/person.png").toString(),
-                contactPictureImageView.getFitWidth(),
-                contactPictureImageView.getFitHeight(),
-                false,
-                true);
+        this.pictureBytes = pictureBytes;
+        contactPicture.setFill(ImageConverter.convertBytesToImagePattern(pictureBytes));
     }
 
 }

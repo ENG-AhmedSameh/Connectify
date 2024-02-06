@@ -53,8 +53,10 @@ public class titleBarController{
 
     public void onMouseDraggedHandler(MouseEvent mouseEvent) {
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        stage.setX(mouseEvent.getScreenX() - xOffset);
-        stage.setY(mouseEvent.getScreenY() - yOffset);
+        if(!stage.isMaximized()){
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
+        }
     }
 
     public void maximizeButtonHandler(MouseEvent event) {
