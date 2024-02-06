@@ -129,6 +129,9 @@ public class StageManager {
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setCenter(logoPane);
     }
+    public void openContactChat(){
+
+    }
 
     public void switchToProfileEditor(){
         Scene scene = sceneMap.get("home");

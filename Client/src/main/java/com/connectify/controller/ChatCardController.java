@@ -53,6 +53,9 @@ public class ChatCardController implements Initializable {
     @FXML
     private AnchorPane chatCardPane;
 
+    @FXML
+    private Circle statusCircle;
+
     private int chatId;
     private IntegerProperty unread = new SimpleIntegerProperty();
     private StringProperty chatName = new SimpleStringProperty();
@@ -89,6 +92,10 @@ public class ChatCardController implements Initializable {
         lastMessageLabel.textProperty().bind(lastMessage);
         timestampProperty = new SimpleObjectProperty<>(timestamp.toLocalDateTime());
         bindLastMessageTimeStamp();
+        if(!CurrentUser.getChatManagerFactory().getChatManager(chatId).isPrivateChat())
+            statusCircle.setVisible(false);
+        else
+            statusCircle.fillProperty().bind(CurrentUser.getChatManagerFactory().getChatManager(chatId).getcolorProperty());
     }
     private void bindLastMessageTimeStamp(){
         formattedTimestamp = new StringBinding() {
@@ -119,7 +126,6 @@ public class ChatCardController implements Initializable {
     private void setChatPhoto(){
         chatPicture.setFill(ImageConverter.convertBytesToImagePattern(pictureBytes));
     }
-
 
     private void displayChat(){
         CurrentUser.getChatManagerFactory().setActiveChatID(chatId);
