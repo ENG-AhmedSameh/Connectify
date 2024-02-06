@@ -60,19 +60,21 @@ public class AttachmentService {
     }
 
     public File getAttachment(Integer attachmentId) {
-        AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
-        Attachments attachment = attachmentDAO.get(attachmentId);
-        if (attachment != null) {
             Callable<File> callable = () -> {
-                Path filePath = Paths.get(attachment.getName());
-                return filePath.toFile();
+                AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
+                Attachments attachment = attachmentDAO.get(attachmentId);
+                if(attachment != null){
+                    Path filePath = Paths.get(attachment.getName());
+                    System.out.println("downloading: " + filePath);
+                    return filePath.toFile();
+                }
+                return null;
             };
             try {
                 return executor.submit(callable).get();
             } catch (InterruptedException | ExecutionException e) {
                 System.err.println("Exception: " + e.getMessage());
             }
-        }
         return null;
     }
 

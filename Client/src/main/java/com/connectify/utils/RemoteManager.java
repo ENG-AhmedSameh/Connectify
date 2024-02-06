@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import org.controlsfx.control.Notifications;
 
 
+import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -389,8 +390,26 @@ public class RemoteManager {
     }
 
     public ChatCardsInfoDTO getUserLastChatCardInfo(String phoneNumber) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
         try {
             return server.getUserLastChatCardInfo(phoneNumber);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public File getAttachment(Integer attachmentID) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
+        try {
+            return server.getAttachment(attachmentID);
         } catch (RemoteException e) {
             handleServerDown();
             System.err.println("Remote Exception: " + e.getMessage());

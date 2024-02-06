@@ -8,6 +8,7 @@ import com.connectify.model.entities.User;
 import com.connectify.utils.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -28,11 +30,18 @@ import javafx.util.Callback;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 public class ChatController implements Initializable {
 
@@ -97,13 +106,7 @@ public class ChatController implements Initializable {
         if(!Objects.equals(sendBox.getText(), "")){
             try {
                 MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()), null);
-                MessageMapper mapper = MessageMapper.INSTANCE;
-                Message message =mapper.messageSentDtoTOMessage(messageSentDTO);
-                ChatCardHandler.updateChatCard(message);
-                RemoteManager.getInstance().sendMessage(messageSentDTO);
-                //TODO render send message
-                messages.add(message);
-                sendBox.clear();
+                appendMessage(messageSentDTO);
             } catch (RemoteException e) {
                 System.err.println("Can't find server, details: "+e.getMessage());
             }
@@ -118,7 +121,8 @@ public class ChatController implements Initializable {
         Runnable sendAttachmentTask = () -> {
             if(file != null){
                 try{
-                    MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(), chatID, "", new Timestamp(System.currentTimeMillis()), file);
+                    MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(), chatID, file.getName(), new Timestamp(System.currentTimeMillis()), file);
+//                    appendMessage(messageSentDTO);
                     RemoteManager.getInstance().sendAttachment(messageSentDTO);
                 } catch (RemoteException e){
                     System.err.println("Remote Exception: " + e.getMessage());
@@ -130,6 +134,16 @@ public class ChatController implements Initializable {
 
     public void htmlEditorHandler(){
 
+    }
+
+    private void appendMessage(MessageSentDTO messageSentDTO){
+        MessageMapper mapper = MessageMapper.INSTANCE;
+        Message message =mapper.messageSentDtoTOMessage(messageSentDTO);
+        ChatCardHandler.updateChatCard(message);
+        RemoteManager.getInstance().sendMessage(messageSentDTO);
+        //TODO render send message
+        messages.add(message);
+        sendBox.clear();
     }
 
     private void setListViewCellFactory(){
@@ -162,21 +176,45 @@ public class ChatController implements Initializable {
         if (message != null) {
             try {
                 if(Objects.equals(message.getSender(), Client.getConnectedUser().getPhoneNumber())){
-                    loader= new FXMLLoader(getClass().getResource("/views/SentMessageHBox.fxml"));
-                    loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
-                    root = loader.load();
+                    if(message.getAttachmentId() != null){
+                        loader= new FXMLLoader(getClass().getResource("/views/SentAttachmentHBox.fxml"));
+                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                        root = loader.load();
+                        root.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
+                    }
+                    else {
+                        loader= new FXMLLoader(getClass().getResource("/views/SentMessageHBox.fxml"));
+                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                        root = loader.load();
+                    }
                 }
                 else{
                     if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
-                        loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
-                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
-                        root = loader.load();
-                    }else{
-                        loader = new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
-                        GroupMessageHBoxController controller = new GroupMessageHBoxController();
-                        loader.setController(controller);
-                        root = loader.load();
-                        ChatManager chatManager= ChatManagerFactory.getChatManager(chatID);
+                        if(message.getAttachmentId() != null){
+                            loader= new FXMLLoader(getClass().getResource("/views/ReceivedAttachmentHBox.fxml"));
+                            loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                            root = loader.load();
+                            root.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
+                        }
+                        else {
+                            loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
+                            loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                            root = loader.load();
+                        }
+                    }
+                    else{
+                        if(message.getAttachmentId() != null){
+                            loader= new FXMLLoader(getClass().getResource("/views/SentAttachmentHBox.fxml"));
+                            loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                            root = loader.load();
+                            root.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
+                        }
+                        else {
+                            loader = new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
+                            GroupMessageHBoxController controller = new GroupMessageHBoxController();
+                            loader.setController(controller);
+                            root = loader.load();
+                            ChatManager chatManager= ChatManagerFactory.getChatManager(chatID);
 //                        if(Objects.equals(chatManager.getGroupLastSender(), message.getSender())){
 //                            controller.setSameSenderMessageStyle(message.getContent(),message.getTimestamp());
 //                            chatManager.setGroupLastSender(message.getSender());
@@ -184,7 +222,8 @@ public class ChatController implements Initializable {
                             User user = chatManager.getUserInfo(message.getSender());
                             controller.setDifferentSenderMessageStyle(user.getName(),user.getPicture(),message.getContent(),message.getTimestamp());
                             chatManager.setGroupLastSender(message.getSender());
-                        //}
+                            //}
+                        }
                     }
                 }
                 return root;
@@ -193,6 +232,34 @@ public class ChatController implements Initializable {
             }
         }
         return null;
+    }
+
+    private EventHandler<MouseEvent> createEventHandler(Integer attachmentID){
+        return (EventHandler<MouseEvent>) (e) -> {
+            Callable<File> task = () -> RemoteManager.getInstance().getAttachment(attachmentID);
+            var future = new FutureTask<File>(task);
+            var thread = new Thread(future);
+            thread.start();
+            try {
+                File attachment = future.get();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Save File");
+                fileChooser.setInitialFileName(attachment.getName());
+                File selectedFile = fileChooser.showSaveDialog(chatName.getScene().getWindow());
+                if (selectedFile != null) {
+                    try {
+                        Files.copy(attachment.toPath(), selectedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println("File saved successfully to: " + selectedFile.getAbsolutePath());
+                    } catch (IOException ex) {
+                        System.err.println("Failed to save file: " + attachment.getPath());
+                    }
+                }
+            } catch (InterruptedException ex) {
+                System.err.println("Interrupted Exception: " + ex.getMessage());
+            } catch (ExecutionException ex) {
+                System.err.println("Execution Exception: " + ex.getMessage());
+            }
+        };
     }
 
 }
