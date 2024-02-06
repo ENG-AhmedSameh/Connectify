@@ -187,4 +187,55 @@ public class UserDAOImpl implements UserDAO {
         }
         return false;
     }
+
+    @Override
+    public Mode getMode(String phoneNumber) {
+        String query = "SELECT mode FROM users WHERE phone_number = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, phoneNumber);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Mode.valueOf(resultSet.getString("mode"));
+                }
+            }
+            return null;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return null;
+        }
+    }
+    @Override
+    public Status getStatus(String phoneNumber) {
+        String query = "SELECT status FROM users WHERE phone_number = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, phoneNumber);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Status.valueOf(resultSet.getString("status"));
+                }
+            }
+            return null;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public boolean updateModeAndStatus(String phoneNumber,Mode mode, Status status) {
+        String query = "update users SET mode = ?, status = ? WHERE phone_number = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, mode.toString());
+            preparedStatement.setString(2, status.toString());
+            preparedStatement.setString(3, phoneNumber);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated ==1;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return false;
+        }
+    }
 }

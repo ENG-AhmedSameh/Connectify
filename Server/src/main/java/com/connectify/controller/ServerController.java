@@ -4,13 +4,20 @@ package com.connectify.controller;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
+import com.connectify.services.*;
 import com.connectify.model.entities.User;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
+import com.connectify.services.ChatService;
+import com.connectify.services.MessageService;
+import com.connectify.services.UserChatsService;
 import com.connectify.services.*;
 import com.connectify.dto.ContactsDTO;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -21,6 +28,8 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     private final MessageService messageService;
 
     private final ChatService chatService;
+
+    private final AttachmentService attachmentService;
     private final ContactService contactService;
     private final InvitationService invitationService;
     private final ContactsService contactsService;
@@ -30,6 +39,7 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         userService = new UserService();
         messageService = new MessageService();
         chatService = new ChatService();
+        attachmentService = new AttachmentService();
         contactService =new ContactService();
         invitationService = new InvitationService();
         contactsService = new ContactsService();
@@ -42,7 +52,12 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     public LoginResponse login(LoginRequest loginRequest) throws RemoteException {
-        return userService.loginUser(loginRequest);
+        LoginResponse response = userService.loginUser(loginRequest);
+        if(response.getStatus()){
+            String phoneNumber = loginRequest.getPhoneNumber();
+            contactsService.updateUserStatusAtContacts(phoneNumber,userService.getUserStatus(phoneNumber));
+        }
+        return response;
     }
 
     @Override
@@ -63,8 +78,12 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public boolean logout(String phoneNumber) throws RemoteException {
         User userInfo = userService.getUserInfo(phoneNumber);
-        contactsService.notifyContacts(phoneNumber, "A contact is offline.", userInfo.getName() + " has become offline");
-        return userService.logoutUser(phoneNumber);
+        boolean loggedOut = userService.logoutUser(phoneNumber);
+        if(loggedOut){
+            contactsService.notifyContacts(phoneNumber, "A contact is offline.", userInfo.getName() + " has become offline");
+            contactsService.updateUserModeAtContactsToOffline(phoneNumber);
+        }
+        return loggedOut;
     }
 
     @Override
@@ -102,7 +121,18 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     public void sendMessage(MessageSentDTO message) throws RemoteException {
         MessageDTO storedMessage = messageService.storeMessage(message);
         chatService.sendMessage(storedMessage);
+    }
 
+    @Override
+    public void sendAttachment(MessageSentDTO message) throws RemoteException{
+        Integer attachmentId = attachmentService.storeAttachment(message);
+        message.setAttachmentId(attachmentId);
+        MessageDTO storedMessage = messageService.storeMessage(message);
+        chatService.sendMessage(storedMessage);
+    }
+
+    public File getAttachment(Integer attachmentId) throws RemoteException{
+        return attachmentService.getAttachment(attachmentId);
     }
 
     @Override
@@ -145,6 +175,28 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException {
         return contactsService.areAlreadyFriends(userPhone, friendPhone);
+    }
+
+    @Override
+    public Mode getUserMode(String phoneNumber) throws RemoteException {
+        return userService.getUserMode(phoneNumber);
+    }
+
+    @Override
+    public Status getUserStatus(String phoneNumber) throws RemoteException {
+        return userService.getUserStatus(phoneNumber);
+    }
+
+    @Override
+    public boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) throws RemoteException {
+        boolean modeAndStatusUpdated = userService.updateModeAndStatus(phoneNumber,mode,status);
+        if(modeAndStatusUpdated){
+            if(mode==Mode.OFFLINE)
+                contactsService.updateUserModeAtContactsToOffline(phoneNumber);
+            else
+                contactsService.updateUserStatusAtContacts(phoneNumber,status);
+        }
+        return modeAndStatusUpdated;
     }
 
     @Override

@@ -2,25 +2,36 @@ package com.connectify.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ChatManagerFactory {
-    private static int activeChatID = 0;
-    private static final Map<Integer,ChatManager> chatManagersMap = new HashMap<>();
+    private int activeChatID = 0;
+    private final Map<Integer,ChatManager> chatManagersMap = new HashMap<>();
+    private final Map<String,ChatManager> contactsChatManager = new HashMap<>();
 
-    public static ChatManager getChatManager(int chatID){
-        chatManagersMap.putIfAbsent(chatID,new ChatManager(chatID));
+    public ChatManager getChatManager(int chatID){
+        ChatManager chatManager = new ChatManager(chatID);
+        chatManagersMap.putIfAbsent(chatID,chatManager);
+        String contact = chatManager.getChatContact(chatID);
+        if(!Objects.equals(contact, ""))
+            contactsChatManager.putIfAbsent(contact,chatManager);
         return chatManagersMap.get(chatID);
     }
 
-    public static int getActiveChatID() {
+    public int getActiveChatID() {
         return activeChatID;
     }
 
-    public static void setActiveChatID(int activeChatID) {
-        ChatManagerFactory.activeChatID = activeChatID;
+    public void setActiveChatID(int activeChatID) {
+        this.activeChatID = activeChatID;
     }
 
-    public static void clearChatManagersMap(){
+    public void clearChatManagersMap(){
         chatManagersMap.clear();
+    }
+    public ChatManager getContactChatManager(String phoneNumber){
+        if(contactsChatManager.containsKey(phoneNumber))
+            return contactsChatManager.get(phoneNumber);
+        return null;
     }
 }

@@ -47,3 +47,32 @@
     -fx-border-color:  -fx-blue;
     -fx-border-width:  2 2 2 2;
 }
+.list-view > .viewport {
+    -fx-background-color: transparent;
+}
+
+.list-view:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.list-view:horizontal .track,
+.list-view:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.list-view:horizontal .thumb,
+.list-view:vertical .thumb {
+    -fx-background-color: #597081;
+    -fx-background-radius: 3em;
+}
+.list-view > .corner {
+    -fx-background-color: black;
+}
+

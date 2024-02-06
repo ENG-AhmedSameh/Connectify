@@ -18,11 +18,5 @@ public class AllChatsPaneLoader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        }catch (IOException e) {
-//            System.err.println(e.getMessage());
-//            throw new RuntimeException();
-//            //return null;
-//            //throw new RuntimeException(e);
-//        }
     }
 }

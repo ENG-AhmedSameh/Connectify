@@ -16,18 +16,14 @@ import java.util.List;
 public class InvitationService {
     public boolean sendInvitation(String senderPhoneNumber, String receiverPhoneNumber) {
         InvitationsDAO invitationsDAO = new InvitationsDAOImpl();
-
         Invitations friendInvitation = new Invitations();
         friendInvitation.setSender(senderPhoneNumber);
         friendInvitation.setReceiver(receiverPhoneNumber);
-
         boolean isInvitationSent = invitationsDAO.insert(friendInvitation);
-
         if (isInvitationSent) {
             try {
                 IncomingFriendInvitationResponse receivedInvitation = invitationsDAO
                         .getIncomingFriendRequest(senderPhoneNumber, receiverPhoneNumber);
-
                 ConnectedUser receiver = Server.getConnectedUsers().get(receiverPhoneNumber);
                 if (receiver != null) {
                     receiver.receiveNotification("New Friend Request", "You have received a new friend request");
@@ -36,7 +32,6 @@ public class InvitationService {
                 System.err.println("Error sending friend invitation. case:" + e.getMessage());
             }
         }
-
         return isInvitationSent;
     }
 

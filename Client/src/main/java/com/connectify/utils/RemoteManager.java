@@ -4,9 +4,14 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
 import org.controlsfx.control.Notifications;
 
 
+import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -19,33 +24,39 @@ public class RemoteManager {
 
     private ServerAPI server;
 
-    private final int port = 1099;
+    private final static int port = 1099;
 
-    private final String host = "localhost";
+    private final static String host = "localhost";
     private static RemoteManager instance;
 
 
-    private RemoteManager(){
-        try {
-            Registry registry = LocateRegistry.getRegistry(host, port);
-            server = (ServerAPI) registry.lookup("server");
-        } catch (RemoteException | NotBoundException e) {
-            handleServerDown();
-            System.err.println("Remote Exception: " + e.getMessage());
-        }
-    }
-
+    private RemoteManager(){}
 
     public static RemoteManager getInstance() {
+        if(instance != null && instance.isServerDown()) {
+            instance.handleServerDown();
+            instance = null;
+        }
         if (instance == null) {
             instance = new RemoteManager();
+            try {
+                Registry registry = LocateRegistry.getRegistry(host, port);
+                instance.server = (ServerAPI) registry.lookup("server");
+            } catch (RemoteException | NotBoundException e) {
+                instance.handleServerDown();
+                System.err.println("Remote Exception: " + e.getMessage());
+            }
         }
         return instance;
     }
 
+    public static void reset() {
+        instance = null;
+    }
+
     public boolean signUp(SignUpRequest request){
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -59,7 +70,7 @@ public class RemoteManager {
 
     public LoginResponse login(LoginRequest request) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return new LoginResponse(false, "Server is down");
         }
         try {
@@ -67,13 +78,13 @@ public class RemoteManager {
         } catch (RemoteException e) {
             handleServerDown();
             System.err.println("Remote Exception: " + e.getMessage());
-            return null;
+            return new LoginResponse(false, "Server is down");
         }
     }
 
     public void registerConnectedUser(ConnectedUser connectedUser) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return;
         }
         try {
@@ -86,7 +97,7 @@ public class RemoteManager {
 
     public void logout(ConnectedUser connectedUser) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return;
         }
         try {
@@ -100,8 +111,8 @@ public class RemoteManager {
 
     public UserProfileResponse getUserProfile(String phoneNumber) {
         if(isServerDown()){
-            handleServerDown();
-            return new UserProfileResponse();
+            reset();
+            return null;
         }
         try {
             return server.getUserProfile(phoneNumber);
@@ -114,7 +125,7 @@ public class RemoteManager {
 
     public boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -128,7 +139,7 @@ public class RemoteManager {
 
     public boolean updateUserPassword(String phoneNumber, byte[] salt, String password) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -142,7 +153,7 @@ public class RemoteManager {
 
     public boolean updateUserPicture(String phoneNumber, byte[] newPicture) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -157,8 +168,8 @@ public class RemoteManager {
 
     public List<IncomingFriendInvitationResponse> getIncomingFriendRequests(String currentUserPhone) {
         if(isServerDown()){
-            handleServerDown();
-            return new ArrayList<>();
+            reset();
+            return null;
         }
         try {
             return server.getIncomingFriendRequests(currentUserPhone);
@@ -171,7 +182,7 @@ public class RemoteManager {
 
     public void changeProfileAndBio(ImageBioChangeRequest request) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return;
         }
         try {
@@ -184,7 +195,7 @@ public class RemoteManager {
 
     public void sendMessage(MessageSentDTO messageSentDTO) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return;
         }
         try {
@@ -197,8 +208,8 @@ public class RemoteManager {
 
     public List<ContactsDTO> getContacts(String phoneNumber) {
         if(isServerDown()){
-            handleServerDown();
-            return new ArrayList<>();
+            reset();
+            return null;
         }
         try {
             return server.getContacts(phoneNumber);
@@ -211,8 +222,8 @@ public class RemoteManager {
 
     public List<ChatCardsInfoDTO> getUserChatsCardsInfo(String phoneNumber) {
         if(isServerDown()){
-            handleServerDown();
-            return new ArrayList<>();
+            reset();
+            return null;
         }
         try {
             return server.getUserChatsCardsInfo(phoneNumber);
@@ -225,7 +236,7 @@ public class RemoteManager {
 
     public boolean areAlreadyFriends(String currentUserPhone, String text) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -239,8 +250,8 @@ public class RemoteManager {
 
     public FriendToAddResponse getFriendToAdd(String newContactPhone) {
         if(isServerDown()){
-            handleServerDown();
-            return new FriendToAddResponse();
+            reset();
+            return null;
         }
         try {
             return server.getFriendToAdd(newContactPhone);
@@ -253,7 +264,7 @@ public class RemoteManager {
 
     public boolean isInvitationSent(String currentUserPhone, String text) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -267,7 +278,7 @@ public class RemoteManager {
 
     public boolean sendInvitation(String currentUserPhone, String phoneNumber) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -281,7 +292,7 @@ public class RemoteManager {
 
     public Boolean isPrivateChat(int chatID) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -295,8 +306,8 @@ public class RemoteManager {
 
     public List<MemberInfoDTO> getAllChatOtherMembersInfo(int chatID, String phoneNumber) {
         if(isServerDown()){
-            handleServerDown();
-            return new ArrayList<>();
+            reset();
+            return null;
         }
         try {
             return server.getAllChatOtherMembersInfo(chatID, phoneNumber);
@@ -309,7 +320,7 @@ public class RemoteManager {
 
     public void prepareCurrentChat(ChatMemberDTO chatMemberDTO) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return;
         }
         try {
@@ -322,7 +333,7 @@ public class RemoteManager {
 
     public boolean acceptFriendRequest(int invitationId) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -336,7 +347,7 @@ public class RemoteManager {
 
     public boolean cancelFriendRequest(int invitationId) {
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
         try {
@@ -348,17 +359,32 @@ public class RemoteManager {
         }
     }
 
+    public void sendAttachment(MessageSentDTO messageSentDTO) {
+        if(isServerDown()){
+            reset();
+            return;
+        }
+        try {
+            server.sendAttachment(messageSentDTO);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+        }
+    }
+
     private void handleServerDown() {
         showServerDownNotification();
         StageManager.getInstance().switchToLogin();
     }
 
     private void showServerDownNotification() {
-        Notifications
-                .create()
-                .title("Server is down")
-                .text("Server is down. contact the admin and try again later")
-                .showInformation();
+        Image icon = new Image(getClass().getResource("/images/notification.png").toString());
+        Notifications.create()
+                .title("Failed to connect to the Server")
+                .text("Server is down. Contact the admin and try again later")
+                .graphic(new ImageView(icon))
+                .threshold(3, Notifications.create().title("Collapsed Notification"))
+                .show();
     }
 
     public boolean isServerDown() {
@@ -366,6 +392,10 @@ public class RemoteManager {
     }
 
     public ChatCardsInfoDTO getUserLastChatCardInfo(String phoneNumber) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
         try {
             return server.getUserLastChatCardInfo(phoneNumber);
         } catch (RemoteException e) {
@@ -375,10 +405,53 @@ public class RemoteManager {
         }
     }
 
+    public File getAttachment(Integer attachmentID) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
+        try {
+            return server.getAttachment(attachmentID);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public Mode getContactMode(String phoneNumber) {
+        try {
+            return server.getUserMode(phoneNumber);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.out.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
+    }
+    public Status getContactStatus(String phoneNumber) {
+        try {
+            return server.getUserStatus(phoneNumber);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.out.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) {
+        try {
+            return server.updateUserModeAndStatus(phoneNumber,mode,status);
+        }catch (RemoteException e){
+            handleServerDown();
+            System.out.println("Remote Exception: " + e.getMessage());
+            return false;
+        }
+    }
+
     public boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) {
 
         if(isServerDown()){
-            handleServerDown();
+            reset();
             return false;
         }
 

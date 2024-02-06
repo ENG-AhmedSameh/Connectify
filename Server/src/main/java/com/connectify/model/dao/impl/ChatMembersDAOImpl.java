@@ -296,4 +296,18 @@ public class ChatMembersDAOImpl implements ChatMembersDAO {
             return false;
         }
     }
+
+    @Override
+    public boolean closeAllUserChats(String phoneNumber) {
+        String query = "UPDATE CHAT_MEMBERS SET is_open = 0 WHERE member = ? AND is_open = 1;";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, phoneNumber);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+        return false;
+    }
 }
