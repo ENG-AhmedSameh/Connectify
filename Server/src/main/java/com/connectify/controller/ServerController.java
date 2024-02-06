@@ -3,6 +3,7 @@ package com.connectify.controller;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
+import com.connectify.Server;
 import com.connectify.dto.*;
 import com.connectify.services.*;
 import com.connectify.model.entities.User;
@@ -201,7 +202,19 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
 
     @Override
     public boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) throws RemoteException {
-        return groupService.createGroup(contactsDTOS, groupName, groupDescription, image);
+        boolean isSuccessful = groupService.createGroup(contactsDTOS, groupName, groupDescription, image);
+
+        if (isSuccessful) {
+            for (ContactsDTO contactsDTO : contactsDTOS) {
+                ConnectedUser receiver = Server.getConnectedUsers().get(contactsDTO.getPhoneNumber());
+                if (receiver != null) {
+                    ChatCardsInfoDTO chatCard = getUserLastChatCardInfo(receiver.getPhoneNumber());
+                    receiver.makeNewChatCard(chatCard);
+                }
+            }
+        }
+
+        return isSuccessful;
     }
 
     @Override

@@ -83,21 +83,10 @@ public class GroupInfoController implements Initializable {
             groupNameTextField.setTooltip(hintText("Doesn't match the password in the first field"));
             return;
         }
-        boolean isSuccessful = RemoteManager.getInstance().createGroup(list,
+        RemoteManager.getInstance().createGroup(list,
                 groupNameTextField.getText(),
                 groupDescriptionTextField.getText(),
                 newPicture);
-
-//        if (isSuccessful) {
-//            ChatCardsInfoDTO chat = null;
-//            try {
-//                chat = RemoteManager.getInstance().getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
-//            } catch (RemoteException e) {
-//                throw new RuntimeException(e);
-//            }
-//            AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
-//            CurrentUser.getAllChatsController().getChatsPanesList().add(chatCard);
-//        }
         StageManager.getInstance().switchToChats();
     }
 

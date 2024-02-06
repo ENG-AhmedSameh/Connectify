@@ -53,7 +53,6 @@ public class StageManager {
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
-        //Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchToSignUp(){
