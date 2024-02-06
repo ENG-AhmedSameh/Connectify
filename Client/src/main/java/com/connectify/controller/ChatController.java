@@ -122,7 +122,7 @@ public class ChatController implements Initializable {
             if(file != null){
                 try{
                     MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(), chatID, file.getName(), new Timestamp(System.currentTimeMillis()), file);
-//                    appendMessage(messageSentDTO);
+                    appendMessage(messageSentDTO);
                     RemoteManager.getInstance().sendAttachment(messageSentDTO);
                 } catch (RemoteException e){
                     System.err.println("Remote Exception: " + e.getMessage());
