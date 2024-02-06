@@ -9,7 +9,9 @@ import com.connectify.loaders.ViewLoader;
 import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.model.entities.ChatMember;
 import com.connectify.utils.ChatManagerFactory;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -73,13 +75,13 @@ public class AllChatsPaneController implements Initializable {
 
     private void initializeListView(){
         sortedAnchorPanes = new SortedList<>(chatsPanesList, (pane1, pane2) -> {
-            ChatCardController controller1 = ChatManagerFactory.getChatManager(ChatCardLoader.getChatsCardId(pane1)).getChatCardController();
-            ChatCardController controller2 = ChatManagerFactory.getChatManager(ChatCardLoader.getChatsCardId(pane2)).getChatCardController();
+            ChatCardController controller1 = CurrentUser.getChatManagerFactory().getChatManager(ChatCardLoader.getChatsCardId(pane1)).getChatCardController();
+            ChatCardController controller2 = CurrentUser.getChatManagerFactory().getChatManager(ChatCardLoader.getChatsCardId(pane2)).getChatCardController();
             return Objects.requireNonNull(controller2).getLastMessageTimestamp().compareTo(Objects.requireNonNull(controller1).getLastMessageTimestamp());
         });
         allChatsListView.setItems(sortedAnchorPanes);
-        //allChatsListView.setItems(chatsPanesList);
         setListViewCellFactory();
+        CurrentUser.setAllChatsController(this);
     }
 
     private void setListViewCellFactory() {
@@ -107,7 +109,6 @@ public class AllChatsPaneController implements Initializable {
     }
     private void loadAllUserChats(){
         try {
-            //allChatsVBox.getChildren().removeAll();
             List<ChatCardsInfoDTO> chatCardsInfoDTOS = RemoteManager.getInstance().getUserChatsCardsInfo(Client.getConnectedUser().getPhoneNumber());
             for(ChatCardsInfoDTO chat:chatCardsInfoDTOS)
                 addChatOnChatPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
@@ -115,11 +116,24 @@ public class AllChatsPaneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-    public static void clearChatsCardList(){
+    public void clearChatsCardList(){
         chatsPanesList.clear();
     }
 
-    public static ObservableList<AnchorPane> getChatsPanesList() {
+    public ObservableList<AnchorPane> getChatsPanesList() {
         return chatsPanesList;
     }
+
+    public void rearrangeChatCardController(AnchorPane chatCard){
+        Platform.runLater(()->{
+            chatsPanesList.remove(chatCard);
+            chatsPanesList.add(chatCard);
+        });
+    }
+
+//    public void removeAllChatCards(){
+//        Platform.runLater(()->{
+//            chatsPanesList.removeAll(chatsPanesList);
+//        });
+//    }
 }

@@ -11,22 +11,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChatPaneFactory {
+    private final Map<Integer, BorderPane> paneCache = new HashMap<>();
 
-
-    private static final Map<Integer, BorderPane> paneCache = new HashMap<>();
-
-    public static BorderPane getChatPane(int id, String name, Image image) {
+    public BorderPane getChatPane(int id, String name, Image image) {
 
         if (paneCache.containsKey(id)) {
             return paneCache.get(id);
 
         }
         BorderPane newPane = ChatLoader.loadChatPane(id,name,image);
-        ChatManagerFactory.getChatManager(id).setChatPane(newPane);
+        CurrentUser.getChatManagerFactory().getChatManager(id).setChatPane(newPane);
         paneCache.put(id, newPane);
         return newPane;
     }
-    public static void clearChats(){
+    public void clearChats(){
         paneCache.clear();
     }
 

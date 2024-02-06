@@ -12,6 +12,7 @@ import com.connectify.model.entities.Message;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import org.controlsfx.control.Notifications;
 import com.connectify.controller.IncomingFriendRequestController;
 import com.connectify.dto.IncomingFriendInvitationResponse;
@@ -28,6 +29,10 @@ import java.util.Map;
 public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, Serializable {
 
     private final String phoneNumber;
+
+    private static AllChatsPaneController allChatsController;
+    private static ChatManagerFactory chatManagerFactory = new ChatManagerFactory();
+    private static ChatPaneFactory chatPaneFactory = new ChatPaneFactory();
 
     private static final Map<Integer, ObservableList<Message>> chatListMessagesMap = new HashMap<>();
 
@@ -78,8 +83,22 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     @Override
     public void makeNewChatCard(ChatCardsInfoDTO chat) throws RemoteException{
         AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
-        AllChatsPaneController.getChatsPanesList().add(chatCard);
+        CurrentUser.getAllChatsController().getChatsPanesList().add(chatCard);
     }
 
+    public static AllChatsPaneController getAllChatsController() {
+        return allChatsController;
+    }
 
+    public static void setAllChatsController(AllChatsPaneController allChatsController) {
+        CurrentUser.allChatsController = allChatsController;
+    }
+
+    public static ChatManagerFactory getChatManagerFactory() {
+        return chatManagerFactory;
+    }
+
+    public static ChatPaneFactory getChatPaneFactory() {
+        return chatPaneFactory;
+    }
 }

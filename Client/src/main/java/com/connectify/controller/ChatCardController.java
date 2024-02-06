@@ -6,6 +6,7 @@ import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.ChatPaneFactory;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.*;
@@ -134,9 +135,9 @@ public class ChatCardController implements Initializable {
     }
 
     private void displayChat(){
-        ChatManagerFactory.setActiveChatID(chatId);
+        CurrentUser.getChatManagerFactory().setActiveChatID(chatId);
         setUnreadMessagesNumber(0);
-        BorderPane chatPane = ChatPaneFactory.getChatPane(chatId, chatName.get(),pictureImage);
+        BorderPane chatPane = CurrentUser.getChatPaneFactory().getChatPane(chatId, chatName.get(),pictureImage);
         ViewLoader loader = ViewLoader.getInstance();
         loader.switchToChat(chatPane,chatCardPane.getScene());
     }
@@ -168,7 +169,7 @@ public class ChatCardController implements Initializable {
         nChatUnreadMessagesLabel.setVisible(unread != 0);
     }
     public void updateUnreadMessagesNumber(){
-        if(ChatManagerFactory.getActiveChatID()!=chatId)
+        if(CurrentUser.getChatManagerFactory().getActiveChatID()!=chatId)
             this.unread.setValue(unread.getValue()+1);
     }
     public int getUnreadMessagesNumber() {
@@ -211,4 +212,7 @@ public class ChatCardController implements Initializable {
         timestampProperty.setValue(timestamp.toLocalDateTime());
     }
 
+    public void updateCardPosition(AnchorPane chatCardPane) {
+        CurrentUser.getAllChatsController().rearrangeChatCardController(chatCardPane);
+    }
 }

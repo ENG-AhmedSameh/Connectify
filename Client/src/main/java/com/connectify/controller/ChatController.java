@@ -74,7 +74,7 @@ public class ChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(!ChatManagerFactory.getChatManager(chatID).isPrivateChat())
+        if(!CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat())
             statusCircle.setVisible(false);
         chatName.setText(name);
         pictureImageView.setImage(image);
@@ -101,6 +101,7 @@ public class ChatController implements Initializable {
                 //TODO render send message
                 messages.add(message);
                 sendBox.clear();
+                //CurrentUser.getAllChatsController().rearrangeChatCardController();
             } catch (RemoteException e) {
                 System.err.println("Can't find server, details: "+e.getMessage());
             }
@@ -150,7 +151,7 @@ public class ChatController implements Initializable {
                     root = loader.load();
                 }
                 else{
-                    if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
+                    if(CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat()){
                         loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
                         loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
                         root = loader.load();
@@ -159,7 +160,7 @@ public class ChatController implements Initializable {
                         GroupMessageHBoxController controller = new GroupMessageHBoxController();
                         loader.setController(controller);
                         root = loader.load();
-                        ChatManager chatManager= ChatManagerFactory.getChatManager(chatID);
+                        ChatManager chatManager= CurrentUser.getChatManagerFactory().getChatManager(chatID);
 //                        if(Objects.equals(chatManager.getGroupLastSender(), message.getSender())){
 //                            controller.setSameSenderMessageStyle(message.getContent(),message.getTimestamp());
 //                            chatManager.setGroupLastSender(message.getSender());

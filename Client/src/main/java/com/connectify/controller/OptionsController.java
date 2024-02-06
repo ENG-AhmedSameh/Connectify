@@ -8,6 +8,7 @@ import com.connectify.loaders.AllContactsPaneLoader;
 import com.connectify.loaders.LogoLoader;
 import com.connectify.model.entities.User;
 import com.connectify.loaders.ViewLoader;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
@@ -83,6 +84,9 @@ public class OptionsController {
     void logoutHandler(ActionEvent event) {
         RemoteManager.getInstance().logout(Client.getConnectedUser());
         Client.updateUserCredentials("false");
+        CurrentUser.getAllChatsController().clearChatsCardList();
+        CurrentUser.getChatManagerFactory().clearChatManagersMap();
+        CurrentUser.getChatPaneFactory().clearChats();
         Client.setConnectedUser(null);
         StageManager.getInstance().resetHomeScene();
         StageManager.getInstance().switchToLogin();
