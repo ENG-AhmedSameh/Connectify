@@ -82,6 +82,7 @@ public class OptionsController {
     @FXML
     void logoutHandler(ActionEvent event) {
         RemoteManager.getInstance().logout(Client.getConnectedUser());
+        RemoteManager.reset();
         Client.updateUserCredentials("false");
         Client.setConnectedUser(null);
         StageManager.getInstance().resetHomeScene();
