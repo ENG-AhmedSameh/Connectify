@@ -1,6 +1,10 @@
 package com.connectify.controller;
 
+import com.connectify.Client;
+import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.ContactsDTO;
+import com.connectify.loaders.ChatCardLoader;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
@@ -19,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -78,10 +83,21 @@ public class GroupInfoController implements Initializable {
             groupNameTextField.setTooltip(hintText("Doesn't match the password in the first field"));
             return;
         }
-        RemoteManager.getInstance().createGroup(list,
+        boolean isSuccessful = RemoteManager.getInstance().createGroup(list,
                 groupNameTextField.getText(),
                 groupDescriptionTextField.getText(),
                 newPicture);
+
+//        if (isSuccessful) {
+//            ChatCardsInfoDTO chat = null;
+//            try {
+//                chat = RemoteManager.getInstance().getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
+//            } catch (RemoteException e) {
+//                throw new RuntimeException(e);
+//            }
+//            AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
+//            CurrentUser.getAllChatsController().getChatsPanesList().add(chatCard);
+//        }
         StageManager.getInstance().switchToChats();
     }
 
