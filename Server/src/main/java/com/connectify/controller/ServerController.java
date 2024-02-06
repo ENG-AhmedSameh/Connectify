@@ -5,17 +5,11 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
 import com.connectify.model.entities.User;
-import com.connectify.services.ChatService;
-import com.connectify.services.MessageService;
-import com.connectify.services.UserChatsService;
+import com.connectify.services.*;
 import com.connectify.dto.ContactsDTO;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
-import com.connectify.services.ContactService;
-import com.connectify.services.ContactsService;
-import com.connectify.services.InvitationService;
-import com.connectify.services.UserService;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -30,6 +24,8 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     private final ContactService contactService;
     private final InvitationService invitationService;
     private final ContactsService contactsService;
+    private GroupService groupService;
+
     public ServerController() throws RemoteException {
         userService = new UserService();
         messageService = new MessageService();
@@ -37,6 +33,7 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
         contactService =new ContactService();
         invitationService = new InvitationService();
         contactsService = new ContactsService();
+        groupService = new GroupService();
     }
 
     @Override
@@ -148,6 +145,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException {
         return contactsService.areAlreadyFriends(userPhone, friendPhone);
+    }
+
+    @Override
+    public boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) throws RemoteException {
+        return groupService.createGroup(contactsDTOS, groupName, groupDescription, image);
     }
 
     @Override

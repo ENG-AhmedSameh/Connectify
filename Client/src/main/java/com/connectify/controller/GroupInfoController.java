@@ -78,10 +78,10 @@ public class GroupInfoController implements Initializable {
             groupNameTextField.setTooltip(hintText("Doesn't match the password in the first field"));
             return;
         }
-//        RemoteManager.getInstance().createGroup(list,
-//                groupNameTextField.getText(),
-//                groupDescriptionTextField.getText(),
-//                newPicture);
+        RemoteManager.getInstance().createGroup(list,
+                groupNameTextField.getText(),
+                groupDescriptionTextField.getText(),
+                newPicture);
         StageManager.getInstance().switchToChats();
     }
 

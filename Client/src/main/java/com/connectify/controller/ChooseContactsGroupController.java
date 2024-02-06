@@ -2,7 +2,9 @@ package com.connectify.controller;
 
 import com.connectify.Client;
 import com.connectify.dto.ContactsDTO;
+import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ChooseContactCardLoader;
+import com.connectify.mapper.ContactMapper;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.collections.ObservableList;
@@ -63,11 +65,24 @@ public class ChooseContactsGroupController implements Initializable {
 
     @FXML
     void NextHandler(ActionEvent event) {
-        selectedContacts = processSelectedContacts();
-        if (selectedContacts.isEmpty()) {
+        try {
+            selectedContacts = processSelectedContacts();
+
+            UserProfileResponse currentUserProfile = RemoteManager.getInstance()
+                    .getUserProfile(Client.getConnectedUser().getPhoneNumber());
+
+            ContactsDTO currentUser = ContactMapper.INSTANCE.userProfileResponseToContactsDto(currentUserProfile);
+            selectedContacts.add(currentUser);
+
+        } catch (RemoteException e) {
+            System.err.println("Error when trying to get current user profile. Case: " + e.getMessage());
+        }
+
+        if (selectedContacts.size() < 2) {
             errorLabel.setText("Select at least one contact.");
             return;
         }
+
         StageManager.getInstance().switchToGroupInfo();
     }
 

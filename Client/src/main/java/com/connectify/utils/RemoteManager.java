@@ -374,4 +374,20 @@ public class RemoteManager {
             return null;
         }
     }
+
+    public boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) {
+
+        if(isServerDown()){
+            handleServerDown();
+            return false;
+        }
+
+        try {
+            return server.createGroup(contactsDTOS, groupName, groupDescription, image);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+            return false;
+        }
+    }
 }

@@ -51,4 +51,6 @@ public interface ServerAPI extends Remote{
     boolean cancelFriendRequest(int invitationId) throws RemoteException;
 
     boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException;
+
+    boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) throws RemoteException;
 }

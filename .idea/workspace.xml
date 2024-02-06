@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="add controllers for creating group GUI">
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="add transitions between scenes while creating a group.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChooseContactCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChooseContactCardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChooseContactsGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChooseContactsGroupController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/GroupInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/GroupInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ChooseContactCardLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/loaders/ChooseContactCardLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/styles/AllChatsPaneStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/styles/AllChatsPaneStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactsGroupPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/ChooseContactsGroupPane.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/GroupInfoPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/GroupInfoPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/RemoteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/RemoteManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/GroupDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/GroupDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/GroupDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/GroupDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/Interfaces/ServerAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/mapper/ContactMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/mapper/ContactMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +113,7 @@
       <recent name="D:\Career\Connectify\Server\src\main\java\server" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.connectify.services" />
       <recent name="com.connectify.loaders" />
       <recent name="com.connectify.controller" />
       <recent name="com.connectify.utils" />
@@ -363,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707170733482</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="add transitions between scenes while creating a group.">
+      <option name="closed" value="true" />
+      <created>1707174985897</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1707174985897</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,7 +422,8 @@
     <MESSAGE value="Agmal Commit Elnaharda" />
     <MESSAGE value="update chat card displayed details when user send message" />
     <MESSAGE value="add controllers for creating group GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="add controllers for creating group GUI" />
+    <MESSAGE value="add transitions between scenes while creating a group." />
+    <option name="LAST_COMMIT_MESSAGE" value="add transitions between scenes while creating a group." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
