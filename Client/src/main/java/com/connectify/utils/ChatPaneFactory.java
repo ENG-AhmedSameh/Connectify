@@ -13,7 +13,7 @@ import java.util.Map;
 public class ChatPaneFactory {
     private final Map<Integer, BorderPane> paneCache = new HashMap<>();
 
-    public BorderPane getChatPane(int id, String name, Image image) {
+    public BorderPane getChatPane(int id, String name, byte[] image) {
 
         if (paneCache.containsKey(id)) {
             return paneCache.get(id);
