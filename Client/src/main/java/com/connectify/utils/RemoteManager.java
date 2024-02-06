@@ -372,21 +372,6 @@ public class RemoteManager {
         }
     }
 
-    private void handleServerDown() {
-        showServerDownNotification();
-        StageManager.getInstance().switchToLogin();
-    }
-
-    private void showServerDownNotification() {
-        Image icon = new Image(getClass().getResource("/images/notification.png").toString());
-        Notifications.create()
-                .title("Failed to connect to the Server")
-                .text("Server is down. Contact the admin and try again later")
-                .graphic(new ImageView(icon))
-                .threshold(3, Notifications.create().title("Collapsed Notification"))
-                .show();
-    }
-
     public boolean isServerDown() {
         return server == null;
     }
@@ -420,6 +405,10 @@ public class RemoteManager {
     }
 
     public Mode getContactMode(String phoneNumber) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
         try {
             return server.getUserMode(phoneNumber);
         } catch (RemoteException e) {
@@ -429,6 +418,10 @@ public class RemoteManager {
         }
     }
     public Status getContactStatus(String phoneNumber) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
         try {
             return server.getUserStatus(phoneNumber);
         } catch (RemoteException e) {
@@ -439,6 +432,10 @@ public class RemoteManager {
     }
 
     public boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) {
+        if(isServerDown()){
+            reset();
+            return false;
+        }
         try {
             return server.updateUserModeAndStatus(phoneNumber,mode,status);
         }catch (RemoteException e){
@@ -449,12 +446,10 @@ public class RemoteManager {
     }
 
     public boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) {
-
         if(isServerDown()){
             reset();
             return false;
         }
-
         try {
             return server.createGroup(contactsDTOS, groupName, groupDescription, image);
         } catch (RemoteException e) {
@@ -462,5 +457,20 @@ public class RemoteManager {
             System.err.println("Remote Exception: " + e.getMessage());
             return false;
         }
+    }
+
+    private void handleServerDown() {
+        showServerDownNotification();
+        StageManager.getInstance().switchToLogin();
+    }
+
+    private void showServerDownNotification() {
+        Image icon = new Image(getClass().getResource("/images/notification.png").toString());
+        Notifications.create()
+                .title("Failed to connect to the Server")
+                .text("Server is down. Contact the admin and try again later")
+                .graphic(new ImageView(icon))
+                .threshold(3, Notifications.create().title("Collapsed Notification"))
+                .show();
     }
 }

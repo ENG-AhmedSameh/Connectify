@@ -70,12 +70,9 @@ public class UserService {
         Server.getConnectedUsers().remove(phoneNumber);
         UserDAO userDAO = new UserDAOImpl();
         ChatMembersDAO chatMembersDAO = new ChatMembersDAOImpl();
-        boolean successed;
         System.out.println("Unregistered user: " + phoneNumber);
-        successed = chatMembersDAO.closeAllUserChats(phoneNumber);
-        if(successed)
-            successed = userDAO.updateMode(phoneNumber, Mode.OFFLINE);;
-        return successed;
+        chatMembersDAO.closeAllUserChats(phoneNumber);
+        return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
     }
 
     public void registerConnectedUser(ConnectedUser user) {
