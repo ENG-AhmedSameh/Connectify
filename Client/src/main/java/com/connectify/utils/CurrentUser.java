@@ -1,23 +1,19 @@
 package com.connectify.utils;
 
-import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.controller.AllChatsPaneController;
 import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.MessageDTO;
 import com.connectify.loaders.ChatCardLoader;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
+import com.connectify.model.enums.Status;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.Notifications;
-import com.connectify.controller.IncomingFriendRequestController;
-import com.connectify.dto.IncomingFriendInvitationResponse;
-import com.connectify.loaders.IncomingFriendRequestCardLoader;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
@@ -32,6 +28,10 @@ import java.util.Map;
 public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, Serializable {
 
     private final String phoneNumber;
+
+    private static AllChatsPaneController allChatsController;
+    private static ChatManagerFactory chatManagerFactory = new ChatManagerFactory();
+    private static ChatPaneFactory chatPaneFactory = new ChatPaneFactory();
 
     private static final Map<Integer, ObservableList<Message>> chatListMessagesMap = new HashMap<>();
 
@@ -59,7 +59,6 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     @Override
     public void receiveMessage(MessageDTO messageDTO) throws RemoteException {
-        System.out.println(messageDTO.getContent());
         MessageMapper mapper = MessageMapper.INSTANCE;
         Message receivedMessage = mapper.messageDtoToMessage(messageDTO);
         ChatCardHandler.updateChatCard(receivedMessage);
@@ -83,10 +82,34 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     }
 
     @Override
-    public void makeNewChatCard(ChatCardsInfoDTO chat) throws RemoteException{
-        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
-        AllChatsPaneController.getChatsPanesList().add(chatCard);
+    public void updateContactModeToOffline(String phoneNumber) throws RemoteException {
+        chatManagerFactory.getContactChatManager(phoneNumber).changeUserModeColorPropertyToOffline();
     }
 
+    @Override
+    public void updateContactStatus(String phoneNumber, Status status) throws RemoteException {
+        chatManagerFactory.getContactChatManager(phoneNumber).changeUserModeColorProperty(status);
+    }
 
+    @Override
+    public void makeNewChatCard(ChatCardsInfoDTO chat) throws RemoteException{
+        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
+        CurrentUser.getAllChatsController().getChatsPanesList().add(chatCard);
+    }
+
+    public static AllChatsPaneController getAllChatsController() {
+        return allChatsController;
+    }
+
+    public static void setAllChatsController(AllChatsPaneController allChatsController) {
+        CurrentUser.allChatsController = allChatsController;
+    }
+
+    public static ChatManagerFactory getChatManagerFactory() {
+        return chatManagerFactory;
+    }
+
+    public static ChatPaneFactory getChatPaneFactory() {
+        return chatPaneFactory;
+    }
 }

@@ -3,6 +3,7 @@ package com.connectify.loaders;
 import com.connectify.controller.ChatCardController;
 import com.connectify.utils.ChatManager;
 import com.connectify.utils.ChatManagerFactory;
+import com.connectify.utils.CurrentUser;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
@@ -37,7 +38,7 @@ public class ChatCardLoader {
         ChatCardController controller = new ChatCardController(chatId,unread,name,picture,lastMessage,timestamp);
         fxmlLoader.setLocation(ChatCardLoader.class.getResource("/views/ChatCardPane.fxml"));
         fxmlLoader.setController(controller);
-        ChatManager chatManager = ChatManagerFactory.getChatManager(chatId);
+        ChatManager chatManager = CurrentUser.getChatManagerFactory().getChatManager(chatId);
         chatManager.setChatCardController(controller);
         try {
             AnchorPane chatCardPane = fxmlLoader.load();

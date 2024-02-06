@@ -7,9 +7,10 @@ import javafx.application.Platform;
 public class ChatCardHandler {
     public static void updateChatCard(Message message) {
         Platform.runLater(()->{
-            ChatManager chatManager = ChatManagerFactory.getChatManager(message.getChatId());
+            ChatManager chatManager = CurrentUser.getChatManagerFactory().getChatManager(message.getChatId());
             ChatCardController chatCardController= chatManager.getChatCardController();
             chatCardController.updateUnreadMessagesNumber();
+            chatCardController.updateCardPosition(chatManager.getChatCardPane());
             chatCardController.setLastMessage(message.getContent());
             chatCardController.setTimestamp(message.getTimestamp());
         });

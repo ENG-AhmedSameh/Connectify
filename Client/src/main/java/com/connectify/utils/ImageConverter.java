@@ -4,13 +4,14 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
 import java.io.ByteArrayInputStream;
+import java.util.Objects;
 
 public class ImageConverter {
 
     public static ImagePattern convertBytesToImagePattern(byte[] imageBytes) {
         Image image;
         if (imageBytes == null || imageBytes.length == 0) {
-            image = new Image(ImageConverter.class.getResourceAsStream("/Images/profile.png"));
+            image = new Image(Objects.requireNonNull(ImageConverter.class.getResourceAsStream("/Images/profile.png")));
             return new ImagePattern(image);
         }
         try {

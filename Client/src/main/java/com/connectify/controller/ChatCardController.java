@@ -5,6 +5,7 @@ import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.ChatPaneFactory;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.ImageConverter;
 import com.connectify.utils.RemoteManager;
 import javafx.beans.binding.StringBinding;
@@ -52,6 +53,9 @@ public class ChatCardController implements Initializable {
     @FXML
     private AnchorPane chatCardPane;
 
+    @FXML
+    private Circle statusCircle;
+
     private int chatId;
     private IntegerProperty unread = new SimpleIntegerProperty();
     private StringProperty chatName = new SimpleStringProperty();
@@ -88,6 +92,10 @@ public class ChatCardController implements Initializable {
         lastMessageLabel.textProperty().bind(lastMessage);
         timestampProperty = new SimpleObjectProperty<>(timestamp.toLocalDateTime());
         bindLastMessageTimeStamp();
+        if(!CurrentUser.getChatManagerFactory().getChatManager(chatId).isPrivateChat())
+            statusCircle.setVisible(false);
+        else
+            statusCircle.fillProperty().bind(CurrentUser.getChatManagerFactory().getChatManager(chatId).getcolorProperty());
     }
     private void bindLastMessageTimeStamp(){
         formattedTimestamp = new StringBinding() {
@@ -119,11 +127,10 @@ public class ChatCardController implements Initializable {
         chatPicture.setFill(ImageConverter.convertBytesToImagePattern(pictureBytes));
     }
 
-
     private void displayChat(){
-        ChatManagerFactory.setActiveChatID(chatId);
+        CurrentUser.getChatManagerFactory().setActiveChatID(chatId);
         setUnreadMessagesNumber(0);
-        BorderPane chatPane = ChatPaneFactory.getChatPane(chatId, chatName.get(),pictureBytes);
+        BorderPane chatPane = CurrentUser.getChatPaneFactory().getChatPane(chatId, chatName.get(),pictureBytes);
         ViewLoader loader = ViewLoader.getInstance();
         loader.switchToChat(chatPane,chatCardPane.getScene());
     }
@@ -155,7 +162,7 @@ public class ChatCardController implements Initializable {
         nChatUnreadMessagesLabel.setVisible(unread != 0);
     }
     public void updateUnreadMessagesNumber(){
-        if(ChatManagerFactory.getActiveChatID()!=chatId)
+        if(CurrentUser.getChatManagerFactory().getActiveChatID()!=chatId)
             this.unread.setValue(unread.getValue()+1);
     }
     public int getUnreadMessagesNumber() {
@@ -198,4 +205,7 @@ public class ChatCardController implements Initializable {
         timestampProperty.setValue(timestamp.toLocalDateTime());
     }
 
+    public void updateCardPosition(AnchorPane chatCardPane) {
+        CurrentUser.getAllChatsController().rearrangeChatCardController(chatCardPane);
+    }
 }

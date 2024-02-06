@@ -5,6 +5,7 @@ import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import com.connectify.model.entities.User;
+import com.connectify.model.enums.Mode;
 import com.connectify.utils.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -86,8 +88,10 @@ public class ChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(!ChatManagerFactory.getChatManager(chatID).isPrivateChat())
+        if(!CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat())
             statusCircle.setVisible(false);
+        else
+            statusCircle.fillProperty().bind(CurrentUser.getChatManagerFactory().getChatManager(chatID).getcolorProperty());
         chatName.setText(name);
         chatPicture.setFill(ImageConverter.convertBytesToImagePattern(image));
         setListViewCellFactory();
@@ -189,6 +193,16 @@ public class ChatController implements Initializable {
                     }
                 }
                 else{
+                    if(CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat()){
+                        loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
+                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
+                        root = loader.load();
+                    }else{
+                        loader = new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
+                        GroupMessageHBoxController controller = new GroupMessageHBoxController();
+                        loader.setController(controller);
+                        root = loader.load();
+                        ChatManager chatManager= CurrentUser.getChatManagerFactory().getChatManager(chatID);
                     if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
                         if(message.getAttachmentId() != null){
                             loader= new FXMLLoader(getClass().getResource("/views/ReceivedAttachmentHBox.fxml"));

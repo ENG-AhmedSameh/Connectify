@@ -6,6 +6,8 @@ import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
 import com.connectify.services.*;
 import com.connectify.model.entities.User;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
 import com.connectify.services.ChatService;
 import com.connectify.services.MessageService;
 import com.connectify.services.UserChatsService;
@@ -50,7 +52,12 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     public LoginResponse login(LoginRequest loginRequest) throws RemoteException {
-        return userService.loginUser(loginRequest);
+        LoginResponse response = userService.loginUser(loginRequest);
+        if(response.getStatus()){
+            String phoneNumber = loginRequest.getPhoneNumber();
+            contactsService.updateUserStatusAtContacts(phoneNumber,userService.getUserStatus(phoneNumber));
+        }
+        return response;
     }
 
     @Override
@@ -71,8 +78,12 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public boolean logout(String phoneNumber) throws RemoteException {
         User userInfo = userService.getUserInfo(phoneNumber);
-        contactsService.notifyContacts(phoneNumber, "A contact is offline.", userInfo.getName() + " has become offline");
-        return userService.logoutUser(phoneNumber);
+        boolean loggedOut = userService.logoutUser(phoneNumber);
+        if(loggedOut){
+            contactsService.notifyContacts(phoneNumber, "A contact is offline.", userInfo.getName() + " has become offline");
+            contactsService.updateUserModeAtContactsToOffline(phoneNumber);
+        }
+        return loggedOut;
     }
 
     @Override
@@ -164,6 +175,28 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException {
         return contactsService.areAlreadyFriends(userPhone, friendPhone);
+    }
+
+    @Override
+    public Mode getUserMode(String phoneNumber) throws RemoteException {
+        return userService.getUserMode(phoneNumber);
+    }
+
+    @Override
+    public Status getUserStatus(String phoneNumber) throws RemoteException {
+        return userService.getUserStatus(phoneNumber);
+    }
+
+    @Override
+    public boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) throws RemoteException {
+        boolean modeAndStatusUpdated = userService.updateModeAndStatus(phoneNumber,mode,status);
+        if(modeAndStatusUpdated){
+            if(mode==Mode.OFFLINE)
+                contactsService.updateUserModeAtContactsToOffline(phoneNumber);
+            else
+                contactsService.updateUserStatusAtContacts(phoneNumber,status);
+        }
+        return modeAndStatusUpdated;
     }
 
     @Override

@@ -6,6 +6,8 @@ import com.connectify.dto.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
 import org.controlsfx.control.Notifications;
 
 
@@ -414,6 +416,35 @@ public class RemoteManager {
             handleServerDown();
             System.err.println("Remote Exception: " + e.getMessage());
             return null;
+        }
+    }
+
+    public Mode getContactMode(String phoneNumber) {
+        try {
+            return server.getUserMode(phoneNumber);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.out.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
+    }
+    public Status getContactStatus(String phoneNumber) {
+        try {
+            return server.getUserStatus(phoneNumber);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.out.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) {
+        try {
+            return server.updateUserModeAndStatus(phoneNumber,mode,status);
+        }catch (RemoteException e){
+            handleServerDown();
+            System.out.println("Remote Exception: " + e.getMessage());
+            return false;
         }
     }
 }
