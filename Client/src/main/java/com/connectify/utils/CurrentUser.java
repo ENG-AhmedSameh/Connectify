@@ -12,13 +12,17 @@ import com.connectify.model.entities.Message;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.controlsfx.control.Notifications;
 import com.connectify.controller.IncomingFriendRequestController;
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.loaders.IncomingFriendRequestCardLoader;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.File;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -39,12 +43,13 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     @Override
     public void receiveNotification(String title, String message) throws RemoteException {
         Platform.runLater(() -> {
+            Image icon = new Image(getClass().getResource("/images/notification.png").toString());
             Notifications.create()
                     .title(title)
                     .text(message)
-                    .darkStyle()
+                    .graphic(new ImageView(icon))
                     .threshold(3, Notifications.create().title("Collapsed Notification"))
-                    .showInformation();
+                    .show();
         });
     }
 
