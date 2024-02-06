@@ -6,10 +6,10 @@ import java.io.Serializable;
 public class ImageBioChangeRequest implements Serializable {
 
     private final String phoneNumber;
-    private final File image;
+    private final byte[] image;
     private final String bio;
 
-    public ImageBioChangeRequest(String phoneNumber, File image, String bio) {
+    public ImageBioChangeRequest(String phoneNumber, byte[] image, String bio) {
         this.phoneNumber = phoneNumber;
         this.image = image;
         this.bio = bio;
@@ -19,7 +19,7 @@ public class ImageBioChangeRequest implements Serializable {
         return phoneNumber;
     }
 
-    public File getImage() {
+    public byte[] getImage() {
         return image;
     }
 

@@ -14,7 +14,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
-import java.io.File;
+import java.io.*;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
@@ -55,11 +55,26 @@ public class ImageBioController {
             if(selectedImage == null){
                 selectedImage = new File(getClass().getResourceAsStream("/images/profile.png").toString());
             }
-            return new ImageBioChangeRequest(phoneNumber, selectedImage, bioTextArea.getText());
+
+            return new ImageBioChangeRequest(phoneNumber, fileToByteArray(selectedImage), bioTextArea.getText());
         } catch (RemoteException e) {
             System.err.println("Couldn't get user: " + e.getMessage());
         }
         return null;
     }
+    private byte[] fileToByteArray(File file){
+        try(FileInputStream fis = new FileInputStream(file)) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                baos.write(buf, 0, readNum);
+            }
+            return baos.toByteArray();
+        } catch (IOException e) {
+            System.err.println("Io Error in picture file, details: "+e.getMessage());
+            return null;
+        }
+    }
+
 
 }

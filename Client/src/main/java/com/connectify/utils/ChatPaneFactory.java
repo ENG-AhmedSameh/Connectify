@@ -15,7 +15,7 @@ public class ChatPaneFactory {
 
     private static final Map<Integer, BorderPane> paneCache = new HashMap<>();
 
-    public static BorderPane getChatPane(int id, String name, Image image) {
+    public static BorderPane getChatPane(int id, String name, byte[] image) {
 
         if (paneCache.containsKey(id)) {
             return paneCache.get(id);
