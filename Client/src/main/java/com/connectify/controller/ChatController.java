@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -194,21 +195,13 @@ public class ChatController implements Initializable {
                 }
                 else{
                     if(CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat()){
-                        loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
-                        loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
-                        root = loader.load();
-                    }else{
-                        loader = new FXMLLoader(getClass().getResource("/views/GroupMessageHBox.fxml"));
-                        GroupMessageHBoxController controller = new GroupMessageHBoxController();
-                        loader.setController(controller);
-                        root = loader.load();
-                        ChatManager chatManager= CurrentUser.getChatManagerFactory().getChatManager(chatID);
-                    if(ChatManagerFactory.getChatManager(chatID).isPrivateChat()){
                         if(message.getAttachmentId() != null){
                             loader= new FXMLLoader(getClass().getResource("/views/ReceivedAttachmentHBox.fxml"));
                             loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
                             root = loader.load();
-                            root.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
+                            // TODO fix this line
+                            ImageView icon = (ImageView) root.lookup("downloadIcon");
+                            icon.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
                         }
                         else {
                             loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
@@ -228,7 +221,7 @@ public class ChatController implements Initializable {
                             GroupMessageHBoxController controller = new GroupMessageHBoxController();
                             loader.setController(controller);
                             root = loader.load();
-                            ChatManager chatManager= ChatManagerFactory.getChatManager(chatID);
+                            ChatManager chatManager= CurrentUser.getChatManagerFactory().getChatManager(chatID);
 //                        if(Objects.equals(chatManager.getGroupLastSender(), message.getSender())){
 //                            controller.setSameSenderMessageStyle(message.getContent(),message.getTimestamp());
 //                            chatManager.setGroupLastSender(message.getSender());
@@ -247,6 +240,8 @@ public class ChatController implements Initializable {
         }
         return null;
     }
+
+
 
     private EventHandler<MouseEvent> createEventHandler(Integer attachmentID){
         return (EventHandler<MouseEvent>) (e) -> {
@@ -277,3 +272,4 @@ public class ChatController implements Initializable {
     }
 
 }
+

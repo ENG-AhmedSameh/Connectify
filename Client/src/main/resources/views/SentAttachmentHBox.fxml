@@ -22,7 +22,7 @@
                         <Font name="Arial" size="12.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="downloadIcon" fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/download.png" />
                      </image>
