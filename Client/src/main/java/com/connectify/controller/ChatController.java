@@ -1,7 +1,6 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
@@ -12,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -24,7 +24,6 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.Arrays;
@@ -37,7 +36,7 @@ public class ChatController implements Initializable {
     private ImageView attachmentImageView;
 
     @FXML
-    private Text chatName;
+    private Label chatName;
 
     @FXML
     private ImageView htmlEditorImageView;
@@ -52,7 +51,7 @@ public class ChatController implements Initializable {
     private Circle pictureClip;
 
     @FXML
-    private ImageView pictureImageView;
+    private Circle chatPicture;
 
     @FXML
     private TextField sendBox;
@@ -69,7 +68,7 @@ public class ChatController implements Initializable {
 
     private final String name;
 
-    private final Image image;
+    private final byte[] image;
 
 
     @Override
@@ -77,14 +76,14 @@ public class ChatController implements Initializable {
         if(!CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat())
             statusCircle.setVisible(false);
         chatName.setText(name);
-        pictureImageView.setImage(image);
+        chatPicture.setFill(ImageConverter.convertBytesToImagePattern(image));
         setListViewCellFactory();
         messages = CurrentUser.getMessageList(chatID);
         messagesList.setItems(messages);
     }
 
 
-    public ChatController(int chatID, String name, Image image){
+    public ChatController(int chatID, String name, byte[] image){
         this.chatID = chatID;
         this.name = name;
         this.image = image;

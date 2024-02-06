@@ -1,8 +1,8 @@
 package com.connectify.controller;
 
+import com.connectify.utils.ImageConverter;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -11,10 +11,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-import java.net.URL;
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
 
 public class GroupMessageHBoxController{
 
@@ -22,7 +20,7 @@ public class GroupMessageHBoxController{
     private TextFlow contentTextFlow;
 
     @FXML
-    private Circle imageCircle;
+    private Circle imagePicture;
 
     @FXML
     private Text messageContentText;
@@ -42,7 +40,7 @@ public class GroupMessageHBoxController{
     public void setSameSenderMessageStyle(String messageContent,Timestamp messageTime){
         Platform.runLater(()->{
             messageElementsVBox.getChildren().remove(senderNameLabel);
-            imageCircle.setVisible(false);
+            imagePicture.setVisible(false);
             contentTextFlow.setStyle("-fx-background-radius: 10 10 0 0");
             setMessageContent(messageContent);
             setMessageTime(messageTime);
@@ -53,7 +51,7 @@ public class GroupMessageHBoxController{
             setMessageContent(messageContent);
             setMessageTime(messageTime);
             setSenderName(senderName);
-//            setSenderImage(senderImage);
+            setSenderImage(senderImage);
         });
     }
 
@@ -63,8 +61,8 @@ public class GroupMessageHBoxController{
     }
 
 
-    private void setSenderImage(Image senderImage) {
-        //imageCircle.setFill();
+    private void setSenderImage(byte[] senderImage) {
+        imagePicture.setFill(ImageConverter.convertBytesToImagePattern(senderImage));
     }
 
 
