@@ -5,6 +5,7 @@ import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import com.connectify.model.entities.User;
+import com.connectify.model.enums.Mode;
 import com.connectify.utils.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -75,6 +77,8 @@ public class ChatController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(!CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat())
             statusCircle.setVisible(false);
+        else
+            statusCircle.fillProperty().bind(CurrentUser.getChatManagerFactory().getChatManager(chatID).getcolorProperty());
         chatName.setText(name);
         chatPicture.setFill(ImageConverter.convertBytesToImagePattern(image));
         setListViewCellFactory();

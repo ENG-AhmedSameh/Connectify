@@ -7,6 +7,9 @@ import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.dto.*;
 import com.connectify.dto.*;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
+import javafx.scene.paint.Color;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -51,4 +54,9 @@ public interface ServerAPI extends Remote{
     boolean cancelFriendRequest(int invitationId) throws RemoteException;
 
     boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException;
+
+    Mode getUserMode(String phoneNumber) throws RemoteException;
+    Status getUserStatus(String phoneNumber) throws RemoteException;
+
+    boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) throws RemoteException;
 }

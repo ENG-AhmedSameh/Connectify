@@ -1,26 +1,20 @@
 package com.connectify.utils;
 
-import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.controller.AllChatsPaneController;
 import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.MessageDTO;
 import com.connectify.loaders.ChatCardLoader;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
+import com.connectify.model.enums.Status;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 import org.controlsfx.control.Notifications;
-import com.connectify.controller.IncomingFriendRequestController;
-import com.connectify.dto.IncomingFriendInvitationResponse;
-import com.connectify.loaders.IncomingFriendRequestCardLoader;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.Serializable;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
@@ -78,6 +72,16 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     public void forceLogout() throws RemoteException {
         StageManager.getInstance().resetHomeScene();
         StageManager.getInstance().switchToLogin();
+    }
+
+    @Override
+    public void updateContactModeToOffline(String phoneNumber) throws RemoteException {
+        chatManagerFactory.getContactChatManager(phoneNumber).changeUserModeColorPropertyToOffline();
+    }
+
+    @Override
+    public void updateContactStatus(String phoneNumber, Status status) throws RemoteException {
+        chatManagerFactory.getContactChatManager(phoneNumber).changeUserModeColorProperty(status);
     }
 
     @Override

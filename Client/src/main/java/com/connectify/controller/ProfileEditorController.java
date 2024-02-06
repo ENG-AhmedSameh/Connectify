@@ -187,7 +187,10 @@ public class ProfileEditorController implements Initializable {
                 boolean result = RemoteManager.getInstance().updateUserProfile(updateUserInfoRequest);
                 System.out.println("Update user profile result: " + result);
             }
-
+            if(isModeOrStatusChanged()){
+                boolean result = RemoteManager.getInstance().updateUserModeAndStatus(phoneNumTxtF.getText(),Mode.valueOf(modeComboBox.getValue()),Status.valueOf(statusComboBox.getValue()));
+                System.out.println("Update user mode and status: "+result);
+            }
 
             if (!passwordPassF.getText().isEmpty()) {
                 if (validatePassword()) {
@@ -209,15 +212,18 @@ public class ProfileEditorController implements Initializable {
         StageManager.getInstance().switchFromProfileEditorToHome();
     }
 
+    private boolean isModeOrStatusChanged() {
+        return !(statusComboBox.getValue().equals(currentUserDetails.getStatus().toString()) &&
+                modeComboBox.getValue().equals(currentUserDetails.getMode().toString()));
+    }
     private boolean isUserInfoChanged() {
         return !(nameTxtF.getText().equals(currentUserDetails.getName()) &&
                 emailTxtF.getText().equals(currentUserDetails.getEmail()) &&
                 genderComboBox.getValue().equals(currentUserDetails.getGender().toString()) &&
                 birthDatePicker.getValue().equals(currentUserDetails.getBirthDate()) &&
-                (bioTextArea.getText().equals("bio") || bioTextArea.getText().equals(currentUserDetails.getBio())) &&
-                statusComboBox.getValue().equals(currentUserDetails.getStatus().toString()) &&
-                modeComboBox.getValue().equals(currentUserDetails.getMode().toString()));
+                (bioTextArea.getText().equals("bio") || bioTextArea.getText().equals(currentUserDetails.getBio())));
     }
+
 
     private UpdateUserInfoRequest createUpdateUserInfoRequest() {
         UpdateUserInfoRequest request = new UpdateUserInfoRequest();
