@@ -4,6 +4,7 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.loaders.ChatCardLoader;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -106,7 +107,7 @@ public class IncomingFriendRequestCardController implements Initializable {
             throw new RuntimeException(e);
         }
         AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
-        AllChatsPaneController.getChatsPanesList().add(chatCard);
+        CurrentUser.getAllChatsController().getChatsPanesList().add(chatCard);
     }
 
     @FXML

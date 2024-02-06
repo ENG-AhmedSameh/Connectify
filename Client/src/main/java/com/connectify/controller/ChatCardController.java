@@ -1,11 +1,12 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.ChatPaneFactory;
+import com.connectify.utils.CurrentUser;
+import com.connectify.utils.ImageConverter;
 import com.connectify.utils.RemoteManager;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.*;
@@ -13,16 +14,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -36,7 +36,7 @@ public class ChatCardController implements Initializable {
     private Label chatNameTextField;
 
     @FXML
-    private ImageView chatPictureImageView;
+    private Circle chatPicture;
 
     @FXML
     private Label lastMessageLabel;
@@ -53,12 +53,15 @@ public class ChatCardController implements Initializable {
     @FXML
     private AnchorPane chatCardPane;
 
+    @FXML
+    private Circle statusCircle;
+
     private int chatId;
     private IntegerProperty unread = new SimpleIntegerProperty();
     private StringProperty chatName = new SimpleStringProperty();
     private StringProperty lastMessage= new SimpleStringProperty();
     private byte[] pictureBytes;
-    private Image pictureImage;
+    private byte[] pictureImage;
     private Timestamp timestamp;
     private ObjectProperty<LocalDateTime> timestampProperty;
     private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
@@ -89,6 +92,10 @@ public class ChatCardController implements Initializable {
         lastMessageLabel.textProperty().bind(lastMessage);
         timestampProperty = new SimpleObjectProperty<>(timestamp.toLocalDateTime());
         bindLastMessageTimeStamp();
+        if(!CurrentUser.getChatManagerFactory().getChatManager(chatId).isPrivateChat())
+            statusCircle.setVisible(false);
+        else
+            statusCircle.fillProperty().bind(CurrentUser.getChatManagerFactory().getChatManager(chatId).getcolorProperty());
     }
     private void bindLastMessageTimeStamp(){
         formattedTimestamp = new StringBinding() {
@@ -117,26 +124,13 @@ public class ChatCardController implements Initializable {
     }
 
     private void setChatPhoto(){
-        chatPictureImageView.setImage(convertToJavaFXImage(pictureBytes,chatPictureImageView.getFitWidth(),chatPictureImageView.getFitHeight()));
-        //chatPictureImageView.imageProperty().bind(pictureBytes);
-    }
-
-    public Image convertToJavaFXImage(byte[] bytes, double width, double height) {
-        if(bytes == null){
-            String imagePath = "target/classes/images/profile.png";
-            File imageFile = new File(imagePath);
-            pictureImage = new Image(imageFile.toURI().toString());
-            return pictureImage;
-        }
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-        pictureImage = new Image(inputStream, width, height, false, true);
-        return pictureImage;
+        chatPicture.setFill(ImageConverter.convertBytesToImagePattern(pictureBytes));
     }
 
     private void displayChat(){
-        ChatManagerFactory.setActiveChatID(chatId);
+        CurrentUser.getChatManagerFactory().setActiveChatID(chatId);
         setUnreadMessagesNumber(0);
-        BorderPane chatPane = ChatPaneFactory.getChatPane(chatId, chatName.get(),pictureImage);
+        BorderPane chatPane = CurrentUser.getChatPaneFactory().getChatPane(chatId, chatName.get(),pictureBytes);
         ViewLoader loader = ViewLoader.getInstance();
         loader.switchToChat(chatPane,chatCardPane.getScene());
     }
@@ -168,7 +162,7 @@ public class ChatCardController implements Initializable {
         nChatUnreadMessagesLabel.setVisible(unread != 0);
     }
     public void updateUnreadMessagesNumber(){
-        if(ChatManagerFactory.getActiveChatID()!=chatId)
+        if(CurrentUser.getChatManagerFactory().getActiveChatID()!=chatId)
             this.unread.setValue(unread.getValue()+1);
     }
     public int getUnreadMessagesNumber() {
@@ -211,4 +205,7 @@ public class ChatCardController implements Initializable {
         timestampProperty.setValue(timestamp.toLocalDateTime());
     }
 
+    public void updateCardPosition(AnchorPane chatCardPane) {
+        CurrentUser.getAllChatsController().rearrangeChatCardController(chatCardPane);
+    }
 }

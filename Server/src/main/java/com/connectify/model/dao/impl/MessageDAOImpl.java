@@ -51,7 +51,6 @@ public class MessageDAOImpl implements MessageDAO{
             Message insertedMessage=null;
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 if (rs.next()) {
-                    // Assuming the auto-generated key is the first column
                     int messageId = rs.getInt(1);
                     insertedMessage = generateMessage(messageId,sender,chatID,content,timestamp,attachmentID);
                 }

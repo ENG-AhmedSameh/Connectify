@@ -7,7 +7,12 @@ import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.dto.*;
 import com.connectify.dto.*;
+import com.connectify.model.enums.Mode;
+import com.connectify.model.enums.Status;
+import javafx.scene.paint.Color;
+import com.connectify.model.entities.Attachments;
 
+import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -40,6 +45,10 @@ public interface ServerAPI extends Remote{
 
     void sendMessage(MessageSentDTO message) throws RemoteException;
 
+    void sendAttachment(MessageSentDTO messageSentDTO) throws RemoteException;
+
+    File getAttachment(Integer attachmentId) throws RemoteException;
+
     void prepareCurrentChat(ChatMemberDTO chatMemberDTO) throws RemoteException;
     List<ContactsDTO> getContacts(String phoneNumber)throws RemoteException ;
     boolean isPrivateChat(int chatID) throws RemoteException;
@@ -51,4 +60,11 @@ public interface ServerAPI extends Remote{
     boolean cancelFriendRequest(int invitationId) throws RemoteException;
 
     boolean areAlreadyFriends(String userPhone, String friendPhone) throws RemoteException;
+
+    Mode getUserMode(String phoneNumber) throws RemoteException;
+    Status getUserStatus(String phoneNumber) throws RemoteException;
+
+    boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) throws RemoteException;
+
+    boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) throws RemoteException;
 }

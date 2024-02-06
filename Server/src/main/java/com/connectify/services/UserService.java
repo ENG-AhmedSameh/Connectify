@@ -8,7 +8,9 @@ import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.dto.*;
 import com.connectify.mapper.UserMapper;
+import com.connectify.model.dao.ChatMembersDAO;
 import com.connectify.model.dao.UserDAO;
+import com.connectify.model.dao.impl.ChatMembersDAOImpl;
 import com.connectify.model.dao.impl.UserDAOImpl;
 import com.connectify.model.entities.User;
 import com.connectify.model.enums.Mode;
@@ -67,8 +69,13 @@ public class UserService {
     public boolean logoutUser(String phoneNumber){
         Server.getConnectedUsers().remove(phoneNumber);
         UserDAO userDAO = new UserDAOImpl();
+        ChatMembersDAO chatMembersDAO = new ChatMembersDAOImpl();
+        boolean successed;
         System.out.println("Unregistered user: " + phoneNumber);
-        return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
+        successed = chatMembersDAO.closeAllUserChats(phoneNumber);
+        if(successed)
+            successed = userDAO.updateMode(phoneNumber, Mode.OFFLINE);;
+        return successed;
     }
 
     public void registerConnectedUser(ConnectedUser user) {
@@ -84,7 +91,7 @@ public class UserService {
 
     public boolean changeProfileAndBio(ImageBioChangeRequest request) {
         UserDAO userDAO = new UserDAOImpl();
-        return userDAO.updateImage(request.getPhoneNumber(), request.getImage()) && userDAO.updateBio(request.getPhoneNumber(), request.getBio());
+        return userDAO.updatePicture(request.getPhoneNumber(), request.getImage()) && userDAO.updateBio(request.getPhoneNumber(), request.getBio());
     }
 
     public FriendToAddResponse getFriendToAddData(String phone) {
@@ -96,5 +103,20 @@ public class UserService {
     public User getUserInfo(String phoneNumber) {
         UserDAO userDAO = new UserDAOImpl();
         return userDAO.get(phoneNumber);
+    }
+
+    public Mode getUserMode(String phoneNumber) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.getMode(phoneNumber);
+    }
+
+    public Status getUserStatus(String phoneNumber) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.getStatus(phoneNumber);
+    }
+
+    public boolean updateModeAndStatus(String phoneNumber,Mode mode, Status status) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updateModeAndStatus(phoneNumber,mode,status);
     }
 }

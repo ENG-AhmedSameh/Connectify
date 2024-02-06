@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
 public class ChatLoader {
-    public static BorderPane loadChatPane(int chat_id,String name, Image picture) {
+    public static BorderPane loadChatPane(int chat_id,String name, byte[] picture) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         ChatController controller = new ChatController(chat_id,name,picture);
         fxmlLoader.setLocation(ChatLoader.class.getResource("/views/Chat.fxml"));

@@ -4,12 +4,13 @@ import com.connectify.Client;
 import com.connectify.loaders.*;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -51,7 +52,7 @@ public class StageManager {
         Scene scene = sceneMap.get("login");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
-        Platform.runLater(() -> stage.setScene(scene));
+        stage.setScene(scene);
     }
 
     public void switchToSignUp(){
@@ -60,7 +61,8 @@ public class StageManager {
         Scene scene = sceneMap.get("signup");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
-        Platform.runLater(() -> stage.setScene(scene));
+        stage.setScene(scene);
+        //Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchToSecondSignUp(){
@@ -69,7 +71,8 @@ public class StageManager {
         Scene scene = sceneMap.get("secondSignUp");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
-        Platform.runLater(() -> stage.setScene(scene));
+        stage.setScene(scene);
+        //Platform.runLater(() -> stage.setScene(scene));
     }
 
 
@@ -84,7 +87,8 @@ public class StageManager {
         Scene scene = sceneMap.get("home");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
-        Platform.runLater(() -> stage.setScene(scene));
+        stage.setScene(scene);
+        //Platform.runLater(() -> stage.setScene(scene));
     }
 
     public void switchFromProfileEditorToHome(){
@@ -104,6 +108,15 @@ public class StageManager {
         centerPane.setLeft(chatsPane);
     }
 
+    public void switchToChooseContactsGroupPane(){
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        AnchorPane chooseContactsGroupAnchorPane = ChooseContactsGroupPaneLoader.loadChooseContactsGroupAnchorPane();
+        centerPane.setCenter(logoPane);
+        centerPane.setLeft(chooseContactsGroupAnchorPane);
+    }
+
     public void switchToProfile(){
         Scene scene = sceneMap.get("home");
         BorderPane mainPane = (BorderPane) scene.getRoot();
@@ -121,6 +134,9 @@ public class StageManager {
         centerPane.setCenter(null);
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setCenter(logoPane);
+    }
+    public void openContactChat(){
+
     }
 
     public void switchToProfileEditor(){
@@ -211,5 +227,15 @@ public class StageManager {
     }
     public Map<String, Scene> getSceneMap() {
         return sceneMap;
+    }
+
+    public void switchToGroupInfo() {
+        Scene scene = sceneMap.get("home");
+        BorderPane mainPane = (BorderPane) scene.getRoot();
+        BorderPane centerPane = (BorderPane) mainPane.getCenter();
+        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
+        AnchorPane groupInfoPane = GroupInfoPaneLoader.loadGroupInfoAnchorPane();
+        centerPane.setCenter(logoPane);
+        centerPane.setLeft(groupInfoPane);
     }
 }

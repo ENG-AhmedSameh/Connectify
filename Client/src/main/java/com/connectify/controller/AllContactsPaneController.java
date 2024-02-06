@@ -8,8 +8,11 @@ import com.connectify.loaders.ContactCardLoader;
 import com.connectify.mapper.ContactMapper;
 import com.connectify.model.entities.User;
 import com.connectify.utils.RemoteManager;
+import com.connectify.utils.StageManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -35,6 +38,9 @@ public class AllContactsPaneController implements Initializable {
     @FXML
     private VBox allContactsVBox;
 
+    @FXML
+    private Button createGroupButton;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<ContactsDTO> ContactDTOList = null;
@@ -53,6 +59,11 @@ public class AllContactsPaneController implements Initializable {
 
     public void addContactOnContactsPane(){
 
+    }
+
+    @FXML
+    void createGroupHandler(ActionEvent event) {
+        StageManager.getInstance().switchToChooseContactsGroupPane();
     }
 
 }
