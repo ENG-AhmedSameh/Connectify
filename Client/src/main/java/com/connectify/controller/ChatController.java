@@ -4,6 +4,7 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.MessageDTO;
 import com.connectify.dto.MessageSentDTO;
+import com.connectify.loaders.ChatCardLoader;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import com.connectify.model.entities.User;
@@ -11,6 +12,7 @@ import com.connectify.model.enums.Mode;
 import com.connectify.utils.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -41,10 +44,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -89,6 +89,7 @@ public class ChatController implements Initializable {
 
     private final byte[] image;
 
+    public SortedList<Message> sortedMessagesList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -98,9 +99,14 @@ public class ChatController implements Initializable {
             statusCircle.fillProperty().bind(CurrentUser.getChatManagerFactory().getChatManager(chatID).getcolorProperty());
         chatName.setText(name);
         chatPicture.setFill(ImageConverter.convertBytesToImagePattern(image));
-        setListViewCellFactory();
+        initializeListView();
+    }
+
+    private void initializeListView() {
         messages = CurrentUser.getMessageList(chatID);
-        messagesList.setItems(messages);
+        sortedMessagesList = new SortedList<>(messages, Comparator.comparing(Message::getTimestamp));
+        messagesList.setItems(sortedMessagesList);
+        setListViewCellFactory();
         loadHistoryMessages();
     }
 
