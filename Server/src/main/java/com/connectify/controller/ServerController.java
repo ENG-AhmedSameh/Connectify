@@ -103,7 +103,7 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     public boolean logout(String phoneNumber) throws RemoteException {
         User userInfo = userService.getUserInfo(phoneNumber);
         boolean loggedOut = userService.logoutUser(phoneNumber);
-        if(loggedOut){
+        if(loggedOut && !userInfo.getMode().toString().equalsIgnoreCase("offline")){
             contactsService.notifyContacts(phoneNumber, "A contact is offline.", userInfo.getName() + " has become offline");
             contactsService.updateUserModeAtContactsToOffline(phoneNumber);
         }
