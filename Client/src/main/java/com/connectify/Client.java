@@ -24,7 +24,7 @@ public class Client extends Application {
         StageManager.getInstance().switchToLogin();
         primaryStage.show();
         String autoLogin = PropertiesManager.getInstance().getAutoLogin();
-        if(!RemoteManager.getInstance().isServerDown() && autoLogin.equals("true")){
+    if(!RemoteManager.getInstance().isServerDown() && autoLogin != null && autoLogin.equals("true")){
             ConnectedUser user = CurrentUser.getInstance();
             if(user.getPhoneNumber() != null){
                 RemoteManager.getInstance().registerConnectedUser(user);

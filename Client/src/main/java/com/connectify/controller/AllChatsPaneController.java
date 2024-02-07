@@ -138,7 +138,7 @@ public class AllChatsPaneController implements Initializable {
     public void addLastCreatedChatCard(){
         ChatCardsInfoDTO chat;
         try {
-            chat = RemoteManager.getInstance().getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
+            chat = RemoteManager.getInstance().getUserLastChatCardInfo(CurrentUser.getInstance().getPhoneNumber());
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

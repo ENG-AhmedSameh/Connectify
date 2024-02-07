@@ -60,10 +60,10 @@ public class Server extends Application {
 
     public static void powerUp(){
         try{
-            System.out.println("Server is running...");
             registry = LocateRegistry.createRegistry(1099);
             ServerAPI server = new ServerController();
             registry.rebind("server", server);
+            System.out.println("Server is running...");
         } catch (RemoteException e){
             System.err.println("Couldn't power up server: " + e.getMessage());
             System.exit(1);
@@ -72,15 +72,16 @@ public class Server extends Application {
 
     public static void powerDown(){
         try{
-            System.out.println("Server is shutdown...");
             for(var user : connectedUsers.values()){
                 user.receiveNotification("Server is down", "Server is down. Contact the admin and try to reconnect later.");
                 user.forceLogout();
             }
             UserService userService = new UserService();
             userService.logoutAllUser();
+            connectedUsers.clear();
             registry.unbind("server");
             UnicastRemoteObject.unexportObject(registry, true);
+            System.out.println("Server is shutdown...");
         } catch (RemoteException | NotBoundException e){
             System.err.println("Couldn't power down server: " + e.getMessage());
             System.exit(1);

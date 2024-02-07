@@ -44,13 +44,6 @@ public class titleBarController{
 
     @FXML
     void closeButtonHandler(MouseEvent event) {
-        try {
-            if(CurrentUser.getInstance().getPhoneNumber() != null){
-                RemoteManager.getInstance().logout(CurrentUser.getInstance());
-            }
-        } catch (RemoteException e) {
-            System.err.println("Remote Exception: " + e.getMessage());
-        }
         System.exit(0);
     }
 

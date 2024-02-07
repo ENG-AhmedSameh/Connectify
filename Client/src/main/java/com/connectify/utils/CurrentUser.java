@@ -39,7 +39,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     private CurrentUser() throws RemoteException {
         super();
         String token = PropertiesManager.getInstance().getToken();
-        if(!token.isBlank()){
+        if(token != null && !token.isBlank()){
             this.phoneNumber = RemoteManager.getInstance().getPhoneNumberByToken(token);
         }
     }
