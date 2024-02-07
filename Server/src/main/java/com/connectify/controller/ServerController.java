@@ -102,8 +102,9 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public boolean logout(String phoneNumber) throws RemoteException {
         User userInfo = userService.getUserInfo(phoneNumber);
+        Mode userMode = userInfo.getMode();
         boolean loggedOut = userService.logoutUser(phoneNumber);
-        if(loggedOut && !userInfo.getMode().toString().equalsIgnoreCase("offline")){
+        if(loggedOut && userMode.equals(Mode.ONLINE)){
             contactsService.notifyContacts(phoneNumber, "A contact is offline.", userInfo.getName() + " has become offline");
             contactsService.updateUserModeAtContactsToOffline(phoneNumber);
         }
@@ -215,10 +216,14 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     public boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) throws RemoteException {
         boolean modeAndStatusUpdated = userService.updateModeAndStatus(phoneNumber,mode,status);
         if(modeAndStatusUpdated){
-            if(mode==Mode.OFFLINE)
+            if(mode==Mode.OFFLINE) {
                 contactsService.updateUserModeAtContactsToOffline(phoneNumber);
-            else
-                contactsService.updateUserStatusAtContacts(phoneNumber,status);
+                contactsService.notifyContacts(phoneNumber, "A contact is offline.", phoneNumber + " has become offline");
+            }
+            else {
+                contactsService.updateUserStatusAtContacts(phoneNumber, status);
+                contactsService.notifyContacts(phoneNumber, "A contact is online.", phoneNumber + " has become online");
+            }
         }
         return modeAndStatusUpdated;
     }
