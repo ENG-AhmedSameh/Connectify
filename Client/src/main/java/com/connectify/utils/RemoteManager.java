@@ -4,6 +4,7 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
 
+import com.connectify.model.entities.Message;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -490,5 +491,19 @@ public class RemoteManager {
                     .threshold(3, Notifications.create().title("Collapsed Notification"))
                     .show();
         });
+    }
+
+    public List<MessageDTO> getAllChatMessages(int chatID,Integer idLimit) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
+        try {
+            return server.getAllChatMessages(chatID,idLimit);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
     }
 }

@@ -246,6 +246,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
+    public List<MessageDTO> getAllChatMessages(int chatID,Integer idLimit) throws RemoteException {
+        return messageService.getAllChatMessages(chatID,idLimit);
+    }
+
+    @Override
     public boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException {
         return userService.updateUser(updateUserInfoRequest);
     }

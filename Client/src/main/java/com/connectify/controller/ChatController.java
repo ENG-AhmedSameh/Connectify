@@ -1,6 +1,8 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
+import com.connectify.Interfaces.ServerAPI;
+import com.connectify.dto.MessageDTO;
 import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
@@ -40,6 +42,7 @@ import java.nio.file.StandardCopyOption;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
@@ -98,6 +101,13 @@ public class ChatController implements Initializable {
         setListViewCellFactory();
         messages = CurrentUser.getMessageList(chatID);
         messagesList.setItems(messages);
+        loadHistoryMessages();
+    }
+
+    private void loadHistoryMessages() {
+        Integer firstReceivedId = CurrentUser.getChatFirstReceivedMessageId(chatID);
+        List<MessageDTO> historyMeessageDtoList = RemoteManager.getInstance().getAllChatMessages(chatID,firstReceivedId);
+        messages.addAll(MessageMapper.INSTANCE.messageDtoListToMessageList(historyMeessageDtoList));
     }
 
 
@@ -208,8 +218,8 @@ public class ChatController implements Initializable {
                             loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
                             root = loader.load();
                             // TODO fix this line
-                            ImageView icon = (ImageView) root.lookup("downloadIcon");
-                            icon.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
+                            //ImageView icon = (ImageView) root.lookup("downloadIcon");
+                            root.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
                         }
                         else {
                             loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));

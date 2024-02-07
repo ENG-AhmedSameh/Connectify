@@ -30,6 +30,8 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     private String phoneNumber;
 
+    private static Map<Integer,Integer> chatFirstReceivedMessageIdMap = new HashMap<>();
+
     private static AllChatsPaneController allChatsController;
     private static ChatManagerFactory chatManagerFactory = new ChatManagerFactory();
     private static ChatPaneFactory chatPaneFactory = new ChatPaneFactory();
@@ -88,6 +90,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         int chatID = messageDTO.getChatId();
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
         chatListMessagesMap.get(chatID).add(receivedMessage);
+        chatFirstReceivedMessageIdMap.putIfAbsent(chatID,receivedMessage.getMessageId());
         if(ChatBot.isEnabled()){
             ExecutorService executorService = Executors.newSingleThreadExecutor();
             executorService.submit(()->{
@@ -152,5 +155,9 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     public static ChatPaneFactory getChatPaneFactory() {
         return chatPaneFactory;
+    }
+
+    public static Integer getChatFirstReceivedMessageId(int chatId) {
+        return chatFirstReceivedMessageIdMap.get(chatId);
     }
 }
