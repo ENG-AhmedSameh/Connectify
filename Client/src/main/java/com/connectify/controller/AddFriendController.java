@@ -1,10 +1,12 @@
 package com.connectify.controller;
 
 import com.connectify.Client;
+import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.FriendToAddResponse;
 import com.connectify.loaders.AddFriendCardLoader;
 import com.connectify.model.entities.Invitations;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.collections.ObservableList;
@@ -132,6 +134,7 @@ public class AddFriendController implements Initializable {
             ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
 
             friendRequestList.removeIf(anchorPane -> isInvitationIdMatch(anchorPane, invitationId));
+            CurrentUser.getAllChatsController().addLastCreatedChatCard();
 
         }
     }

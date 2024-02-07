@@ -103,7 +103,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     @Override
     public void makeNewChatCard(ChatCardsInfoDTO chat) throws RemoteException{
         AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
-        CurrentUser.getAllChatsController().getChatsPanesList().add(chatCard);
+        Platform.runLater(()->CurrentUser.getAllChatsController().getChatsPanesList().add(chatCard));
     }
 
     public static AllChatsPaneController getAllChatsController() {
