@@ -17,11 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.Notifications;
 import javafx.scene.layout.AnchorPane;
-
-import java.io.File;
 import java.io.Serializable;
-import java.net.URISyntaxException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
