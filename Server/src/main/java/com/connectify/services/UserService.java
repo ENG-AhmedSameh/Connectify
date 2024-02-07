@@ -67,6 +67,9 @@ public class UserService {
     }
 
     public boolean logoutUser(String phoneNumber){
+        if(!Server.getConnectedUsers().containsKey(phoneNumber)){
+            return false;
+        }
         Server.getConnectedUsers().remove(phoneNumber);
         UserDAO userDAO = new UserDAOImpl();
         ChatMembersDAO chatMembersDAO = new ChatMembersDAOImpl();
