@@ -50,7 +50,7 @@ public class ImageBioController {
 
     private ImageBioChangeRequest createImageBioChangeRequest() {
         try {
-            String phoneNumber = Client.getConnectedUser().getPhoneNumber();
+            String phoneNumber = CurrentUser.getInstance().getPhoneNumber();
             if(selectedImage == null){
                 selectedImage = new File(getClass().getResourceAsStream("/images/profile.png").toString());
             }

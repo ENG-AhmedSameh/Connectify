@@ -4,6 +4,7 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
 
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.connectify.model.enums.Mode;
@@ -54,31 +55,31 @@ public class RemoteManager {
         instance = null;
     }
 
-    public boolean signUp(SignUpRequest request){
+    public SignUpResponse signUp(SignUpRequest request){
         if(isServerDown()){
             reset();
-            return false;
+            return new SignUpResponse(false, "Server is Down", null);
         }
         try {
             return server.signUp(request);
         } catch (RemoteException e) {
             handleServerDown();
             System.err.println("Remote Exception: " + e.getMessage());
-            return false;
+            return new SignUpResponse(false, "Server is Down", null);
         }
     }
 
     public LoginResponse login(LoginRequest request) {
         if(isServerDown()){
             reset();
-            return new LoginResponse(false, "Server is down");
+            return new LoginResponse(false, "Server is down", null);
         }
         try {
             return server.login(request);
         } catch (RemoteException e) {
             handleServerDown();
             System.err.println("Remote Exception: " + e.getMessage());
-            return new LoginResponse(false, "Server is down");
+            return new LoginResponse(false, "Server is down", null);
         }
     }
 
@@ -459,18 +460,35 @@ public class RemoteManager {
         }
     }
 
+    public String getPhoneNumberByToken(String token) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
+        try {
+            return server.getPhoneNumberByToken(token);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
     private void handleServerDown() {
         showServerDownNotification();
+        server = null;
         StageManager.getInstance().switchToLogin();
     }
 
     private void showServerDownNotification() {
-        Image icon = new Image(getClass().getResource("/images/notification.png").toString());
-        Notifications.create()
-                .title("Failed to connect to the Server")
-                .text("Server is down. Contact the admin and try again later")
-                .graphic(new ImageView(icon))
-                .threshold(3, Notifications.create().title("Collapsed Notification"))
-                .show();
+        Platform.runLater(() -> {
+            Image icon = new Image(getClass().getResource("/images/error.png").toString());
+            Notifications.create()
+                    .title("Failed to connect to the Server")
+                    .text("Server is down. Contact the admin and try again later")
+                    .graphic(new ImageView(icon))
+                    .threshold(3, Notifications.create().title("Collapsed Notification"))
+                    .show();
+        });
     }
 }

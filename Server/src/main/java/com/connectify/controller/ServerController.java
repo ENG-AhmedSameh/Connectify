@@ -12,11 +12,11 @@ import com.connectify.model.enums.Status;
 import com.connectify.services.ChatService;
 import com.connectify.services.MessageService;
 import com.connectify.services.UserChatsService;
-import com.connectify.services.*;
 import com.connectify.dto.ContactsDTO;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
+import com.connectify.utils.TokenGenerator;
 
 import java.io.File;
 import java.rmi.RemoteException;
@@ -48,8 +48,31 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
-    public boolean signUp(SignUpRequest signUpRequest) throws RemoteException {
-        return userService.insertUser(signUpRequest);
+    public SignUpResponse signUp(SignUpRequest signUpRequest) throws RemoteException {
+        SignUpResponse response = new SignUpResponse();
+        boolean isSuccessful = userService.insertUser(signUpRequest);
+        if(isSuccessful){
+            String token = null;
+            boolean isTokenUnique = false;
+            do {
+                token = TokenGenerator.generateToken();
+                isTokenUnique = userService.updateToken(signUpRequest.getPhoneNumber(),token);
+            } while (!isTokenUnique);
+            response.setSuccessful(true);
+            response.setMessage("Sign up successful");
+            response.setToken(token);
+            return response;
+        }
+        else {
+            response.setSuccessful(false);
+            response.setMessage("Phone number is already registered");
+            return response;
+        }
+    }
+
+    @Override
+    public String getPhoneNumberByToken(String token) throws RemoteException {
+        return userService.getPhoneNumberByToken(token);
     }
 
     public LoginResponse login(LoginRequest loginRequest) throws RemoteException {

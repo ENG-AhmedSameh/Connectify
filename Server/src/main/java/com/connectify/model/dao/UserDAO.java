@@ -13,6 +13,9 @@ public interface UserDAO extends DAO<User, String> {
     boolean updateBio(String phoneNumber, String bio);
     Mode getMode(String phoneNumber);
     Status getStatus(String phoneNumber);
-
     boolean updateModeAndStatus(String phoneNumber,Mode mode, Status status);
+
+    boolean updateToken(String phoneNumber, String token);
+
+    String getPhoneNumberByToken(String token);
 }

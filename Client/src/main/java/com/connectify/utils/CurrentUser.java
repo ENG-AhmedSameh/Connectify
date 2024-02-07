@@ -16,18 +16,16 @@ import javafx.scene.image.ImageView;
 import org.controlsfx.control.Notifications;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.File;
 import java.io.Serializable;
-import java.net.URISyntaxException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, Serializable {
+    private static CurrentUser instance;
 
-    private final String phoneNumber;
+    private String phoneNumber;
 
     private static AllChatsPaneController allChatsController;
     private static ChatManagerFactory chatManagerFactory = new ChatManagerFactory();
@@ -35,9 +33,31 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     private static final Map<Integer, ObservableList<Message>> chatListMessagesMap = new HashMap<>();
 
-    public CurrentUser(String phoneNumber) throws RemoteException {
+    private CurrentUser() throws RemoteException {
         super();
-        this.phoneNumber = phoneNumber;
+        String token = PropertiesManager.getInstance().getToken();
+        if(!token.isBlank()){
+            this.phoneNumber = RemoteManager.getInstance().getPhoneNumberByToken(token);
+        }
+    }
+    public static CurrentUser getInstance() throws RemoteException {
+        if (instance == null) {
+            instance = new CurrentUser();
+            if(instance.getPhoneNumber() != null){
+                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                    try {
+                        RemoteManager.getInstance().logout(CurrentUser.getInstance());
+                    } catch (RemoteException e) {
+                        System.err.println("Remote Exception: " + e.getMessage());
+                    }
+                }));
+            }
+        }
+        return instance;
+    }
+
+    public static void reset(){
+        instance = null;
     }
 
     @Override
@@ -77,7 +97,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     @Override
     public void forceLogout() throws RemoteException {
         RemoteManager.reset();
-
+        CurrentUser.reset();
         Platform.runLater(() ->{
             StageManager.getInstance().resetHomeScene();
             StageManager.getInstance().switchToLogin();

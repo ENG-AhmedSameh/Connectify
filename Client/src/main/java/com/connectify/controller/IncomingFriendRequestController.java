@@ -4,6 +4,7 @@ import com.connectify.Client;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.loaders.IncomingFriendRequestCardLoader;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +36,7 @@ public class IncomingFriendRequestController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            currentUserPhone = Client.getConnectedUser().getPhoneNumber();
+            currentUserPhone = CurrentUser.getInstance().getPhoneNumber();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }

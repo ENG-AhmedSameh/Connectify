@@ -110,7 +110,7 @@ public class ChatController implements Initializable {
     public void sendHandler(){
         if(!Objects.equals(sendBox.getText(), "")){
             try {
-                MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()), null);
+                MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()), null);
                 appendMessage(messageSentDTO);
             } catch (RemoteException e) {
                 System.err.println("Can't find server, details: "+e.getMessage());
@@ -126,7 +126,7 @@ public class ChatController implements Initializable {
         Runnable sendAttachmentTask = () -> {
             if(file != null){
                 try{
-                    MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(), chatID, file.getName(), new Timestamp(System.currentTimeMillis()), file);
+                    MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(), chatID, file.getName(), new Timestamp(System.currentTimeMillis()), file);
                     appendMessage(messageSentDTO);
                     RemoteManager.getInstance().sendAttachment(messageSentDTO);
                 } catch (RemoteException e){
@@ -180,7 +180,7 @@ public class ChatController implements Initializable {
         HBox root;
         if (message != null) {
             try {
-                if(Objects.equals(message.getSender(), Client.getConnectedUser().getPhoneNumber())){
+                if(Objects.equals(message.getSender(), CurrentUser.getInstance().getPhoneNumber())){
                     if(message.getAttachmentId() != null){
                         loader= new FXMLLoader(getClass().getResource("/views/SentAttachmentHBox.fxml"));
                         loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));

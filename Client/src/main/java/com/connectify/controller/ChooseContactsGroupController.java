@@ -5,6 +5,7 @@ import com.connectify.dto.ContactsDTO;
 import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ChooseContactCardLoader;
 import com.connectify.mapper.ContactMapper;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.collections.ObservableList;
@@ -53,7 +54,7 @@ public class ChooseContactsGroupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         List<ContactsDTO> ContactDTOList = null;
         try {
-            ContactDTOList = RemoteManager.getInstance().getContacts(Client.getConnectedUser().getPhoneNumber());
+            ContactDTOList = RemoteManager.getInstance().getContacts(CurrentUser.getInstance().getPhoneNumber());
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }
@@ -69,7 +70,7 @@ public class ChooseContactsGroupController implements Initializable {
             selectedContacts = processSelectedContacts();
 
             UserProfileResponse currentUserProfile = RemoteManager.getInstance()
-                    .getUserProfile(Client.getConnectedUser().getPhoneNumber());
+                    .getUserProfile(CurrentUser.getInstance().getPhoneNumber());
 
             ContactsDTO currentUser = ContactMapper.INSTANCE.userProfileResponseToContactsDto(currentUserProfile);
             selectedContacts.add(currentUser);

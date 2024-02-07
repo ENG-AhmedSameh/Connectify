@@ -1,14 +1,11 @@
 package com.connectify.controller.fxmlcontrollers;
 
-import com.connectify.Server;
 import com.connectify.utils.DBConnection;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
@@ -19,6 +16,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Collectors;
 
@@ -39,14 +37,22 @@ public class StatisticsController implements Initializable {
     private PieChart countryPieChart;
 
     private Connection connection;
+
+    private ScheduledExecutorService executor;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            executor = Executors.newSingleThreadScheduledExecutor();
             connection = DBConnection.getInstance().getConnection();
         } catch (SQLException e) {
             System.err.println("Couldn't connect to database: " + e.getMessage());
         }
-        Server.getStatisticsScheduler().scheduleAtFixedRate(this::updateCharts, 0, 5, SECONDS);
+        executor.scheduleAtFixedRate(this::updateCharts, 0, 5, SECONDS);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (executor != null) {
+                executor.shutdown();
+            }
+        }));
     }
 
 

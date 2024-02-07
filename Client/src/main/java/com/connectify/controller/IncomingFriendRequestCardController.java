@@ -62,7 +62,7 @@ public class IncomingFriendRequestCardController implements Initializable {
         this.phone = phone;
         this.invitationId = invitationId;
         try {
-            currentUserPhone = Client.getConnectedUser().getPhoneNumber();
+            currentUserPhone = CurrentUser.getInstance().getPhoneNumber();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }
@@ -102,7 +102,7 @@ public class IncomingFriendRequestCardController implements Initializable {
         }
         ChatCardsInfoDTO chat = null;
         try {
-            chat = RemoteManager.getInstance().getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
+            chat = RemoteManager.getInstance().getUserLastChatCardInfo(CurrentUser.getInstance().getPhoneNumber());
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
