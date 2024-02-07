@@ -75,11 +75,11 @@ public class Server extends Application {
         try{
             System.out.println("Server is shutdown...");
             for(var user : connectedUsers.values()){
-                UserService userService = new UserService();
-                userService.logoutUser(user.getPhoneNumber());
                 user.receiveNotification("Server is down", "Server is down. Contact the admin and try to reconnect later.");
                 user.forceLogout();
             }
+            UserService userService = new UserService();
+            userService.logoutAllUser();
             registry.unbind("server");
             UnicastRemoteObject.unexportObject(registry, true);
             statisticsScheduler.shutdown();

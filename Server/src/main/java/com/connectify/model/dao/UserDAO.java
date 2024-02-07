@@ -15,4 +15,6 @@ public interface UserDAO extends DAO<User, String> {
     Status getStatus(String phoneNumber);
 
     boolean updateModeAndStatus(String phoneNumber,Mode mode, Status status);
+
+    boolean updateAllUsersModeToOffline();
 }

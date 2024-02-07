@@ -100,14 +100,7 @@ public class IncomingFriendRequestCardController implements Initializable {
             ObservableList<AnchorPane> friendRequestList = IncomingFriendRequestController.getFriendRequestList();
             friendRequestList.removeIf(this::isControllerMatch);
         }
-        ChatCardsInfoDTO chat = null;
-        try {
-            chat = RemoteManager.getInstance().getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
-        CurrentUser.getAllChatsController().getChatsPanesList().add(chatCard);
+        CurrentUser.getAllChatsController().addLastCreatedChatCard();
     }
 
     @FXML

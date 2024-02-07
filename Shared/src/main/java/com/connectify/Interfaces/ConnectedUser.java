@@ -16,9 +16,10 @@ public interface ConnectedUser extends Remote {
     void receiveMessage(MessageDTO messageDTO) throws RemoteException;
 
     void updateContactModeToOffline(String phoneNumber) throws RemoteException;
+
     void updateContactStatus(String phoneNumber, Status status) throws RemoteException;
 
-
     void makeNewChatCard(ChatCardsInfoDTO chatCard) throws RemoteException;
+
     void forceLogout() throws RemoteException;
 }

@@ -130,6 +130,16 @@ public class AllChatsPaneController implements Initializable {
             chatsPanesList.add(chatCard);
         });
     }
+    public void addLastCreatedChatCard(){
+        ChatCardsInfoDTO chat;
+        try {
+            chat = RemoteManager.getInstance().getUserLastChatCardInfo(Client.getConnectedUser().getPhoneNumber());
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+        AnchorPane chatCard = ChatCardLoader.loadChatCardAnchorPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
+        chatsPanesList.add(chatCard);
+    }
 
 //    public void removeAllChatCards(){
 //        Platform.runLater(()->{

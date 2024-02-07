@@ -25,4 +25,6 @@ public interface ChatMembersDAO extends DAO<ChatMember, ChatMember> {
     ChatCardsInfoDTO getUserLastChatInfo(String userId);
 
     boolean closeAllUserChats(String phoneNumber);
+
+    boolean closeAllUsersOpenedChats();
 }

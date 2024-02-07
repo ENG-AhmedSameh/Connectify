@@ -74,6 +74,13 @@ public class UserService {
         chatMembersDAO.closeAllUserChats(phoneNumber);
         return userDAO.updateMode(phoneNumber, Mode.OFFLINE);
     }
+    public boolean logoutAllUser(){
+        Server.getConnectedUsers().clear();
+        UserDAO userDAO = new UserDAOImpl();
+        ChatMembersDAO chatMembersDAO = new ChatMembersDAOImpl();
+        chatMembersDAO.closeAllUsersOpenedChats();
+        return userDAO.updateAllUsersModeToOffline();
+    }
 
     public void registerConnectedUser(ConnectedUser user) {
         try {
@@ -115,5 +122,10 @@ public class UserService {
     public boolean updateModeAndStatus(String phoneNumber,Mode mode, Status status) {
         UserDAO userDAO = new UserDAOImpl();
         return userDAO.updateModeAndStatus(phoneNumber,mode,status);
+    }
+
+    public boolean updateAllUsersModeToOffline() {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updateAllUsersModeToOffline();
     }
 }

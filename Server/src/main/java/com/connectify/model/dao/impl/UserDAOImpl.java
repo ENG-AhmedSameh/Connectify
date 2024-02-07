@@ -238,4 +238,19 @@ public class UserDAOImpl implements UserDAO {
             return false;
         }
     }
+
+    @Override
+    public boolean updateAllUsersModeToOffline() {
+        String query = "update users SET mode = ? WHERE mode = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, Mode.OFFLINE.toString());
+            preparedStatement.setString(2, Mode.ONLINE.toString());
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return false;
+        }
+    }
 }
