@@ -3,6 +3,7 @@ package com.connectify.utils;
 import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.controller.AllChatsPaneController;
+import com.connectify.controller.ChatController;
 import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.MessageDTO;
 import com.connectify.loaders.ChatCardLoader;
@@ -25,6 +26,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, Serializable {
 
@@ -66,8 +69,20 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         int chatID = messageDTO.getChatId();
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
         chatListMessagesMap.get(chatID).add(receivedMessage);
+        if(ChatBot.isEnabled()){
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+            executorService.submit(()->{
+                String chatBotMessage = ChatBot.call(receivedMessage.getContent());
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+                ChatController controller = chatManagerFactory.getChatManager(chatID).getChatController();
+                Platform.runLater(()->controller.sendChatBotMessage(chatBotMessage));
+            });
+        }
     }
-
 
 
     public static ObservableList<Message> getMessageList(int chatID) {

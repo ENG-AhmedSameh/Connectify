@@ -1,6 +1,8 @@
 package com.connectify.loaders;
 
 import com.connectify.controller.ChatController;
+import com.connectify.utils.ChatManager;
+import com.connectify.utils.CurrentUser;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +17,11 @@ public class ChatLoader {
         fxmlLoader.setLocation(ChatLoader.class.getResource("/views/Chat.fxml"));
         fxmlLoader.setController(controller);
         try {
-            return fxmlLoader.load();
+            BorderPane chatPane = fxmlLoader.load();
+            ChatManager chatManager = CurrentUser.getChatManagerFactory().getChatManager(chat_id);
+            chatManager.setChatPane(chatPane);
+            chatManager.setChatController(controller);
+            return chatPane;
         } catch (IOException e) {
 //            throw new RuntimeException(e);
             System.err.println("Error: "+e.getMessage());

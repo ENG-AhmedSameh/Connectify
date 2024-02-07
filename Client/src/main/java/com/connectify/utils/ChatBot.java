@@ -4,8 +4,11 @@ import com.google.code.chatterbotapi.ChatterBot;
 import com.google.code.chatterbotapi.ChatterBotFactory;
 import com.google.code.chatterbotapi.ChatterBotSession;
 import com.google.code.chatterbotapi.ChatterBotType;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 public class ChatBot {
+    private static BooleanProperty enabled = new SimpleBooleanProperty(false);
     public static String call(String input) {
         try {
             ChatterBotFactory factory = new ChatterBotFactory();
@@ -22,5 +25,17 @@ public class ChatBot {
             System.err.println(errorMessage);
             return "Sorry, I don't have an answer to that";
         }
+    }
+
+    public static boolean isEnabled() {
+        return enabled.get();
+    }
+
+    public static BooleanProperty enabledProperty() {
+        return enabled;
+    }
+
+    public static void setEnabled(boolean enabled) {
+        ChatBot.enabled.set(enabled);
     }
 }

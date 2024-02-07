@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.*?>
 
-<AnchorPane fx:id="allChatsAnchorPane" styleClass="chats-cards-pane" stylesheets="@../styles/AllChatsPaneStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="allChatsAnchorPane" styleClass="chats-cards-pane" stylesheets="@../styles/AllChatsPaneStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="chatSearchTextField" blendMode="SCREEN" layoutX="19.0" layoutY="14.0" prefHeight="26.0" prefWidth="311.0" styleClass="text-field">
-         <stylesheets>
-            <URL value="@../styles/SignUp.css" />
-            <URL value="@../styles/AllChatsPaneStyle.css" />
-         </stylesheets></TextField>
+      <HBox alignment="CENTER" layoutX="19.0" layoutY="14.0">
+         <children>
+            <TextField fx:id="chatSearchTextField" blendMode="SCREEN" prefHeight="26.0" prefWidth="219.0" styleClass="text-field">
+               <stylesheets>
+                  <URL value="@../styles/SignUp.css" />
+                  <URL value="@../styles/AllChatsPaneStyle.css" />
+               </stylesheets>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <ImageView fitHeight="39.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/chatbot.png" />
+                     </image>
+                  </ImageView>
+                  <ToggleSwitch fx:id="chatBotToggleSwitch" prefHeight="18.0" prefWidth="14.0" styleClass="purple" stylesheets="@../styles/HomeScreen.css" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
       <ListView fx:id="allChatsListView" layoutY="60.0" prefWidth="350.0" stylesheets="@../styles/AllChatsPaneStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
    </children>
 </AnchorPane>

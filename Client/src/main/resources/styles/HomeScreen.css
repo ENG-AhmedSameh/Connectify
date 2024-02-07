@@ -12,3 +12,9 @@
 .bar {
     -fx-background-color: #0e1621;
 }
+.toggle-switch .thumb-area {
+    -fx-background-color:  #7ea0b7;
+}
+.toggle-switch:selected .thumb-area {
+    -fx-background-color: #2f6ea5;
+}

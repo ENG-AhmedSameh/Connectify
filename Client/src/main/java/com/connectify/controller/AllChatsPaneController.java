@@ -8,6 +8,7 @@ import com.connectify.loaders.ChatCardLoader;
 import com.connectify.loaders.ViewLoader;
 import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.model.entities.ChatMember;
+import com.connectify.utils.ChatBot;
 import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
@@ -22,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
 import java.rmi.NotBoundException;
@@ -47,6 +49,8 @@ public class AllChatsPaneController implements Initializable {
 
     @FXML
     private VBox allChatsVBox;
+    @FXML
+    private ToggleSwitch chatBotToggleSwitch;
 
     @FXML
     private ListView<AnchorPane> allChatsListView;
@@ -71,6 +75,7 @@ public class AllChatsPaneController implements Initializable {
         initializeListView();
         loadAllUserChats();
         System.out.println("done");
+        chatBotToggleSwitch.selectedProperty().bindBidirectional(ChatBot.enabledProperty());
     }
 
     private void initializeListView(){
@@ -141,9 +146,4 @@ public class AllChatsPaneController implements Initializable {
         chatsPanesList.add(chatCard);
     }
 
-//    public void removeAllChatCards(){
-//        Platform.runLater(()->{
-//            chatsPanesList.removeAll(chatsPanesList);
-//        });
-//    }
 }

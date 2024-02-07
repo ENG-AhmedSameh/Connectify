@@ -117,6 +117,14 @@ public class ChatController implements Initializable {
             }
         }
     }
+    public void sendChatBotMessage(String content){
+        try {
+            MessageSentDTO messageSentDTO = new MessageSentDTO(Client.getConnectedUser().getPhoneNumber(),chatID,content,new Timestamp(System.currentTimeMillis()), null);
+            appendMessage(messageSentDTO);
+        } catch (RemoteException e) {
+            System.err.println("Can't find server, details: "+e.getMessage());
+        }
+    }
 
     public void attachmentHandler(){
         Stage stage = (Stage) sendBox.getScene().getWindow();

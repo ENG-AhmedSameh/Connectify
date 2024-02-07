@@ -17,10 +17,8 @@ public class ChatPaneFactory {
 
         if (paneCache.containsKey(id)) {
             return paneCache.get(id);
-
         }
         BorderPane newPane = ChatLoader.loadChatPane(id,name,image);
-        CurrentUser.getChatManagerFactory().getChatManager(id).setChatPane(newPane);
         paneCache.put(id, newPane);
         return newPane;
     }
