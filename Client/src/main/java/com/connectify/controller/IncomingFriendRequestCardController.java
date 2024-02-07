@@ -62,7 +62,7 @@ public class IncomingFriendRequestCardController implements Initializable {
         this.phone = phone;
         this.invitationId = invitationId;
         try {
-            currentUserPhone = Client.getConnectedUser().getPhoneNumber();
+            currentUserPhone = CurrentUser.getInstance().getPhoneNumber();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }

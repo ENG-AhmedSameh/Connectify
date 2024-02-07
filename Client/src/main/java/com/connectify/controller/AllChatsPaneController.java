@@ -114,7 +114,7 @@ public class AllChatsPaneController implements Initializable {
     }
     private void loadAllUserChats(){
         try {
-            List<ChatCardsInfoDTO> chatCardsInfoDTOS = RemoteManager.getInstance().getUserChatsCardsInfo(Client.getConnectedUser().getPhoneNumber());
+            List<ChatCardsInfoDTO> chatCardsInfoDTOS = RemoteManager.getInstance().getUserChatsCardsInfo(CurrentUser.getInstance().getPhoneNumber());
             for(ChatCardsInfoDTO chat:chatCardsInfoDTOS)
                 addChatOnChatPane(chat.getChatID(),chat.getUnreadMessagesNumber(),chat.getName(),chat.getPicture(),chat.getLastMessage(),chat.getTimestamp());
         } catch (RemoteException e) {

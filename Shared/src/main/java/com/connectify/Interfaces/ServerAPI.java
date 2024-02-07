@@ -19,7 +19,10 @@ import java.util.List;
 
 public interface ServerAPI extends Remote{
 
-    boolean signUp(SignUpRequest signUpRequest) throws RemoteException;
+    SignUpResponse signUp(SignUpRequest signUpRequest) throws RemoteException;
+
+    String getPhoneNumberByToken(String token) throws RemoteException;
+
     List<ChatMemberDTO> getAllUserChats(String userId) throws RemoteException;
     boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException;
     boolean updateUserPicture(String phoneNumber, byte[] picture) throws RemoteException;

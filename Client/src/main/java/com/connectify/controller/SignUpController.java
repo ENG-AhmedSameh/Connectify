@@ -3,12 +3,10 @@ package com.connectify.controller;
 import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.dto.SignUpRequest;
+import com.connectify.dto.SignUpResponse;
 import com.connectify.model.enums.Gender;
 import com.connectify.util.PasswordManager;
-import com.connectify.utils.CountryList;
-import com.connectify.utils.CurrentUser;
-import com.connectify.utils.RemoteManager;
-import com.connectify.utils.StageManager;
+import com.connectify.utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,6 +39,9 @@ public class SignUpController implements Initializable {
     @FXML private Button signUpBtn;
     @FXML private Label signUpLbl;
     @FXML private AnchorPane signUpPane;
+
+    @FXML
+    private Label errorLabel;
 
     private CountryList countryList;
     private Boolean validInformation = true;
@@ -128,15 +129,19 @@ public class SignUpController implements Initializable {
         validateFields();
         if(validInformation){
             SignUpRequest request = createSignUpRequest();
-            boolean isSuccessFul = RemoteManager.getInstance().signUp(request);
-            if (!isSuccessFul) {
-                phoneNumTxtF.setTooltip(hintText("This phone number is already registered"));
+            SignUpResponse response = RemoteManager.getInstance().signUp(request);
+            if (!response.isSuccessful()) {
+                phoneNumTxtF.setTooltip(hintText(response.getMessage()));
                 phoneNumTxtF.setStyle("-fx-border-color: red;");
+                errorLabel.setText(response.getMessage());
+                errorLabel.setVisible(true);
             }
             else {
-                ConnectedUser connectedUser = new CurrentUser(countryCodeLbl.getText() + phoneNumTxtF.getText());
-                RemoteManager.getInstance().registerConnectedUser(connectedUser);
-                Client.setConnectedUser(connectedUser);
+                PropertiesManager.getInstance().setUserCredentials(response.getToken(), "true");
+                PropertiesManager.getInstance().setLoginInformation(phoneNumTxtF.getText(), countryCodeLbl.getText(), countryComboBox.getValue());
+                ConnectedUser user = CurrentUser.getInstance();
+                RemoteManager.getInstance().registerConnectedUser(user);
+                errorLabel.setVisible(false);
                 clearFields();
                 StageManager.getInstance().switchToSecondSignUp();
             }

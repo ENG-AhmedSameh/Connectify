@@ -6,10 +6,8 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
-import com.connectify.utils.CountryList;
-import com.connectify.utils.CurrentUser;
-import com.connectify.utils.RemoteManager;
-import com.connectify.utils.StageManager;
+import com.connectify.utils.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,20 +38,17 @@ public class LoginController implements Initializable {
     private Label errorLabel;
     private CountryList countryList = CountryList.getInstance();
 
-    private Properties userCredentials;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryComboBox.getItems().addAll(new TreeSet<>(countryList.getCountriesMap().keySet()));
-        userCredentials = Client.getUserCredentials();
-        phoneNumberTextField.setText(userCredentials.getProperty("phoneNumber"));
-        countryComboBox.getSelectionModel().select(userCredentials.getProperty("country"));
-        countryCodeLabel.setText(countryList.getCountriesMap().get(countryComboBox.getValue()));
+        countryComboBox.getSelectionModel().select(PropertiesManager.getInstance().getCountry());
+        countryCodeLabel.setText(PropertiesManager.getInstance().getCountryCode());
+        phoneNumberTextField.setText(PropertiesManager.getInstance().getPhoneNumber());
     }
     public void SignupButtonOnAction(ActionEvent e) {
         StageManager.getInstance().switchToSignUp();
     }
-    public void LoginButtonOnAction(ActionEvent e) {
+    public void LoginButtonOnAction(ActionEvent e) throws RemoteException {
         errorLabel.setVisible(false);
         if(countryComboBox.getValue()==null){
             countryComboBox.setTooltip(new Tooltip("Please select your country"));
@@ -71,22 +66,19 @@ public class LoginController implements Initializable {
             return;
         }
         LoginRequest request = createLoginRequest();
-        try {
-            LoginResponse response = RemoteManager.getInstance().login(request);
-            if (response.getStatus()) {
-                ConnectedUser connectedUser = new CurrentUser(countryCodeLabel.getText() + phoneNumberTextField.getText());
-                RemoteManager.getInstance().registerConnectedUser(connectedUser);
-                Client.updateUserCredentials(phoneNumberTextField.getText(),countryCodeLabel.getText() ,countryComboBox.getValue(),"true");
-                Client.setConnectedUser(connectedUser);
-                passwordTextField.clear();
-                StageManager.getInstance().switchToHome();
-            }
-            else {
-                errorLabel.setText(response.getMessage());
-                errorLabel.setVisible(true);
-            }
-        } catch (RemoteException ex) {
-            System.err.println("Remote Exception: " + ex.getMessage());
+        LoginResponse response = RemoteManager.getInstance().login(request);
+        if (response.getStatus()) {
+            PropertiesManager.getInstance().setUserCredentials(response.getToken(), "true");
+            PropertiesManager.getInstance().setLoginInformation(phoneNumberTextField.getText(), countryCodeLabel.getText(), countryComboBox.getValue());
+            ConnectedUser user = CurrentUser.getInstance();
+            RemoteManager.getInstance().registerConnectedUser(user);
+            passwordTextField.clear();
+            errorLabel.setVisible(false);
+            StageManager.getInstance().switchToHome();
+        }
+        else {
+            errorLabel.setText(response.getMessage());
+            errorLabel.setVisible(true);
         }
     }
 

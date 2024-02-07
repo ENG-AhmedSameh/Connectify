@@ -59,7 +59,7 @@ public class AddFriendController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         txtFieldsOriginalStyle = newContactPhoneSearchTextField.getStyle();
         try {
-            currentUserPhone = Client.getConnectedUser().getPhoneNumber();
+            currentUserPhone = CurrentUser.getInstance().getPhoneNumber();
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }
@@ -125,7 +125,7 @@ public class AddFriendController implements Initializable {
     private void acceptFriend(FriendToAddResponse friend, int invitationId) throws RemoteException {
         boolean request = RemoteManager.getInstance().acceptFriendRequest(invitationId);
         System.out.println("Friend request result: " + request);
-        Client.getConnectedUser()
+        CurrentUser.getInstance()
                 .receiveNotification("Friend Request Accepted",
                         "You are now friends with " + friend.getName()
                                 + ". They had previously sent you a friend request, which has been accepted.");

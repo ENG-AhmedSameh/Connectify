@@ -28,7 +28,7 @@ public class Server extends Application {
     private static Registry registry;
     private static Map<String, ConnectedUser> connectedUsers;
 
-    private static ScheduledExecutorService statisticsScheduler;
+
 
     @Override
     public void init() throws Exception {
@@ -38,7 +38,7 @@ public class Server extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage){
         Parent root = ViewLoader.getInstance().getMainPane();
         Scene scene = new Scene(root);
         stage.initStyle(StageStyle.UNDECORATED);
@@ -64,9 +64,8 @@ public class Server extends Application {
             registry = LocateRegistry.createRegistry(1099);
             ServerAPI server = new ServerController();
             registry.rebind("server", server);
-            statisticsScheduler = Executors.newSingleThreadScheduledExecutor();
         } catch (RemoteException e){
-            System.err.println("Couldn't power up server: "+e.getMessage());
+            System.err.println("Couldn't power up server: " + e.getMessage());
             System.exit(1);
         }
     }
@@ -82,14 +81,9 @@ public class Server extends Application {
             userService.logoutAllUser();
             registry.unbind("server");
             UnicastRemoteObject.unexportObject(registry, true);
-            statisticsScheduler.shutdown();
         } catch (RemoteException | NotBoundException e){
             System.err.println("Couldn't power down server: " + e.getMessage());
             System.exit(1);
         }
-    }
-
-    public static ScheduledExecutorService getStatisticsScheduler() {
-        return statisticsScheduler;
     }
 }

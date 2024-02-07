@@ -138,7 +138,7 @@ public class ChatCardController implements Initializable {
         try {
             ChatMemberDTO chatMemberDTO = new ChatMemberDTO();
             chatMemberDTO.setChatId(chatId);
-            chatMemberDTO.setMember(Client.getConnectedUser().getPhoneNumber());
+            chatMemberDTO.setMember(CurrentUser.getInstance().getPhoneNumber());
             RemoteManager.getInstance().prepareCurrentChat(chatMemberDTO);
         } catch (RemoteException e) {
             System.err.println("Couldn't find server, details:  "+e.getMessage());

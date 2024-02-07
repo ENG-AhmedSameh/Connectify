@@ -66,6 +66,7 @@ public class UserDAOImpl implements UserDAO {
                     user.setBio(resultSet.getString("bio"));
                     user.setStatus(Status.valueOf(resultSet.getString("status")));
                     user.setMode(Mode.valueOf(resultSet.getString("mode")));
+                    user.setToken(resultSet.getString("token"));
                 }
             }
             return user;
@@ -251,6 +252,39 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
             return false;
+        }
+    }
+
+    @Override
+    public boolean updateToken(String phoneNumber, String token) {
+        String query = "update users SET token = ? WHERE phone_number = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, token);
+            preparedStatement.setString(2, phoneNumber);
+            int rowsInserted = preparedStatement.executeUpdate();
+            return rowsInserted == 1;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public String getPhoneNumberByToken(String token) {
+        String query = "SELECT phone_number from users WHERE token = ?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, token);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("phone_number");
+                }
+            }
+            return null;
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return null;
         }
     }
 }

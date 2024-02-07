@@ -9,6 +9,7 @@ import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 import com.connectify.util.PasswordManager;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
@@ -77,7 +78,7 @@ public class ProfileEditorController implements Initializable {
         initializeComboBoxes();
         txtFieldsOriginalStyle = nameTxtF.getStyle();
         try {
-            currentUserDetails = RemoteManager.getInstance().getUserProfile(Client.getConnectedUser().getPhoneNumber());
+            currentUserDetails = RemoteManager.getInstance().getUserProfile(CurrentUser.getInstance().getPhoneNumber());
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

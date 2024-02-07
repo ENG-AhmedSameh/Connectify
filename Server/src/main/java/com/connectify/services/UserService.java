@@ -34,14 +34,14 @@ public class UserService {
         UserDAO userDAO = new UserDAOImpl();
         User user = userDAO.get(request.getPhoneNumber());
         if(user == null){
-            return new LoginResponse(false, "Phone number is not correct or registered");
+            return new LoginResponse(false, "Phone number is not correct or registered", null);
         }
         String hashedPassword = user.getPassword();
         boolean isCorrect = PasswordManager.isEqual(hashedPassword, request.getPassword(), user.getSalt());
         if(isCorrect){
-            return new LoginResponse(true, "Login successful");
+            return new LoginResponse(true, "Login successful", user.getToken());
         }
-        return new LoginResponse(false, "Password is not correct");
+        return new LoginResponse(false, "Password is not correct", null);
     }
 
     public UserProfileResponse getUserProfile(String phoneNumber) {
@@ -84,6 +84,11 @@ public class UserService {
 
     public void registerConnectedUser(ConnectedUser user) {
         try {
+            if(Server.getConnectedUsers().containsKey(user.getPhoneNumber())){
+                ConnectedUser prev = Server.getConnectedUsers().get(user.getPhoneNumber());
+                prev.forceLogout();
+                prev.receiveNotification("Session Expired","You have been logged out by another user");
+            }
             UserDAO userDAO = new UserDAOImpl();
             userDAO.updateMode(user.getPhoneNumber(), Mode.ONLINE);
             Server.getConnectedUsers().put(user.getPhoneNumber(), user);
@@ -127,5 +132,15 @@ public class UserService {
     public boolean updateAllUsersModeToOffline() {
         UserDAO userDAO = new UserDAOImpl();
         return userDAO.updateAllUsersModeToOffline();
+    }
+
+    public boolean updateToken(String phoneNumber, String token) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.updateToken(phoneNumber, token);
+    }
+
+    public String getPhoneNumberByToken(String token) {
+        UserDAO userDAO = new UserDAOImpl();
+        return userDAO.getPhoneNumberByToken(token);
     }
 }

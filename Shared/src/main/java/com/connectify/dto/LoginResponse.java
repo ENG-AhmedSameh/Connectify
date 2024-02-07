@@ -7,9 +7,12 @@ public class LoginResponse implements Serializable {
 
     private final String message;
 
-    public LoginResponse(boolean status, String message) {
+    private final String token;
+
+    public LoginResponse(boolean status, String message, String token) {
         this.status = status;
         this.message = message;
+        this.token = token;
     }
 
     public boolean getStatus() {
@@ -18,5 +21,9 @@ public class LoginResponse implements Serializable {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

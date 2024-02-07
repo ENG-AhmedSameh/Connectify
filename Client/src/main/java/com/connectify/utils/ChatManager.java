@@ -37,7 +37,7 @@ public class ChatManager {
         privateChat = RemoteManager.getInstance().isPrivateChat(chatID);
         List<MemberInfoDTO> memberInfoDTOS = null;
         try {
-            memberInfoDTOS = RemoteManager.getInstance().getAllChatOtherMembersInfo(chatID, Client.getConnectedUser().getPhoneNumber());
+            memberInfoDTOS = RemoteManager.getInstance().getAllChatOtherMembersInfo(chatID, CurrentUser.getInstance().getPhoneNumber());
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }

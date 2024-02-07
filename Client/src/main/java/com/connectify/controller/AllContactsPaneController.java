@@ -7,6 +7,7 @@ import com.connectify.loaders.ChatCardLoader;
 import com.connectify.loaders.ContactCardLoader;
 import com.connectify.mapper.ContactMapper;
 import com.connectify.model.entities.User;
+import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
@@ -45,7 +46,7 @@ public class AllContactsPaneController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<ContactsDTO> ContactDTOList = null;
         try {
-            ContactDTOList = RemoteManager.getInstance().getContacts(Client.getConnectedUser().getPhoneNumber());
+            ContactDTOList = RemoteManager.getInstance().getContacts(CurrentUser.getInstance().getPhoneNumber());
         } catch (RemoteException e) {
             System.err.println("Remote Exception: " + e.getMessage());
         }

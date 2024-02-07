@@ -22,6 +22,8 @@ public class User{
     private Status status;
     private byte[] salt;
 
+    private String token;
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -116,6 +118,14 @@ public class User{
 
     public void setSalt(byte[] salt) {
         this.salt = salt;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
 

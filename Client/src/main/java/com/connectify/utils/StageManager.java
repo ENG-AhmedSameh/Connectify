@@ -78,7 +78,7 @@ public class StageManager {
 
     public void switchToHome(){
         try {
-            System.out.println(Client.getConnectedUser().getPhoneNumber());
+            System.out.println(CurrentUser.getInstance().getPhoneNumber());
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -87,6 +87,14 @@ public class StageManager {
         Scene scene = sceneMap.get("home");
         BorderPane mainPane =(BorderPane)scene.getRoot();
         mainPane.setPrefSize(stage.getWidth(),stage.getHeight());
+        stage.onCloseRequestProperty().set(e -> {
+            try {
+                RemoteManager.getInstance().logout(CurrentUser.getInstance());
+            } catch (RemoteException ex) {
+                System.err.println("Remote Exception: " + ex.getMessage());
+            }
+            System.exit(0);
+        });
         stage.setScene(scene);
         //Platform.runLater(() -> stage.setScene(scene));
     }
