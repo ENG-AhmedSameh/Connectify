@@ -97,6 +97,6 @@
       </HBox>
    </bottom>
    <center>
-      <ListView fx:id="messagesList" BorderPane.alignment="CENTER" />
+      <ListView fx:id="messagesList" />
    </center>
 </BorderPane>

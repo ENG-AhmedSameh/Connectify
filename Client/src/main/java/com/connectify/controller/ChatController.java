@@ -11,6 +11,9 @@ import com.connectify.model.entities.User;
 import com.connectify.model.enums.Mode;
 import com.connectify.utils.*;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
@@ -108,6 +111,14 @@ public class ChatController implements Initializable {
         messagesList.setItems(sortedMessagesList);
         setListViewCellFactory();
         loadHistoryMessages();
+        messagesList.scrollTo(messagesList.getItems().size()+1);
+        messages.addListener((ListChangeListener<Message>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    messagesList.scrollTo(messagesList.getItems().size()+1);
+                }
+            }
+        });
     }
 
     private void loadHistoryMessages() {
