@@ -1,6 +1,5 @@
 package com.connectify.utils;
 
-import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.controller.AllChatsPaneController;
 import com.connectify.controller.ChatController;
@@ -115,11 +114,9 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         RemoteManager.reset();
         CurrentUser.reset();
         Platform.runLater(() ->{
-            Client.updateUserCredentials("false");
             CurrentUser.getAllChatsController().clearChatsCardList();
             CurrentUser.getChatManagerFactory().clearChatManagersMap();
             CurrentUser.getChatPaneFactory().clearChats();
-            Client.setConnectedUser(null);
             StageManager.getInstance().resetHomeScene();
             StageManager.getInstance().switchToLogin();
         });
