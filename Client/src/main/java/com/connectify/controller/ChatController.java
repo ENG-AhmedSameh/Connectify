@@ -105,6 +105,7 @@ public class ChatController implements Initializable {
         if(!Objects.equals(sendBox.getText(), "")){
             try {
                 MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(),chatID,sendBox.getText(),new Timestamp(System.currentTimeMillis()), null);
+                RemoteManager.getInstance().sendMessage(messageSentDTO);
                 appendMessage(messageSentDTO);
             } catch (RemoteException e) {
                 System.err.println("Can't find server, details: "+e.getMessage());
@@ -130,8 +131,8 @@ public class ChatController implements Initializable {
                 try{
                     byte[] bytes = Files.readAllBytes(file.toPath());
                     MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(), chatID, file.getName(), new Timestamp(System.currentTimeMillis()), bytes);
-                    appendMessage(messageSentDTO);
                     RemoteManager.getInstance().sendAttachment(messageSentDTO);
+                    appendMessage(messageSentDTO);
                     System.out.println("attachment sent");
                 } catch (RemoteException e){
                     System.err.println("Remote Exception: " + e.getMessage());
@@ -151,7 +152,6 @@ public class ChatController implements Initializable {
         MessageMapper mapper = MessageMapper.INSTANCE;
         Message message = mapper.messageSentDtoTOMessage(messageSentDTO);
         ChatCardHandler.updateChatCard(message);
-        RemoteManager.getInstance().sendMessage(messageSentDTO);
         //TODO render send message
         messages.add(message);
         sendBox.clear();
