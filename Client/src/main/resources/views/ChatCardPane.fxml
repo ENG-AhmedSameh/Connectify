@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="chatCardPane" maxHeight="100.0" maxWidth="335.0" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="chatCardPane" maxHeight="100.0" maxWidth="330.0" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox fx:id="messageHBox" alignment="CENTER_LEFT" maxHeight="100.0" maxWidth="335.0" mouseTransparent="true" prefHeight="100.0" prefWidth="335.0" styleClass="chat-HBox" stylesheets="@../styles/SignUp.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,8 +17,8 @@
                   <Insets right="10.0" />
                </HBox.margin>
                <children>
-                  <Circle fx:id="chatPicture" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
-                  <Circle fx:id="statusCircle" fill="DODGERBLUE" radius="8.0" stroke="#202b36" strokeLineCap="ROUND" strokeWidth="3.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="-1.0" />
+                  <Circle fx:id="chatPicture" fill="DODGERBLUE" layoutX="42.0" layoutY="52.0" radius="37.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="14.200000000000003" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="4.200000000000003" AnchorPane.topAnchor="15.0" />
+                  <Circle fx:id="statusCircle" fill="DODGERBLUE" layoutX="59.0" layoutY="79.0" radius="8.0" stroke="#202b36" strokeLineCap="ROUND" strokeWidth="3.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="9.0" />
                </children>
             </AnchorPane>
             <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="309.0" spacing="10.0">
@@ -37,7 +37,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <Label fx:id="lastMessageTimeLabel" alignment="CENTER" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="54.0" text="12:00 AM" textAlignment="CENTER" textFill="#597081" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="lastMessageTimeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="26.0" prefWidth="67.0" text="12:00 AM" textAlignment="CENTER" textFill="#597081" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <HBox>

@@ -23,10 +23,10 @@
 
 }
 .list-view .list-cell:odd {
-    -fx-background-color: #17212b;
+    -fx-background-color: #0e1621;
 }
 .list-view .list-cell:even {
-    -fx-background-color: #17212b;
+    -fx-background-color: #0e1621;
 }
 .chats-cards-pane{
     -fx-background-color: #17212b;

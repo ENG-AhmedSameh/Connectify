@@ -28,8 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -53,6 +52,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 public class ChatController implements Initializable {
+
+    @FXML
+    private BorderPane chatsBorderPane;
 
     @FXML
     private ImageView attachmentImageView;
@@ -96,6 +98,16 @@ public class ChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image chatBackgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/chat-backGround.jpg")));
+        //chatBackgroundImage.
+        BackgroundImage backgroundImage = new BackgroundImage(
+                chatBackgroundImage,
+                BackgroundRepeat.REPEAT, // How the image should be repeated along the X axis
+                BackgroundRepeat.NO_REPEAT, // How the image should be repeated along the Y axis
+                BackgroundPosition.DEFAULT, // Position of the image
+                BackgroundSize.DEFAULT);   // Size of the image
+        chatsBorderPane.setBackground(new Background(backgroundImage));
+
         if(!CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat())
             statusCircle.setVisible(false);
         else
@@ -111,11 +123,11 @@ public class ChatController implements Initializable {
         messagesList.setItems(sortedMessagesList);
         setListViewCellFactory();
         loadHistoryMessages();
-        messagesList.scrollTo(messagesList.getItems().size()+1);
+        messagesList.scrollTo(messagesList.getItems().size()*2);
         messages.addListener((ListChangeListener<Message>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
-                    messagesList.scrollTo(messagesList.getItems().size()+1);
+                    messagesList.scrollTo(messagesList.getItems().size()*2);
                 }
             }
         });

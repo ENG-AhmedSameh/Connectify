@@ -116,7 +116,7 @@ public class ProfileEditorController implements Initializable {
 
     @FXML
     void handleCancelAction(ActionEvent event) {
-        StageManager.getInstance().switchFromProfileEditorToHome();
+        StageManager.getInstance().switchToProfile();
     }
 
     private void validateFields() {
@@ -210,7 +210,7 @@ public class ProfileEditorController implements Initializable {
             }
         }
 
-        StageManager.getInstance().switchFromProfileEditorToHome();
+        StageManager.getInstance().switchToProfile();
     }
 
     private boolean isModeOrStatusChanged() {

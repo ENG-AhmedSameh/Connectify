@@ -1,6 +1,6 @@
 * {
     -fx-dark: #0e1621;
-    -fx-dark-blue: #182732;
+    -fx-dark-blue: #17212b;
     -fx-blue: #2a5379;
     -fx-gray: #4c5660;
     -fx-light: #e7e5e5;
@@ -25,7 +25,7 @@
 }
 
 .list-view {
-    -fx-background-color: -fx-dark;
+    -fx-background-color: transparent;
 }
 
 .list-cell {
@@ -33,11 +33,13 @@
 }
 
 .list-view .list-cell:odd {
-    -fx-background-color: -fx-dark;
+    /*-fx-background-color: -fx-dark;*/
+    -fx-background-color: transparent;
 }
 
 .list-view .list-cell:even {
-    -fx-background-color: -fx-dark;
+    /*-fx-background-color: -fx-dark;*/
+    -fx-background-color: transparent;
 }
 
 .contact-message {
