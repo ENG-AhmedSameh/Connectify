@@ -78,7 +78,7 @@ public class Server extends Application {
                 try {
                     connectedUsers.get(user).ping();
                 } catch (RemoteException e) {
-                    System.err.println("user " + user + "did not respond");
+                    System.err.println("user " + user + " did not respond");
                     userService.logoutUser(user);
                 }
             }
