@@ -65,15 +65,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     @Override
     public void receiveNotification(String title, String message) throws RemoteException {
-        Platform.runLater(() -> {
-            Image icon = new Image(getClass().getResource("/images/notification.png").toString());
-            Notifications.create()
-                    .title(title)
-                    .text(message)
-                    .graphic(new ImageView(icon))
-                    .threshold(3, Notifications.create().title("Collapsed Notification"))
-                    .show();
-        });
+        NotificationsManager.showServerNotification(title, message);
     }
 
     public String getPhoneNumber() throws RemoteException {

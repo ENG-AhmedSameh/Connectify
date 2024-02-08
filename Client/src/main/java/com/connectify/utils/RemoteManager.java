@@ -475,20 +475,8 @@ public class RemoteManager {
     }
 
     private void handleServerDown() {
-        showServerDownNotification();
+        NotificationsManager.showErrorNotification();
         server = null;
         Platform.runLater(() -> StageManager.getInstance().switchToLogin());
-    }
-
-    private void showServerDownNotification() {
-        Platform.runLater(() -> {
-            Image icon = new Image(getClass().getResource("/images/error.png").toString());
-            Notifications.create()
-                    .title("Failed to connect to the Server")
-                    .text("Server is down. Contact the admin and try again later")
-                    .graphic(new ImageView(icon))
-                    .threshold(3, Notifications.create().title("Collapsed Notification"))
-                    .show();
-        });
     }
 }
