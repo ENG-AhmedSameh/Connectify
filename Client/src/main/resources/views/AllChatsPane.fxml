@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<AnchorPane fx:id="allChatsAnchorPane" maxWidth="330.0" style="-fx-background-color: #0e1621;" styleClass="chats-cards-pane" stylesheets="@../styles/AllChatsPaneStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="allChatsAnchorPane" maxWidth="340.0" style="-fx-background-color: -fx-blueGray;" styleClass="chats-cards-pane" stylesheets="@../styles/AllChatsPaneStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" layoutX="19.0" layoutY="14.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0">
          <children>
@@ -35,6 +35,6 @@
             </HBox>
          </children>
       </HBox>
-      <ListView fx:id="allChatsListView" layoutY="60.0" prefWidth="350.0" style="-fx-background-color: transparent;" stylesheets="@../styles/AllChatsPaneStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+      <ListView fx:id="allChatsListView" layoutY="60.0" prefWidth="325.0" stylesheets="@../styles/AllChatsPaneStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
    </children>
 </AnchorPane>

@@ -4,6 +4,7 @@
     -fx-blue: #2a5379;
     -fx-gray: #4c5660;
     -fx-light: #e7e5e5;
+    -fx-test: #415A77
 }
 
 .chat-banner {
@@ -29,7 +30,7 @@
 }
 
 .list-cell {
-    -fx-padding: -1px;
+    -fx-padding: -5px;
 }
 
 .list-view .list-cell:odd {
@@ -43,7 +44,7 @@
 }
 
 .contact-message {
-    -fx-background-color: -fx-dark-blue;
+    -fx-background-color: transparent;
     -fx-text-fill: -fx-light;
     -fx-font-size: 15px;
     -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;

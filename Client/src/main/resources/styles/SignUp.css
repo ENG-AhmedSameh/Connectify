@@ -1,7 +1,8 @@
 * {
     -fx-dark: #0e1621;
     -fx-blue: #2f6ea5;
-    -fx-blueGray : #17212b
+    -fx-blueGray : #17212b;
+    -fx-test: #1B263B
 }
 
 .logo-anchor-pane{
@@ -49,7 +50,7 @@
     -fx-background-radius: 10;
 }
 .tool-bar{
-    -fx-background-color: -fx-blueGray;
+    -fx-background-color: -fx-dark;
 }
 
 
