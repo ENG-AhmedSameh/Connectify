@@ -70,4 +70,6 @@ public interface ServerAPI extends Remote{
     boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) throws RemoteException;
 
     boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) throws RemoteException;
+
+    void sendPingBack(String phoneNumber) throws RemoteException;
 }

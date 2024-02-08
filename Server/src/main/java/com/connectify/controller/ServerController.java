@@ -247,6 +247,11 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     }
 
     @Override
+    public void sendPingBack(String phoneNumber) throws RemoteException {
+        System.out.println(phoneNumber + " is here");
+    }
+
+    @Override
     public boolean updateUserProfile(UpdateUserInfoRequest updateUserInfoRequest) throws RemoteException {
         return userService.updateUser(updateUserInfoRequest);
     }

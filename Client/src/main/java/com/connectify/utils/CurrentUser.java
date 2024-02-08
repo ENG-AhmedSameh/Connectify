@@ -46,15 +46,6 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     public static CurrentUser getInstance() throws RemoteException {
         if (instance == null) {
             instance = new CurrentUser();
-            if(instance.getPhoneNumber() != null){
-                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                    try {
-                        RemoteManager.getInstance().logout(CurrentUser.getInstance());
-                    } catch (RemoteException e) {
-                        System.err.println("Remote Exception: " + e.getMessage());
-                    }
-                }));
-            }
         }
         return instance;
     }
@@ -112,6 +103,11 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
             StageManager.getInstance().resetHomeScene();
             StageManager.getInstance().switchToLogin();
         });
+    }
+
+    @Override
+    public void ping() throws RemoteException {
+        RemoteManager.getInstance().sendPingBack(phoneNumber);
     }
 
     @Override

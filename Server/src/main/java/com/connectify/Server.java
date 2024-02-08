@@ -22,11 +22,15 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 public class Server extends Application {
 
 
     private static Registry registry;
     private static Map<String, ConnectedUser> connectedUsers;
+
+    private static ScheduledExecutorService executor;
 
 
 
@@ -68,6 +72,19 @@ public class Server extends Application {
             System.err.println("Couldn't power up server: " + e.getMessage());
             System.exit(1);
         }
+        Runnable pingUsers = () -> {
+            UserService userService = new UserService();
+            for (var user : connectedUsers.keySet()) {
+                try {
+                    connectedUsers.get(user).ping();
+                } catch (RemoteException e) {
+                    System.err.println("user " + user + "did not respond");
+                    userService.logoutUser(user);
+                }
+            }
+        };
+        executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(pingUsers, 0, 5, SECONDS);
     }
 
     public static void powerDown(){
@@ -79,6 +96,7 @@ public class Server extends Application {
             UserService userService = new UserService();
             userService.logoutAllUser();
             connectedUsers.clear();
+            executor.shutdown();
             registry.unbind("server");
             UnicastRemoteObject.unexportObject(registry, true);
             System.out.println("Server is shutdown...");

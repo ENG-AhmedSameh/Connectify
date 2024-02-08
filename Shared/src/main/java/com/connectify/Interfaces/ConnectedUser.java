@@ -22,4 +22,6 @@ public interface ConnectedUser extends Remote {
     void makeNewChatCard(ChatCardsInfoDTO chatCard) throws RemoteException;
 
     void forceLogout() throws RemoteException;
+
+    void ping() throws RemoteException;
 }

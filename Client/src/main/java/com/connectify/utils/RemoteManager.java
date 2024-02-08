@@ -474,6 +474,19 @@ public class RemoteManager {
         }
     }
 
+    public void sendPingBack(String phoneNumber) {
+        if(isServerDown()){
+            reset();
+            return;
+        }
+        try {
+            server.sendPingBack(phoneNumber);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+        }
+    }
+
     private void handleServerDown() {
         NotificationsManager.showErrorNotification();
         server = null;

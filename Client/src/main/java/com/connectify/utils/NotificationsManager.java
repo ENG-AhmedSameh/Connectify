@@ -38,12 +38,14 @@ public class NotificationsManager {
     private static void playErrorSound() {
         Media sound = new Media((NotificationsManager.class.getResource("/sounds/error.mp3").toString()));
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setVolume(0.05);
         mediaPlayer.play();
     }
 
     private static void playServerNotificationSound(){
         Media sound = new Media((NotificationsManager.class.getResource("/sounds/notifications.mp3").toString()));
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setVolume(0.05);
         mediaPlayer.play();
     }
 }
