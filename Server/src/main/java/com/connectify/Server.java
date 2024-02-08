@@ -18,6 +18,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -64,6 +65,7 @@ public class Server extends Application {
 
     public static void powerUp(){
         try{
+//            System.setProperty("java.rmi.server.hostname", "192.168.1.11");
             registry = LocateRegistry.createRegistry(1099);
             ServerAPI server = new ServerController();
             registry.rebind("server", server);
