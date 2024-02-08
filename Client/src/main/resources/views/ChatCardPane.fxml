@@ -42,7 +42,7 @@
                   </AnchorPane>
                   <HBox>
                      <children>
-                        <Label fx:id="lastMessageLabel" prefWidth="176.0" text="last massage supposed to be displayed here" textFill="#597081" />
+                        <Label fx:id="lastMessageLabel" maxHeight="20.0" prefWidth="176.0" text="last massage supposed to be displayed here" textFill="#597081" />
                         <Label fx:id="nChatUnreadMessagesLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="29.0" style="-fx-border-radius: 50; -fx-background-color: #7ea0b7; -fx-background-radius: 50;" text="1" textAlignment="RIGHT" textFill="WHITE">
                            <HBox.margin>
                               <Insets left="5.0" />

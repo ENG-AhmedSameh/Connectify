@@ -85,6 +85,21 @@
     -fx-padding: 0;
 }
 
-.button .graphic {
-    -fx-background-color: transparent;
+.button:hover {
+    -fx-background-color: #202b36;
+}
+.text-area{
+    -fx-background-color: -fx-dark-blue ;
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+    -fx-text-fill: white;
+
+}
+.text-area .content {
+    -fx-background-color: -fx-dark-blue ;
+    -fx-border-color: transparent;
+}
+.text-area:focused .content {
+    -fx-background-color: -fx-dark-blue;
+    -fx-border-color: -fx-blue;
 }

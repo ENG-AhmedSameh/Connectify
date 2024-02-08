@@ -21,12 +21,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -78,7 +77,7 @@ public class ChatController implements Initializable {
     private Circle chatPicture;
 
     @FXML
-    private TextField sendBox;
+    private TextArea sendBox;
 
     @FXML
     private ImageView sendImageView;
@@ -107,6 +106,15 @@ public class ChatController implements Initializable {
                 BackgroundPosition.DEFAULT, // Position of the image
                 BackgroundSize.DEFAULT);   // Size of the image
         chatsBorderPane.setBackground(new Background(backgroundImage));
+
+        sendBox.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER && !keyEvent.isShiftDown()) {
+                sendHandler();
+                keyEvent.consume();
+            }else if(keyEvent.getCode() == KeyCode.ENTER && keyEvent.isShiftDown()){
+                sendBox.appendText("\n");
+            }
+        });
 
         if(!CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat())
             statusCircle.setVisible(false);
