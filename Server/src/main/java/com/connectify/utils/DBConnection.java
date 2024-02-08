@@ -15,13 +15,17 @@ public class DBConnection {
     private static final int MAX_IDLE_TIME_EXCESS_CONN = 3000;
 
     private final ComboPooledDataSource dataSource;
-    private static DBConnection instance;
+    private static volatile DBConnection instance;
 
     private DBConnection(){ dataSource = setupDataSource();}
 
-    public static synchronized DBConnection getInstance(){
+    public static DBConnection getInstance(){
         if (instance == null) {
-            instance = new DBConnection();
+            synchronized (DBConnection.class) {
+                if (instance == null) {
+                    instance = new DBConnection();
+                }
+            }
         }
         return instance;
     }
