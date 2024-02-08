@@ -50,7 +50,7 @@ public interface ServerAPI extends Remote{
 
     void sendAttachment(MessageSentDTO messageSentDTO) throws RemoteException;
 
-    File getAttachment(Integer attachmentId) throws RemoteException;
+    byte[] getAttachment(Integer attachmentId) throws RemoteException;
 
     void prepareCurrentChat(ChatMemberDTO chatMemberDTO) throws RemoteException;
     List<ContactsDTO> getContacts(String phoneNumber)throws RemoteException ;

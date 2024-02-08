@@ -1,11 +1,9 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
 import com.connectify.dto.MessageSentDTO;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import com.connectify.model.entities.User;
-import com.connectify.model.enums.Mode;
 import com.connectify.utils.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -13,19 +11,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -34,17 +28,13 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 public class ChatController implements Initializable {
 
@@ -86,6 +76,8 @@ public class ChatController implements Initializable {
 
     private final byte[] image;
 
+    private final ExecutorService executor;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -98,6 +90,7 @@ public class ChatController implements Initializable {
         setListViewCellFactory();
         messages = CurrentUser.getMessageList(chatID);
         messagesList.setItems(messages);
+        Runtime.getRuntime().addShutdownHook(new Thread(executor::shutdown));
     }
 
 
@@ -105,6 +98,7 @@ public class ChatController implements Initializable {
         this.chatID = chatID;
         this.name = name;
         this.image = image;
+        executor = Executors.newCachedThreadPool();
     }
 
     public void sendHandler(){
@@ -134,15 +128,19 @@ public class ChatController implements Initializable {
         Runnable sendAttachmentTask = () -> {
             if(file != null){
                 try{
-                    MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(), chatID, file.getName(), new Timestamp(System.currentTimeMillis()), file);
+                    byte[] bytes = Files.readAllBytes(file.toPath());
+                    MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(), chatID, file.getName(), new Timestamp(System.currentTimeMillis()), bytes);
                     appendMessage(messageSentDTO);
                     RemoteManager.getInstance().sendAttachment(messageSentDTO);
+                    System.out.println("attachment sent");
                 } catch (RemoteException e){
                     System.err.println("Remote Exception: " + e.getMessage());
+                } catch (IOException e) {
+                    System.err.println("IO Exception: " + e.getMessage());
                 }
             }
         };
-        new Thread(sendAttachmentTask).start();
+        executor.execute(sendAttachmentTask);
     }
 
     public void htmlEditorHandler(){
@@ -151,7 +149,7 @@ public class ChatController implements Initializable {
 
     private void appendMessage(MessageSentDTO messageSentDTO){
         MessageMapper mapper = MessageMapper.INSTANCE;
-        Message message =mapper.messageSentDtoTOMessage(messageSentDTO);
+        Message message = mapper.messageSentDtoTOMessage(messageSentDTO);
         ChatCardHandler.updateChatCard(message);
         RemoteManager.getInstance().sendMessage(messageSentDTO);
         //TODO render send message
@@ -207,9 +205,9 @@ public class ChatController implements Initializable {
                             loader= new FXMLLoader(getClass().getResource("/views/ReceivedAttachmentHBox.fxml"));
                             loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
                             root = loader.load();
-                            // TODO fix this line
-                            ImageView icon = (ImageView) root.lookup("downloadIcon");
-                            icon.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
+//                            // TODO fix this line
+//                            ImageView icon = (ImageView) root.lookup("downloadIcon");
+                            root.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
                         }
                         else {
                             loader = new FXMLLoader(getClass().getResource("/views/ReceivedMessageHBox.fxml"));
@@ -253,22 +251,18 @@ public class ChatController implements Initializable {
 
     private EventHandler<MouseEvent> createEventHandler(Integer attachmentID){
         return (EventHandler<MouseEvent>) (e) -> {
-            Callable<File> task = () -> RemoteManager.getInstance().getAttachment(attachmentID);
-            var future = new FutureTask<File>(task);
-            var thread = new Thread(future);
-            thread.start();
+            Callable<byte[]> task = () -> RemoteManager.getInstance().getAttachment(attachmentID);
             try {
-                File attachment = future.get();
+                byte[] attachment = executor.submit(task).get();
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Save File");
-                fileChooser.setInitialFileName(attachment.getName());
                 File selectedFile = fileChooser.showSaveDialog(chatName.getScene().getWindow());
                 if (selectedFile != null) {
                     try {
-                        Files.copy(attachment.toPath(), selectedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        Files.write(selectedFile.toPath(), attachment);
                         System.out.println("File saved successfully to: " + selectedFile.getAbsolutePath());
                     } catch (IOException ex) {
-                        System.err.println("Failed to save file: " + attachment.getPath());
+                        System.err.println("Failed to save file: " + selectedFile.toPath());
                     }
                 }
             } catch (InterruptedException ex) {

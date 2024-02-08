@@ -9,10 +9,10 @@ public class MessageSentDTO implements Serializable {
     private int chatId;
     private String content;
     private Timestamp timestamp;
-    private File attachment;
+    private byte[] attachment;
     private Integer attachmentId;
 
-    public MessageSentDTO(String sender, int chatId, String content, Timestamp timestamp, File attachment) {
+    public MessageSentDTO(String sender, int chatId, String content, Timestamp timestamp, byte[] attachment) {
         this.sender = sender;
         this.chatId = chatId;
         this.content = content;
@@ -52,11 +52,11 @@ public class MessageSentDTO implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public File getAttachment() {
+    public byte[] getAttachment() {
         return attachment;
     }
 
-    public void setAttachment(File attachment) {
+    public void setAttachment( byte[] attachment) {
         this.attachment = attachment;
     }
 

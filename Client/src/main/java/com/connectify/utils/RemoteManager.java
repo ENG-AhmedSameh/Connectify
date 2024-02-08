@@ -391,7 +391,7 @@ public class RemoteManager {
         }
     }
 
-    public File getAttachment(Integer attachmentID) {
+    public byte[] getAttachment(Integer attachmentID) {
         if(isServerDown()){
             reset();
             return null;
@@ -477,7 +477,7 @@ public class RemoteManager {
     private void handleServerDown() {
         showServerDownNotification();
         server = null;
-        StageManager.getInstance().switchToLogin();
+        Platform.runLater(() -> StageManager.getInstance().switchToLogin());
     }
 
     private void showServerDownNotification() {

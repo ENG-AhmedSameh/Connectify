@@ -35,20 +35,16 @@ public class AttachmentService {
                 Files.createDirectories(senderFolderPath);
             }
 
-            Path attachmentPath = message.getAttachment().toPath();
-            if (Files.exists(attachmentPath)) {
-                Path newFilePath = senderFolderPath.resolve(attachmentPath.getFileName());
-                Files.copy(attachmentPath, newFilePath, StandardCopyOption.REPLACE_EXISTING);
+            Path newFilePath = senderFolderPath.resolve(message.getContent());
+            Files.write(newFilePath, message.getAttachment());
 
-                Attachments attachment = new Attachments();
-                attachment.setName(newFilePath.toString());
-                attachment.setExtension(getExtension(newFilePath.toString()));
-                attachment.setSize((int) Files.size(newFilePath));
-                System.out.println(newFilePath);
-                AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
-                return attachmentDAO.insertAndReturnID(attachment);
-            }
-            return null;
+            Attachments attachment = new Attachments();
+            attachment.setName(newFilePath.toString());
+            attachment.setExtension(getExtension(newFilePath.toString()));
+            attachment.setSize((int) Files.size(newFilePath));
+            System.out.println(newFilePath);
+            AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
+            return attachmentDAO.insertAndReturnID(attachment);
         };
 
         try {
@@ -59,14 +55,14 @@ public class AttachmentService {
         }
     }
 
-    public File getAttachment(Integer attachmentId) {
-            Callable<File> callable = () -> {
+    public byte[] getAttachment(Integer attachmentId) {
+            Callable<byte[]> callable = () -> {
                 AttachmentDAO attachmentDAO = new AttachmentsDAOImpl();
                 Attachments attachment = attachmentDAO.get(attachmentId);
                 if(attachment != null){
                     Path filePath = Paths.get(attachment.getName());
                     System.out.println("downloading: " + filePath);
-                    return filePath.toFile();
+                    return Files.readAllBytes(filePath);
                 }
                 return null;
             };

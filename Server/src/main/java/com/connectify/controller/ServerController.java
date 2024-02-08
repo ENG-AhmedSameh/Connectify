@@ -150,12 +150,13 @@ public class ServerController extends UnicastRemoteObject implements ServerAPI {
     @Override
     public void sendAttachment(MessageSentDTO message) throws RemoteException{
         Integer attachmentId = attachmentService.storeAttachment(message);
+        System.out.println("Attachment id: " + attachmentId);
         message.setAttachmentId(attachmentId);
         MessageDTO storedMessage = messageService.storeMessage(message);
         chatService.sendMessage(storedMessage);
     }
 
-    public File getAttachment(Integer attachmentId) throws RemoteException{
+    public byte[] getAttachment(Integer attachmentId) throws RemoteException{
         return attachmentService.getAttachment(attachmentId);
     }
 
