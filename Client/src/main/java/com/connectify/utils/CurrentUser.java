@@ -2,19 +2,15 @@ package com.connectify.utils;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.controller.AllChatsPaneController;
-import com.connectify.controller.ChatController;
 import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.MessageDTO;
 import com.connectify.loaders.ChatCardLoader;
-import com.connectify.mapper.MessageMapper;
+import com.connectify.mapper.*;
 import com.connectify.model.entities.Message;
 import com.connectify.model.enums.Status;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import org.controlsfx.control.Notifications;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.Serializable;
@@ -30,11 +26,13 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     private String phoneNumber;
 
-    private static AllChatsPaneController allChatsController;
-    private static ChatManagerFactory chatManagerFactory = new ChatManagerFactory();
-    private static ChatPaneFactory chatPaneFactory = new ChatPaneFactory();
+    private static Map<Integer,Integer> chatFirstReceivedMessageIdMap;
 
-    private static final Map<Integer, ObservableList<Message>> chatListMessagesMap = new HashMap<>();
+    private static AllChatsPaneController allChatsController;
+    private static ChatManagerFactory chatManagerFactory;
+    private static ChatPaneFactory chatPaneFactory;
+
+    private static Map<Integer, ObservableList<Message>> chatListMessagesMap ;
 
     private CurrentUser() throws RemoteException {
         super();
@@ -42,6 +40,10 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         if(token != null && !token.isBlank()){
             this.phoneNumber = RemoteManager.getInstance().getPhoneNumberByToken(token);
         }
+        chatManagerFactory = new ChatManagerFactory();
+        chatPaneFactory = new ChatPaneFactory();
+        chatListMessagesMap = new HashMap<>();
+        chatFirstReceivedMessageIdMap = new HashMap<>();
     }
     public static CurrentUser getInstance() throws RemoteException {
         if (instance == null) {
@@ -50,9 +52,6 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         return instance;
     }
 
-    public static void reset(){
-        instance = null;
-    }
 
     @Override
     public void receiveNotification(String title, String message) throws RemoteException {
@@ -67,25 +66,36 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     public void receiveMessage(MessageDTO messageDTO) throws RemoteException {
         MessageMapper mapper = MessageMapper.INSTANCE;
         Message receivedMessage = mapper.messageDtoToMessage(messageDTO);
+        if(receivedMessage.getChatId()!=chatManagerFactory.getActiveChatID()){
+            String notificationMessage = messageDTO.getContent();
+            if(notificationMessage.length()>40)
+                notificationMessage = messageDTO.getContent().substring(0,40)+"...";
+            NotificationsManager.showMessageNotification("You have a new message",
+                    chatManagerFactory.getChatManager(messageDTO.getChatId()).
+                            getChatCardController().getChatName()+": "+notificationMessage);
+        }
+
         ChatCardHandler.updateChatCard(receivedMessage);
         int chatID = messageDTO.getChatId();
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
         chatListMessagesMap.get(chatID).add(receivedMessage);
+        chatFirstReceivedMessageIdMap.putIfAbsent(chatID,receivedMessage.getMessageId());
         if(ChatBot.isEnabled()){
             ExecutorService executorService = Executors.newSingleThreadExecutor();
             executorService.submit(()->{
-                String chatBotMessage = ChatBot.call(receivedMessage.getContent());
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     System.out.println(e.getMessage());
                 }
-                ChatController controller = chatManagerFactory.getChatManager(chatID).getChatController();
-                Platform.runLater(()->controller.sendChatBotMessage(chatBotMessage));
+                try {
+                    ChatBot.replyToMessage(receivedMessage);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             });
         }
     }
-
 
     public static ObservableList<Message> getMessageList(int chatID) {
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
@@ -95,7 +105,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     @Override
     public void forceLogout() throws RemoteException {
         RemoteManager.reset();
-        CurrentUser.reset();
+        CurrentUser.resetAllData();
         Platform.runLater(() ->{
             CurrentUser.getAllChatsController().clearChatsCardList();
             CurrentUser.getChatManagerFactory().clearChatManagersMap();
@@ -140,5 +150,20 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     public static ChatPaneFactory getChatPaneFactory() {
         return chatPaneFactory;
+    }
+
+    public static Integer getChatFirstReceivedMessageId(int chatId) {
+        return chatFirstReceivedMessageIdMap.get(chatId);
+    }
+
+    public static void resetAllData(){
+        chatListMessagesMap.clear();
+        chatFirstReceivedMessageIdMap.clear();
+        allChatsController.clearChatsCardList();
+        chatManagerFactory.clearChatManagersMap();
+        chatManagerFactory.setActiveChatID(0);
+        chatPaneFactory.clearChats();
+        chatManagerFactory.clearContactsManagersMap();
+        instance = null;
     }
 }

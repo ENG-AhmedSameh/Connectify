@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 <AnchorPane style="-fx-background-color: transparent;" styleClass="chat-HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="350.0" spacing="10.0">

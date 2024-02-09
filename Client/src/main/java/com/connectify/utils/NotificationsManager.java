@@ -3,9 +3,9 @@ package com.connectify.utils;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.controlsfx.control.Notifications;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import org.controlsfx.control.Notifications;
 
 public class NotificationsManager {
 
@@ -13,6 +13,18 @@ public class NotificationsManager {
         Platform.runLater(() -> {
             playServerNotificationSound();
             Image icon = new Image(NotificationsManager.class.getResource("/images/notification.png").toString());
+            Notifications.create()
+                    .title(title)
+                    .text(body)
+                    .graphic(new ImageView(icon))
+                    .threshold(3, Notifications.create().title("Collapsed Notification"))
+                    .show();
+        });
+    }
+    public static void showMessageNotification(String title, String body){
+        Platform.runLater(() -> {
+            playServerNotificationSound();
+            Image icon = new Image(NotificationsManager.class.getResource("/images/message-notification.png").toString());
             Notifications.create()
                     .title(title)
                     .text(body)

@@ -6,6 +6,8 @@ import com.connectify.model.entities.Message;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface MessageMapper {
     MessageMapper INSTANCE = Mappers.getMapper(MessageMapper.class);
@@ -15,4 +17,7 @@ public interface MessageMapper {
     Message messageDtoToMessage(MessageDTO messageDTO);
     MessageDTO messageToMessageDto(Message message);
 
+    List<MessageDTO> messageListToMessageDtoList(List<Message> allChatMessages);
+
+    List<Message> messageDtoListToMessageList(List<MessageDTO> historyMeessageDtoList);
 }

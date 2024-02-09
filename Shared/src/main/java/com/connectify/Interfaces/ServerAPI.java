@@ -1,18 +1,10 @@
 package com.connectify.Interfaces;
 
 
-import com.connectify.dto.ContactsDTO;
-import com.connectify.dto.LoginRequest;
-import com.connectify.dto.LoginResponse;
-import com.connectify.dto.SignUpRequest;
-import com.connectify.dto.*;
 import com.connectify.dto.*;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
-import javafx.scene.paint.Color;
-import com.connectify.model.entities.Attachments;
 
-import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -70,6 +62,8 @@ public interface ServerAPI extends Remote{
     boolean updateUserModeAndStatus(String phoneNumber,Mode mode, Status status) throws RemoteException;
 
     boolean createGroup(List<ContactsDTO> contactsDTOS, String groupName, String groupDescription, byte[] image) throws RemoteException;
+
+    List<MessageDTO> getAllChatMessages(int chatID,Integer idLimit) throws RemoteException;
 
     void sendPingBack(String phoneNumber) throws RemoteException;
 }

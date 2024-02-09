@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="solve conflict with dev after refactor current user">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="complete the validation of the signup screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/AllChatsPaneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/titleBarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/titleBarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/CurrentUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/CurrentUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/connectify/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ProfileEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ProfileEditorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/UserInformationValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/UserInformationValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="refractor" />
+        <entry key="$PROJECT_DIR$" value="add-offline-messages" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,7 +43,7 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="5c59d442-a3f4-4de2-8089-d8c2367575c8" />
+        <option name="accountId" value="6d6d482c-84e3-4485-8ec3-5a61edbd6f7e" />
         <option name="url" value="https://github.com/hazemkhaled98/Connectify" />
       </UrlAndAccount>
     </option>
@@ -74,14 +69,10 @@
   &quot;keyToString&quot;: {
     &quot;Application.Client.executor&quot;: &quot;Run&quot;,
     &quot;Application.Server.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Client [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Connectify [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Connectify [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Shared [install].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;gui-enhancement&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;F:/ITI Courses/JAVA/Advanced JavaFx/Labs/Day 1/D01L01&quot;,
@@ -94,7 +85,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -132,6 +123,36 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.connectify.Client" />
+      <module name="Client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.connectify.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.connectify.Server" />
+      <module name="Server" />
       <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
         <option name="credential" />
         <option name="region" />
@@ -227,25 +248,9 @@
       <workItem from="1706864333925" duration="1496000" />
       <workItem from="1706873946880" duration="26929000" />
       <workItem from="1706943313550" duration="44525000" />
-      <workItem from="1707116460534" duration="26670000" />
-      <workItem from="1707146722041" duration="4666000" />
-      <workItem from="1707156037442" duration="634000" />
-      <workItem from="1707158624004" duration="926000" />
-      <workItem from="1707159637911" duration="708000" />
-      <workItem from="1707197811875" duration="1358000" />
-      <workItem from="1707199182999" duration="3928000" />
-      <workItem from="1707203164525" duration="56000" />
-      <workItem from="1707203235748" duration="1121000" />
-      <workItem from="1707220062479" duration="6377000" />
-      <workItem from="1707228519189" duration="28000" />
-      <workItem from="1707228560972" duration="6072000" />
-      <workItem from="1707235399829" duration="3857000" />
-      <workItem from="1707246944376" duration="770000" />
-      <workItem from="1707248177073" duration="37000" />
-      <workItem from="1707285157131" duration="38629000" />
-      <workItem from="1707331850599" duration="204000" />
-      <workItem from="1707332486484" duration="17000" />
-      <workItem from="1707333194203" duration="2451000" />
+      <workItem from="1707325724627" duration="6457000" />
+      <workItem from="1707335983091" duration="47940000" />
+      <workItem from="1707485175919" duration="1396000" />
     </task>
     <task id="LOCAL-00001" summary="try merging DB layer">
       <option name="closed" value="true" />
@@ -375,159 +380,103 @@
       <option name="project" value="LOCAL" />
       <updated>1706987890783</updated>
     </task>
-    <task id="LOCAL-00017" summary="fixed code country bug on invitations">
+    <task id="LOCAL-00017" summary="fixed bugs in group creation and closing the server">
       <option name="closed" value="true" />
-      <created>1707070979511</created>
+      <created>1707304074533</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1707070979511</updated>
+      <updated>1707304074533</updated>
     </task>
-    <task id="LOCAL-00018" summary="reset user properties">
+    <task id="LOCAL-00018" summary="solved problems in accepting invitation">
       <option name="closed" value="true" />
-      <created>1707071606485</created>
+      <created>1707316637705</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1707071606485</updated>
+      <updated>1707316637706</updated>
     </task>
-    <task id="LOCAL-00019" summary="handle server down on client side">
+    <task id="LOCAL-00019" summary="added chatBot functionality">
       <option name="closed" value="true" />
-      <created>1707131622388</created>
+      <created>1707329085304</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1707131622388</updated>
+      <updated>1707329085305</updated>
     </task>
-    <task id="LOCAL-00020" summary="add attachment logic">
+    <task id="LOCAL-00020" summary="before merge">
       <option name="closed" value="true" />
-      <created>1707139708987</created>
+      <created>1707331010583</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1707139708987</updated>
+      <updated>1707331010583</updated>
     </task>
-    <task id="LOCAL-00021" summary="fixed get attachment in thread">
+    <task id="LOCAL-00021" summary="load stored messages">
       <option name="closed" value="true" />
-      <created>1707140192809</created>
+      <created>1707345390824</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1707140192809</updated>
+      <updated>1707345390824</updated>
     </task>
-    <task id="LOCAL-00022" summary="add notifications for contacts on log in and log out">
+    <task id="LOCAL-00022" summary="sort the message in the messages list view">
       <option name="closed" value="true" />
-      <created>1707147073013</created>
+      <created>1707346001482</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1707147073013</updated>
+      <updated>1707346001482</updated>
     </task>
-    <task id="LOCAL-00023" summary="add remote manager &amp; notifications on log in and out">
+    <task id="LOCAL-00023" summary="make auto scroll in chat(with bug)">
       <option name="closed" value="true" />
-      <created>1707153665450</created>
+      <created>1707349336851</created>
       <option name="number" value="00023" />
       <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
-      <updated>1707153665450</updated>
+      <updated>1707349336851</updated>
     </task>
-    <task id="LOCAL-00024" summary="add unregister from server on exit request">
+    <task id="LOCAL-00024" summary="fix gui bugs">
       <option name="closed" value="true" />
-      <created>1707159536440</created>
+      <created>1707394215080</created>
       <option name="number" value="00024" />
       <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1707159536440</updated>
+      <updated>1707394215080</updated>
     </task>
-    <task id="LOCAL-00025" summary="handled send file server logic">
+    <task id="LOCAL-00025" summary="enhance the main screen colors and sizes">
       <option name="closed" value="true" />
-      <created>1707202024625</created>
+      <created>1707400352474</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1707202024625</updated>
+      <updated>1707400352474</updated>
     </task>
-    <task id="LOCAL-00026" summary="add placeholder file to create attachments folder">
+    <task id="LOCAL-00026" summary="enhance the chat screen with small bug in text area">
       <option name="closed" value="true" />
-      <created>1707202995783</created>
+      <created>1707405455222</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1707202995783</updated>
+      <updated>1707405455222</updated>
     </task>
-    <task id="LOCAL-00027" summary="edit notifications style">
+    <task id="LOCAL-00027" summary="fix bugs in logout and chat bot">
       <option name="closed" value="true" />
-      <created>1707204305240</created>
+      <created>1707472528293</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1707204305240</updated>
+      <updated>1707472528293</updated>
     </task>
-    <task id="LOCAL-00028" summary="handled server down log in log out bugs">
+    <task id="LOCAL-00028" summary="complete the validation of the signup screen">
       <option name="closed" value="true" />
-      <created>1707224285693</created>
+      <created>1707483321168</created>
       <option name="number" value="00028" />
       <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1707224285693</updated>
+      <updated>1707483321168</updated>
     </task>
-    <task id="LOCAL-00029" summary="add receive attachment">
-      <option name="closed" value="true" />
-      <created>1707234660887</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1707234660887</updated>
-    </task>
-    <task id="LOCAL-00030" summary="add receive attachment front end files">
-      <option name="closed" value="true" />
-      <created>1707234684652</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1707234684652</updated>
-    </task>
-    <task id="LOCAL-00031" summary="fixed append message in sender chat">
-      <option name="closed" value="true" />
-      <created>1707235950926</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1707235950926</updated>
-    </task>
-    <task id="LOCAL-00032" summary="add file sharing">
-      <option name="closed" value="true" />
-      <created>1707239513295</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1707239513295</updated>
-    </task>
-    <task id="LOCAL-00033" summary="fixed remote manager">
-      <option name="closed" value="true" />
-      <created>1707247646449</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1707247646449</updated>
-    </task>
-    <task id="LOCAL-00034" summary="refactor current user">
-      <option name="closed" value="true" />
-      <created>1707331101172</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1707331101172</updated>
-    </task>
-    <task id="LOCAL-00035" summary="solve conflict with dev after refactor current user">
-      <option name="closed" value="true" />
-      <created>1707331669234</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1707331669234</updated>
-    </task>
-    <option name="localTasksCounter" value="36" />
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,32 +494,61 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="add ConnectedUser" />
+    <MESSAGE value="merged with stage manager" />
+    <MESSAGE value="merged with stage manager ." />
+    <MESSAGE value="added chat_id to chatController" />
+    <MESSAGE value="send message back end" />
+    <MESSAGE value="add prepare current chat (handle logic in DB)" />
     <MESSAGE value="make chat and chat's card observable using list views and observable variables" />
     <MESSAGE value="implement sent message logic" />
     <MESSAGE value="implement sent message logic2" />
     <MESSAGE value="update chat card information on receiving message" />
     <MESSAGE value="Agmal Commit Elnaharda" />
     <MESSAGE value="update chat card displayed details when user send message" />
-    <MESSAGE value="fixed code country bug on invitations" />
-    <MESSAGE value="reset user properties" />
-    <MESSAGE value="handle server down on client side" />
-    <MESSAGE value="add attachment logic" />
-    <MESSAGE value="fixed get attachment in thread" />
-    <MESSAGE value="add notifications for contacts on log in and log out" />
-    <MESSAGE value="add remote manager &amp; notifications on log in and out" />
-    <MESSAGE value="add unregister from server on exit request" />
-    <MESSAGE value="handled send file server logic" />
-    <MESSAGE value="add placeholder file to create attachments folder" />
-    <MESSAGE value="edit notifications style" />
-    <MESSAGE value="handled server down log in log out bugs" />
-    <MESSAGE value="add receive attachment" />
-    <MESSAGE value="add receive attachment front end files" />
-    <MESSAGE value="fixed append message in sender chat" />
-    <MESSAGE value="add file sharing" />
-    <MESSAGE value="fixed remote manager" />
-    <MESSAGE value="refactor current user" />
-    <MESSAGE value="solve conflict with dev after refactor current user" />
-    <option name="LAST_COMMIT_MESSAGE" value="solve conflict with dev after refactor current user" />
+    <MESSAGE value="fixed bugs in group creation and closing the server" />
+    <MESSAGE value="solved problems in accepting invitation" />
+    <MESSAGE value="added chatBot functionality" />
+    <MESSAGE value="before merge" />
+    <MESSAGE value="load stored messages" />
+    <MESSAGE value="sort the message in the messages list view" />
+    <MESSAGE value="make auto scroll in chat(with bug)" />
+    <MESSAGE value="gui problems" />
+    <MESSAGE value="fix gui bugs" />
+    <MESSAGE value="enhance the main screen colors and sizes" />
+    <MESSAGE value="enhance the chat screen with small bug in text area" />
+    <MESSAGE value="fix bugs in logout and chat bot" />
+    <MESSAGE value="complete the validation of the signup screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete the validation of the signup screen" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/MessageDAOImpl.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/GroupMessageHBoxController.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="8" />
+        </breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="76" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.connectify.utils.CurrentUser" memberName="ref" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

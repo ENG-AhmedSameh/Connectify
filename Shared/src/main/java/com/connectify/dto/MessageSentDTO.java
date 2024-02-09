@@ -1,6 +1,5 @@
 package com.connectify.dto;
 
-import java.io.File;
 import java.io.Serializable;
 import java.sql.Timestamp;
 

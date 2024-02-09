@@ -1,19 +1,15 @@
 package com.connectify.app;
 
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Interfaces.ServerAPI;
-import com.connectify.utils.*;
+import com.connectify.utils.CurrentUser;
+import com.connectify.utils.PropertiesManager;
+import com.connectify.utils.RemoteManager;
+import com.connectify.utils.StageManager;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.util.Properties;
 
 public class Client extends Application {
     private static Stage primaryStage;
@@ -21,6 +17,8 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
+        primaryStage.setTitle("Connectify");
         StageManager.getInstance().switchToLogin();
         primaryStage.show();
         String autoLogin = PropertiesManager.getInstance().getAutoLogin();

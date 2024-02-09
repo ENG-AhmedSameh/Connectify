@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.web.*?>
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.web.WebView?>
 <HBox fx:id="userMessageBox" alignment="TOP_RIGHT" prefHeight="85.0" prefWidth="392.0" styleClass="user-message" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <WebView prefHeight="65.0" prefWidth="282.0" styleClass="contact-message">

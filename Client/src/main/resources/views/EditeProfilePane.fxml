@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane fx:id="editeProfilePane" styleClass="anchor-pane" stylesheets="@../styles/Profile.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ProfileEditorController">
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="editeProfilePane" styleClass="anchor-pane" stylesheets="@../styles/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ProfileEditorController">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="24.799999237060547" layoutY="11.199999809265137" stylesheets="@../styles/Profile.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <AnchorPane>
+            <AnchorPane styleClass="anchor-pane" stylesheets="@../styles/Profile.css">
                <children>
                   <VBox alignment="CENTER" fillWidth="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -30,8 +29,8 @@
                                     <Circle fx:id="userImg" fill="DODGERBLUE" onMouseClicked="#profileImageOnMouseClicked" radius="64.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="circle" />
                                  </children>
                               </HBox>
-                              <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="450.0" promptText="bio" styleClass="text-area" stylesheets="@../styles/Profile.css" text="I am happy." />
-                              <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" text="01143414035" />
+                              <TextArea fx:id="bioTextArea" prefHeight="200.0" prefWidth="450.0" promptText="bio" styleClass="text-area" stylesheets="@../styles/Profile.css" />
+                              <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" stylesheets="@../styles/Profile.css" text="01143414035" />
                               <TextField fx:id="emailTxtF" blendMode="SCREEN" prefHeight="29.0" prefWidth="407.0" promptText="E-mail" styleClass="text-field" text="Nofal@gimal.com" VBox.vgrow="NEVER" />
                               <TextField fx:id="nameTxtF" blendMode="SCREEN" prefHeight="28.0" prefWidth="402.0" promptText="Display Name" styleClass="text-field" text="Mohamed Nofal" VBox.vgrow="NEVER" />
                               <PasswordField fx:id="passwordPassF" blendMode="SCREEN" prefHeight="29.0" prefWidth="427.0" promptText="New Password" styleClass="text-field" VBox.vgrow="NEVER" />

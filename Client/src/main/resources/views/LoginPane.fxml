@@ -64,7 +64,7 @@
                     </HBox>
                 </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: #2f6ea5; -fx-background-radius: 10px; -fx-cursor: hand;" text="Login" textFill="WHITE">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: #2f6ea5; -fx-background-radius: 10px; -fx-cursor: hand;" text="Login" textFill="WHITE">
                 <font>
                     <Font name="Bodoni MT Italic" size="12.0" />
                 </font>

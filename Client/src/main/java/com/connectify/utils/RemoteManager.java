@@ -3,21 +3,14 @@ package com.connectify.utils;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.*;
-
-import javafx.application.Platform;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
-import org.controlsfx.control.Notifications;
+import javafx.application.Platform;
 
-
-import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -492,5 +485,19 @@ public class RemoteManager {
         NotificationsManager.showErrorNotification();
         server = null;
         Platform.runLater(() -> StageManager.getInstance().switchToLogin());
+    }
+
+    public List<MessageDTO> getAllChatMessages(int chatID,Integer idLimit) {
+        if(isServerDown()){
+            reset();
+            return null;
+        }
+        try {
+            return server.getAllChatMessages(chatID,idLimit);
+        } catch (RemoteException e) {
+            handleServerDown();
+            System.err.println("Remote Exception: " + e.getMessage());
+            return null;
+        }
     }
 }

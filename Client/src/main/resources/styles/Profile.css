@@ -51,7 +51,13 @@
 .text-area{
     -fx-control-inner-background: -fx-blueGray;
     -fx-border-color:  -fx-blue;
-    -fx-text-fill:  #FFFFFF;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: grey;
+}
+.text-area .content {
+    -fx-background-color: -fx-blueGray;
+    -fx-prompt-text-fill: white;
+    -fx-border-color: transparent;
 }
 
 .button:hover {

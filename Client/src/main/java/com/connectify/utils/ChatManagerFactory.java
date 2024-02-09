@@ -29,6 +29,9 @@ public class ChatManagerFactory {
     public void clearChatManagersMap(){
         chatManagersMap.clear();
     }
+    public void clearContactsManagersMap(){
+        contactsChatManager.clear();
+    }
     public ChatManager getContactChatManager(String phoneNumber){
         if(contactsChatManager.containsKey(phoneNumber))
             return contactsChatManager.get(phoneNumber);

@@ -2,7 +2,6 @@ package com.connectify.loaders;
 
 import com.connectify.controller.ChatCardController;
 import com.connectify.utils.ChatManager;
-import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.CurrentUser;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;

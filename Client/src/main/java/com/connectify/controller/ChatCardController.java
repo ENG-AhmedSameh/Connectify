@@ -157,7 +157,10 @@ public class ChatCardController implements Initializable {
     }
     public void updateUnreadMessagesNumber(){
         if(CurrentUser.getChatManagerFactory().getActiveChatID()!=chatId)
+        {
+            nChatUnreadMessagesLabel.setVisible(true);
             this.unread.setValue(unread.getValue()+1);
+        }
     }
     public int getUnreadMessagesNumber() {
         return this.unread.get();

@@ -1,8 +1,6 @@
 package com.connectify.model.dao;
 
 import com.connectify.dto.ChatCardsInfoDTO;
-import com.connectify.dto.MemberInfoDTO;
-import com.connectify.mapper.MemberInfoMapper;
 import com.connectify.model.entities.ChatMember;
 import com.connectify.model.entities.User;
 

@@ -41,7 +41,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <mainClass>com.connectify.app.App</mainClass>
+    <mainClass>com.connectify.app.ClientApp</mainClass>
   </properties>
 </project>
 

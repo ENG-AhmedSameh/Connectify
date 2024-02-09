@@ -48,7 +48,7 @@
             </VBox>
             <VBox alignment="CENTER" spacing="10.0" VBox.vgrow="NEVER">
                <children>
-                  <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#signUpBtnHandler" prefHeight="30.0" prefWidth="444.0" style="-fx-cursor: hand;" stylesheets="@../styles/SignUp.css" text="Sign Up" />
+                  <Button fx:id="signUpBtn" defaultButton="true" mnemonicParsing="false" onAction="#signUpBtnHandler" prefHeight="30.0" prefWidth="444.0" style="-fx-cursor: hand;" stylesheets="@../styles/SignUp.css" text="Sign Up" />
                   <Label contentDisplay="RIGHT" prefHeight="20.0" prefWidth="232.0" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="Already have an account ?  ">
                      <font>
                         <Font size="14.0" />

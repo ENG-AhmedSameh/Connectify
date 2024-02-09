@@ -1,7 +1,7 @@
 package com.connectify.app;
 
-public class App {
+public class ServerApp {
     public static void main(String[] args) {
-        Client.main(args);
+        Server.main(args);
     }
 }

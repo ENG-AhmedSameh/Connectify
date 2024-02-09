@@ -1,6 +1,5 @@
 package com.connectify.loaders;
 
-import com.connectify.controller.AddFriendCardController;
 import com.connectify.controller.IncomingFriendRequestCardController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
