@@ -89,10 +89,7 @@ public class OptionsController {
             System.err.println("Error while logging out: " + e.getMessage());
         }
         PropertiesManager.getInstance().setUserCredentials("false");
-        CurrentUser.getAllChatsController().clearChatsCardList();
-        CurrentUser.getChatManagerFactory().clearChatManagersMap();
-        CurrentUser.getChatPaneFactory().clearChats();
-        CurrentUser.reset();
+        CurrentUser.resetAllData();
         RemoteManager.reset();
         StageManager.getInstance().resetHomeScene();
         StageManager.getInstance().switchToLogin();

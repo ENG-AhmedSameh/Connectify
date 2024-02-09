@@ -1,11 +1,17 @@
 package com.connectify.utils;
 
+import com.connectify.dto.MessageSentDTO;
+import com.connectify.mapper.MessageMapper;
+import com.connectify.model.entities.Message;
 import com.google.code.chatterbotapi.ChatterBot;
 import com.google.code.chatterbotapi.ChatterBotFactory;
 import com.google.code.chatterbotapi.ChatterBotSession;
 import com.google.code.chatterbotapi.ChatterBotType;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+
+import java.rmi.RemoteException;
+import java.sql.Timestamp;
 
 public class ChatBot {
     private static BooleanProperty enabled = new SimpleBooleanProperty(false);
@@ -25,6 +31,15 @@ public class ChatBot {
             System.err.println(errorMessage);
             return "Sorry, I don't have an answer to that";
         }
+    }
+
+    public static void replyToMessage(Message receivedMessage) throws RemoteException {
+        String replyContent = call(receivedMessage.getContent());
+        MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(),receivedMessage.getChatId(),replyContent,new Timestamp(System.currentTimeMillis()), null);
+        Message replyMessage = MessageMapper.INSTANCE.messageSentDtoTOMessage(messageSentDTO);
+        CurrentUser.getMessageList(receivedMessage.getChatId()).add(replyMessage);
+        ChatCardHandler.updateChatCard(replyMessage);
+        RemoteManager.getInstance().sendMessage(messageSentDTO);
     }
 
     public static boolean isEnabled() {

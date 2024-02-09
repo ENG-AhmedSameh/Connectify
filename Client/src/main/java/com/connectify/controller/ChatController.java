@@ -135,7 +135,7 @@ public class ChatController implements Initializable {
         messages.addListener((ListChangeListener<Message>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
-                    messagesList.scrollTo(messagesList.getItems().size()*2);
+                    //messagesList.scrollTo(messagesList.getItems().size()*2);
                 }
             }
         });
@@ -162,14 +162,6 @@ public class ChatController implements Initializable {
             } catch (RemoteException e) {
                 System.err.println("Can't find server, details: "+e.getMessage());
             }
-        }
-    }
-    public void sendChatBotMessage(String content){
-        try {
-            MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(),chatID,content,new Timestamp(System.currentTimeMillis()), null);
-            appendMessage(messageSentDTO);
-        } catch (RemoteException e) {
-            System.err.println("Can't find server, details: "+e.getMessage());
         }
     }
 
