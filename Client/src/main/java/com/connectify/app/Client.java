@@ -1,4 +1,4 @@
-package com.connectify;
+package com.connectify.app;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;

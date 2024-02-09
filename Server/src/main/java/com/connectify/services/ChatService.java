@@ -1,13 +1,12 @@
 package com.connectify.services;
 
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Server;
+import com.connectify.app.Server;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.dto.MemberInfoDTO;
 import com.connectify.dto.MessageDTO;
 import com.connectify.mapper.ChatMemberMapper;
 import com.connectify.mapper.MemberInfoMapper;
-import com.connectify.mapper.MemberInfoMapperImpl;
 import com.connectify.model.dao.ChatDAO;
 import com.connectify.model.dao.ChatMembersDAO;
 import com.connectify.model.dao.impl.ChatDAOImpl;

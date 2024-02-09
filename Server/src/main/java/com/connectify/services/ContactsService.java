@@ -1,6 +1,6 @@
 package com.connectify.services;
 
-import com.connectify.Server;
+import com.connectify.app.Server;
 import com.connectify.model.dao.ContactsDAO;
 import com.connectify.model.dao.impl.ContactsDAOImpl;
 import com.connectify.model.enums.Status;

@@ -1,6 +1,5 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.dto.SignUpResponse;

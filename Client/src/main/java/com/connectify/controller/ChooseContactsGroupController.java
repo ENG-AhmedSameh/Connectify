@@ -1,6 +1,5 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
 import com.connectify.dto.ContactsDTO;
 import com.connectify.dto.UserProfileResponse;
 import com.connectify.loaders.ChooseContactCardLoader;

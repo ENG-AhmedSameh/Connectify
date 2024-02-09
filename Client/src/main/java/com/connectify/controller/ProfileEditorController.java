@@ -1,10 +1,7 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.UpdateUserInfoRequest;
 import com.connectify.dto.UserProfileResponse;
-import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
@@ -28,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Objects;
 import java.util.ResourceBundle;

@@ -3,7 +3,7 @@ package com.connectify.controller;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
-import com.connectify.Server;
+import com.connectify.app.Server;
 import com.connectify.dto.*;
 import com.connectify.services.*;
 import com.connectify.model.entities.User;
@@ -18,7 +18,6 @@ import com.connectify.dto.LoginResponse;
 import com.connectify.dto.SignUpRequest;
 import com.connectify.utils.TokenGenerator;
 
-import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;

@@ -1,15 +1,9 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ChatCardsInfoDTO;
-import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ChatCardLoader;
 import com.connectify.loaders.ViewLoader;
-import com.connectify.mapper.ChatMemberMapper;
-import com.connectify.model.entities.ChatMember;
 import com.connectify.utils.ChatBot;
-import com.connectify.utils.ChatManagerFactory;
 import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import javafx.application.Platform;
@@ -20,16 +14,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;

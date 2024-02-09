@@ -1,10 +1,6 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
-import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.ContactsDTO;
-import com.connectify.loaders.ChatCardLoader;
-import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
 import javafx.event.ActionEvent;
@@ -23,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
 

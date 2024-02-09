@@ -1,7 +1,7 @@
 package com.connectify.controller.fxmlcontrollers;
 
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Server;
+import com.connectify.app.Server;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;

@@ -1,6 +1,6 @@
 package com.connectify.controller.fxmlcontrollers;
 
-import com.connectify.Server;
+import com.connectify.app.Server;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;

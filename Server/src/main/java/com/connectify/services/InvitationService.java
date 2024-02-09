@@ -1,7 +1,7 @@
 package com.connectify.services;
 
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Server;
+import com.connectify.app.Server;
 import com.connectify.controller.ServerController;
 import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.IncomingFriendInvitationResponse;

@@ -1,9 +1,6 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ContactsDTO;
-import com.connectify.loaders.ChatCardLoader;
 import com.connectify.loaders.ContactCardLoader;
 import com.connectify.mapper.ContactMapper;
 import com.connectify.model.entities.User;
@@ -20,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;

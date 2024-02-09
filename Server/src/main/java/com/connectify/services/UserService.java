@@ -1,7 +1,7 @@
 package com.connectify.services;
 
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Server;
+import com.connectify.app.Server;
 import com.connectify.dto.ImageBioChangeRequest;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;

@@ -1,13 +1,10 @@
 package com.connectify.controller;
 
 
-import com.connectify.Client;
 import com.connectify.Interfaces.ConnectedUser;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.LoginRequest;
 import com.connectify.dto.LoginResponse;
 import com.connectify.utils.*;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,9 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 

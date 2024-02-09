@@ -1,9 +1,6 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.UserProfileResponse;
-import com.connectify.loaders.ViewLoader;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
@@ -21,7 +18,6 @@ import javafx.scene.shape.Circle;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 

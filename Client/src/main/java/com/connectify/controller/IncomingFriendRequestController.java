@@ -1,7 +1,5 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.IncomingFriendInvitationResponse;
 import com.connectify.loaders.IncomingFriendRequestCardLoader;
 import com.connectify.utils.CurrentUser;
@@ -16,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;

@@ -10,12 +10,12 @@ module Client {
     requires chatter.bot.api;
     requires javafx.media;
 
-    opens com.connectify;
     opens com.connectify.loaders;
     opens com.connectify.controller;
     opens com.connectify.utils;
-    exports com.connectify;
     exports com.connectify.loaders;
     exports com.connectify.controller;
     exports com.connectify.utils;
+    exports com.connectify.app;
+    opens com.connectify.app;
 }

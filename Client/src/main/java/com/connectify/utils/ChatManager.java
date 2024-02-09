@@ -1,6 +1,5 @@
 package com.connectify.utils;
 
-import com.connectify.Client;
 import com.connectify.controller.ChatCardController;
 import com.connectify.controller.ChatController;
 import com.connectify.dto.MemberInfoDTO;

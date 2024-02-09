@@ -1,7 +1,5 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
-import com.connectify.Interfaces.ServerAPI;
 import com.connectify.dto.ImageBioChangeRequest;
 import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
@@ -15,7 +13,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
 import java.io.*;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class ImageBioController {

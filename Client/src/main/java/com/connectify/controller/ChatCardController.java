@@ -1,10 +1,7 @@
 package com.connectify.controller;
 
-import com.connectify.Client;
 import com.connectify.dto.ChatMemberDTO;
 import com.connectify.loaders.ViewLoader;
-import com.connectify.utils.ChatManagerFactory;
-import com.connectify.utils.ChatPaneFactory;
 import com.connectify.utils.CurrentUser;
 import com.connectify.utils.ImageConverter;
 import com.connectify.utils.RemoteManager;
@@ -13,15 +10,12 @@ import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
