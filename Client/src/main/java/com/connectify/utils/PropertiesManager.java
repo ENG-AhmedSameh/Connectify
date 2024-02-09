@@ -1,14 +1,16 @@
 package com.connectify.utils;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class PropertiesManager {
 
     private static PropertiesManager instance;
-
-    private static final String TOKEN_FILE = System.getProperty("user.dir") + File.separator + "classes" + File.separator + "user.properties";
-    private static final String LOGIN_FILE = System.getProperty("user.dir") + File.separator + "classes" + File.separator + "login.properties";
+    String TOKEN_FILE = System.getProperty("user.dir") + File.separator + "config" + File.separator + "user.properties";
+    String LOGIN_FILE = System.getProperty("user.dir") + File.separator + "config" + File.separator + "login.properties";
     private static final String TOKEN_KEY = "token";
     private static final String AUTO_LOGIN_KEY = "autoLogin";
     private static final String PHONE_NUMBER_KEY = "phoneNumber";
@@ -22,6 +24,15 @@ public class PropertiesManager {
     private PropertiesManager() {
         tokenProperties = new Properties();
         loginProperties = new Properties();
+        String pathString = System.getProperty("user.dir") + File.separator + "config";
+        Path path = Paths.get(pathString);
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException e) {
+                System.err.println("Failed to create config directory");
+            }
+        }
         loadProperties();
     }
 
