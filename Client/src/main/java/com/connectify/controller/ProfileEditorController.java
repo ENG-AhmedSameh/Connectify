@@ -9,6 +9,7 @@ import com.connectify.util.PasswordManager;
 import com.connectify.utils.CurrentUser;
 import com.connectify.utils.RemoteManager;
 import com.connectify.utils.StageManager;
+import com.connectify.utils.UserInformationValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -112,72 +113,13 @@ public class ProfileEditorController implements Initializable {
 
     @FXML
     void handleCancelAction(ActionEvent event) {
-        StageManager.getInstance().switchFromProfileEditorToHome();
+        StageManager.getInstance().switchToProfile();
     }
 
-    private void validateFields() {
-        validateName();
-        validateEmail();
-//        validatePassword();
-    }
-
-    private boolean validatePassword() {
-        if (!Objects.equals(passwordPassF.getText(), confirmPasswordPassF.getText())) {
-            confirmPasswordPassF.setStyle("-fx-border-color: red;");
-            confirmPasswordPassF.setTooltip(hintText("Doesn't match the password in the first field"));
-            return false;
-        } else {
-            confirmPasswordPassF.setStyle(txtFieldsOriginalStyle);
-            confirmPasswordPassF.setTooltip(null);
-            return true;
-        }
-    }
-
-    private void validateName() {
-        String name = nameTxtF.getText();
-        if (name.isEmpty()) {
-            validInformation = false;
-            nameTxtF.setTooltip(hintText("You must Enter your Name"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        } else if (name.length() > 50) {
-            nameTxtF.setTooltip(hintText("Name is too long"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        } else if (!name.matches("^[a-zA-Z]+(?:\\s[a-zA-Z]+){0,4}$")) {
-            nameTxtF.setTooltip(new Tooltip("Name must contains only english characters and maximum 4 spaces"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        } else {
-            nameTxtF.setStyle(txtFieldsOriginalStyle);
-            nameTxtF.setTooltip(null);
-        }
-    }
-
-    private void validateEmail() {
-        if (emailTxtF.getText().matches("[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}")) {
-            emailTxtF.setStyle(txtFieldsOriginalStyle);
-            emailTxtF.setTooltip(null);
-        } else {
-            emailTxtF.setStyle("-fx-border-color: red;");
-            if (emailTxtF.getText().isEmpty())
-                emailTxtF.setTooltip(hintText("You must enter your email"));
-            else
-                emailTxtF.setTooltip(hintText("Enter a valid email"));
-        }
-    }
-
-    private Tooltip hintText(String text) {
-        Tooltip tooltip = new Tooltip();
-        tooltip.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: rgba(241,241,241,1); -fx-text-fill: black; -fx-background-radius: 4; -fx-border-radius: 4; -fx-opacity: 1.0;");
-        tooltip.setAutoHide(false);
-        tooltip.setMaxWidth(300);
-        tooltip.setWrapText(true);
-        tooltip.setText(text);
-        //tooltip.setGraphic(image);
-        return tooltip;
-    }
 
     @FXML
     void updateBtnHandler(ActionEvent event) {
-        validateFields();
+        boolean validInformation = UserInformationValidator.validateUpdateProfileForm(nameTxtF,emailTxtF);
         if (validInformation) {
             if (isUserInfoChanged()) {
                 UpdateUserInfoRequest updateUserInfoRequest = createUpdateUserInfoRequest();
@@ -188,15 +130,13 @@ public class ProfileEditorController implements Initializable {
                 boolean result = RemoteManager.getInstance().updateUserModeAndStatus(phoneNumTxtF.getText(),Mode.valueOf(modeComboBox.getValue()),Status.valueOf(statusComboBox.getValue()));
                 System.out.println("Update user mode and status: "+result);
             }
-
-            if (!passwordPassF.getText().isEmpty()) {
-                if (validatePassword()) {
+            if (!(Objects.equals(passwordPassF.getText(), ""))) {
+                boolean changeInPass = UserInformationValidator.validateUpdatedPassword(passwordPassF,confirmPasswordPassF);
+                if(changeInPass){
                     byte[] salt = PasswordManager.generateSalt();
                     String password = PasswordManager.encode(passwordPassF.getText(), salt);
                     boolean result = RemoteManager.getInstance().updateUserPassword(currentUserDetails.getPhoneNumber(), salt, password);
                     System.out.println("Update password result: " + result);
-                } else {
-                    return;
                 }
             }
 
@@ -206,7 +146,7 @@ public class ProfileEditorController implements Initializable {
             }
         }
 
-        StageManager.getInstance().switchFromProfileEditorToHome();
+        StageManager.getInstance().switchToProfile();
     }
 
     private boolean isModeOrStatusChanged() {

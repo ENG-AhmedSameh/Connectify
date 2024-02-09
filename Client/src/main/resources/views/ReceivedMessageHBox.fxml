@@ -13,11 +13,11 @@
    <children>
       <VBox maxWidth="590.0" minWidth="40.0" HBox.hgrow="NEVER">
          <children>
-            <TextFlow fx:id="contentTextFlow" maxWidth="445.0" style="-fx-background-radius: 10 10 0 0;" styleClass="contact-message" stylesheets="@../styles/Chat.css">
+            <TextFlow fx:id="contentTextFlow" maxWidth="445.0" style="-fx-background-radius: 10 10 0 0; -fx-background-color: #182732;" styleClass="contact-message" stylesheets="@../styles/Chat.css">
                <children>
                   <Text fx:id="messageContentText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial" size="13.0" />
                      </font></Text>
                </children>
                <padding>
@@ -40,6 +40,6 @@
       </VBox>
    </children>
    <padding>
-      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
    </padding>
 </HBox>

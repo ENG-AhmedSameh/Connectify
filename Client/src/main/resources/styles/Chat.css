@@ -1,9 +1,10 @@
 * {
     -fx-dark: #0e1621;
-    -fx-dark-blue: #182732;
+    -fx-dark-blue: #17212b;
     -fx-blue: #2a5379;
     -fx-gray: #4c5660;
     -fx-light: #e7e5e5;
+    -fx-test: #415A77
 }
 
 .chat-banner {
@@ -25,23 +26,25 @@
 }
 
 .list-view {
-    -fx-background-color: -fx-dark;
+    -fx-background-color: transparent;
 }
 
 .list-cell {
-    -fx-padding: -1px;
+    -fx-padding: -5px;
 }
 
 .list-view .list-cell:odd {
-    -fx-background-color: -fx-dark;
+    /*-fx-background-color: -fx-dark;*/
+    -fx-background-color: transparent;
 }
 
 .list-view .list-cell:even {
-    -fx-background-color: -fx-dark;
+    /*-fx-background-color: -fx-dark;*/
+    -fx-background-color: transparent;
 }
 
 .contact-message {
-    -fx-background-color: -fx-dark-blue;
+    -fx-background-color: transparent;
     -fx-text-fill: -fx-light;
     -fx-font-size: 15px;
     -fx-font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
@@ -82,6 +85,21 @@
     -fx-padding: 0;
 }
 
-.button .graphic {
-    -fx-background-color: transparent;
+.button:hover {
+    -fx-background-color: #202b36;
+}
+.text-area{
+    -fx-background-color: -fx-dark-blue ;
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+    -fx-text-fill: white;
+
+}
+.text-area .content {
+    -fx-background-color: -fx-dark-blue ;
+    -fx-border-color: transparent;
+}
+.text-area:focused .content {
+    -fx-background-color: -fx-dark-blue;
+    -fx-border-color: -fx-blue;
 }

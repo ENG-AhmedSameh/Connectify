@@ -1,12 +1,17 @@
 package com.connectify.controller;
 
 import com.connectify.dto.MessageSentDTO;
+import com.connectify.loaders.ChatCardLoader;
 import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import com.connectify.model.entities.User;
 import com.connectify.utils.*;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +20,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -35,8 +48,15 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.*;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 public class ChatController implements Initializable {
+
+    @FXML
+    private BorderPane chatsBorderPane;
 
     @FXML
     private ImageView attachmentImageView;
@@ -60,7 +80,7 @@ public class ChatController implements Initializable {
     private Circle chatPicture;
 
     @FXML
-    private TextField sendBox;
+    private TextArea sendBox;
 
     @FXML
     private ImageView sendImageView;
@@ -76,21 +96,62 @@ public class ChatController implements Initializable {
 
     private final byte[] image;
 
+    public SortedList<Message> sortedMessagesList;
     private final ExecutorService executor;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image chatBackgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/chat-backGround.jpg")));
+        //chatBackgroundImage.
+        BackgroundImage backgroundImage = new BackgroundImage(
+                chatBackgroundImage,
+                BackgroundRepeat.REPEAT, // How the image should be repeated along the X axis
+                BackgroundRepeat.NO_REPEAT, // How the image should be repeated along the Y axis
+                BackgroundPosition.DEFAULT, // Position of the image
+                BackgroundSize.DEFAULT);   // Size of the image
+        chatsBorderPane.setBackground(new Background(backgroundImage));
+
+        sendBox.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER && !keyEvent.isShiftDown()) {
+                sendHandler();
+                keyEvent.consume();
+            }else if(keyEvent.getCode() == KeyCode.ENTER && keyEvent.isShiftDown()){
+                sendBox.appendText("\n");
+            }
+        });
+
         if(!CurrentUser.getChatManagerFactory().getChatManager(chatID).isPrivateChat())
             statusCircle.setVisible(false);
         else
             statusCircle.fillProperty().bind(CurrentUser.getChatManagerFactory().getChatManager(chatID).getcolorProperty());
         chatName.setText(name);
         chatPicture.setFill(ImageConverter.convertBytesToImagePattern(image));
-        setListViewCellFactory();
+        initializeListView();
+    }
+
+    private void initializeListView() {
         messages = CurrentUser.getMessageList(chatID);
         messagesList.setItems(messages);
         Runtime.getRuntime().addShutdownHook(new Thread(executor::shutdown));
+        sortedMessagesList = new SortedList<>(messages, Comparator.comparing(Message::getTimestamp));
+        messagesList.setItems(sortedMessagesList);
+        setListViewCellFactory();
+        loadHistoryMessages();
+        messagesList.scrollTo(messagesList.getItems().size()*2);
+        messages.addListener((ListChangeListener<Message>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    //messagesList.scrollTo(messagesList.getItems().size()*2);
+                }
+            }
+        });
+    }
+
+    private void loadHistoryMessages() {
+        Integer firstReceivedId = CurrentUser.getChatFirstReceivedMessageId(chatID);
+        List<MessageDTO> historyMeessageDtoList = RemoteManager.getInstance().getAllChatMessages(chatID,firstReceivedId);
+        messages.addAll(MessageMapper.INSTANCE.messageDtoListToMessageList(historyMeessageDtoList));
     }
 
 
@@ -110,15 +171,6 @@ public class ChatController implements Initializable {
             } catch (RemoteException e) {
                 System.err.println("Can't find server, details: "+e.getMessage());
             }
-        }
-    }
-    public void sendChatBotMessage(String content){
-        try {
-            MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(),chatID,content,new Timestamp(System.currentTimeMillis()), null);
-            RemoteManager.getInstance().sendMessage(messageSentDTO);
-            appendMessage(messageSentDTO);
-        } catch (RemoteException e) {
-            System.err.println("Can't find server, details: "+e.getMessage());
         }
     }
 
@@ -206,8 +258,8 @@ public class ChatController implements Initializable {
                             loader= new FXMLLoader(getClass().getResource("/views/ReceivedAttachmentHBox.fxml"));
                             loader.setController(new MessageHBoxController(message.getContent(),message.getTimestamp()));
                             root = loader.load();
-//                            // TODO fix this line
-//                            ImageView icon = (ImageView) root.lookup("downloadIcon");
+                            // TODO fix this line
+                            //ImageView icon = (ImageView) root.lookup("downloadIcon");
                             root.addEventHandler(MouseEvent.MOUSE_CLICKED, createEventHandler(message.getAttachmentId()));
                         }
                         else {

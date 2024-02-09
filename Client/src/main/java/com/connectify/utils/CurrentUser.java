@@ -30,11 +30,13 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
 
     private String phoneNumber;
 
-    private static AllChatsPaneController allChatsController;
-    private static ChatManagerFactory chatManagerFactory = new ChatManagerFactory();
-    private static ChatPaneFactory chatPaneFactory = new ChatPaneFactory();
+    private static Map<Integer,Integer> chatFirstReceivedMessageIdMap;
 
-    private static final Map<Integer, ObservableList<Message>> chatListMessagesMap = new HashMap<>();
+    private static AllChatsPaneController allChatsController;
+    private static ChatManagerFactory chatManagerFactory;
+    private static ChatPaneFactory chatPaneFactory;
+
+    private static Map<Integer, ObservableList<Message>> chatListMessagesMap ;
 
     private CurrentUser() throws RemoteException {
         super();
@@ -42,6 +44,10 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         if(token != null && !token.isBlank()){
             this.phoneNumber = RemoteManager.getInstance().getPhoneNumberByToken(token);
         }
+        chatManagerFactory = new ChatManagerFactory();
+        chatPaneFactory = new ChatPaneFactory();
+        chatListMessagesMap = new HashMap<>();
+        chatFirstReceivedMessageIdMap = new HashMap<>();
     }
     public static CurrentUser getInstance() throws RemoteException {
         if (instance == null) {
@@ -50,9 +56,6 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         return instance;
     }
 
-    public static void reset(){
-        instance = null;
-    }
 
     @Override
     public void receiveNotification(String title, String message) throws RemoteException {
@@ -71,17 +74,20 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
         int chatID = messageDTO.getChatId();
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
         chatListMessagesMap.get(chatID).add(receivedMessage);
+        chatFirstReceivedMessageIdMap.putIfAbsent(chatID,receivedMessage.getMessageId());
         if(ChatBot.isEnabled()){
             ExecutorService executorService = Executors.newSingleThreadExecutor();
             executorService.submit(()->{
-                String chatBotMessage = ChatBot.call(receivedMessage.getContent());
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     System.out.println(e.getMessage());
                 }
-                ChatController controller = chatManagerFactory.getChatManager(chatID).getChatController();
-                Platform.runLater(()->controller.sendChatBotMessage(chatBotMessage));
+                try {
+                    ChatBot.replyToMessage(receivedMessage);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             });
         }
     }
@@ -95,7 +101,7 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     @Override
     public void forceLogout() throws RemoteException {
         RemoteManager.reset();
-        CurrentUser.reset();
+        CurrentUser.resetAllData();
         Platform.runLater(() ->{
             CurrentUser.getAllChatsController().clearChatsCardList();
             CurrentUser.getChatManagerFactory().clearChatManagersMap();
@@ -141,4 +147,26 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     public static ChatPaneFactory getChatPaneFactory() {
         return chatPaneFactory;
     }
+
+    public static Integer getChatFirstReceivedMessageId(int chatId) {
+        return chatFirstReceivedMessageIdMap.get(chatId);
+    }
+
+    public static void resetAllData(){
+//        chatListMessagesMap = null;
+//        chatPaneFactory=null;
+//        chatManagerFactory = null;
+//        allChatsController=null;
+//        chatFirstReceivedMessageIdMap=null;
+        chatListMessagesMap.clear();
+        chatFirstReceivedMessageIdMap.clear();
+        allChatsController.clearChatsCardList();
+        chatManagerFactory.clearChatManagersMap();
+        chatPaneFactory.clearChats();
+        chatManagerFactory.clearContactsManagersMap();
+        instance = null;
+    }
+//    public static void reset(){
+//        instance = null;
+//    }
 }

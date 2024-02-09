@@ -12,6 +12,7 @@ import com.connectify.model.dao.ChatMembersDAO;
 import com.connectify.model.dao.impl.ChatDAOImpl;
 import com.connectify.model.dao.impl.ChatMembersDAOImpl;
 import com.connectify.model.entities.ChatMember;
+import com.connectify.model.entities.Message;
 import com.connectify.model.entities.User;
 
 import java.rmi.RemoteException;

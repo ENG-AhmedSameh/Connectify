@@ -45,35 +45,23 @@ public class LoginController implements Initializable {
     }
     public void LoginButtonOnAction(ActionEvent e) throws RemoteException {
         errorLabel.setVisible(false);
-        if(countryComboBox.getValue()==null){
-            countryComboBox.setTooltip(new Tooltip("Please select your country"));
-            countryComboBox.setStyle("-fx-border-color: red;");
-            return;
-        }
-        if(phoneNumberTextField.getText().isBlank() || !phoneNumberTextField.getText().matches("^[0-9]+$")){
-            phoneNumberTextField.setTooltip(new Tooltip("Please enter a valid phone number"));
-            phoneNumberTextField.setStyle("-fx-border-color: red;");
-            return;
-        }
-        if(passwordTextField.getText().isBlank()) {
-            passwordTextField.setTooltip(new Tooltip("Please enter your password"));
-            passwordTextField.setStyle("-fx-border-color: red;");
-            return;
-        }
-        LoginRequest request = createLoginRequest();
-        LoginResponse response = RemoteManager.getInstance().login(request);
-        if (response.getStatus()) {
-            PropertiesManager.getInstance().setUserCredentials(response.getToken(), "true");
-            PropertiesManager.getInstance().setLoginInformation(phoneNumberTextField.getText(), countryCodeLabel.getText(), countryComboBox.getValue());
-            ConnectedUser user = CurrentUser.getInstance();
-            RemoteManager.getInstance().registerConnectedUser(user);
-            passwordTextField.clear();
-            errorLabel.setVisible(false);
-            StageManager.getInstance().switchToHome();
-        }
-        else {
-            errorLabel.setText(response.getMessage());
-            errorLabel.setVisible(true);
+        boolean validLogin = UserInformationValidator.validateLoginForm(countryComboBox,phoneNumberTextField,passwordTextField);
+        if(validLogin){
+            LoginRequest request = createLoginRequest();
+            LoginResponse response = RemoteManager.getInstance().login(request);
+            if (response.getStatus()) {
+                PropertiesManager.getInstance().setUserCredentials(response.getToken(), "true");
+                PropertiesManager.getInstance().setLoginInformation(phoneNumberTextField.getText(), countryCodeLabel.getText(), countryComboBox.getValue());
+                ConnectedUser user = CurrentUser.getInstance();
+                RemoteManager.getInstance().registerConnectedUser(user);
+                passwordTextField.clear();
+                errorLabel.setVisible(false);
+                StageManager.getInstance().switchToHome();
+            }
+            else {
+                errorLabel.setText(response.getMessage());
+                errorLabel.setVisible(true);
+            }
         }
     }
 

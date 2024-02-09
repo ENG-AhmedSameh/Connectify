@@ -7,6 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -24,6 +26,8 @@ public class StageManager {
     private AnchorPane chatsPane;
     private AnchorPane logoPane;
     private AnchorPane incomingFriendRequestPane;
+
+    GridPane profileGridPane;
 
 
     private StageManager(){
@@ -123,12 +127,24 @@ public class StageManager {
 
     public void switchToProfile(){
         Scene scene = sceneMap.get("home");
+        if(profileGridPane==null){
+            profileGridPane = new GridPane();
+            ColumnConstraints col1 = new ColumnConstraints();
+            col1.setPercentWidth(40);
+            ColumnConstraints col2 = new ColumnConstraints();
+            col2.setPercentWidth(60);
+            RowConstraints row = new RowConstraints();
+            row.setPercentHeight(100);
+            profileGridPane.getColumnConstraints().addAll(col1,col2);
+            profileGridPane.getRowConstraints().addAll(row);
+            profileGridPane.add(logoPane,0,0);
+        }
+        AnchorPane profilePane = ProfileLoader.loadProfileAnchorPane();
+        profileGridPane.add(profilePane,1,0);
         BorderPane mainPane = (BorderPane) scene.getRoot();
         BorderPane centerPane = (BorderPane) mainPane.getCenter();
-        centerPane.setCenter(ProfileLoader.loadProfileAnchorPane());
-        AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
-        logoPane.setStyle("-fx-background-color: #17212b");
-        centerPane.setLeft(logoPane);
+        centerPane.setCenter(profileGridPane);
+        centerPane.setLeft(null);
     }
     public void switchToContacts(){
         Scene scene = sceneMap.get("home");
@@ -138,9 +154,6 @@ public class StageManager {
         centerPane.setCenter(null);
         AnchorPane logoPane = LogoLoader.loadLogoAnchorPane();
         centerPane.setCenter(logoPane);
-    }
-    public void openContactChat(){
-
     }
 
     public void switchToProfileEditor(){

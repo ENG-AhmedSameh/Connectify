@@ -18,7 +18,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
@@ -125,12 +124,12 @@ public class SignUpController implements Initializable {
 
     @FXML
     private void signUpBtnHandler(ActionEvent event) throws RemoteException {
-        validateFields();
+        validInformation = UserInformationValidator.validateSignUpForm(countryComboBox,phoneNumTxtF,nameTxtF,emailTxtF,passwordPassF,confirmPasswordPassF,genderComboBox,birthDatePicker);
         if(validInformation){
             SignUpRequest request = createSignUpRequest();
             SignUpResponse response = RemoteManager.getInstance().signUp(request);
             if (!response.isSuccessful()) {
-                phoneNumTxtF.setTooltip(hintText(response.getMessage()));
+                phoneNumTxtF.setTooltip(UserInformationValidator.hintText(response.getMessage()));
                 phoneNumTxtF.setStyle("-fx-border-color: red;");
                 errorLabel.setText(response.getMessage());
                 errorLabel.setVisible(true);
@@ -147,77 +146,8 @@ public class SignUpController implements Initializable {
         }
     }
 
-    private void validateFields() {
-        validateCountry();
-//        validatePhoneNumber();
-        validateName();
-        validateEmail();
-        validatePassword();
-//        validGender();
-    }
-
-    private void validatePassword() {
-        if(!Objects.equals(confirmPasswordPassF.getText(), passwordPassF.getText())){
-            confirmPasswordPassF.setStyle("-fx-border-color: red;");
-            confirmPasswordPassF.setTooltip(hintText("Doesn't match the password in the first field"));
-        }else{
-            confirmPasswordPassF.setStyle(txtFieldsOriginalStyle);
-            confirmPasswordPassF.setTooltip(null);
-        }
-
-    }
-
-
-    private void validateCountry() {
-        if(countryComboBox.getValue()==null) {
-            validInformation = false;
-            countryComboBox.setStyle("-fx-border-color: red;");
-            countryComboBox.setTooltip(hintText("You must choose a country"));
-        }
-    }
-    private void validateName() {
-        String name = nameTxtF.getText();
-        if(name.isEmpty()){
-            validInformation = false;
-            nameTxtF.setTooltip(hintText("You must Enter your Name"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        }else if (name.length()>50) {
-            nameTxtF.setTooltip(hintText("Name is too long"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        }else if(!name.matches("^[a-zA-Z]+(?:\\s[a-zA-Z]+){0,4}$")){
-            nameTxtF.setTooltip(new Tooltip("Name must contains only english characters and maximum 4 spaces"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        }else{
-            nameTxtF.setStyle(txtFieldsOriginalStyle);
-            nameTxtF.setTooltip(null);
-        }
-    }
-    private void validateEmail() {
-        if(emailTxtF.getText().matches("[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}")){
-            emailTxtF.setStyle(txtFieldsOriginalStyle);
-            emailTxtF.setTooltip(null);
-        }else{
-            emailTxtF.setStyle("-fx-border-color: red;");
-            if(emailTxtF.getText().isEmpty())
-                emailTxtF.setTooltip(hintText("You must enter your email"));
-            else
-                emailTxtF.setTooltip(hintText("Enter a valid email"));
-        }
-    }
-
-    private Tooltip hintText(String text) {
-        Tooltip tooltip = new Tooltip();
-        tooltip.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: rgba(241,241,241,1); -fx-text-fill: black; -fx-background-radius: 4; -fx-border-radius: 4; -fx-opacity: 1.0;");
-        tooltip.setAutoHide(false);
-        tooltip.setMaxWidth(300);
-        tooltip.setWrapText(true);
-        tooltip.setText(text);
-        //tooltip.setGraphic(image);
-        return tooltip;
-    }
-
-
     public void onLoginLabelClickedHandler(MouseEvent mouseEvent) {
+        clearFields();
         StageManager.getInstance().switchToLogin();
     }
 
