@@ -1,100 +1,103 @@
 package com.connectify.utils;
 
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
-
-public class PropertiesManager{
+public class PropertiesManager {
 
     private static PropertiesManager instance;
-    private final Properties userCredentials;
 
-    private final Properties loginInformation;
+    private static final String TOKEN_FILE = System.getProperty("user.dir") + File.separator + "classes" + File.separator + "user.properties";
+    private static final String LOGIN_FILE = System.getProperty("user.dir") + File.separator + "classes" + File.separator + "login.properties";
+    private static final String TOKEN_KEY = "token";
+    private static final String AUTO_LOGIN_KEY = "autoLogin";
+    private static final String PHONE_NUMBER_KEY = "phoneNumber";
+    private static final String COUNTRY_CODE_KEY = "countryCode";
+    private static final String COUNTRY_KEY = "country";
+
+    private final Properties tokenProperties;
+
+    private final Properties loginProperties;
 
     private PropertiesManager() {
-        userCredentials = new Properties();
-        loginInformation = new Properties();
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("user.properties")) {
-            userCredentials.load(is);
-        } catch (IOException ex) {
-            System.err.println("Could load user credentials: " + ex.getMessage());;
-        }
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("login.properties")) {
-            loginInformation.load(is);
-        } catch (IOException ex) {
-            System.err.println("Could load login information: " + ex.getMessage());;
-        }
+        tokenProperties = new Properties();
+        loginProperties = new Properties();
+        loadProperties();
     }
 
-    public static PropertiesManager getInstance(){
-        if(instance == null){
+    public static PropertiesManager getInstance() {
+        if (instance == null) {
             instance = new PropertiesManager();
         }
         return instance;
     }
 
-    public void setUserCredentials(String token, String autoLogin){
-        userCredentials.setProperty("token", token);
-        userCredentials.setProperty("autoLogin", autoLogin);
-        storeCredentials();
+    private void loadProperties() {
+        try (InputStream inputStream = new FileInputStream(TOKEN_FILE)) {
+            tokenProperties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (InputStream inputStream = new FileInputStream(LOGIN_FILE)) {
+            loginProperties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    private void saveTokenProperties() {
+        try (OutputStream outputStream = new FileOutputStream(TOKEN_FILE)) {
+            tokenProperties.store(outputStream, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveLoginProperties() {
+        try (OutputStream outputStream = new FileOutputStream(LOGIN_FILE)) {
+            loginProperties.store(outputStream, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setUserCredentials(String token, String autoLogin) {
+        tokenProperties.setProperty(TOKEN_KEY, token);
+        tokenProperties.setProperty(AUTO_LOGIN_KEY, autoLogin);
+        saveTokenProperties();
+    }
 
     public void setUserCredentials(String autoLogin) {
-        String token = userCredentials.getProperty("token");
-        userCredentials.setProperty("token", token);
-        userCredentials.setProperty("autoLogin", autoLogin);
-        storeCredentials();
+        tokenProperties.setProperty(TOKEN_KEY, getToken());
+        tokenProperties.setProperty(AUTO_LOGIN_KEY, autoLogin);
+        saveTokenProperties();
     }
 
-
-    public String getToken(){
-        return userCredentials.getProperty("token");
+    public String getToken() {
+        return tokenProperties.getProperty(TOKEN_KEY);
     }
 
-    public String getAutoLogin(){
-        return userCredentials.getProperty("autoLogin");
+    public String getAutoLogin() {
+        return tokenProperties.getProperty(AUTO_LOGIN_KEY);
     }
 
-    public void setLoginInformation(String phoneNumber, String countryCode, String country){
-        loginInformation.setProperty("phoneNumber", phoneNumber);
-        loginInformation.setProperty("countryCode", countryCode);
-        loginInformation.setProperty("country", country);
-        storeLoginInformation();
+    public void setLoginInformation(String phoneNumber, String countryCode, String country) {
+        loginProperties.setProperty(PHONE_NUMBER_KEY, phoneNumber);
+        loginProperties.setProperty(COUNTRY_CODE_KEY, countryCode);
+        loginProperties.setProperty(COUNTRY_KEY, country);
+        saveLoginProperties();
     }
 
     public String getPhoneNumber() {
-        return loginInformation.getProperty("phoneNumber");
+        return loginProperties.getProperty(PHONE_NUMBER_KEY);
     }
 
-    public String getCountryCode(){
-        return loginInformation.getProperty("countryCode");
+    public String getCountryCode() {
+        return loginProperties.getProperty(COUNTRY_CODE_KEY);
     }
 
-    public String getCountry(){
-        return loginInformation.getProperty("country");
+    public String getCountry() {
+        return loginProperties.getProperty(COUNTRY_KEY);
     }
-
-    private void storeLoginInformation(){
-        try (FileOutputStream fos = new FileOutputStream("Client/target/classes/login.properties")) {
-            loginInformation.store(fos, null);
-        } catch (IOException ex) {
-            System.err.println("Couldn't save credentials to file: " + ex.getMessage());
-        }
-    }
-
-
-    private void storeCredentials(){
-        try (FileOutputStream fos = new FileOutputStream("Client/target/classes/user.properties")) {
-            userCredentials.store(fos, null);
-        } catch (IOException ex) {
-            System.err.println("Couldn't save credentials to file: " + ex.getMessage());
-        }
-    }
-
-
-
 }

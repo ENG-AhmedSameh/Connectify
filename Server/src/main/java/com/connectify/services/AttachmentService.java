@@ -24,7 +24,8 @@ public class AttachmentService {
 
     public Integer storeAttachment(MessageSentDTO message){
         Callable<Integer> callable = () -> {
-            Path attachmentsPath = Paths.get(getClass().getClassLoader().getResource("attachments").toURI());
+            String path = System.getProperty("user.dir") + File.separator + "attachments";
+            Path attachmentsPath = Paths.get(path);
             Path chatFolderPath = attachmentsPath.resolve(String.valueOf(message.getChatId()));
             if (!Files.exists(chatFolderPath)) {
                 Files.createDirectories(chatFolderPath);
