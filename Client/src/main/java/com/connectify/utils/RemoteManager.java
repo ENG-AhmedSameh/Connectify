@@ -41,6 +41,7 @@ public class RemoteManager {
         if (instance == null) {
             instance = new RemoteManager();
             try {
+//                Registry registry = LocateRegistry.getRegistry("192.168.1.11", port); //the server ip in the network
                 Registry registry = LocateRegistry.getRegistry(host, port);
                 instance.server = (ServerAPI) registry.lookup("server");
             } catch (RemoteException | NotBoundException e) {
