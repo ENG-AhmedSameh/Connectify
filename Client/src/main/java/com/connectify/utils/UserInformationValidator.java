@@ -9,6 +9,16 @@ public class UserInformationValidator {
 
     private static boolean validInformation;
     private static String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
+
+    public static boolean validateLoginForm(ComboBox<String> countryComboBox, TextField phoneNumTxtF, PasswordField passwordPassF){
+        validInformation = true;
+        txtFieldsOriginalStyle = phoneNumTxtF.getStyle();
+        comboBoxOriginalStyle = countryComboBox.getStyle();
+        validateCountry(countryComboBox);
+        validatePhoneNumber(phoneNumTxtF);
+        validatePassword(passwordPassF);
+        return validInformation;
+    }
     public static boolean validateSignUpForm(ComboBox<String> countryComboBox, TextField phoneNumTxtF, TextField nameTxtF, TextField emailTxtF, PasswordField passwordPassF, PasswordField confirmPasswordPassF, ComboBox<Gender> genderComboBox, DatePicker birthDatePicker) {
         txtFieldsOriginalStyle = nameTxtF.getStyle();
         comboBoxOriginalStyle = countryComboBox.getStyle();
@@ -18,8 +28,21 @@ public class UserInformationValidator {
         validatePhoneNumber(phoneNumTxtF);
         validateName(nameTxtF);
         validateEmail(emailTxtF);
-        validatePassword(passwordPassF,confirmPasswordPassF);
+        validatePassword(passwordPassF);
+        validatePasswordAndConfirmPassword(passwordPassF,confirmPasswordPassF);
         validGender(genderComboBox);
+        return validInformation;
+    }
+    public static boolean validateUpdateProfileForm(TextField nameTxtF, TextField emailTxtF){
+        validInformation = true;
+        validateName(nameTxtF);
+        validateEmail(emailTxtF);
+        return validInformation;
+    }
+    public static boolean validateUpdatedPassword(PasswordField passwordPassF, PasswordField confirmPasswordPassF){
+        validInformation=true;
+        validatePassword(passwordPassF);
+        validatePasswordAndConfirmPassword(passwordPassF,confirmPasswordPassF);
         return validInformation;
     }
 
@@ -48,17 +71,22 @@ public class UserInformationValidator {
         }
     }
 
-    private static void validatePassword(PasswordField passwordPassF, PasswordField confirmPasswordPassF) {
+    public static void validatePassword(PasswordField passwordPassF){
         if(passwordPassF.getText().length()<8){
             passwordPassF.setStyle("-fx-border-color: red;");
-            passwordPassF.setTooltip(hintText("Doesn't match the password in the first field"));
-        }
-        else if(!Objects.equals(confirmPasswordPassF.getText(), passwordPassF.getText())){
-            confirmPasswordPassF.setStyle("-fx-border-color: red;");
-            confirmPasswordPassF.setTooltip(hintText("Doesn't match the password in the first field"));
+            passwordPassF.setTooltip(hintText("password must be at least 8 chars"));
         }else{
             passwordPassF.setStyle(txtFieldsOriginalStyle);
             passwordPassF.setTooltip(null);
+        }
+    }
+
+    private static void validatePasswordAndConfirmPassword(PasswordField passwordPassF, PasswordField confirmPasswordPassF) {
+
+        if(!Objects.equals(confirmPasswordPassF.getText(), passwordPassF.getText())){
+            confirmPasswordPassF.setStyle("-fx-border-color: red;");
+            confirmPasswordPassF.setTooltip(hintText("Doesn't match the password in the first field"));
+        }else{
             confirmPasswordPassF.setStyle(txtFieldsOriginalStyle);
             confirmPasswordPassF.setTooltip(null);
         }
