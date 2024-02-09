@@ -4,13 +4,11 @@ import com.connectify.utils.ImageConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.io.ByteArrayInputStream;
 
 public class AddFriendCardController implements Initializable {
 

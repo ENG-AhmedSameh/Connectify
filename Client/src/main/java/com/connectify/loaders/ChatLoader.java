@@ -4,8 +4,6 @@ import com.connectify.controller.ChatController;
 import com.connectify.utils.ChatManager;
 import com.connectify.utils.CurrentUser;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;

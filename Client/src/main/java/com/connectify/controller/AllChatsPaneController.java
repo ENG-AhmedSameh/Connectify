@@ -12,7 +12,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
@@ -89,8 +92,10 @@ public class AllChatsPaneController implements Initializable {
                     protected void updateItem(AnchorPane item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty || item == null) {
+                            //Platform.runLater(()->setGraphic(null));
                             setGraphic(null);
                         } else {
+                            //Platform.runLater(()->setGraphic(item));
                             setGraphic(item);
                         }
                     }

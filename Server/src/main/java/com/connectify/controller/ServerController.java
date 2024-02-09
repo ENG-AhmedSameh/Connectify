@@ -5,17 +5,10 @@ import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.Interfaces.ServerAPI;
 import com.connectify.app.Server;
 import com.connectify.dto.*;
-import com.connectify.services.*;
 import com.connectify.model.entities.User;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
-import com.connectify.services.ChatService;
-import com.connectify.services.MessageService;
-import com.connectify.services.UserChatsService;
-import com.connectify.dto.ContactsDTO;
-import com.connectify.dto.LoginRequest;
-import com.connectify.dto.LoginResponse;
-import com.connectify.dto.SignUpRequest;
+import com.connectify.services.*;
 import com.connectify.utils.TokenGenerator;
 
 import java.rmi.RemoteException;

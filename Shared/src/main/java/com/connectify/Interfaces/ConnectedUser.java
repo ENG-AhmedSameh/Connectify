@@ -1,7 +1,6 @@
 package com.connectify.Interfaces;
 
 import com.connectify.dto.ChatCardsInfoDTO;
-
 import com.connectify.dto.MessageDTO;
 import com.connectify.model.enums.Status;
 

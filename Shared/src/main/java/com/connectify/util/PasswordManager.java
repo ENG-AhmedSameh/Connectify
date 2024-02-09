@@ -5,7 +5,6 @@ import javax.crypto.spec.PBEKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.spec.KeySpec;
-import java.util.Arrays;
 
 public class PasswordManager {
     public static String encode(String password, byte[] salt){

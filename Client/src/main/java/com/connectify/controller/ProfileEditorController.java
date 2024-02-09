@@ -131,12 +131,14 @@ public class ProfileEditorController implements Initializable {
                 System.out.println("Update user mode and status: "+result);
             }
             if (!(Objects.equals(passwordPassF.getText(), ""))) {
-                boolean changeInPass = UserInformationValidator.validateUpdatedPassword(passwordPassF,confirmPasswordPassF);
-                if(changeInPass){
+                boolean newValidPass = UserInformationValidator.validateUpdatedPassword(passwordPassF,confirmPasswordPassF);
+                if(newValidPass){
                     byte[] salt = PasswordManager.generateSalt();
                     String password = PasswordManager.encode(passwordPassF.getText(), salt);
                     boolean result = RemoteManager.getInstance().updateUserPassword(currentUserDetails.getPhoneNumber(), salt, password);
                     System.out.println("Update password result: " + result);
+                }else{
+                    return;
                 }
             }
 
@@ -144,9 +146,8 @@ public class ProfileEditorController implements Initializable {
                 boolean result = RemoteManager.getInstance().updateUserPicture(currentUserDetails.getPhoneNumber(), newPicture);
                 System.out.println("Update profile picture result: " + result);
             }
+            StageManager.getInstance().switchToProfile();
         }
-
-        StageManager.getInstance().switchToProfile();
     }
 
     private boolean isModeOrStatusChanged() {

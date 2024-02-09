@@ -90,14 +90,14 @@
 }
 .text-area{
     -fx-background-color: -fx-dark-blue ;
+    -fx-control-inner-background: -fx-dark-blue;
     -fx-focus-color: transparent;
-    -fx-text-box-border: transparent;
     -fx-text-fill: white;
-
+    -fx-prompt-text-fill: grey;
 }
 .text-area .content {
     -fx-background-color: -fx-dark-blue ;
-    -fx-border-color: transparent;
+    -fx-border-color: grey;
 }
 .text-area:focused .content {
     -fx-background-color: -fx-dark-blue;

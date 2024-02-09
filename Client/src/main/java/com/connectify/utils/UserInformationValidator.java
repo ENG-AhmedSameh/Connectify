@@ -11,18 +11,23 @@ public class UserInformationValidator {
     private static String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
 
     public static boolean validateLoginForm(ComboBox<String> countryComboBox, TextField phoneNumTxtF, PasswordField passwordPassF){
+        if(txtFieldsOriginalStyle == null){
+            txtFieldsOriginalStyle = phoneNumTxtF.getStyle();
+            comboBoxOriginalStyle = countryComboBox.getStyle();
+        }
         validInformation = true;
-        txtFieldsOriginalStyle = phoneNumTxtF.getStyle();
-        comboBoxOriginalStyle = countryComboBox.getStyle();
         validateCountry(countryComboBox);
         validatePhoneNumber(phoneNumTxtF);
         validatePassword(passwordPassF);
         return validInformation;
     }
     public static boolean validateSignUpForm(ComboBox<String> countryComboBox, TextField phoneNumTxtF, TextField nameTxtF, TextField emailTxtF, PasswordField passwordPassF, PasswordField confirmPasswordPassF, ComboBox<Gender> genderComboBox, DatePicker birthDatePicker) {
-        txtFieldsOriginalStyle = nameTxtF.getStyle();
-        comboBoxOriginalStyle = countryComboBox.getStyle();
-        datePickerOriginalStyle = birthDatePicker.getStyle();
+        if(txtFieldsOriginalStyle==null){
+            txtFieldsOriginalStyle = nameTxtF.getStyle();
+            comboBoxOriginalStyle = countryComboBox.getStyle();
+        }
+        if(datePickerOriginalStyle==null)
+            datePickerOriginalStyle = birthDatePicker.getStyle();
         validInformation = true;
         validateCountry(countryComboBox);
         validatePhoneNumber(phoneNumTxtF);
@@ -34,6 +39,9 @@ public class UserInformationValidator {
         return validInformation;
     }
     public static boolean validateUpdateProfileForm(TextField nameTxtF, TextField emailTxtF){
+        if(txtFieldsOriginalStyle==null){
+            txtFieldsOriginalStyle = nameTxtF.getStyle();
+        }
         validInformation = true;
         validateName(nameTxtF);
         validateEmail(emailTxtF);
@@ -75,6 +83,7 @@ public class UserInformationValidator {
         if(passwordPassF.getText().length()<8){
             passwordPassF.setStyle("-fx-border-color: red;");
             passwordPassF.setTooltip(hintText("password must be at least 8 chars"));
+            validInformation = false;
         }else{
             passwordPassF.setStyle(txtFieldsOriginalStyle);
             passwordPassF.setTooltip(null);
@@ -86,6 +95,7 @@ public class UserInformationValidator {
         if(!Objects.equals(confirmPasswordPassF.getText(), passwordPassF.getText())){
             confirmPasswordPassF.setStyle("-fx-border-color: red;");
             confirmPasswordPassF.setTooltip(hintText("Doesn't match the password in the first field"));
+            validInformation = false;
         }else{
             confirmPasswordPassF.setStyle(txtFieldsOriginalStyle);
             confirmPasswordPassF.setTooltip(null);
@@ -122,12 +132,14 @@ public class UserInformationValidator {
         if(emailTxtF.getText().matches("[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}")){
             emailTxtF.setStyle(txtFieldsOriginalStyle);
             emailTxtF.setTooltip(null);
+            validInformation = true;
         }else{
             emailTxtF.setStyle("-fx-border-color: red;");
             if(emailTxtF.getText().isEmpty())
                 emailTxtF.setTooltip(hintText("You must enter your email"));
             else
                 emailTxtF.setTooltip(hintText("Enter a valid email"));
+            validInformation = false;
         }
     }
 

@@ -1,10 +1,7 @@
 package com.connectify.loaders;
 
 import com.connectify.controller.ChooseContactCardController;
-import com.connectify.controller.ContactCardController;
-import com.connectify.controller.IncomingFriendRequestCardController;
 import com.connectify.dto.ContactsDTO;
-import com.connectify.model.entities.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 

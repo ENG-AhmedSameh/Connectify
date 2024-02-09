@@ -1,15 +1,12 @@
 package com.connectify.controller;
 
+import com.connectify.dto.MessageDTO;
 import com.connectify.dto.MessageSentDTO;
-import com.connectify.loaders.ChatCardLoader;
-import com.connectify.mapper.MessageMapper;
 import com.connectify.model.entities.Message;
 import com.connectify.model.entities.User;
+import com.connectify.mapper.*;
 import com.connectify.utils.*;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
@@ -19,20 +16,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -41,17 +33,13 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.concurrent.*;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ChatController implements Initializable {
 
@@ -138,14 +126,15 @@ public class ChatController implements Initializable {
         messagesList.setItems(sortedMessagesList);
         setListViewCellFactory();
         loadHistoryMessages();
+        //TODO scroll down automatically
         messagesList.scrollTo(messagesList.getItems().size()*2);
-        messages.addListener((ListChangeListener<Message>) change -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    //messagesList.scrollTo(messagesList.getItems().size()*2);
-                }
-            }
-        });
+//        messages.addListener((ListChangeListener<Message>) change -> {
+//            while (change.next()) {
+//                if (change.wasAdded()) {
+//                    messagesList.scrollTo(messagesList.getItems().size()*2);
+//                }
+//            }
+//        });
     }
 
     private void loadHistoryMessages() {

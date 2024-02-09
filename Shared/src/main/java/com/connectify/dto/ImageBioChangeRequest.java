@@ -1,6 +1,5 @@
 package com.connectify.dto;
 
-import java.io.File;
 import java.io.Serializable;
 
 public class ImageBioChangeRequest implements Serializable {

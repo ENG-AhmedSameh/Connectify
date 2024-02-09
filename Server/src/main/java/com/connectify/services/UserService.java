@@ -2,10 +2,6 @@ package com.connectify.services;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.app.Server;
-import com.connectify.dto.ImageBioChangeRequest;
-import com.connectify.dto.LoginRequest;
-import com.connectify.dto.LoginResponse;
-import com.connectify.dto.SignUpRequest;
 import com.connectify.dto.*;
 import com.connectify.mapper.UserMapper;
 import com.connectify.model.dao.ChatMembersDAO;

@@ -1,7 +1,7 @@
 package com.connectify.utils;
 
 import com.connectify.dto.MessageSentDTO;
-import com.connectify.mapper.MessageMapper;
+import com.connectify.mapper.*;
 import com.connectify.model.entities.Message;
 import com.google.code.chatterbotapi.ChatterBot;
 import com.google.code.chatterbotapi.ChatterBotFactory;

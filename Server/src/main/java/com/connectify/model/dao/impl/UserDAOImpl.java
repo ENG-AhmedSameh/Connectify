@@ -1,16 +1,13 @@
 package com.connectify.model.dao.impl;
 
 import com.connectify.model.dao.UserDAO;
-import com.connectify.utils.DBConnection;
 import com.connectify.model.entities.User;
 import com.connectify.model.enums.Gender;
 import com.connectify.model.enums.Mode;
 import com.connectify.model.enums.Status;
 import com.connectify.utils.DBConnection;
 
-import java.io.*;
 import java.sql.*;
-import java.time.LocalDate;
 
 public class UserDAOImpl implements UserDAO {
 

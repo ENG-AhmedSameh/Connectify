@@ -1,12 +1,8 @@
 package com.connectify.utils;
-import com.connectify.loaders.ChatLoader;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
-import java.io.IOException;
+import com.connectify.loaders.ChatLoader;
+import javafx.scene.layout.BorderPane;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Objects;
 
 public class ImageConverter {

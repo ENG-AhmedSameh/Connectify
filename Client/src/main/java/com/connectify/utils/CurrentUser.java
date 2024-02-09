@@ -2,19 +2,15 @@ package com.connectify.utils;
 
 import com.connectify.Interfaces.ConnectedUser;
 import com.connectify.controller.AllChatsPaneController;
-import com.connectify.controller.ChatController;
 import com.connectify.dto.ChatCardsInfoDTO;
 import com.connectify.dto.MessageDTO;
 import com.connectify.loaders.ChatCardLoader;
-import com.connectify.mapper.MessageMapper;
+import com.connectify.mapper.*;
 import com.connectify.model.entities.Message;
 import com.connectify.model.enums.Status;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import org.controlsfx.control.Notifications;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.Serializable;
@@ -70,6 +66,15 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     public void receiveMessage(MessageDTO messageDTO) throws RemoteException {
         MessageMapper mapper = MessageMapper.INSTANCE;
         Message receivedMessage = mapper.messageDtoToMessage(messageDTO);
+        if(receivedMessage.getChatId()!=chatManagerFactory.getActiveChatID()){
+            String notificationMessage = messageDTO.getContent();
+            if(notificationMessage.length()>40)
+                notificationMessage = messageDTO.getContent().substring(0,40)+"...";
+            NotificationsManager.showMessageNotification("You have a new message",
+                    chatManagerFactory.getChatManager(messageDTO.getChatId()).
+                            getChatCardController().getChatName()+": "+notificationMessage);
+        }
+
         ChatCardHandler.updateChatCard(receivedMessage);
         int chatID = messageDTO.getChatId();
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
@@ -91,7 +96,6 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
             });
         }
     }
-
 
     public static ObservableList<Message> getMessageList(int chatID) {
         chatListMessagesMap.putIfAbsent(chatID, FXCollections.observableArrayList());
@@ -153,20 +157,13 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     }
 
     public static void resetAllData(){
-//        chatListMessagesMap = null;
-//        chatPaneFactory=null;
-//        chatManagerFactory = null;
-//        allChatsController=null;
-//        chatFirstReceivedMessageIdMap=null;
         chatListMessagesMap.clear();
         chatFirstReceivedMessageIdMap.clear();
         allChatsController.clearChatsCardList();
         chatManagerFactory.clearChatManagersMap();
+        chatManagerFactory.setActiveChatID(0);
         chatPaneFactory.clearChats();
         chatManagerFactory.clearContactsManagersMap();
         instance = null;
     }
-//    public static void reset(){
-//        instance = null;
-//    }
 }

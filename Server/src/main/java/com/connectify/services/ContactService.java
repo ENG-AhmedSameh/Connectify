@@ -2,7 +2,6 @@ package com.connectify.services;
 
 import com.connectify.dto.ContactsDTO;
 import com.connectify.mapper.ContactMapper;
-import com.connectify.model.dao.ContactsDAO;
 import com.connectify.model.dao.impl.ContactsDAOImpl;
 import com.connectify.model.entities.User;
 
