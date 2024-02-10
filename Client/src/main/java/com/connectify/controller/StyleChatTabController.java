@@ -17,7 +17,6 @@ public class StyleChatTabController {
     @FXML
     private ChoiceBox<String> fontTypeChoiceBox;
 
-    @FXML
     private TextArea textArea;
 
     @FXML
@@ -28,6 +27,10 @@ public class StyleChatTabController {
 
     @FXML
     private ToggleButton underlineButton;
+
+    public StyleChatTabController(TextArea textArea){
+        this.textArea = textArea;
+    }
 
     @FXML
     private void initialize() {

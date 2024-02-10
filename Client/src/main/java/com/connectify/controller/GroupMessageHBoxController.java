@@ -36,6 +36,7 @@ public class GroupMessageHBoxController{
     @FXML
     private HBox userMessageBox;
 
+
     public void setSameSenderMessageStyle(String messageContent,Timestamp messageTime){
         Platform.runLater(()->{
             messageElementsVBox.getChildren().remove(senderNameLabel);
@@ -45,12 +46,14 @@ public class GroupMessageHBoxController{
             setMessageTime(messageTime);
         });
     }
-    public void setDifferentSenderMessageStyle(String senderName,byte[] senderImage ,String messageContent, Timestamp messageTime){
+    public void setDifferentSenderMessageStyle(String senderName,byte[] senderImage ,String messageContent, Timestamp messageTime,String messageStyle){
+        String newMessageStyle = messageStyle.replace("-fx-text-fill","-fx-fill");
         Platform.runLater(()->{
             setMessageContent(messageContent);
             setMessageTime(messageTime);
             setSenderName(senderName);
             setSenderImage(senderImage);
+            messageContentText.setStyle(newMessageStyle);
         });
     }
 

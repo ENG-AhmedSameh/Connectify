@@ -249,4 +249,5 @@ public class StageManager {
         centerPane.setCenter(logoPane);
         centerPane.setLeft(groupInfoPane);
     }
+
 }

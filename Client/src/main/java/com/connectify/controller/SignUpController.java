@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
@@ -49,9 +50,21 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeComboBox();
+        initializeDatePicker();
         txtFieldsOriginalStyle = nameTxtF.getStyle();
         comboBoxOriginalStyle = countryComboBox.getStyle();
         datePickerOriginalStyle = birthDatePicker.getStyle();
+    }
+
+    private void initializeDatePicker() {
+        birthDatePicker.setValue(LocalDate.of(1997, 1, 1));
+        birthDatePicker.setDayCellFactory(param -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.compareTo(LocalDate.now().minusYears(6)) > 0 );
+            }
+        });
     }
 
     private void initializeComboBox() {

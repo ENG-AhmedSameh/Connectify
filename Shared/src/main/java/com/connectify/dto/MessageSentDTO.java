@@ -11,12 +11,15 @@ public class MessageSentDTO implements Serializable {
     private byte[] attachment;
     private Integer attachmentId;
 
-    public MessageSentDTO(String sender, int chatId, String content, Timestamp timestamp, byte[] attachment) {
+    private String messageStyle;
+
+    public MessageSentDTO(String sender, int chatId, String content, Timestamp timestamp, byte[] attachment, String style) {
         this.sender = sender;
         this.chatId = chatId;
         this.content = content;
         this.timestamp= timestamp;
         this.attachment = attachment;
+        this.messageStyle = style;
     }
 
     public int getChatId() {
@@ -65,5 +68,13 @@ public class MessageSentDTO implements Serializable {
 
     public void setAttachmentId(Integer attachmentId) {
         this.attachmentId = attachmentId;
+    }
+
+    public String getMessageStyle() {
+        return messageStyle;
+    }
+
+    public void setMessageStyle(String messageStyle) {
+        this.messageStyle = messageStyle;
     }
 }

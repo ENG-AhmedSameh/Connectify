@@ -95,6 +95,9 @@
     -fx-text-fill: white;
     -fx-prompt-text-fill: grey;
 }
+.text-area .text{
+    -fx-underline: false;
+}
 .text-area .content {
     -fx-background-color: -fx-dark-blue ;
     -fx-border-color: grey;
@@ -102,4 +105,16 @@
 .text-area:focused .content {
     -fx-background-color: -fx-dark-blue;
     -fx-border-color: -fx-blue;
+}
+.style-combo-box {
+    -fx-background-color:  -fx-dark;
+    -fx-text-fill: white;
+}
+
+.style-combo-box > .list-view {
+    -fx-pref-width: 204;
+    -fx-text-fill: white;
+}
+.style-combo-box > .list-cell{
+    -fx-text-fill: #FFFFFF;
 }

@@ -4,11 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="complete the validation of the signup screen">
+    <list default="true" id="e10d31b1-2e8a-4a4d-869a-e043b283151e" name="Changes" comment="merged with gui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ProfileEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ProfileEditorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/UserInformationValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/UserInformationValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/GroupMessageHBoxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/GroupMessageHBoxController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/MessageHBoxController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/MessageHBoxController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/StyleChatTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/StyleChatTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/ChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/ChatBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/StageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/StageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/styles/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/styles/Chat.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/Chat.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/SentMessageHBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/SentMessageHBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/views/StyleChatTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/views/StyleChatTab.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/MessageDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/MessageDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/connectify/services/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/connectify/services/MessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/AdminController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/AnnouncementController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/controller/fxmlcontrollers/StatisticsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/loaders/ViewLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/AttachmentDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/ChatDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/DAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/GroupDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/MessageDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/impl/AttachmentsDAOImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/impl/ChatDAOImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/impl/GroupDAOImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/connectify/model/dao/impl/MessageDAOImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/db.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/admin-large.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/admin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/announcement-large.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/announcement.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/exit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/logout.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/maximize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/minimize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/statistics-large.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/statistics.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/styles/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/views/admin-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/views/announcement-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/views/server-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/views/statistics-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/dto/MessageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/dto/MessageDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/dto/MessageSentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/dto/MessageSentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/src/main/java/com/connectify/model/entities/Message.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +64,8 @@
       <list>
         <option value="module-info" />
         <option value="CSS File" />
-        <option value="Interface" />
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -29,7 +73,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="add-offline-messages" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -65,39 +109,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;gui-enhancement&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/ITI Courses/JAVA/Advanced JavaFx/Labs/Day 1/D01L01&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Client.executor": "Run",
+    "Application.Server.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "add-style-message-bar",
+    "jdk.selected.JAVA_MODULE": "21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "F:/ITI Projects/Connectify/Client/src/main/resources/images",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Career\Projects\Connectify\Shared\src\main\java" />
       <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\images" />
+      <recent name="D:\Career\Projects\Connectify\Shared\src\main\java" />
       <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\Images" />
       <recent name="F:\ITI Projects\Connectify\Client\src\main\resources\Styles" />
       <recent name="D:\Career\Connectify\Server\src\main\java\server" />
@@ -107,83 +151,50 @@
       <recent name="D:\Career\Projects\Connectify\Server\src\main\java\com\connectify\controller\utils\db" />
       <recent name="D:\Career\Connectify\Server\src\main\java\server" />
     </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.connectify.mapper" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.connectify.loaders" />
       <recent name="com.connectify.utils" />
       <recent name="com.connectify.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
-    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.connectify.Client" />
+  <component name="RunManager" selected="Application.ClientApp">
+    <configuration name="ClientApp" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.connectify.app.ClientApp" />
       <module name="Client" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.connectify.*" />
+          <option name="PATTERN" value="com.connectify.app.*" />
           <option name="ENABLED" value="true" />
         </pattern>
-      </extension>
-      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-        <option name="credential" />
-        <option name="region" />
-        <option name="useCurrentConnection" value="false" />
       </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.connectify.Client" />
-      <module name="Client" />
+    <configuration name="ServerApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.connectify.app.ServerApp" />
+      <module name="Server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.connectify.*" />
+          <option name="PATTERN" value="com.connectify.app.*" />
           <option name="ENABLED" value="true" />
         </pattern>
-      </extension>
-      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-        <option name="credential" />
-        <option name="region" />
-        <option name="useCurrentConnection" value="false" />
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Server" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.connectify.Server" />
-      <module name="Server" />
-      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-        <option name="credential" />
-        <option name="region" />
-        <option name="useCurrentConnection" value="false" />
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Server" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.connectify.Server" />
-      <module name="Server" />
-      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-        <option name="credential" />
-        <option name="region" />
-        <option name="useCurrentConnection" value="false" />
       </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Server" />
-      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.ClientApp" />
+      <item itemvalue="Application.ServerApp" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.ClientApp" />
+        <item itemvalue="Application.ServerApp" />
         <item itemvalue="Application.Client" />
       </list>
     </recent_temporary>
@@ -251,6 +262,8 @@
       <workItem from="1707325724627" duration="6457000" />
       <workItem from="1707335983091" duration="47940000" />
       <workItem from="1707485175919" duration="1396000" />
+      <workItem from="1707487627337" duration="11146000" />
+      <workItem from="1707501991796" duration="18995000" />
     </task>
     <task id="LOCAL-00001" summary="try merging DB layer">
       <option name="closed" value="true" />
@@ -476,7 +489,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707483321168</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="merged with gui">
+      <option name="closed" value="true" />
+      <created>1707498960472</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1707498960472</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -494,7 +515,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add ConnectedUser" />
     <MESSAGE value="merged with stage manager" />
     <MESSAGE value="merged with stage manager ." />
     <MESSAGE value="added chat_id to chatController" />
@@ -519,20 +539,41 @@
     <MESSAGE value="enhance the chat screen with small bug in text area" />
     <MESSAGE value="fix bugs in logout and chat bot" />
     <MESSAGE value="complete the validation of the signup screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete the validation of the signup screen" />
+    <MESSAGE value="merged with gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged with gui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Server/src/main/java/com/connectify/model/dao/impl/MessageDAOImpl.java</url>
-          <line>36</line>
+          <line>37</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/GroupMessageHBoxController.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="40" />
+          <url>file://$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/SignUpController.java</url>
+          <line>139</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/Client/src/main/java/com/connectify/utils/CurrentUser.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/Server/src/main/java/com/connectify/services/ChatService.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/Server/src/main/java/com/connectify/services/MessageService.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/Client/src/main/java/com/connectify/controller/ChatController.java</url>
+          <line>212</line>
+          <option name="timeStamp" value="88" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.RuntimeException" package="java.lang" />

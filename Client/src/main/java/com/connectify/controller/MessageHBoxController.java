@@ -33,14 +33,21 @@ public class MessageHBoxController implements Initializable {
     String messageContent;
     Timestamp messageTimestamp;
 
-    public MessageHBoxController(String messageContent, Timestamp messageTimestamp) {
+    String messageStyle;
+
+    public MessageHBoxController(String messageContent, Timestamp messageTimestamp,String style) {
         this.messageContent = messageContent;
         this.messageTimestamp = messageTimestamp;
+        messageStyle = style;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.messageContentText.setText(messageContent);
         this.messageTimeLabel.setText(messageTimestamp.toLocalDateTime().toLocalTime().format(DateTimeFormatter.ofPattern("hh:mm a")));
+        messageStyle = messageStyle.replace("-fx-text-fill","-fx-fill");
+        messageContentText.setStyle(messageStyle);
+//        System.out.println(messageStyle);
     }
+
 }

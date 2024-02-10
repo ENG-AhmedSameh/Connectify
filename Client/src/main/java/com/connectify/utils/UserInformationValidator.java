@@ -36,8 +36,21 @@ public class UserInformationValidator {
         validatePassword(passwordPassF);
         validatePasswordAndConfirmPassword(passwordPassF,confirmPasswordPassF);
         validGender(genderComboBox);
+        validDatePicker(birthDatePicker);
         return validInformation;
     }
+
+    private static void validDatePicker(DatePicker birthDatePicker) {
+        if(birthDatePicker.getValue()==null) {
+            validInformation = false;
+            birthDatePicker.setStyle("-fx-border-color: red;");
+            birthDatePicker.setTooltip(hintText("You must choose your birth date"));
+        }else {
+            birthDatePicker.setStyle(comboBoxOriginalStyle);
+            birthDatePicker.setTooltip(null);
+        }
+    }
+
     public static boolean validateUpdateProfileForm(TextField nameTxtF, TextField emailTxtF){
         if(txtFieldsOriginalStyle==null){
             txtFieldsOriginalStyle = nameTxtF.getStyle();

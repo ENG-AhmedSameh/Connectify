@@ -35,7 +35,7 @@ public class ChatBot {
 
     public static void replyToMessage(Message receivedMessage) throws RemoteException {
         String replyContent = call(receivedMessage.getContent());
-        MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(),receivedMessage.getChatId(),replyContent,new Timestamp(System.currentTimeMillis()), null);
+        MessageSentDTO messageSentDTO = new MessageSentDTO(CurrentUser.getInstance().getPhoneNumber(),receivedMessage.getChatId(),replyContent,new Timestamp(System.currentTimeMillis()), null,"");
         Message replyMessage = MessageMapper.INSTANCE.messageSentDtoTOMessage(messageSentDTO);
         CurrentUser.getMessageList(receivedMessage.getChatId()).add(replyMessage);
         ChatCardHandler.updateChatCard(replyMessage);

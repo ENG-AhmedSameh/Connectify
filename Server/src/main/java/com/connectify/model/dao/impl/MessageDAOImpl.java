@@ -17,7 +17,7 @@ public class MessageDAOImpl implements MessageDAO{
 
     @Override
     public boolean insert(Message message) {
-        String query = "INSERT INTO Message (sender, chat_id, content, attachement_id) VALUES (?,?,?,?)";
+        String query = "INSERT INTO Message (sender, chat_id, content, attachement_id,style) VALUES (?,?,?,?,?)";
         try(Connection connection = dbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
@@ -25,6 +25,7 @@ public class MessageDAOImpl implements MessageDAO{
             preparedStatement.setInt(2, message.getChatId());
             preparedStatement.setString(3, message.getContent());
             preparedStatement.setInt(4, message.getAttachmentId());
+            preparedStatement.setString(5, message.getMessageStyle());
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
@@ -34,7 +35,7 @@ public class MessageDAOImpl implements MessageDAO{
     }
     @Override
     public Message insertSentMessage(Message clientMessage) {
-        String query = "INSERT INTO Message (sender, chat_id,timestamp, content, attachment_id) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO Message (sender, chat_id,timestamp, content, attachment_id,style) VALUES (?,?,?,?,?,?)";
 
         try(Connection connection = dbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS))
@@ -44,17 +45,19 @@ public class MessageDAOImpl implements MessageDAO{
             Timestamp timestamp = clientMessage.getTimestamp();
             String content = clientMessage.getContent();
             Integer attachmentID =clientMessage.getAttachmentId();
+            String messageStyle = clientMessage.getMessageStyle();
             preparedStatement.setString(1, sender);
             preparedStatement.setInt(2, chatID);
             preparedStatement.setTimestamp(3,timestamp);
             preparedStatement.setString(4, content);
             preparedStatement.setObject(5,attachmentID);
+            preparedStatement.setString(6,messageStyle);
             int rowsInserted = preparedStatement.executeUpdate();
             Message insertedMessage=null;
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 if (rs.next()) {
                     int messageId = rs.getInt(1);
-                    insertedMessage = generateMessage(messageId,sender,chatID,content,timestamp,attachmentID);
+                    insertedMessage = generateMessage(messageId,sender,chatID,content,timestamp,attachmentID,messageStyle);
                 }
             }
 
@@ -83,6 +86,7 @@ public class MessageDAOImpl implements MessageDAO{
                     message.setTimestamp(resultSet.getTimestamp("timestamp"));
                     message.setContent(resultSet.getString("content"));
                     message.setAttachmentId((Integer) resultSet.getObject("attachment_id"));
+                    message.setMessageStyle(resultSet.getString("style"));
                     messagesList.add(message);
                 }
             }
@@ -110,6 +114,7 @@ public class MessageDAOImpl implements MessageDAO{
                     message.setTimestamp(resultSet.getTimestamp("timestamp"));
                     message.setContent(resultSet.getString("content"));
                     message.setAttachmentId((Integer)resultSet.getObject("attachment_id"));
+                    message.setMessageStyle(resultSet.getString("style"));
                     messagesList.add(message);
                 }
             }
@@ -121,7 +126,7 @@ public class MessageDAOImpl implements MessageDAO{
         }
     }
 
-    private Message generateMessage(int messageID, String sender, int chatID, String content, Timestamp timestamp, Integer attachmentID){
+    private Message generateMessage(int messageID, String sender, int chatID, String content, Timestamp timestamp, Integer attachmentID,String messageStyle){
         Message message = new Message();
         message.setMessageId(messageID);
         message.setSender(sender);
@@ -129,6 +134,7 @@ public class MessageDAOImpl implements MessageDAO{
         message.setTimestamp(timestamp);
         message.setContent(content);
         message.setAttachmentId(attachmentID);
+        message.setMessageStyle(messageStyle);
         return message;
     }
 
@@ -149,6 +155,7 @@ public class MessageDAOImpl implements MessageDAO{
                     message.setTimestamp(resultSet.getTimestamp("timeStamp"));
                     message.setContent(resultSet.getString("content"));
                     message.setAttachmentId((Integer) resultSet.getObject("attachment_id"));
+                    message.setMessageStyle(resultSet.getString("style"));
                 }
             }
             return message;
