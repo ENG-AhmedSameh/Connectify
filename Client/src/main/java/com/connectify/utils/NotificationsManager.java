@@ -9,6 +9,8 @@ import org.controlsfx.control.Notifications;
 
 public class NotificationsManager {
 
+    private static final double VOLUME = 0.5;
+
     public static void showServerNotification(String title, String body){
         Platform.runLater(() -> {
             playServerNotificationSound();
@@ -50,14 +52,14 @@ public class NotificationsManager {
     private static void playErrorSound() {
         Media sound = new Media((NotificationsManager.class.getResource("/sounds/error.mp3").toString()));
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setVolume(0.05);
+        mediaPlayer.setVolume(VOLUME);
         mediaPlayer.play();
     }
 
     private static void playServerNotificationSound(){
         Media sound = new Media((NotificationsManager.class.getResource("/sounds/notifications.mp3").toString()));
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setVolume(0.05);
+        mediaPlayer.setVolume(VOLUME);
         mediaPlayer.play();
     }
 }

@@ -105,8 +105,8 @@ public class CurrentUser extends UnicastRemoteObject implements ConnectedUser, S
     @Override
     public void forceLogout() throws RemoteException {
         RemoteManager.reset();
-        CurrentUser.resetAllData();
         Platform.runLater(() ->{
+            CurrentUser.resetAllData();
             CurrentUser.getAllChatsController().clearChatsCardList();
             CurrentUser.getChatManagerFactory().clearChatManagersMap();
             CurrentUser.getChatPaneFactory().clearChats();
