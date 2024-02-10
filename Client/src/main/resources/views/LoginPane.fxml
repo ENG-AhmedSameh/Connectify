@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="anchor-pane" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.LoginController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.599999999999966" AnchorPane.topAnchor="11.0">
+            <Label text="Welcome to Connectify" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="400.0" text="Confirm your country code then enter phone number and password" textFill="#7e909e" />
+         <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="294.0" style="visibility: hidden;" textFill="#d93434" />
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="375.0">
+                <children>
+                    <Label prefHeight="18.0" prefWidth="105.0" text="Country :" textFill="WHITE">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                    <ComboBox fx:id="countryComboBox" onAction="#countryOnSelectHandler" onKeyPressed="#countryOnKeyPressedHandler" prefWidth="250.0" promptText="Select your Country" />
+                </children>
+            <VBox.margin>
+               <Insets top="20.0" />
+            </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                <Label layoutX="22.0" layoutY="131.0" prefHeight="20.0" prefWidth="79.0" text="Number :" textFill="WHITE">
+                    <font>
+                        <Font name="Bodoni MT" size="14.0" />
+                    </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+                </Label>
+                <Label fx:id="countryCodeLabel" prefHeight="18.0" prefWidth="49.0" text="+" textFill="WHITE" />
+                <TextField fx:id="phoneNumberTextField" layoutX="136.0" layoutY="127.0" prefHeight="28.0" prefWidth="222.0" promptText="Phone number">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin></TextField>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                <Label layoutX="22.0" layoutY="191.0" prefHeight="18.0" prefWidth="106.0" text="Password :" textFill="WHITE">
+                    <font>
+                        <Font name="Bodoni MT" size="14.0" />
+                    </font>
+                </Label>
+                <PasswordField fx:id="passwordTextField" layoutX="136.0" layoutY="187.0" prefHeight="26.0" prefWidth="250.0" promptText="Password" />
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                <children>
+                    <HBox alignment="CENTER" prefHeight="130.0" prefWidth="300.0">
+                        <children>
+                            <Label contentDisplay="CENTER" prefHeight="18.0" prefWidth="134.0" text="Don't Have An Account ?" textFill="WHITE" />
+                            <Button mnemonicParsing="false" onAction="#SignupButtonOnAction" style="-fx-background-color: #17212b; -fx-cursor: hand;" text="Sign Up" textFill="#2f6ea5" />
+                        </children>
+                    </HBox>
+                </children>
+            </HBox>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: #2f6ea5; -fx-background-radius: 10px; -fx-cursor: hand;" text="Login" textFill="WHITE">
+                <font>
+                    <Font name="Bodoni MT Italic" size="12.0" />
+                </font>
+            </Button>
+        </VBox>
+    </children>
+</AnchorPane>

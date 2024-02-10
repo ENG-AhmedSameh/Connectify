@@ -2,8 +2,12 @@ package com.connectify.model.dao.impl;
 
 import com.connectify.model.dao.AttachmentDAO;
 import com.connectify.model.entities.Attachments;
-import com.connectify.controller.utils.DBConnection;
-import java.sql.*;
+import com.connectify.utils.DBConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AttachmentsDAOImpl implements AttachmentDAO{
 
@@ -86,5 +90,26 @@ public class AttachmentsDAOImpl implements AttachmentDAO{
             System.err.println("SQLException: " + e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public int insertAndReturnID(Attachments attachments) {
+        String query = "INSERT INTO attachments (name, extension, size) VALUES (?, ?, ?)";
+        try(Connection connection = dbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS))
+        {
+            preparedStatement.setString(1, attachments.getName());
+            preparedStatement.setString(2, attachments.getExtension());
+            preparedStatement.setInt(3, attachments.getSize());
+            preparedStatement.executeUpdate();
+            try(ResultSet resultSet = preparedStatement.getGeneratedKeys()){
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+        return -1;
     }
 }

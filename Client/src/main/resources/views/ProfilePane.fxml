@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="profilePane" styleClass="anchor-pane" stylesheets="@../styles/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.ProfileController">
+   <children>
+      <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="25.0" layoutY="11.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="488.0" spacing="20.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label fx:id="profileLbl" alignment="CENTER" prefHeight="38.0" prefWidth="81.0" text="Profile" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="editeBtn" mnemonicParsing="false" onAction="#editeBtnHandler" text="Edit" />
+               </children>
+            </HBox>
+            <VBox prefHeight="222.0" prefWidth="450.0" spacing="20.0" VBox.vgrow="NEVER">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Circle fx:id="userImg" fill="DODGERBLUE" radius="64.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="bioTextArea" editable="false" prefHeight="200.0" prefWidth="450.0" promptText="bio" styleClass="text-area" text="bio" />
+                  <TextField fx:id="phoneNumTxtF" blendMode="SCREEN" editable="false" prefHeight="30.0" prefWidth="180.0" promptText="Phone Number" styleClass="text-field" text="01143414035" />
+                  <TextField fx:id="nameTxtF" blendMode="SCREEN" editable="false" prefHeight="28.0" prefWidth="402.0" promptText="Display Name" styleClass="text-field" text="Mohamed Nofal" VBox.vgrow="NEVER" />
+                  <TextField fx:id="emailTxtF" blendMode="SCREEN" editable="false" prefHeight="29.0" prefWidth="407.0" promptText="E-mail" styleClass="text-field" text="Nofal@gimal.com" VBox.vgrow="NEVER" />
+                  <HBox prefHeight="29.0" prefWidth="455.0" spacing="80.0" VBox.vgrow="NEVER">
+                     <children>
+                        <DatePicker fx:id="birthDatePicker" blendMode="SCREEN" editable="false" prefHeight="26.0" prefWidth="311.0" promptText="Birth Date" styleClass="date-picker" HBox.hgrow="NEVER" />
+                        <ComboBox fx:id="genderComboBox" blendMode="SCREEN" disable="true" editable="true" prefHeight="26.0" prefWidth="276.0" promptText="Male" styleClass="combo-box" visibleRowCount="2" HBox.hgrow="NEVER" />
+                     </children>
+                  </HBox>
+                  <ComboBox fx:id="statusComboBox" blendMode="SCREEN" prefHeight="26.0" prefWidth="179.0" promptText="Available" styleClass="combo-box" visibleRowCount="3">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="modeComboBox" blendMode="SCREEN" prefHeight="26.0" prefWidth="179.0" promptText="Online" styleClass="combo-box" visibleRowCount="2">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,15 @@
+#AnchorPane {
+    -fx-background-color: #0e1621;
+}
+
+.color-picker {
+    -fx-pref-width: 100px;
+}
+
+.text-area {
+    -fx-control-inner-background: #182732;
+    -fx-font-size: 14px;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+}

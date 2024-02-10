@@ -1,22 +1,18 @@
 package com.connectify.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
+public class titleBarController{
 
-
-public class titleBarController implements Initializable{
-
+    public HBox titleBarHBox;
     @FXML
     private ImageView closeButton;
 
@@ -24,32 +20,26 @@ public class titleBarController implements Initializable{
     private ImageView minimizeButton;
 
     @FXML
-    private HBox titleBarHBox;
+    private HBox dragBar;
+
 
     private static double xOffset = 0;
     private static double yOffset = 0;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        titleBarHBox.setOnMousePressed(event -> {
-//            xOffset = event.getSceneX();
-//            yOffset = event.getSceneY();
-//        });
-//        titleBarHBox.setOnMouseDragged(event -> {
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            stage.setX(event.getScreenX() - xOffset);
-//            stage.setY(event.getScreenY() - yOffset);
-//        });
-    }
+    private static Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+    private static double screenMaxWidth = visualBounds.getWidth();
+    private static double screenMaxHeight = visualBounds.getHeight();
+    private static double lastXPosition;
+    private static double lastYPosition;
+    private static double lastWidth;
+    private static double lastHeight;
+    boolean maximized = false;
+
+
 
     @FXML
     void closeButtonHandler(MouseEvent event) {
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?", ButtonType.YES, ButtonType.NO);
-//        alert.setHeaderText("Exit ?");
-//        alert.showAndWait();
-//        if (alert.getResult() == ButtonType.YES) {
-            System.exit(0);
-//        }
+        System.exit(0);
     }
 
     @FXML
@@ -58,5 +48,38 @@ public class titleBarController implements Initializable{
         stage.setIconified(true);
     }
 
+    public void onMousePressedHandler(MouseEvent mouseEvent) {
+        xOffset = mouseEvent.getSceneX();
+        yOffset = mouseEvent.getSceneY();
+    }
+
+    public void onMouseDraggedHandler(MouseEvent mouseEvent) {
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        if(!maximized){
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
+        }
+    }
+
+    public void maximizeButtonHandler(MouseEvent event) {
+        Stage stage = (Stage) titleBarHBox.getScene().getWindow();
+        if(!maximized){
+            lastXPosition =stage.getX();
+            lastYPosition = stage.getY();
+            lastWidth = stage.getWidth();
+            lastHeight = stage.getHeight();
+            stage.setWidth(screenMaxWidth);
+            stage.setHeight(screenMaxHeight);
+            stage.setX(0);
+            stage.setY(0);
+            maximized = true;
+        }else{
+            stage.setWidth(lastWidth);
+            stage.setHeight(lastHeight);
+            stage.setX(lastXPosition);
+            stage.setY(lastYPosition);
+            maximized =false;
+        }
+    }
 }
 

@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="signUpPane" prefHeight="500.0" prefWidth="500.0" styleClass="signUP-anchor-pane" stylesheets="@../styles/SignUp.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.SignUpController">
+<AnchorPane fx:id="signUpPane" prefHeight="500.0" prefWidth="500.0" styleClass="signUP-anchor-pane" stylesheets="@../styles/SignUp.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.SignUpController">
    <children>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="25.0" layoutY="11.0" prefHeight="500.0" prefWidth="350.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.599999999999966" AnchorPane.topAnchor="11.0">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="25.0" layoutY="11.0" prefHeight="500.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.599999999999966" AnchorPane.topAnchor="11.0">
          <children>
             <Label fx:id="signUpLbl" prefHeight="39.0" prefWidth="254.0" text="Sign up to Chat App" textFill="WHITE" VBox.vgrow="NEVER">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="357.0" style="visibility: false;" text="Label" textFill="#ff0000dd" />
             <VBox prefHeight="222.0" prefWidth="450.0" spacing="20.0" VBox.vgrow="NEVER">
                <children>
                   <HBox prefHeight="30.0" prefWidth="423.0" spacing="30.0">
@@ -54,13 +48,13 @@
             </VBox>
             <VBox alignment="CENTER" spacing="10.0" VBox.vgrow="NEVER">
                <children>
-                  <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#signUpBtnHandler" prefHeight="30.0" prefWidth="444.0" stylesheets="@../styles/SignUp.css" text="Sign Up" />
-                  <Label contentDisplay="RIGHT" prefHeight="20.0" prefWidth="232.0" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="Have an account?        ">
+                  <Button fx:id="signUpBtn" defaultButton="true" mnemonicParsing="false" onAction="#signUpBtnHandler" prefHeight="30.0" prefWidth="444.0" style="-fx-cursor: hand;" stylesheets="@../styles/SignUp.css" text="Sign Up" />
+                  <Label contentDisplay="RIGHT" prefHeight="20.0" prefWidth="232.0" styleClass="text-field" stylesheets="@../styles/SignUp.css" text="Already have an account ?  ">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <graphic>
-                        <Label accessibleRole="BUTTON" prefHeight="25.0" prefWidth="65.0" stylesheets="@../styles/SignUp.css" text="Log in" textFill="#2f6ea5">
+                        <Label accessibleRole="BUTTON" onMouseClicked="#onLoginLabelClickedHandler" prefHeight="25.0" prefWidth="46.0" style="-fx-cursor: hand;" stylesheets="@../styles/SignUp.css" text="Log in" textFill="#2f6ea5">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

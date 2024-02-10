@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<AnchorPane fx:id="addFriendAnchorPane" prefHeight="622.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.connectify.controller.AddFriendController">
+    <children>
+      <BorderPane prefHeight="622.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <VBox spacing="10.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+               <children>
+                  <HBox spacing="10.0">
+                     <children>
+                          <TextField fx:id="newContactPhoneSearchTextField" blendMode="SCREEN" prefHeight="32.0" prefWidth="266.0" promptText="Enter Contact Phone" styleClass="text-field" stylesheets="@../styles/AllContactsPaneStyles.css" />
+                        <Button fx:id="serchButton" defaultButton="true" mnemonicParsing="false" onAction="#searchButtonHandler" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: transparent;" styleClass="search-button">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/search.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Separator blendMode="SOFT_LIGHT" layoutX="10.0" layoutY="90.0" prefWidth="200.0" style="-fx-background-color: #2f6ea5;" />
+                  <Label text="Send invitations to:" textFill="#2f6ea5">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Separator blendMode="SOFT_LIGHT" prefWidth="200.0" style="-fx-background-color: #2f6ea5;" />
+               </children>
+            </VBox>
+         </top>
+         <center>
+              <ScrollPane fx:id="seaerchContactsScrollPane" hbarPolicy="NEVER" minWidth="350.0" prefHeight="478.0" prefWidth="350.0" stylesheets="@../styles/AllContactsPaneStyles.css" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+                  <content>
+                      <VBox fx:id="searchContactsVBox" alignment="TOP_CENTER" minWidth="350.0" spacing="10.0" />
+                  </content>
+               <padding>
+                  <Insets left="5.0" top="10.0" />
+               </padding>
+              </ScrollPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="350.0" spacing="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="sendInvitationsButton" mnemonicParsing="false" onAction="#sendInvitationsButtonHandler" style="-fx-cursor: hand;" text="Send Invitations" />
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonHandler" style="-fx-cursor: hand;" text="Cancel" />
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+    </children>
+   <stylesheets>
+      <URL value="@../styles/SignUp.css" />
+      <URL value="@../styles/AllChatsPaneStyle.css" />
+   </stylesheets>
+   <styleClass>
+      <String fx:value="logo-anchor-pane" />
+      <String fx:value="chats-cards-pane" />
+   </styleClass>
+</AnchorPane>

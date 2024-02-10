@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.HTMLEditor?>
+<VBox alignment="CENTER" prefHeight="571.0" prefWidth="707.0" styleClass="chat-window" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HTMLEditor fx:id="editor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="449.0" prefWidth="579.0" VBox.vgrow="ALWAYS" />
+      <HBox alignment="CENTER" prefHeight="63.0" prefWidth="707.0" styleClass="bot-bar" stylesheets="@../styles/Chat.css">
+         <children>
+            <ImageView fitHeight="46.0" fitWidth="49.0" onMousePressed="#attachmentHandler" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/attachement.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="200.0" onMousePressed="#sendHTMLHandler" pickOnBounds="true" preserveRatio="true" styleClass="bar-button">
+               <image>
+                  <Image url="@../images/send.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</VBox>

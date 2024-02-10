@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER" minHeight="30.0" prefHeight="60.0" styleClass="chat-banner" stylesheets="@../styles/Chat.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+      <ChoiceBox fx:id="fontTypeChoiceBox" blendMode="SCREEN" prefHeight="26.0" prefWidth="129.0" stylesheets="@../styles/Chat.css">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Arial" />
+                  <String fx:value="Times New Roman" />
+                  <String fx:value="Courier New" />
+                  <String fx:value="Verdana" />
+                  <String fx:value="Tahoma" />
+              </FXCollections>
+          </items>
+          <HBox.margin>
+              <Insets right="20.0" />
+          </HBox.margin>
+      </ChoiceBox>
+      <ChoiceBox fx:id="fontSizeChoiceBox" blendMode="SCREEN" prefWidth="70.0">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="10" />
+                  <String fx:value="12" />
+                  <String fx:value="14" />
+                  <String fx:value="16" />
+                  <String fx:value="18" />
+                  <String fx:value="20" />
+                  <String fx:value="22" />
+                  <String fx:value="30" />
+                  <String fx:value="35" />
+              </FXCollections>
+          </items>
+          <HBox.margin>
+              <Insets right="20.0" />
+          </HBox.margin>
+      </ChoiceBox>
+      <ColorPicker fx:id="colorPicker" blendMode="SCREEN" />
+      <ToggleButton fx:id="boldButton" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" stylesheets="@../styles/Chat.css">
+          <graphic>
+              <ImageView fitHeight="20.0" fitWidth="20.0">
+                  <Image url="@../images/Bold.png" />
+              </ImageView>
+          </graphic>
+          <HBox.margin>
+              <Insets left="30.0" />
+          </HBox.margin>
+      </ToggleButton>
+      <ToggleButton fx:id="italicButton" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0">
+          <graphic>
+              <ImageView fitHeight="20.0" fitWidth="20.0">
+                  <Image url="@../images/italic.png" />
+              </ImageView>
+          </graphic>
+          <HBox.margin>
+              <Insets left="10.0" />
+          </HBox.margin>
+      </ToggleButton>
+      <ToggleButton fx:id="underlineButton" disable="true" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="5.0" visible="false">
+          <graphic>
+              <ImageView fitHeight="20.0" fitWidth="5.0">
+                  <Image url="@../images/underline.png" />
+              </ImageView>
+          </graphic>
+          <HBox.margin>
+              <Insets />
+          </HBox.margin>
+      </ToggleButton>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
+  </HBox>

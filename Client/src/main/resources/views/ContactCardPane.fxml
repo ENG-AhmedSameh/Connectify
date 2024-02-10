@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<AnchorPane onMousePressed="#paneOnClicked" style="-fx-background-color: transparent;" styleClass="chat-HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox fx:id="messageHBox" alignment="CENTER_LEFT" mouseTransparent="true" prefHeight="100.0" prefWidth="350.0">
+            <children>
+            <AnchorPane>
+               <children>
+                  <Circle fx:id="contactPicture" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                  <Circle fx:id="statusCircle" fill="DODGERBLUE" radius="8.0" stroke="#202b36" strokeLineCap="ROUND" strokeWidth="3.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="-1.0" />
+               </children>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </AnchorPane>
+                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="309.0" spacing="10.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <Label fx:id="contactNameLabel" prefHeight="27.0" prefWidth="182.0" text="Friend Name" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox>
+                            <children>
+                                <Label fx:id="contactPhoneNumberLabel" prefHeight="18.0" prefWidth="200.0" text="01092328066" textFill="WHITE" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets left="20.0" right="20.0" />
+            </padding>
+        </HBox>
+    </children>
+</AnchorPane>

@@ -1,10 +1,12 @@
 * {
-    -fx-dark: #17212b;
+    -fx-dark: #0e1621;
     -fx-blue: #2f6ea5;
+    -fx-blueGray : #17212b;
+    -fx-test: #1B263B
 }
 
 .logo-anchor-pane{
-    -fx-background-color:  -fx-blue;
+    -fx-background-color:  -fx-dark;
 }
 .signUP-anchor-pane{
     -fx-background-color:  -fx-dark;
@@ -50,3 +52,25 @@
 .tool-bar{
     -fx-background-color: -fx-dark;
 }
+
+
+.text-area {
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-area .content {
+    -fx-border-color: -fx-blueGray;
+    -fx-border-radius: 4px;
+    -fx-background-color: -fx-blueGray;
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-area .content:focused {
+    -fx-border-color: -fx-blue;
+    -fx-border-width: 2px;
+}
+
+
+
+
+

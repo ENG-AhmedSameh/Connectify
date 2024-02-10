@@ -1,6 +1,11 @@
 package com.connectify.controller;
 
-import com.connectify.utils.CountryList;
+import com.connectify.Interfaces.ConnectedUser;
+import com.connectify.dto.SignUpRequest;
+import com.connectify.dto.SignUpResponse;
+import com.connectify.model.enums.Gender;
+import com.connectify.util.PasswordManager;
+import com.connectify.utils.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,10 +13,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.util.Objects;
+import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
@@ -22,27 +29,42 @@ public class SignUpController implements Initializable {
     @FXML private Label countryCodeLbl;
     @FXML private ComboBox<String> countryComboBox;
     @FXML private TextField emailTxtF;
-    @FXML private ComboBox<String> genderComboBox;
-    @FXML private ImageView logoImgView;
-    @FXML private AnchorPane logoPane;
+    @FXML private ComboBox<Gender> genderComboBox;
     @FXML private TextField nameTxtF;
     @FXML private PasswordField passwordPassF;
     @FXML private TextField phoneNumTxtF;
+    @FXML private ImageView logoImgView;
+    @FXML private AnchorPane logoPane;
     @FXML private Button signUpBtn;
     @FXML private Label signUpLbl;
     @FXML private AnchorPane signUpPane;
 
-    CountryList countryList;
-    Boolean validInformation = true;
+    @FXML
+    private Label errorLabel;
+
+    private CountryList countryList;
+    private Boolean validInformation = true;
 
     private String txtFieldsOriginalStyle, comboBoxOriginalStyle, datePickerOriginalStyle;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeComboBox();
+        initializeDatePicker();
         txtFieldsOriginalStyle = nameTxtF.getStyle();
         comboBoxOriginalStyle = countryComboBox.getStyle();
         datePickerOriginalStyle = birthDatePicker.getStyle();
+    }
+
+    private void initializeDatePicker() {
+        birthDatePicker.setValue(LocalDate.of(1997, 1, 1));
+        birthDatePicker.setDayCellFactory(param -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.compareTo(LocalDate.now().minusYears(6)) > 0 );
+            }
+        });
     }
 
     private void initializeComboBox() {
@@ -56,7 +78,7 @@ public class SignUpController implements Initializable {
     }
 
     private void initializeGenderComboBox(){
-        genderComboBox.getItems().addAll("Male","Female");
+        genderComboBox.getItems().addAll(Gender.MALE,Gender.FEMALE);
     }
 
     @FXML
@@ -114,78 +136,60 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    private void signUpBtnHandler(ActionEvent event){
-        validateFields();
-    }
-
-    private void validateFields() {
-        validateCountry();
-//        validatePhoneNumber();
-        validateName();
-        validateEmail();
-        validatePassword();
-//        validGender();
-    }
-
-    private void validatePassword() {
-        if(!Objects.equals(confirmPasswordPassF.getText(), passwordPassF.getText())){
-            confirmPasswordPassF.setStyle("-fx-border-color: red;");
-            confirmPasswordPassF.setTooltip(hintText("Doesn't match the password in the first field"));
-        }else{
-            confirmPasswordPassF.setStyle(txtFieldsOriginalStyle);
-            confirmPasswordPassF.setTooltip(null);
-        }
-
-    }
-
-
-    private void validateCountry() {
-        if(countryComboBox.getValue()==null) {
-            validInformation = false;
-            countryComboBox.setStyle("-fx-border-color: red;");
-            countryComboBox.setTooltip(hintText("You must choose a country"));
-        }
-    }
-    private void validateName() {
-        String name = nameTxtF.getText();
-        if(name.isEmpty()){
-            validInformation = false;
-            nameTxtF.setTooltip(hintText("You must Enter your Name"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        }else if (name.length()>50) {
-            nameTxtF.setTooltip(hintText("Name is too long"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        }else if(!name.matches("^[a-zA-Z]+(?:\\s[a-zA-Z]+){0,4}$")){
-            nameTxtF.setTooltip(new Tooltip("Name must contains only english characters and maximum 4 spaces"));
-            nameTxtF.setStyle("-fx-border-color: red;");
-        }else{
-            nameTxtF.setStyle(txtFieldsOriginalStyle);
-            nameTxtF.setTooltip(null);
-        }
-    }
-    private void validateEmail() {
-        if(emailTxtF.getText().matches("[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}")){
-            emailTxtF.setStyle(txtFieldsOriginalStyle);
-            emailTxtF.setTooltip(null);
-        }else{
-            emailTxtF.setStyle("-fx-border-color: red;");
-            if(emailTxtF.getText().isEmpty())
-                emailTxtF.setTooltip(hintText("You must enter your email"));
-            else
-                emailTxtF.setTooltip(hintText("Enter a valid email"));
+    private void signUpBtnHandler(ActionEvent event) throws RemoteException {
+        validInformation = UserInformationValidator.validateSignUpForm(countryComboBox,phoneNumTxtF,nameTxtF,emailTxtF,passwordPassF,confirmPasswordPassF,genderComboBox,birthDatePicker);
+        if(validInformation){
+            SignUpRequest request = createSignUpRequest();
+            SignUpResponse response = RemoteManager.getInstance().signUp(request);
+            if (!response.isSuccessful()) {
+                phoneNumTxtF.setTooltip(UserInformationValidator.hintText(response.getMessage()));
+                phoneNumTxtF.setStyle("-fx-border-color: red;");
+                errorLabel.setText(response.getMessage());
+                errorLabel.setVisible(true);
+            }
+            else {
+                PropertiesManager.getInstance().setUserCredentials(response.getToken(), "true");
+                PropertiesManager.getInstance().setLoginInformation(phoneNumTxtF.getText(), countryCodeLbl.getText(), countryComboBox.getValue());
+                ConnectedUser user = CurrentUser.getInstance();
+                RemoteManager.getInstance().registerConnectedUser(user);
+                errorLabel.setVisible(false);
+                clearFields();
+                StageManager.getInstance().switchToSecondSignUp();
+            }
         }
     }
 
-    private Tooltip hintText(String text) {
-        Tooltip tooltip = new Tooltip();
-        tooltip.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: rgba(241,241,241,1); -fx-text-fill: black; -fx-background-radius: 4; -fx-border-radius: 4; -fx-opacity: 1.0;");
-        tooltip.setAutoHide(false);
-        tooltip.setMaxWidth(300);
-        tooltip.setWrapText(true);
-        tooltip.setText(text);
-        //tooltip.setGraphic(image);
-        return tooltip;
+    public void onLoginLabelClickedHandler(MouseEvent mouseEvent) {
+        clearFields();
+        StageManager.getInstance().switchToLogin();
     }
 
+    private SignUpRequest createSignUpRequest(){
+        SignUpRequest request = new SignUpRequest();
+        request.setPhoneNumber(countryCodeLbl.getText() + phoneNumTxtF.getText());
+        request.setName(nameTxtF.getText());
+        request.setEmail(emailTxtF.getText());
+        request.setSalt(PasswordManager.generateSalt());
+        request.setPassword(PasswordManager.encode(passwordPassF.getText(), request.getSalt()));
+        request.setGender(genderComboBox.getValue());
+        request.setCountry(countryComboBox.getValue());
+        request.setBirthDate(birthDatePicker.getValue());
+        return request;
+    }
+
+
+    private void clearFields(){
+        nameTxtF.clear();
+        emailTxtF.clear();
+        phoneNumTxtF.clear();
+        passwordPassF.clear();
+        confirmPasswordPassF.clear();
+        countryCodeLbl.setText(countryList.getCountriesMap().get(countryComboBox.getValue()));
+        nameTxtF.setStyle(txtFieldsOriginalStyle);
+        phoneNumTxtF.setStyle(txtFieldsOriginalStyle);
+        countryComboBox.setStyle(comboBoxOriginalStyle);
+        birthDatePicker.setStyle(datePickerOriginalStyle);
+        validInformation = true;
+    }
 
 }

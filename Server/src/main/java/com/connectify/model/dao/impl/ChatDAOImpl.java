@@ -1,9 +1,8 @@
 package com.connectify.model.dao.impl;
 
-import com.connectify.controller.utils.DBConnection;
 import com.connectify.model.dao.ChatDAO;
-import com.connectify.model.entities.Attachments;
 import com.connectify.model.entities.Chat;
+import com.connectify.utils.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -83,5 +82,24 @@ public class ChatDAOImpl implements ChatDAO {
             System.err.println("SQLException: " + e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public boolean isPrivateChat(int chatID) {
+        String query = "SELECT is_Private_Chat FROM connectify_db.chat WHERE chat_id = ?;";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            preparedStatement.setInt(1, chatID);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getBoolean("is_Private_Chat");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+            return false;
+        }
+        return false;
     }
 }
