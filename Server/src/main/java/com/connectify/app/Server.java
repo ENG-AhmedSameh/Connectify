@@ -66,7 +66,7 @@ public class Server extends Application {
 
     public static void powerUp(){
         try{
-//            System.setProperty("java.rmi.server.hostname", "192.168.1.11");
+            System.setProperty("java.rmi.server.hostname", "172.20.10.3");
             registry = LocateRegistry.createRegistry(1099);
             ServerAPI server = new ServerController();
             registry.rebind("server", server);
@@ -105,7 +105,7 @@ public class Server extends Application {
             System.out.println("Server is shutdown...");
         } catch (RemoteException | NotBoundException e){
             System.err.println("Couldn't power down server: " + e.getMessage());
-            System.exit(1);
+            e.printStackTrace();
         }
     }
 }

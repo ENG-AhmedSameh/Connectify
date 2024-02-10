@@ -23,6 +23,7 @@ public class ChatLoader {
         } catch (IOException e) {
 //            throw new RuntimeException(e);
             System.err.println("Error: "+e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }

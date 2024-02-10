@@ -94,7 +94,7 @@ public class ChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image chatBackgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/chat-backGround.jpg")));
+        Image chatBackgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/chat-BackGround.jpg")));
         //chatBackgroundImage.
         BackgroundImage backgroundImage = new BackgroundImage(
                 chatBackgroundImage,

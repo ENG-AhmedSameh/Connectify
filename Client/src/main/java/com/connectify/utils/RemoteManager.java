@@ -20,7 +20,7 @@ public class RemoteManager {
 
     private final static int port = 1099;
 
-    private final static String host = "localhost";
+    private final static String host = "172.20.10.3";
     private static RemoteManager instance;
 
 
@@ -34,7 +34,6 @@ public class RemoteManager {
         if (instance == null) {
             instance = new RemoteManager();
             try {
-//                Registry registry = LocateRegistry.getRegistry("192.168.1.11", port); //the server ip in the network
                 Registry registry = LocateRegistry.getRegistry(host, port);
                 instance.server = (ServerAPI) registry.lookup("server");
             } catch (RemoteException | NotBoundException e) {
