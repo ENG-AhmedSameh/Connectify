@@ -47,13 +47,13 @@ public class PropertiesManager {
         try (InputStream inputStream = new FileInputStream(TOKEN_FILE)) {
             tokenProperties.load(inputStream);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Could not find token file");
         }
 
         try (InputStream inputStream = new FileInputStream(LOGIN_FILE)) {
             loginProperties.load(inputStream);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Could not find login file");
         }
     }
 
@@ -61,7 +61,7 @@ public class PropertiesManager {
         try (OutputStream outputStream = new FileOutputStream(TOKEN_FILE)) {
             tokenProperties.store(outputStream, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Failed to save token properties");
         }
     }
 
@@ -69,7 +69,7 @@ public class PropertiesManager {
         try (OutputStream outputStream = new FileOutputStream(LOGIN_FILE)) {
             loginProperties.store(outputStream, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Failed to load login properties");
         }
     }
 
