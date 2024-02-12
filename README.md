@@ -65,9 +65,6 @@ A real-time chat application that allows users to register, sign in, manage cont
 ### Manage Service
 - Ability to start/stop the service on the server.
 
-### User Registration
-- Allow users to sign up (i.e., registration of first-time users).
-
 ### Server Availability
 - Accept connections and keep track of clients' status.
 
