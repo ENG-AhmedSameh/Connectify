@@ -26,13 +26,13 @@ A real-time chat application that allows users to register, sign in, manage cont
 ### Adding New Contacts
 - Users can enter contact phone numbers.
 - Contacts receive invitations to accept or reject.
-- If an invitation is pending and the contact user also adds the user, the invitation is automatically accepted (Bonus).
+- If an invitation is pending and the contact user also adds the user, the invitation is automatically accepted.
 
 ### Showing Contacts Status
 - Contacts' status is displayed as online or offline.
 - Online contacts can be classified as Available, Busy, or Away.
 - Users can set their status to Available, Busy, or Away.
-- Users can appear offline (Bonus).
+- Users can appear offline.
 
 ### User Notification
 - Users receive notifications when a contact becomes online/offline or updates their status.
@@ -45,7 +45,7 @@ A real-time chat application that allows users to register, sign in, manage cont
 
 ### Offline Messages
 - Users can send messages to offline contacts.
-- When a contact logs in, they receive all messages sent while they were offline.
+- When a contact logs in, they receive all messages sent while they are offline.
 
 ### File Transfer
 - Ability to transfer files to contacts (text, sound, short video, long movie, etc.).
@@ -72,13 +72,12 @@ A real-time chat application that allows users to register, sign in, manage cont
 - Accept connections and keep track of clients' status.
 
 ### Server Announcement
-- Ability to send an announcement message (formatted text message) to all online users.
+- Ability to send an announcement message to all online users.
 
 ### Server Statistics
 - View the number of online and offline users.
 - Show statistics about users' gender.
-- Show statistics about users' country.
-- Show statistics about users' entries number on the system (Bonus).
+- Show statistics about users' countries.
 
 ### Data Availability
 - Maintain the user's contact list for seamless sign-in from any machine without re-creating the contact list.
@@ -98,6 +97,6 @@ To get started with the chat application, follow these steps:
 3. Manage contacts, update profiles, set status, and send messages.
 4. Enjoy seamless messaging with friends and contacts.
 
-## Acknoledgemet
+## Acknowledgement
 
 This project is part of the ITI Internship.
